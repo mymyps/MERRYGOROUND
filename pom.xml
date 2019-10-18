@@ -231,6 +231,16 @@
 	</dependencies>
     <build>
         <plugins>
+        	<plugin>
+		        <groupId>org.apache.maven.plugins</groupId>
+		        <artifactId>maven-war-plugin</artifactId>
+		        <version>2.4</version>
+		        <configuration>
+		           <failOnMissingWebXml>false</failOnMissingWebXml>
+		           <warsourcedirectory>src/main/webapp</warsourcedirectory>
+		           <webxml>src/main/webapp/WEB-INF/web.xml</webxml>
+		        </configuration>
+		   </plugin>
             <plugin>
                 <artifactId>maven-eclipse-plugin</artifactId>
                 <version>2.9</version>
