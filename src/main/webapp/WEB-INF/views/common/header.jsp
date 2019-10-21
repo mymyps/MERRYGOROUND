@@ -107,7 +107,9 @@
 								</div>
 							</li>
 							<li class="dropdown">
-								<a href="#" class="dropdown-toggle" data-toggle="dropdown">Admin <i
+							<li>
+								<a href="${pageContext.request.contextPath }/admin/adminMain">Admin</a>
+								<%-- <a href="${pageContext.request.contextPath }/admin/adminMain" class="dropdown-toggle" data-toggle="dropdown">Admin <i
 										class="fa fa-angle-down"></i></a>
 								<div class="dropdown-menu">
 									<ul>
@@ -118,7 +120,7 @@
 										<li><a href="pricing.html">Pricing Table</a></li>
 										<li><a href="404.html">404 Page</a></li>
 									</ul>
-								</div>
+								</div> --%>
 							</li>
 							<li class="dropdown">
 								<a href="#" class="dropdown-toggle" data-toggle="dropdown">Supporters <i
