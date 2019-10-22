@@ -465,5 +465,9 @@
 </section>
 </div>
 </body>
+<script type="text/javascript">
+	//console.log(${ac});
+	defaultEvents.push(${ac});
+</script>
 </html>
 <%-- <jsp:include page="/WEB-INF/views/common/footer.jsp" /> --%>

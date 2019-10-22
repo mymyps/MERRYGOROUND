@@ -1,6 +1,7 @@
 
 !function($) {
     "use strict";
+    var defaultEvents = [];
 
     var CalendarApp = function() {
         this.$body = $("body")
@@ -94,11 +95,10 @@
                     $this.$modal.modal('hide');
 
                     // ajax 통신으로 데이터 저장
-                    console.log(title);
-                    console.log(start._i);
+                    console.log(title); //String
+                    console.log(start._i); //number
                     console.log(end._i);
-                    console.log(categoryClass);
-                    
+                    console.log(categoryClass); //String
 
                 }
                 else{
@@ -142,7 +142,7 @@
         
 
 
-        var defaultEvents =  [{
+        defaultEvents =  [{
                 title: '이야!',
                 start: new Date($.now() + 158000000),
                 className: 'bg-dark'
@@ -156,7 +156,10 @@
                 start: new Date($.now() + 338000000),
                 className: 'bg-primary'
             }];
-
+        console.log('testadfadfadfadsfsd');
+        console.log('${ac}');
+        console.log(defaultEvents);
+        
         var $this = this;
         $this.$calendarObj = $this.$calendar.fullCalendar({
             slotDuration: '00:15:00', /* If we want to split day time each 15minutes */
