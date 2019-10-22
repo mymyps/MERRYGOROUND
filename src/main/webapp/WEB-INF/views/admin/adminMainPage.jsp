@@ -445,11 +445,37 @@
 		</div>
 	</div>
 	<!-- /#right-panel -->
+	<script
+		src="https://cdn.jsdelivr.net/npm/jquery@2.2.4/dist/jquery.min.js"></script>
+	<script>
+	//console.log(${ac});
+	//console.log('${ac["title"]}');
+	var testAr = [];
+	
+	$(function () {
+		testAr.push({
+			title:"${ac['title']}",
+			start:"${ac['start']}",
+			end: "${ac['end']}",
+			className : "${ac['className']}"
+			
+		});
+		console.log(testAr);
+	});
+	
+	
+	
+	
+	//title: '이존데',
+    //start: today,
+    //end: today,
+    //className: 'bg-danger'
+	
+	//defaultEvents.push(${ac});
+	</script>
 
 	<!-- Scripts -->
  	<script
-		src="https://cdn.jsdelivr.net/npm/jquery@2.2.4/dist/jquery.min.js"></script>
-	<script
 		src="https://cdn.jsdelivr.net/npm/popper.js@1.14.4/dist/umd/popper.min.js"></script>
 	<script
 		src="https://cdn.jsdelivr.net/npm/bootstrap@4.1.3/dist/js/bootstrap.min.js"></script>
@@ -465,9 +491,6 @@
 </section>
 </div>
 </body>
-<script type="text/javascript">
-	//console.log(${ac});
-	defaultEvents.push(${ac});
-</script>
+
 </html>
 <%-- <jsp:include page="/WEB-INF/views/common/footer.jsp" /> --%>

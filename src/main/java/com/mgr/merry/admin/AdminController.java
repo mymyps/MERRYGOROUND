@@ -27,7 +27,7 @@ public class AdminController {
 		ac.setStart("1570233600000");
 		//1570320000000
 		ac.setEnd("1570320000000");
-		ac.setCategoryClass("bg-danger");
+		ac.setClassName("bg-danger");
 		
 		model.addAttribute("ac", ac);
 		

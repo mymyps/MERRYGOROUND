@@ -8,6 +8,6 @@ public class AdminCalendar {
 	private String title;
 	private String start;
 	private String end;
-	private String categoryClass;
+	private String className;
 
 }

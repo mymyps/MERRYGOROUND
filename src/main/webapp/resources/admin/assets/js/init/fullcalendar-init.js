@@ -2,7 +2,7 @@
 !function($) {
     "use strict";
     var defaultEvents = [];
-
+    
     var CalendarApp = function() {
         this.$body = $("body")
         this.$modal = $('#event-modal'),
@@ -155,9 +155,10 @@
                 title: '테마구입',
                 start: new Date($.now() + 338000000),
                 className: 'bg-primary'
-            }];
-        console.log('testadfadfadfadsfsd');
-        console.log('${ac}');
+            }
+            
+            ];
+        
         console.log(defaultEvents);
         
         var $this = this;
