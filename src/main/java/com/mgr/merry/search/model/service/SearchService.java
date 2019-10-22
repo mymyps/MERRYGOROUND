@@ -7,10 +7,10 @@ import com.mgr.merry.info.model.vo.InfoUpload;
 
 public interface SearchService {
 	
-   //¸ðµç ¸®ºä ¸®½ºÆ® ºÒ·¯¿È 
+      
 	List<Map<String,Object>> allList();
 	
-	//Å×¸¶º° ÄÚ½º ¸®½ºÆ®
+	//í…Œë§ˆë³„ ê²€ìƒ‰ 
 	List<InfoUpload> themaList(int themaNum, int level);
 
 }

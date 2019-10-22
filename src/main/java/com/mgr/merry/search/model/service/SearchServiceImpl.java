@@ -30,22 +30,20 @@ public class SearchServiceImpl implements SearchService {
 
 		int themaNumRef=0;
 
-		if(level ==1) { //���� �׸����
+		if(level ==1) { //메인테마라면
 
-			//themaList1 ������ �˻��ϰ� 
+			//themaList1 로 검색하고 
 
-			themaNumRef = themanum; // �����׸��� 100���̸� ������ȣ 100���� �����׸� �� ��ȸ�� 
+			themaNumRef = themanum; // 메인테마가 100번이라면 100번을 참고하고 있는 모든 list출력 
 			return dao.themaList(session,themanum,themaNumRef);
 
 
-		}else { // �����׸���
+		}else { // 서브테마라면
 
-			//themaList2 ������ �˻�
+			//themaList2 로 검색하세요!
 
 			return dao.themaList(session,themanum);
 
 		}
-
-
 	}
 }
