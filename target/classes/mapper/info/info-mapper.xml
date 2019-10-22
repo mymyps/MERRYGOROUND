@@ -4,7 +4,7 @@
 	<insert id="insertInfo" parameterType="map">
 		<!-- INSERT INTO INFO_UPLOAD VALUES(SEQ_INFO_UPLOAD_NUM.NEXTVAL, #{localNum}, #{supNum},
 		#{themaNum},#{infoupTitle}, default, default, #{infoupPhone}, default, default) -->
-		INSERT INTO INFO_UPLOAD VALUES(SEQ_INFO_UPLOAD_NUM.NEXTVAL, 1, 1, 1,#{infoupTitle}, default, #{infoupPayment}, #{infoupPhone}, #{infoupTime}, default)
+		INSERT INTO INFO_UPLOAD VALUES(2, 1, 1, 1,#{infoupTitle}, default, #{infoupPayment}, #{infoupPhone}, #{infoupTime}, default)
 		<!-- <selectKey keyProperty="infoupNum" resultType="_int" order="AFTER">
 			SELECT SEQ_INFO_UPLOAD_NUM.CURRVAL FROM DUAL
 		</selectKey> -->
