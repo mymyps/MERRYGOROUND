@@ -166,8 +166,8 @@
 										class="fa fa-angle-down"></i></a>
 								<div class="dropdown-menu">
 									<ul>
-										<li><a href="blog-rightside.html">Blog with Sidebar</a></li>
-										<li><a href="blog-item.html">Blog Single</a></li>
+										<li><a href="${pageContext.request.contextPath }/info/infoForm">infoForm 임의연결</a></li>
+										<li><a href="${pageContext.request.contextPath }/info/infoView.do">infoView 임의연결</a></li>
 									</ul>
 								</div>
 							</li>
