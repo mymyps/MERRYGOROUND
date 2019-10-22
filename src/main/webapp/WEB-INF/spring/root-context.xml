@@ -35,10 +35,11 @@
 		<property name="configLocation"
 			value="classpath:mybatis-config.xml"></property>
 	</bean> -->
-	<!-- SessionTemplate을 springbean으로 등록하여 활용 -->
-	<!-- <bean id="sqlSessionTemplate"
-		class="org.mybatis.spring.SqlSessionTemplate">
-		<constructor-arg index="0" ref="sqlSessionFactoryBean" />
-	</bean> -->
+	   <!-- SessionTemplate를 이용한 springbean으로 등록하여 활용  -->
+    <bean id="sqlSessionTemplate" class="org.mybatis.spring.SqlSessionTemplate">
+	     <!--위의 sqlSessionFactoryBean 이 들어옴  -->
+	     <!--생성자를 이용 , index = 매개변수의 순서-->
+	    <constructor-arg index="0" ref="sqlSessionFactoryBean"/>
+    </bean>
 
 </beans>

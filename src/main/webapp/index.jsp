@@ -1,5 +1,6 @@
 ﻿<%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+
 <jsp:include page="/WEB-INF/views/common/header.jsp"/>
 
 
@@ -9,7 +10,7 @@
 				<ul class="cd-hero-slider">
 					<li class="selected">
 						<div class="overlay2">
-							<img class="" src="${pageContext.request.contextPath }/resources/images/merry2.jpg" alt="slider">
+							<img class="" src="${pageContext.request.contextPath}/resources/images/merry2.jpg" alt="slider">
 						</div>
 						<div class="cd-full-width">
 							<h2>Merry-go-round</h2>
@@ -43,7 +44,7 @@
 			<!-- 지도 이미지 -->
 
 			<div class="container" id="mapcontainer">
-				<img src="${pageContext.request.contextPath }/resources/images/mapsearch.png" usemap="#mapSearch">
+				<img src="${path }/resources/images/mapsearch.png" usemap="#mapSearch">
 				<map id="mapSearch" name="mapSearch">
 					<area shape="rect" title="은평서대문" coords="771,69,827,165" href="은평서대문" target="_self"
 						onfocus=this.blur() />
@@ -140,9 +141,9 @@
 						<div class="col-sm-3 web-design isotope-item">
 							<div class="grid">
 								<figure class="effect-oscar">
-									<img src="${pageContext.request.contextPath }/resources/images/portfolio/korean.jpg" alt="" class="img-thumbnail">
+									<img src="${pageContext.request.contextPath}/resources/images/portfolio/korean.jpg" alt="" class="img-thumbnail">
 									<figcaption>
-										<h2><a href="">한식</a></h2>
+										<h2><a href="${pageContext.request.contextPath}/search/searchList?${param.themaNum}=101&${param.level}=2">한식</a></h2>
 									
 								    </figcaption>
 								</figure>
@@ -152,9 +153,9 @@
 						<div class="col-sm-3 web-design isotope-item">
 								<div class="grid">
 									<figure class="effect-oscar">
-										<img src="${pageContext.request.contextPath }/resources/images/portfolio/japan.jpg" alt="" class="img-thumbnail">
+										<img src="${path }/resources/images/portfolio/japan.jpg" alt="" class="img-thumbnail">
 										<figcaption>
-												<h2><a href="">일식</a></h2>
+												<h2><a href="${pageContext.request.contextPath}/search/searchList?${param.themaNum}=102&${param.level}=2">일식</a></h2>
 												
 											</figcaption>
 									</figure>
@@ -164,10 +165,10 @@
 							<div class="col-sm-3 web-design isotope-item">
 									<div class="grid">
 										<figure class="effect-oscar">
-											<img src="${pageContext.request.contextPath }/resources/images/portfolio/yang.jpg" alt="" class="img-thumbnail">
+											<img src="${path }/resources/images/portfolio/yang.jpg" alt="" class="img-thumbnail">
 											<figcaption>
-													<h2><a href="">양식</a></h2>
-													
+												<h2><a href="${pageContext.request.contextPath}/search/searchList?${param.themaNum}=103&${param.level}=2">양식</a></h2>
+											
 											</figcaption>
 										</figure>
 									</div>
@@ -176,9 +177,9 @@
 								<div class="col-sm-3 web-design isotope-item">
 										<div class="grid">
 											<figure class="effect-oscar">
-												<img src="${pageContext.request.contextPath }/resources/images/portfolio/asia.jpg" alt="" class="img-thumbnail">
+												<img src="${path }/resources/images/portfolio/asia.jpg" alt="" class="img-thumbnail">
 												<figcaption>
-														<h2><a href="">아시안푸드</a></h2>
+														<h2><a href="${pageContext.request.contextPath}/search/searchList?${param.themaNum}=104&${param.level}=2">아시안푸드</a></h2>
 													
 													</figcaption>
 											</figure>
@@ -188,9 +189,9 @@
 									<div class="col-sm-3 web-design isotope-item">
 											<div class="grid">
 												<figure class="effect-oscar">
-													<img src="${pageContext.request.contextPath }/resources/images/portfolio/china.jpg" alt="" class="img-thumbnail">
+													<img src="${path }/resources/images/portfolio/china.jpg" alt="" class="img-thumbnail">
 													<figcaption>
-															<h2><a href="">중식</a></h2>
+															<h2><a href="${pageContext.request.contextPath}/search/searchList?${param.themaNum}=105&${param.level}=2">중식</a></h2>
 															
 														</figcaption>
 												</figure>
@@ -203,9 +204,9 @@
 						<div class="col-sm-3 development isotope-item">
 							<div class="grid">
 								<figure class="effect-oscar">
-									<img src="${pageContext.request.contextPath }/resources/images/portfolio/indoor.jpg" alt="" class="img-thumbnail">
+									<img src="${path }/resources/images/portfolio/indoor.jpg" alt="" class="img-thumbnail">
 									<figcaption>
-											<h2><a href="">실내데이트</a></h2>
+											<h2><a href="${pageContext.request.contextPath}/search/searchList?${param.themaNum}=201&${param.level}=2">실내데이트</a></h2>
 											
 										</figcaption>
 								</figure>
@@ -215,9 +216,9 @@
 						<div class="col-sm-3 development isotope-item">
 								<div class="grid">
 									<figure class="effect-oscar">
-										<img src="${pageContext.request.contextPath }/resources/images/portfolio/out.jpg" alt="" class="img-thumbnail">
+										<img src="${path }/resources/images/portfolio/out.jpg" alt="" class="img-thumbnail">
 										<figcaption>
-												<h2><a href="">야외데이트</a></h2>
+												<h2><a href="${pageContext.request.contextPath}/search/searchList?${param.themaNum}=202&${param.level}=2">야외데이트</a></h2>
 											
 											</figcaption>
 									</figure>
@@ -227,9 +228,9 @@
 						<div class="col-sm-3 development isotope-item">
 								<div class="grid">
 									<figure class="effect-oscar">
-										<img src="${pageContext.request.contextPath }/resources/images/portfolio/walk.jpg" alt="" class="img-thumbnail">
+										<img src="${path }/resources/images/portfolio/walk.jpg" alt="" class="img-thumbnail">
 										<figcaption>
-												<h2><a href="">산책하기 좋은 곳</a></h2>
+												<h2><a href="${pageContext.request.contextPath}/search/searchList?${param.themaNum}=203&${param.level}=2">산책하기 좋은 곳</a></h2>
 												
 										</figcaption>
 									</figure>
@@ -239,9 +240,9 @@
 						<div class="col-sm-3 development isotope-item">
 								<div class="grid">
 									<figure class="effect-oscar">
-										<img src="${pageContext.request.contextPath }/resources/images/portfolio/play.jpg" alt="" class="img-thumbnail">
+										<img src="${path }/resources/images/portfolio/play.jpg" alt="" class="img-thumbnail">
 										<figcaption>
-												<h2><a href="">연극 & 공연</a></h2>
+												<h2><a href="${pageContext.request.contextPath}/search/searchList?${param.themaNum}=204&${param.level}=2">연극 & 공연</a></h2>
 												
 										</figcaption>
 									</figure>
@@ -251,9 +252,9 @@
 						<div class="col-sm-3 development isotope-item">
 								<div class="grid">
 									<figure class="effect-oscar">
-										<img src="${pageContext.request.contextPath }/resources/images/portfolio/ma.jpg" alt="" class="img-thumbnail">
+										<img src="${path }/resources/images/portfolio/ma.jpg" alt="" class="img-thumbnail">
 										<figcaption>
-												<h2><a href="">마사지</a></h2>
+												<h2><a href="${pageContext.request.contextPath}/search/searchList?${param.themaNum}=205&${param.level}=2">마사지</a></h2>
 												
 										</figcaption>
 									</figure>
@@ -266,9 +267,9 @@
 						<div class="col-sm-3 joomla isotope-item">
 							<div class="grid">
 								<figure class="effect-oscar">
-									<img src="${pageContext.request.contextPath }/resources/images/portfolio/pub.jpg" alt="" class="img-thumbnail">
+									<img src="${path }/resources/images/portfolio/pub.jpg" alt="" class="img-thumbnail">
 									<figcaption>
-											<h2><a href="">칵테일 & 펍</a></h2>
+											<h2><a href="${pageContext.request.contextPath}/search/searchList?${param.themaNum}=301&${param.level}=2">칵테일 & 펍</a></h2>
 											
 									</figcaption>
 								</figure>
@@ -278,9 +279,9 @@
 						<div class="col-sm-3 joomla isotope-item">
 								<div class="grid">
 									<figure class="effect-oscar">
-										<img src="${pageContext.request.contextPath }/resources/images/portfolio/dal.jpg" alt="" class="img-thumbnail">
+										<img src="${path }/resources/images/portfolio/dal.jpg" alt="" class="img-thumbnail">
 										<figcaption>
-												<h2><a href="">달다구리</a></h2>
+												<h2><a href="${pageContext.request.contextPath}/search/searchList?${param.themaNum}=302&${param.level}=2">달다구리</a></h2>
 												
 										</figcaption>
 									</figure>
@@ -290,9 +291,9 @@
 						<div class="col-sm-3 joomla isotope-item">
 								<div class="grid">
 									<figure class="effect-oscar">
-										<img src="${pageContext.request.contextPath }/resources/images/portfolio/zone.jpg" alt="" class="img-thumbnail">
+										<img src="${path }/resources/images/portfolio/zone.jpg" alt="" class="img-thumbnail">
 										<figcaption>
-												<h2><a href="">포토존 있는 곳</a></h2>
+												<h2><a href="${pageContext.request.contextPath}/search/searchList?${param.themaNum}=303&${param.level}=2">포토존 있는 곳</a></h2>
 												
 										</figcaption>
 									</figure>
@@ -302,9 +303,9 @@
 						<div class="col-sm-3 joomla isotope-item">
 								<div class="grid">
 									<figure class="effect-oscar">
-										<img src="${pageContext.request.contextPath }/resources/images/portfolio/study.jpg" alt="" class="img-thumbnail">
+										<img src="${path }/resources/images/portfolio/study.jpg" alt="" class="img-thumbnail">
 										<figcaption>
-												<h2><a href="">공부하기 좋은 곳</a></h2>
+												<h2><a href="${pageContext.request.contextPath}/search/searchList?${param.themaNum}=304&${param.level}=2">공부하기 좋은 곳</a></h2>
 										</figcaption>		
 									  </figure>
 								</div>
@@ -335,7 +336,7 @@
 					<div class="col-sm-3 development isotope-item">
 						<div class="grid">
 							<figure class="effect-oscar">
-								<img src="${pageContext.request.contextPath }/resources/images/banpo.JPG" alt="" class="img-thumbnail">
+								<img src="${path }/resources/images/banpo.JPG" alt="" class="img-thumbnail">
 								<figcaption>
 									<h3>반포한강공원</h3>
 									<a href="" class="btn btn-primary white cd-btn">보러가기</a>
@@ -350,7 +351,7 @@
 					<div class="col-sm-3 development isotope-item">
 						<div class="grid">
 							<figure class="effect-oscar">
-								<img src="${pageContext.request.contextPath }/resources/images/beerparty.jpg" alt="" class="img-thumbnail">
+								<img src="${path }/resources/images/beerparty.jpg" alt="" class="img-thumbnail">
 								<figcaption>
 									<h3>신촌맥주축제</h3>
 									<a href="" class="btn btn-primary white cd-btn">보러가기</a>
@@ -365,7 +366,7 @@
 					<div class="col-sm-3 development isotope-item">
 						<div class="grid">
 							<figure class="effect-oscar">
-								<img src="${pageContext.request.contextPath }/resources/images/coex.jpg" alt="" class="img-thumbnail">
+								<img src="${pageContext.request.contextPath}/resources/images/coex.jpg" alt="" class="img-thumbnail">
 								<figcaption>
 									<h3>코엑스<br>연극 관람</h3>
 									<a href="" class="btn btn-primary white cd-btn">보러가기</a>
@@ -380,7 +381,7 @@
 					<div class="col-sm-3 development isotope-item">
 						<div class="grid">
 							<figure class="effect-oscar">
-								<img src="${pageContext.request.contextPath }/resources/images/looftop.JPG" alt="" class="img-thumbnail">
+								<img src="${pageContext.request.contextPath}/resources/images/looftop.JPG" alt="" class="img-thumbnail">
 								<figcaption>
 									<h3>루프탑<br>레스토랑</h3>
 									<a href="" class="btn btn-primary white cd-btn">보러가기</a>
@@ -399,7 +400,7 @@
 		<!--추천 데이트코스 끝 -->
 
 
-		<!--현위치 기반 검색 -  지도API와 연결될 link(만약쓴다면 ) -->
+		<!--현위치 기반 검색 - 지도API와 연결될 link(만약쓴다면 ) -->
 		<section class="parallax parallax1">
 			<div class="parallax-overlay"></div>
 			<div class="container">
@@ -461,10 +462,10 @@
 	</section>
 	
    <script>
-		window.onload = function () { 
-		
-		$("#ban").hide();
-		}
+
+  $(document).ready(function(){
+	  $("#ban").hide();  
+  });
 	
  </script>
 
