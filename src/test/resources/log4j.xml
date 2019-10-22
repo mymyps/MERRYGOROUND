@@ -10,6 +10,17 @@
 		</layout>
 	</appender>
 	
+	<!--파일에 로그 찍기  -->
+    <!--다른 Appender를 이용하면됨  DailyRollingFileAppender -->
+    <appender name="filelogger" class="org.apache.log4j.DailyRollingFileAppender">
+      <param name="file" value="c://logs//spring//spring.log"/>
+      <param name="Append" value="true"/>
+      <param name="dataPattern" value=".yyyy-MM-dd"/>
+      <layout class="org.apache.log4j.PatternLayout">
+			<param name="ConversionPattern" value="[%d{yyyy-MM-dd HH:mm:ss}] %-5p: %l - %m%n" />
+		</layout>
+    </appender>
+	
 	<!-- Application Loggers -->
 	<logger name="com.mgr.merry">
 		<level value="info" />

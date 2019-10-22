@@ -61,6 +61,56 @@
 	font-style: normal;
 }
 
+/* By Honey  */
+
+.themaContent
+{
+	background: #f4f4f4;
+	min-height: 150px;
+	max-height: 170px;
+	position: relative;
+	left: 100px;
+}
+.themaContent ul li a{
+	color: #6A6A6A;
+}
+
+
+.ts-padding {
+  padding: 30px;
+}
+
+
+.listImg{
+
+	position: relative;
+	top: 20px;
+	left: 50px;
+	height: 170px;
+	width: 214px;
+	
+}
+
+
+#themarow>:nth-child(n+2) {
+margin-top: -50px;
+}
+
+
+
+.paging2{
+
+	position: relative;
+	left: 325px;
+	top: 30px;
+}
+
+#themenameBrown{
+
+	color: #5a554f !important;
+}
+
+
 
 /* Global styles
 ================================================== */
@@ -474,6 +524,10 @@ blockquote {
 .title-border{
 	line-height: normal;
 	margin-top: 0;
+	
+	position: relative;
+	top: 5px;
+}
 }
 
 .widget-title{
