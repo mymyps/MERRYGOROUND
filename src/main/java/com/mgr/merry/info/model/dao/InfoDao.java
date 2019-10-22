@@ -12,6 +12,11 @@ public interface InfoDao {
 
 	int insertInfoImg(SqlSessionTemplate session, InfoUploadImg infoimg);
 
+	/*
+	 * Map<String, String> selectInfo(SqlSessionTemplate session, int infoNum);
+	 * 
+	 * InfoUploadImg selectInfoImg(SqlSessionTemplate session, int infoNum);
+	 */
 
 
 }

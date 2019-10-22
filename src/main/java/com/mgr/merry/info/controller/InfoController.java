@@ -26,6 +26,18 @@ public class InfoController {
 	public String infoForm() {
 		return "info/infoForm";
 	}
+	
+	/*
+	 * @RequestMapping("/info/infoView.do") public ModelAndView infoView(int
+	 * infoNum) { ModelAndView mv = new ModelAndView(); Map<String, String> info =
+	 * service.selectInfo(infoNum); InfoUploadImg infoImg =
+	 * service.selectInfoImg(infoNum);
+	 * 
+	 * mv.addObject("info", info); mv.addObject("infoImg", infoImg);
+	 * mv.setViewName("info/infoView");
+	 * 
+	 * return mv; }
+	 */
 
 	
 	@RequestMapping("/info/infoFormEnd.do")

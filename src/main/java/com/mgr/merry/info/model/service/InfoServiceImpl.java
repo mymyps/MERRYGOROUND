@@ -22,19 +22,6 @@ public class InfoServiceImpl implements InfoService {
 	@Autowired
 	SqlSessionTemplate session;
 	
-//	@RequestMapping("/board/boardView.do")
-//	public ModelAndView boardView(int boardNo) {
-//		ModelAndView mv = new ModelAndView();
-//		Map<String, String> board=service.selectBoard(boardNo);
-//		List<Attachment> att = service.selectAttachList(boardNo);
-//		
-//		mv.addObject("board", board);
-//		mv.addObject("attach", att);
-//		mv.setViewName("board/boardView");
-//		return mv;
-//	}
-	
-
 	@Override
 	public int insertInfo(Map<String, String> param, InfoUploadImg infoimg) throws Exception {
 		int result=0;
@@ -52,5 +39,15 @@ public class InfoServiceImpl implements InfoService {
 		
 		return result;
 	}
+
+//	@Override
+//	public Map<String, String> selectInfo(int infoNum) {
+//		return dao.selectInfo(session, infoNum);
+//	}
+//
+//	@Override
+//	public InfoUploadImg selectInfoImg(int infoNum) {
+//		return dao.selectInfoImg(session, infoNum);
+//	}
 
 }

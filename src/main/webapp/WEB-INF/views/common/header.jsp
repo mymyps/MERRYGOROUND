@@ -126,7 +126,7 @@
 								<div class="dropdown-menu">
 									<ul>
 										<li><a href="${pageContext.request.contextPath }/info/infoForm">infoForm 임의연결</a></li>
-										<li><a href="blog-item.html">Blog Single</a></li>
+										<li><a href="${pageContext.request.contextPath }/info/infoView.do">infoView 임의연결</a></li>
 									</ul>
 								</div>
 							</li>

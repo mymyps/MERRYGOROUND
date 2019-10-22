@@ -20,13 +20,13 @@
 					<!-- Blog post start -->
 					<div class="post-content">
 						<h1 class="post-title text-center">
-							<a href="blog-item.html">INFO FORM</a>
+							<a href="blog-item.html">INFOMATION 작성</a>
 						</h1>
 						<hr>
 						<div class="entry-content">
 							<div class="infoFormMainFrame">
 								<div>
-									<div class="infoFormSubFrame">INFO - IMAGE</div>
+									<div class="infoFormSubFrame">이미지</div>
 									<p class="infoForm1">
 										<input type="file" name="infoupFile"/>
 
@@ -34,15 +34,16 @@
 								</div>
 
 								<div>
-									<div class="infoFormSubFrame">INFO - TITLE</div>
+									<div class="infoFormSubFrame">제목</div>
 									<p class="infoForm1">
 										<input type="text" placeholder="INFO TITLE" name="infoupTitle" />
 									</p>
 								</div>
+								
 								<div>
-									<div class="infoFormSubFrame">INFO - THEMA</div>
+									<div class="infoFormSubFrame">테마</div>
 									<p class="infoForm1">
-										<select id="" name="themaSubNum">
+										<select id="" name="themaNum" class="infoFormLocFrame">
 											<%-- <%
 												for(Thema t : list){
 											%>
@@ -50,25 +51,42 @@
 											<%
 												}
 											%> --%>
-										</select> <select id="">
-											<option value="">SUB THEMA</option>
+										</select>
+									</p>
+								</div>
+								
+								<div>
+									<div class="infoFormSubFrame">장소</div>
+									<p class="infoForm1">
+										<select id="" name="themaNum" class="mainThema">
+											<option value="">MAIN LOCATION</option>
+											<%-- <%
+												for(Thema t : list){
+											%>
+												<option value="<%t.getThemaNum%>"><%t.getThemaName%></option>
+											<%
+												}
+											%> --%>
+										</select>
+										<select id="" name="themaSubNum">
+											<option value="">SUB LOCATION</option>
 										</select>
 									</p>
 								</div>
 								<div>
-									<div class="infoFormSubFrame">INFO - PAY</div>
+									<div class="infoFormSubFrame">가격</div>
 									<p class="infoForm1">
 										<input type="number" step="1000" name="infoupPayment" />
 									</p>
 								</div>
 								<div>
-									<div class="infoFormSubFrame">INFO - PHONE</div>
+									<div class="infoFormSubFrame">번호</div>
 									<p class="infoForm1">
 										<input type="text" placeholder="INFO PHONE" name="infoupPhone" />
 									</p>
 								</div>
 								<div>
-									<div class="infoFormSubFrame">INFO - TIME</div>
+									<div class="infoFormSubFrame">시간</div>
 									<p class="infoForm1">
 										<input type="text" placeholder="INFO TIME" name="infoupTime" />
 									</p>

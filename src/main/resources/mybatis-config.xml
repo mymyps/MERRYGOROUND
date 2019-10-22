@@ -2,7 +2,8 @@
 <!DOCTYPE configuration PUBLIC "-//mybatis.org//DTD Config 3.0//EN" "http://mybatis.org/dtd/mybatis-3-config.dtd" >
 <configuration>
 	<typeAliases>
-		<typeAlias type="com.mgr.merry.common.ArrayTypeHandler" alias="arrType"/>	
+		<typeAlias type="com.mgr.merry.common.ArrayTypeHandler" alias="arrType"/>
+		<!-- <typeAlias type="com.mgr.merry.info.model.vo.Info" alias="info"/> -->
 		<!-- <typeAlias type="com.kh.spring.demo.model.vo.Dev" alias="dev"/>
 		<typeAlias type="com.kh.spring.demo.model.vo.Member" alias="m"/> -->
 	</typeAliases>
