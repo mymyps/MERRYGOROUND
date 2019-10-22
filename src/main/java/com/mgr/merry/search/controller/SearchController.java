@@ -27,7 +27,7 @@ public class SearchController {
 	
 	public String allList(Model model) {
 		
-		logger.debug("지역별/테마별 리뷰 목록 로드 controller!!");
+	
 	
 		List<Map<String,Object>> list=service.allList();
 		model.addAttribute("list",list);
@@ -40,7 +40,7 @@ public class SearchController {
 			                @RequestParam("level") int level,
 			                Model model) {
 	
-	logger.debug("테마별 리스트가 가져와지면 이게 뜨겠지?!!!!!!!!!1");	
+	
 	
 	List<InfoUpload> list = service.themaList(themaNum, level);
 	model.addAttribute("list",list);

@@ -30,17 +30,17 @@ public class SearchServiceImpl implements SearchService {
 		
 		int themaNumRef=0;
 		
-		if(level ==1) { //¸ŞÀÎ Å×¸¶¶ó¸é
+		if(level ==1) { //ë©”ì¸í…Œë§ˆë¼ë©´
 			
-			//themaList1 Äõ¸®·Î °Ë»öÇÏ°í 
+			//themaList1 ë¡œ ê²€ìƒ‰í•˜ê³  
 			
-		    themaNumRef = themanum; // ¸ŞÀÎÅ×¸¶°¡ 100¹øÀÌ¸é ÂüÁ¶¹øÈ£ 100¹øÀÎ ¼­ºêÅ×¸¶ ´Ù Á¶È¸µÊ 
+		    themaNumRef = themanum; // ë©”ì¸í…Œë§ˆê°€ 100ë²ˆì´ë¼ë©´ 100ë²ˆì„ ì°¸ê³ í•˜ê³  ìˆëŠ” ëª¨ë“  listì¶œë ¥ 
 			return dao.themaList(session,themanum,themaNumRef);
 			
 			
-		}else { // ¼­ºêÅ×¸¶¸é
+		}else { // ì„œë¸Œí…Œë§ˆë¼ë©´
 			
-			//themaList2 Äõ¸®·Î °Ë»ö
+			//themaList2 ë¡œ ê²€ìƒ‰í•˜ì„¸ìš”!
 			
 			return dao.themaList(session,themanum);
 			
@@ -53,4 +53,4 @@ public class SearchServiceImpl implements SearchService {
 		
 	}
 
-}
+
