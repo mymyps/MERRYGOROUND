@@ -88,8 +88,8 @@
 										class="fa fa-angle-down"></i></a>
 								<div class="dropdown-menu">
 									<ul>
-										<li><a href="${pageContext.request.contextPath }">로그인</a></li>
-										<li><a href="${pageContext.request.contextPath }">회원가입</a></li>
+										<li><a href="${pageContext.request.contextPath }/member/login.do">로그인</a></li>
+										<li><a href="${pageContext.request.contextPath }/member/signup.do">회원가입</a></li>
 										<li><a href="${pageContext.request.contextPath }">아이디찾기</a></li>
 										<li><a href="${pageContext.request.contextPath }">비밀번호찾기</a></li>
 									</ul>
