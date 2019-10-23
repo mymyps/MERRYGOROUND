@@ -19,16 +19,26 @@ public class InfoDaoImpl implements InfoDao {
 	public int insertInfoImg(SqlSessionTemplate session, InfoUploadImg infoimg) {
 		return session.insert("info.insertInfoImg", infoimg);
 	}
-//
-//	@Override
-//	public Map<String, String> selectInfo(SqlSessionTemplate session, int infoNum) {
-//		return session.selectOne("info.selectInfo", infoNum);
-//	}
-//
-//	@Override
-//	public InfoUploadImg selectInfoImg(SqlSessionTemplate session, int infoNum) {
-//		return session.selectOne("info.selectInfoImg", infoNum);
-//	}
+
+	@Override
+	public Map<String, String> selectInfo(SqlSessionTemplate session, int infoupNum) {
+		return session.selectOne("info.selectInfo", infoupNum);
+	}
+
+	@Override
+	public InfoUploadImg selectInfoImg(SqlSessionTemplate session, int infoupNum) {
+		return session.selectOne("info.selectInfoImg", infoupNum);
+	}
+
+	@Override
+	public int deleteInfo(SqlSessionTemplate session, int infoupNum) {
+		return session.delete("info.deleteInfo", infoupNum);
+	}
+
+	@Override
+	public int deleteInfoImg(SqlSessionTemplate session, int infoupNum) {
+		return session.delete("info.deleteInfoImg", infoupNum);
+	}
 
 
 
