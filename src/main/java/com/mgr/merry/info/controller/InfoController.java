@@ -40,7 +40,7 @@ public class InfoController {
 		return mv;
 	}
 
-//	
+//	localNum, supNum, themaNum
 	@RequestMapping("/info/infoFormEnd.do")
 	public ModelAndView insertInfo(@RequestParam Map<String, String> param,
 			@RequestParam(value = "infoupFile", required = false) MultipartFile[] infoupFile,
@@ -94,10 +94,6 @@ public class InfoController {
 		int result2 = 0;
 		result = service.deleteInfo(infoupNum);
 		result2 = service.deleteInfoImg(infoupNum);
-		
-		if(result==0) {
-			
-		}
 		
 		return "/info/infoList";
 	}
