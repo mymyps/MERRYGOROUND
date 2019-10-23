@@ -120,14 +120,14 @@
                     		<div class="row" id="themarow">
 						<div class="col-md-8 ts-padding themaContent">
 							<h3 style="margin-top: -2px;">
-							<a href="${path}주미꺼controller?${param.themaNum}=${list.supupnum}" id="themenameBrown">${list.supuptitle}</a>
+							<a href="${path}주미꺼controller?${list.themaNum}=${list.supupnum}" id="themenameBrown">${list["SUPUPTITLE"]}</a>
 							</h3>
 							<p>${list.supupcontent}</p>
 							<hr style="height: 0.5px; background-color: rgb(214, 206, 194);" >
 							<p><strong>${list.supuplocation }</strong><p>
 							</div>
 							<div class="col-md-4 ts-padding about-img" >
-							<img class="listImg" src="${list.filerename}">
+							<img class="listImg" src="${list.filerename}" alt="이미지 준비중">
 						</div>
 					</div><!--/ Content row end -->
 			</c:forEach>

@@ -1,9 +1,8 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html;charset=utf-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
-
+<c:set var = "path" value="${pageContext.request.contextPath}"/>
 
 <!DOCTYPE html>
 <html lang="ko">
@@ -13,8 +12,107 @@
 <title>Merry-go-round</title>
 <meta name="description" content="">
 <meta name="author" content="">
+
+    <!--Tmap API관련   -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <!--appKey = 어쩌구 -> Tmap사이트에서 받은 고유키 입니당-->
+    <script src="https://api2.sktelecom.com/tmap/js?version=1&format=javascript&appKey=9b9bcfec-7c62-4c75-8854-04b5c8e68f51"></script>
+    
+    <script type="text/javascript">
+
+ function initTmap(){
+     var map = new Tmap.Map({
+         div:'map_div',  // 결과 지도를 표시할 곳 입니당
+         width : "50%",  // 가로와 세로 사이즈는 픽셀로 적을 수도 있고
+         height : "50%", // 퍼센트로 적을 수도 있어용 (tmap홈페이지 예제는 픽셀로 되어 있음!!!!!)
+     });
    
+     // 경로 탐색 출발지점과 도착 지점의 좌표
+     // 구글 지도에서 나오는 좌표의 x, y를 바꾸면 된다.
+     // 구글 지도와 x,y 좌표 반대로 적어야함..........ㅎ 
+     var startX = 127.104997;
+     var startY = 37.220800;
+     var endX = 127.028131;
+     var endY = 37.239072;
+     var passList = null;
+     var prtcl;
+     var headers = {};
+
+     headers["appKey"]="9b9bcfec-7c62-4c75-8854-04b5c8e68f51"; //Tmap홈페이지에서 받은 인증키!!
    
+     $.ajax({
+         method:"POST",
+         headers : headers,
+         url:"https://api2.sktelecom.com/tmap/routes?version=1&format=xml",
+         async:false,
+         data:{
+             startX : startX,
+             startY : startY,
+             endX : endX,
+             endY : endY,
+             passList : passList,
+             reqCoordType : "WGS84GEO",
+             resCoordType : "EPSG3857",
+             angle : "172",
+             searchOption : "0",
+             trafficInfo : "Y" //교통정보 표출 옵션입니당!
+         },
+
+         success:function(response){ //API가 제대로 작동할 경우 실행될 코드
+             prtcl = response;
+
+             // 결과 출력 부분 - 여기는 잘 모르겠음.
+             var innerHtml ="";
+             var prtclString = new XMLSerializer().serializeToString(prtcl);//xml to String
+             xmlDoc = $.parseXML( prtclString ),
+             $xml = $( xmlDoc ),
+             $intRate = $xml.find("Document");
+
+             var tDistance = " 총 거리 : "+($intRate[0].getElementsByTagName("tmap:totalDistance")[0].childNodes[0].nodeValue/1000).toFixed(1)+"km,";
+             var tTime = " 총 시간 : "+($intRate[0].getElementsByTagName("tmap:totalTime")[0].childNodes[0].nodeValue/60).toFixed(0)+"분,";
+             var tFare = " 총 요금 : "+$intRate[0].getElementsByTagName("tmap:totalFare")[0].childNodes[0].nodeValue+"원,";
+             var taxiFare = " 예상 택시 요금 : "+$intRate[0].getElementsByTagName("tmap:taxiFare")[0].childNodes[0].nodeValue+"원";
+
+             $("#result").text(tDistance+tTime+tFare+taxiFare);
+
+             // 실시간 교통정보 추가
+             var trafficColors = {
+                 extractStyles:true,
+                 /* 실제 교통정보가 표출되면 아래와 같은 Color로 Line이 생성됩니다. */
+                 trafficDefaultColor:"#000000", //Default
+                 trafficType1Color:"#009900", //원활
+                 trafficType2Color:"#8E8111", //지체
+                 trafficType3Color:"#FF0000", //정체
+             };    
+             var kmlForm = new Tmap.Format.KML(trafficColors).readTraffic(prtcl);
+             routeLayer = new Tmap.Layer.Vector("vectorLayerID"); //백터 레이어 생성
+             routeLayer.addFeatures(kmlForm); //교통정보를 백터 레이어에 추가   
+
+             map.addLayer(routeLayer); // 지도에 백터 레이어 추가
+
+             // 경로탐색 결과 반경만큼 지도 레벨 조정
+             map.zoomToExtent(routeLayer.getDataExtent());
+         },
+         error:function(request,status,error){ // API가 제대로 작동하지 않을 경우
+         console.log("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
+         }
+     });
+ }
+ </script>
+ 
+  <script type="text/javascript">
+			function initTmap(){
+				var map = new Tmapv2.Map("map_div",  
+				{
+					center: new Tmapv2.LatLng(37.566481622437934,126.98502302169841), // 지도 초기 좌표
+					width: "890px", 
+					height: "400px",
+					zoom: 15
+				});
+			} 
+		</script>
+
+
 
 	<!-- Mobile Specific Metas
 	================================================== -->
@@ -66,7 +164,9 @@
 	<script type="text/javascript" src="${pageContext.request.contextPath }/resources/js/waypoints.min.js"></script>
 	<!-- Template custom -->
 	<script type="text/javascript" src="${pageContext.request.contextPath }/resources/js/custom.js"></script>
-	</div><!-- Body inner end -->
+	
+	
+	<!-- Body inner end 요기 div 쪼끔 문제있음 -->
 	
 	<!-- CSS
 	================================================== -->
@@ -95,7 +195,7 @@
 	<link id="style-switch" href="${pageContext.request.contextPath }/resources/css/presets/preset3.css" media="screen" rel="stylesheet" type="text/css">
 </head>
 
-<body>
+<body onload="initTmap()">
 	<div class="body-inner">
 		<!-- Header start -->
 		<header id="header" class="navbar-fixed-top header" role="banner">
@@ -129,8 +229,8 @@
 										class="fa fa-angle-down"></i></a>
 								<div class="dropdown-menu">
 									<ul>
-										<li><a href="${pageContext.request.contextPath }/member/login.do">로그인</a></li>
-										<li><a href="${pageContext.request.contextPath }/member/signup.do">회원가입</a></li>
+										<li><a href="${pageContext.request.contextPath }">로그인</a></li>
+										<li><a href="${pageContext.request.contextPath }">회원가입</a></li>
 										<li><a href="${pageContext.request.contextPath }">아이디찾기</a></li>
 										<li><a href="${pageContext.request.contextPath }">비밀번호찾기</a></li>
 									</ul>
@@ -148,9 +248,7 @@
 								</div>
 							</li>
 							<li class="dropdown">
-							<li>
-								<a href="${pageContext.request.contextPath }/admin/adminMain">Admin</a>
-								<%-- <a href="${pageContext.request.contextPath }/admin/adminMain" class="dropdown-toggle" data-toggle="dropdown">Admin <i
+								<a href="#" class="dropdown-toggle" data-toggle="dropdown">Admin <i
 										class="fa fa-angle-down"></i></a>
 								<div class="dropdown-menu">
 									<ul>
@@ -161,15 +259,15 @@
 										<li><a href="pricing.html">Pricing Table</a></li>
 										<li><a href="404.html">404 Page</a></li>
 									</ul>
-								</div> --%>
+								</div>
 							</li>
 							<li class="dropdown">
 								<a href="#" class="dropdown-toggle" data-toggle="dropdown">Supporters <i
 										class="fa fa-angle-down"></i></a>
 								<div class="dropdown-menu">
 									<ul>
-										<li><a href="${pageContext.request.contextPath }/info/infoForm">infoForm 임의연결</a></li>
-										<li><a href="${pageContext.request.contextPath }/info/infoView.do">infoView 임의연결</a></li>
+										<li><a href="blog-rightside.html">Blog with Sidebar</a></li>
+										<li><a href="blog-item.html">Blog Single</a></li>
 									</ul>
 								</div>
 							</li>
@@ -209,6 +307,22 @@
 				  </div>
 		</div>
 	</div>
+	</div>
 	
-	
-		
+ 
+ <section>
+ 
+ <div id="map_div">
+ 
+ 
+ </div>
+ 
+ <p id="result">요기는 Tmap조회 결과 들어갈 공간이에요!!!</p>
+ 
+ </section>
+
+
+
+
+
+<jsp:include page="/WEB-INF/views/common/footer.jsp"/>

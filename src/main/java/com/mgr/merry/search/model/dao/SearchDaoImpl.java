@@ -12,29 +12,35 @@ import com.mgr.merry.info.model.vo.InfoUpload;
 @Repository
 public class SearchDaoImpl implements SerchDao {
 
+//	@Override
+//	public List<Map<String, Object>> allList(SqlSessionTemplate session) {
+//	
+//		return session.selectList("search.allList");
+//	}
+
+    //ë©”ì¸í…Œë§ˆ ì¡°íšŒ 
 	@Override
-	public List<Map<String, Object>> allList(SqlSessionTemplate session) {
+	public List<Map<String,Object>> themaList(SqlSessionTemplate session,int themanum, int themanumref) {
+		
+		HashMap<String, Object> param = new HashMap<String, Object>();
+		
+		param.put("themanum", themanum);
+		param.put("themanumref", themanumref);
+		
+		return session.selectList("search.themaList1",param);
+	}
+
+	// ì„œë¸Œí…Œë§ˆ ì¡°íšŒ
+	@Override
+	public List<Map<String,Object>> themaList(SqlSessionTemplate session,int themanum) {
+		
+		return session.selectList("search.themaList2",themanum);
+	}
+
+	@Override
+	public List<Map<String, Object>> localList(SqlSessionTemplate session, int localNum) {
 	
-		return session.selectList("search.allList");
-	}
-
-	//Å×¸¶º° ÄÚ½º ¸®½ºÆ®(¸Ô°Å¸®, ³î°Å¸® , Ä«Æä&¼ú ¸ŞÀÎÅ×¸¶ )
-	@Override
-	public List<InfoUpload> themaList(SqlSessionTemplate session,int themaNum, int themaNumRef) {
-		
-		HashMap<String, Object> map = new HashMap<String, Object>();
-		
-		map.put("themaNum", themaNum);
-		map.put("themaNumref", themaNumRef);
-		
-		return session.selectList("search.themaList1",map);
-	}
-
-	// Å×ÀÌº° ÄÚ½º ¸®½ºÆ®(ÇÑ½Ä,Áß½Ä,¾ç½Ä....µî ¼­ºêÅ×¸¶) 
-	@Override
-	public List<InfoUpload> themaList(SqlSessionTemplate session,int themaNum) {
-		
-		return session.selectList("search.themaList2",themaNum);
+		return session.selectList("search.localList",localNum);
 	}
 
 

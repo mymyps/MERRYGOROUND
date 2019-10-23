@@ -9,14 +9,11 @@ import com.mgr.merry.info.model.vo.InfoUpload;
 
 public interface SerchDao {
 	
-	List<Map<String,Object>> allList(SqlSessionTemplate session);
-	
-	//테마별 코스 리스트 메인테마
+//	List<Map<String,Object>> allList(SqlSessionTemplate session);
 
-	List<InfoUpload> themaList(SqlSessionTemplate session, int themaNum, int themaNumRef);
-	
-	
-	//테마별 코스 리스트 디테일 테마 
+	List<Map<String,Object>> themaList(SqlSessionTemplate session, int themanum, int themanumref);
 
-	List<InfoUpload> themaList(SqlSessionTemplate session, int themaNum);
+	List<Map<String,Object>> themaList(SqlSessionTemplate session, int themanum);
+	
+	List<Map<String, Object>> localList(SqlSessionTemplate session, int localnum);
 }

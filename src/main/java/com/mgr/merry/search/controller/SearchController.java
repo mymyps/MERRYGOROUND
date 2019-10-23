@@ -23,32 +23,52 @@ public class SearchController {
 	@Autowired
 	SearchService service;
 	
-	@RequestMapping("/search/allList")
-	
-	public String allList(Model model) {
-		
-	
-	
-		List<Map<String,Object>> list=service.allList();
-		model.addAttribute("list",list);
-		return "redirect:/";
-	}
-	
+//	@RequestMapping("/search/allList")
+//	public String allList(Model model) {
+//	
+//		List<Map<String,Object>> all=service.allList();
+//		model.addAttribute("all",all);
+//		return "redirect:/";
+//	}
+//	
 	@RequestMapping("/search/themaList")
 	
-	public String themaList(@RequestParam("themaNum") int themaNum,
+	
+	
+	public String themaList(@RequestParam("themanum") int themanum,
 			                @RequestParam("level") int level,
 			                Model model) {
 	
 	
 	
-	List<InfoUpload> list = service.themaList(themaNum, level);
+	List<Map<String,Object>> list = service.themaList(themanum, level);
 	model.addAttribute("list",list);
 		
 	return "search/classifyByTheme";
 		
 		
 	}
-			                 
-			
+
+	
+	@RequestMapping("/search/localList")
+	
+	public String localList(@RequestParam("localNum") int localNum,
+			                 Model model) {
+		
+		List<Map<String,Object>> locList = service.localList(localNum);
+		model.addAttribute("locList", locList);
+		return "search/classfyByLoc";
+		
+	
+   }
+	
+   @RequestMapping("/search/tMapSerch")
+   
+   public String tMapSerch() {
+	   
+	   return "search/placeOnAMap";
+   }
+
+
+
 }

@@ -8,9 +8,12 @@ import com.mgr.merry.info.model.vo.InfoUpload;
 public interface SearchService {
 	
       
-	List<Map<String,Object>> allList();
+//	List<Map<String,Object>> allList();
 	
 	//테마별 검색 
-	List<InfoUpload> themaList(int themaNum, int level);
+	List<Map<String,Object>> themaList(int themanum, int level);
+	
+	//지역별 검색
+	List<Map<String,Object>> localList(int localnum);
 
 }
