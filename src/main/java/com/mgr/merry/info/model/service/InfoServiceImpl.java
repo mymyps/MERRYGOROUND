@@ -22,6 +22,7 @@ public class InfoServiceImpl implements InfoService {
 	@Autowired
 	SqlSessionTemplate session;
 	
+	// 수정중
 	@Override
 	public int insertInfo(Map<String, String> param, InfoUploadImg infoimg) throws Exception {
 		int result=0;
@@ -40,16 +41,19 @@ public class InfoServiceImpl implements InfoService {
 		return result;
 	}
 
+	// 수정중
 	@Override
 	public Map<String, String> selectInfo(int infoupNum) {
 		return dao.selectInfo(session, infoupNum);
 	}
 
+	// 수정중
 	@Override
 	public InfoUploadImg selectInfoImg(int infoupNum) {
 		return dao.selectInfoImg(session, infoupNum);
 	}
 
+	// 수정중
 	@Override
 	public int deleteInfo(int infoupNum) {
 		int result=0;

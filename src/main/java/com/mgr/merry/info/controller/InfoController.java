@@ -46,7 +46,6 @@ public class InfoController {
 			@RequestParam(value = "infoupFile", required = false) MultipartFile[] infoupFile,
 			HttpServletRequest request) {
 
-		System.out.println("컨트롤러 param : " + param);
 		String saveDir = request.getSession().getServletContext().getRealPath("/resources/upload/info");
 		InfoUploadImg infoimg = new InfoUploadImg();
 		for (MultipartFile f : infoupFile) {
