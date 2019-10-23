@@ -28,13 +28,14 @@ public class InfoController {
 	}
 
 //	infoList에서 infoupNum을 받아야함
-	@RequestMapping("/info/infoView.do")
+	@RequestMapping("/info/infoView")
 	public ModelAndView infoView(int infoupNum) {
 		ModelAndView mv = new ModelAndView();
 		Map<String, String> info = service.selectInfo(infoupNum);
 		InfoUploadImg infoImg = service.selectInfoImg(infoupNum);
 
-		mv.addObject("info", info); mv.addObject("infoImg", infoImg);
+		mv.addObject("info", info);
+		mv.addObject("infoImg", infoImg);
 		mv.setViewName("info/infoView");
 
 		return mv;
