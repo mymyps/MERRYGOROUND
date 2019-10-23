@@ -5,8 +5,8 @@ import lombok.Data;
 @Data
 public class Thema {
    
-   private String themaname;
-   private int themanum;
-   private int themanumref;
+   private String themaName;
+   private int themaNum;
+   private int themaNumRef;
    private int level;
 }
