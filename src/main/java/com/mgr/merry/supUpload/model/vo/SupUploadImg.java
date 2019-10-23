@@ -1,5 +1,5 @@
 package com.mgr.merry.supUpload.model.vo;
 
-public class supUploadImg {
+public class SupUploadImg {
 
 }
