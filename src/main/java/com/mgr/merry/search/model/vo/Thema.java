@@ -8,5 +8,5 @@ public class Thema {
    private String themaName;
    private int themaNum;
    private int themaNumRef;
-   private int level;
+   private int themaLevel;
 }
