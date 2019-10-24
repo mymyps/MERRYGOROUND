@@ -1,7 +1,10 @@
 
 !function($) {
     "use strict";
+
     var defaultEvents = [];
+    // 실행시 데이터를 받아옴
+    defaultEvents = testAr;
     
     var CalendarApp = function() {
         this.$body = $("body")
@@ -39,20 +42,67 @@
     CalendarApp.prototype.onEventClick =  function (calEvent, jsEvent, view) {
         var $this = this;
             var form = $("<form></form>");
-            form.append("<label>Change event name</label>");
-            form.append("<div class='input-group'><input class='form-control' type=text value='" + calEvent.title + "' /><span class='input-group-btn'><button type='submit' class='btn btn-success waves-effect waves-light'><i class='fa fa-check'></i> Save</button></span></div>");
+            form.append("<label>event 변경 내용</label>");
+            form.append("<div class='input-group'><input class='form-control' type=text value='" + calEvent.title + "' /><span class='input-group-btn'><button type='submit' class='btn btn-success waves-effect waves-light'><i class='fa fa-check'></i> 저장</button></span></div>");
             $this.$modal.modal({
                 backdrop: 'static'
             });
             $this.$modal.find('.delete-event').show().end().find('.save-event').hide().end().find('.modal-body').empty().prepend(form).end().find('.delete-event').unbind('click').click(function () {
-                $this.$calendarObj.fullCalendar('removeEvents', function (ev) {
-                    return (ev._id == calEvent._id);
-                });
+            	// 이벤트 삭제
+//            	console.log("remove event ->");
+            	var calTmp = {
+	        		title: calEvent.title,
+	        		start: typeof calEvent.start._i === "number"? calEvent.start._i:calEvent.start._i.getTime(),
+	        		end: typeof calEvent.end._i === "number" ? calEvent.end._i:calEvent.end != null?calEvent.end._i.getTime():"null",
+//    				end: typeof calEvent.end._i === "number" ? calEvent.end._i:calEvent.end != null?calEvent.end._i.getTime():"null",
+	        		className: calEvent.className[0]
+	        	};
+	        	
+	        	$(document).ready(function(){
+	        		 $.ajax({
+						url: ajaxPath + '/admin/calDel.do',
+						data: calTmp,
+						success: function (data) {
+							console.log("일정을 삭제했습니다");
+							$this.$calendarObj.fullCalendar('removeEvents', function (ev) {
+			                	return (ev._id == calEvent._id);
+			                });
+						},
+	                    error : function(e) {
+	                    	console.log("calendar ajax error");
+	                    }
+					});
+	    		});
+            	
                 $this.$modal.modal('hide');
             });
             $this.$modal.find('form').on('submit', function () {
-                calEvent.title = form.find("input[type=text]").val();
-                $this.$calendarObj.fullCalendar('updateEvent', calEvent);
+            	// 이벤트 수정
+            	calEvent.title = form.find("input[type=text]").val();
+            	
+//            	console.log("mod event ->");
+            	
+            	var calTmp = {
+	        		title: calEvent.title,
+	        		start: typeof calEvent.start._i === "number" ? calEvent.start._i:calEvent.start._i.getTime(),
+    				end: typeof calEvent.end._i === "number" ? calEvent.end._i:calEvent.end != null?calEvent.end._i.getTime():"null",
+	        		className: calEvent.className[0]
+	        	};
+	        	
+	        	$(document).ready(function(){
+	        		 $.ajax({
+						url: ajaxPath + '/admin/calMod.do',
+						data: calTmp,
+						success: function (data) {
+							console.log("일정을 수정했습니다");
+							$this.$calendarObj.fullCalendar('updateEvent', calEvent);
+						},
+	                    error : function(e) {
+	                    	console.log("calendar ajax error");
+	                    }
+					});
+	    		});
+                
                 $this.$modal.modal('hide');
                 return false;
             });
@@ -85,20 +135,54 @@
                 var ending = form.find("input[name='ending']").val();
                 var categoryClass = form.find("select[name='category'] option:checked").val();
                 if (title !== null && title.length != 0) {
-                    $this.$calendarObj.fullCalendar('renderEvent', {
-                        title: title,
-                        start:start,
-                        end: end,
-                        allDay: false,
-                        className: categoryClass
-                    }, true);  
+                	
+//                	console.log("----------");
+//                    console.log(title); //String
+//                    console.log(start); //number
+//                    console.log(end);
+//                    console.log(categoryClass); //String
+//                    console.log($.now());
+//                	console.log($.now(new Date(end._i)));
+                	var ddd = new Date(end._i) - new Date(end._i).getDate();
+                	ddd = new Date(ddd);
+//                    console.log("----------");
+                	// ajax 통신으로 데이터 저장
+                	var calTmp = {
+                		title: title,
+                		start: start._i,
+                		end: new Date(ddd).getTime(),
+                		className: categoryClass
+                	};
+//                	console.log(calTmp);
+                	
+                	$(document).ready(function(){
+                		 $.ajax({
+     						url: ajaxPath + '/admin/calSave.do',
+     						data: calTmp,
+     						success: function (data) {
+     							console.log("일정을 저장했습니다");
+     							defaultEvents.push({
+     		                		title: title,
+     		            			start: new Date($.now()),
+     		            			end: new Date($.now()),
+     		            			className: categoryClass
+     		                    });
+     							$this.$calendarObj.fullCalendar('renderEvent', {
+     		                        title: title,
+     		                        start:start,
+     		                        end: end,
+     		                        allDay: false,
+     		                        className: categoryClass
+     		                    }, true);  
+     							
+     						},
+     	                    error : function(e) {
+//     	                        console.log(e.responseText);
+     	                    	console.log("calendar ajax error");
+     	                    }
+     					});
+            		});
                     $this.$modal.modal('hide');
-
-                    // ajax 통신으로 데이터 저장
-                    console.log(title); //String
-                    console.log(start._i); //number
-                    console.log(end._i);
-                    console.log(categoryClass); //String
 
                 }
                 else{
@@ -114,6 +198,7 @@
         $(this.$event).each(function () {
             // create an Event Object (http://arshaw.com/fullcalendar/docs/event_data/Event_Object/)
             // it doesn't need to have a start or end
+        	
             var eventObject = {
                 title: $.trim($(this).text()) // use the element's text as the event title
             };
@@ -136,30 +221,26 @@
         var m = date.getMonth();
         var y = date.getFullYear();
         var form = '';
-        var today = new Date($.now());
+        //var today = new Date($.now()); //전역변수로 선언
 
-        // 초기생성시 ajax 통신으로 데이터를 가져옴
-        
-
-
-        defaultEvents =  [{
-                title: '이야!',
-                start: new Date($.now() + 158000000),
-                className: 'bg-dark'
-            }, {
-                title: '이존데',
-                start: today,
-                end: today,
-                className: 'bg-danger'
-            }, {
-                title: '테마구입',
-                start: new Date($.now() + 338000000),
-                className: 'bg-primary'
-            }
-            
-            ];
-        
-        console.log(defaultEvents);
+//        defaultEvents =  [{
+//                title: '이야!',
+//                start: new Date($.now() + 158000000),
+//                className: 'bg-dark'
+//            }, {
+//                title: '이존데',
+//                start: today,
+//                end: today,
+//                className: 'bg-danger'
+//            }, {
+//                title: '테마구입',
+//                start: new Date($.now() + 338000000),
+//                className: 'bg-primary'
+//            }
+//            
+//            ];
+//        console.log("############");
+//        console.log(defaultEvents);
         
         var $this = this;
         $this.$calendarObj = $this.$calendar.fullCalendar({

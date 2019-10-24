@@ -448,22 +448,50 @@
 	<script
 		src="https://cdn.jsdelivr.net/npm/jquery@2.2.4/dist/jquery.min.js"></script>
 	<script>
-	//console.log(${ac});
-	//console.log('${ac["title"]}');
+	//console.log('${ac.get(0)}');
+	//console.log('${ac.get(1)}');
+	//consol.log('${ac.size()}');
+	//consol.log('${ac.get(0).title}');
+		
 	var testAr = [];
-	
-	$(function () {
+	var ajaxPath = '<c:out value="${path}"/>';
+
+/* 		{
+		title: "123124",
+        start: new Date(1570233600000),
+        end: new Date(1570233600000),
+        className: "bg-danger"
+	}]; */
+	<c:forEach items="${ac}" var="item">
 		testAr.push({
-			title:"${ac['title']}",
-			start:"${ac['start']}",
-			end: "${ac['end']}",
-			className : "${ac['className']}"
-			
+			title: "${item.title}",
+	        start: new Date(${item.start}),
+	        end: new Date(${item.end}),
+	        className: "${item.className}"
 		});
-		console.log(testAr);
-	});
+	</c:forEach>
+
+	//var testAr1 = new Array();
+	
+	/*	testAr.push({
+			title: "${cal.title}",
+	        start: new Date(${cal.start}),
+	        end: new Date(${cal.end}),
+	        className: "${cal.className}"
+		});
+	*/
+	
+//	console.log("-------------");
+	var today = new Date($.now());
+	
+	// 테스트 초기값
 	
 	
+//	console.log(testAr);
+//	console.log("-------------");
+	
+//	console.log(testAr);
+//	console.log(test);
 	
 	
 	//title: '이존데',

@@ -6,6 +6,7 @@
 		<!-- <typeAlias type="com.mgr.merry.info.model.vo.Info" alias="info"/> -->
 		<!-- <typeAlias type="com.kh.spring.demo.model.vo.Dev" alias="dev"/>
 		<typeAlias type="com.kh.spring.demo.model.vo.Member" alias="m"/> -->
+		<typeAlias type="com.mgr.merry.admin.model.vo.AdminCalendar" alias="cal"/>
 	</typeAliases>
 	
 </configuration>
