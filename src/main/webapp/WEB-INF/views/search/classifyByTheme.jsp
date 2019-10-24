@@ -126,6 +126,7 @@
 							<p><strong>${list.localName}</strong><p>
 							</div>
 							<div class="col-md-4 ts-padding about-img" >
+							
 							<img class="listImg" src="${list.fileReName}" alt="이미지 준비중">
 						</div>
 					</div>
