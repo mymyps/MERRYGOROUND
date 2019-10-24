@@ -2,60 +2,55 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="search">
 	
-     <!-- 모든 list 불러오기  -->
-<!-- 	 <select id="allList" resultType="map"> -->
-<!-- 	 SELECT *  -->
-<!-- 	 FROM SUPPORTERS_UPLOAD s -->
-<!-- 	 INNER JOIN THEMA t -->
-<!-- 	 ON s.THEMANUM=t.THEMANUM -->
-<!-- 	 INNER JOIN INFO_UPLOAD i -->
-<!-- 	 ON t.THEMANUM=i.THEMANUM -->
-<!-- 	 INNER JOIN INFO_UPLOAD_IMG img -->
-<!-- 	 IN i.INFOUPNUM=img.INFONUM -->
-<!-- 	 INNER JOIN LOCATION lo -->
-<!-- 	 ON i.LOCALNUM=lo.LOCALNUM -->
-<!-- 	 </select> -->
-	  
-	<!--메인테마조회 -->
-	  <select id="themaList1" resultType="map" parameterType="map">
-	 SELECT * 
-	 FROM SUPPORTERS_UPLOAD s
+
+	 <select id="allList" resultType="map">
+	 SELECT *
+	 FROM INFO_UPLOAD i
 	 INNER JOIN THEMA t
-	 ON s.THEMANUM=t.THEMANUM
-	 INNER JOIN INFO_UPLOAD i
-	 ON t.THEMANUM=i.THEMANUM
+	 ON i.THEMANUM=t.THEMANUM
 	 INNER JOIN INFO_UPLOAD_IMG img
-	 IN i.INFOUPNUM=img.INFONUM
+	 ON i.INFOUPNUM=img.INFOUPNUM
 	 INNER JOIN LOCATION lo
 	 ON i.LOCALNUM=lo.LOCALNUM
-	 WHERE i.THEMANUM=#{themanum} OR t.THEMANUMREF=#{themanumref}
+	
+	 </select>
+	  
+	<!--메인테마조회 -->
+	  <select id="themaList1" resultType="com.mgr.merry.info.model.vo.InfoUpload" parameterType="map">
+	
+	 SELECT *
+	 FROM INFO_UPLOAD i
+	 INNER JOIN THEMA t
+	 ON i.THEMANUM=t.THEMANUM
+	 INNER JOIN INFO_UPLOAD_IMG img
+	 ON i.INFOUPNUM=img.INFOUPNUM
+	 INNER JOIN LOCATION lo
+	 ON i.LOCALNUM=lo.LOCALNUM
+	 WHERE i.THEMANUM=#{themaNum} OR t.THEMANUMREF=#{themaNumRef}
+	 
 	</select>
 	  
 	<!--서브테마 조회 -->
-	  <select id="themaList2" resultType="map" parameterType="_int">
-	 SELECT * 
-	 FROM SUPPORTERS_UPLOAD s
+	  <select id="themaList2" resultType="com.mgr.merry.info.model.vo.InfoUpload" parameterType="map">
+	 SELECT *
+	 FROM INFO_UPLOAD i
 	 INNER JOIN THEMA t
-	 ON s.THEMANUM=t.THEMANUM
-	 INNER JOIN INFO_UPLOAD i
-	 ON t.THEMANUM=i.THEMANUM
+	 ON i.THEMANUM=t.THEMANUM
 	 INNER JOIN INFO_UPLOAD_IMG img
-	 IN i.INFOUPNUM=img.INFONUM
+	 ON i.INFOUPNUM=img.INFOUPNUM
 	 INNER JOIN LOCATION lo
 	 ON i.LOCALNUM=lo.LOCALNUM
 	 WHERE i.THEMANUM=#{themaNum}
 	  </select>
 	  
 	   <!--지역별조회 -->
-	  <select id="localList" resultType="map" parameterType="_int">
-	 SELECT * 
-	 FROM SUPPORTERS_UPLOAD s
-	 INNER JOIN THEMA t
-	 ON s.THEMANUM=t.THEMANUM
-	 INNER JOIN INFO_UPLOAD i
-	 ON t.THEMANUM=i.THEMANUM
+	  <select id="localList" resultType="com.mgr.merry.info.model.vo.InfoUpload" parameterType="_int">
+	 SELECT *
+	 FROM INFO_UPLOAD I
+	 INNER JOIN THEMA T
+	 ON I.THEMANUM=T.THEMANUM
 	 INNER JOIN INFO_UPLOAD_IMG img
-	 IN i.INFOUPNUM=img.INFONUM
+	 ON i.INFOUPNUM=img.INFOUPNUM
 	 INNER JOIN LOCATION lo
 	 ON i.LOCALNUM=lo.LOCALNUM
 	 WHERE lo.LOCALNUM=#{localNum}

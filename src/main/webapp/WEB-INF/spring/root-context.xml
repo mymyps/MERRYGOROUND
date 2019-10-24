@@ -26,16 +26,19 @@
 			</bean>
 		</property>
 	</bean>
-	<!-- Mybatis에서 SqlSession객체를 생성하는 factoryBean을 springbean으로 등록 -->
-	<bean id="sqlSessionFactoryBean"
-		class="org.mybatis.spring.SqlSessionFactoryBean">
-		<property name="dataSource" ref="dataSource" />
-		<property name="mapperLocations"
-			value="classpath*:mapper/**/*.xml"></property>
-		<property name="configLocation"
-			value="classpath:mybatis-config.xml"></property>
-	</bean>
-	   <!-- SessionTemplate를 이용한 springbean으로 등록하여 활용  -->
+
+    
+    <!--Mybatis에 필요한 SqlSession factoryBean을 springbean으로 등록 -->
+    <bean id="sqlSessionFactoryBean" class="org.mybatis.spring.SqlSessionFactoryBean">
+	    <!-- property = setter 초기화 -->
+	    <!--위의 dataSource를 넣음  -->
+	    <property name="dataSource" ref="dataSource"/>
+	    <!-- resource밑에 mapper찾고 밑에 폴더 몇 개 있든 상관없이 xml파일은 다 읽음  -->
+	    <property name="mapperLocations" value="classpath*:mapper/**/*.xml"/>
+	    <property name="configLocation" value="classpath:mybatis-config.xml"/>
+    </bean>
+    
+    <!-- SessionTemplate를 이용한 springbean으로 등록하여 활용  -->
     <bean id="sqlSessionTemplate" class="org.mybatis.spring.SqlSessionTemplate">
 	     <!--위의 sqlSessionFactoryBean 이 들어옴  -->
 	     <!--생성자를 이용 , index = 매개변수의 순서-->

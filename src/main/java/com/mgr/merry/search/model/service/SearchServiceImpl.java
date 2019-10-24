@@ -18,31 +18,32 @@ public class SearchServiceImpl implements SearchService {
 	
 	@Autowired
 	SqlSessionTemplate session;
+	
+	@Override
+	public List<Map<String, Object>> allList() {
+	
+		return dao.allList(session);
+	}
 
-//	@Override
-//	public List<Map<String, Object>> allList() {
-//	
-//		return dao.allList(session);
-//	}
 
 	@Override
-	public List<Map<String,Object>> themaList(int themanum, int level) {
+	public List<InfoUpload> themaList(Map<String, Object> param) {
 		
-		int themanumref=0;
-		
-		if(level ==1) { //메인테마라면
+		String themaNumRef="";
+			
+		if((int)param.get("level") ==1) { //메인테마라면
 			
 			//themaList1 로 검색하고 
 			
-			themanumref = themanum; // 메인테마가 100번이라면 100번을 참고하고 있는 모든 list출력 
-			return dao.themaList(session,themanum,themanumref);
+			themaNumRef.equals(param.get("themaNum")); // 메인테마가 100번이라면 100번을 참고하고 있는 모든 list출력 
+			return dao.themaList(session,param,themaNumRef);
 			
 			
 		}else { // 서브테마라면
 			
 			//themaList2 로 검색하세요!
 			
-			return dao.themaList(session,themanum);
+			return dao.themaList(session,param);
 			
 		}
 		
@@ -50,7 +51,7 @@ public class SearchServiceImpl implements SearchService {
 	}
 
 	@Override
-	public List<Map<String, Object>> localList(int localNum) {
+	public List<InfoUpload> localList(int localNum) {
 		
 		return dao.localList(session, localNum);
 	}

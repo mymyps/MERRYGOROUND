@@ -17,5 +17,25 @@ public class InfoUpload {
    private String infoupPhone;
    private String infoupTime;
    private String infoupStatus;
+ 
+   //resultType info.model.vo로 받기위해 변수 추가할게요
+   private InfoUploadImg InfoUploadImg;
+   private com.mgr.merry.search.model.vo.Location Location;
+   private com.mgr.merry.search.model.vo.Thema Thema;
+   
+    //InfoUploadImg
+	private int fileNum;
+	private String fileReName;
+	
+	//location
+	
+	private String localName;
+		
+	//thema
+	
+	private String themaName;
+	private String themaNum;
+	private String themaNumRef;
+	private int level;
    
 }
