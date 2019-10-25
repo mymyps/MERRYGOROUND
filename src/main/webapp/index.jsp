@@ -3,7 +3,7 @@
 
 <jsp:include page="/WEB-INF/views/common/header.jsp"/>
 
-
+		
 		<!-- Slider start -->
 		<section id="home" class="no-padding">
 			<div id="main-slide" class="cd-hero">
@@ -16,7 +16,8 @@
 							<h2>Merry-go-round</h2>
 							<br>
 							<h3>매일 매일 똑같은 영화-밥-카페 데이트에 질리셨나요 식상한 데이트에 지치셨나요<br>당좡시작하세욤 Start now!!!!</h3>
-							
+							<a href="${pageContext.request.contextPath }/couple/coupleBoardList">임시연결 </a>	
+							<a href="${pageContext.request.contextPath }/couple/abc">abc </a>	
 						</div> <!-- .cd-full-width -->
 					</li>
 
