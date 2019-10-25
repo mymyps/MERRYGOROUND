@@ -61,6 +61,57 @@
 	font-style: normal;
 }
 
+/* By Honey  */
+
+.themaContent
+{
+	background: #f4f4f4;
+	min-height: 150px;
+	max-height: 170px;
+	position: relative;
+	left: 100px;
+}
+.themaContent ul li a{
+	color: #6A6A6A;
+}
+
+
+.ts-padding {
+  padding: 30px;
+}
+
+
+.listImg{
+
+	position: relative;
+	top: 20px;
+	left: 50px;
+	height: 170px;
+	width: 214px;
+	
+}
+
+
+/* #themarow>:nth-child(n+2) { */
+/* /* margin-top: -50px; */ */
+/* margin-top:-10px; */
+/* } */
+
+
+
+.paging2{
+
+	position: relative;
+	left: 325px;
+	top: 30px;
+}
+
+#themenameBrown{
+
+	color: #5a554f !important;
+}
+
+
 
 /* Global styles
 ================================================== */
@@ -474,6 +525,10 @@ blockquote {
 .title-border{
 	line-height: normal;
 	margin-top: 0;
+	
+	position: relative;
+	top: 5px;
+}
 }
 
 .widget-title{
@@ -3394,4 +3449,190 @@ a.close-styler{
 
 .style-switch-wrapper #preset6 {
 	background-color: #8C42BA;
+}
+
+/* info 상세뷰 joomi 추가 */
+
+.infoimg{
+	width:100%;
+}
+
+.infoDate{
+	float: right;
+}
+
+.infocontent1{
+	width:48%;
+	display: inline-block;
+	text-align: right;
+	padding-right: 15px;
+	border-right: 1px solid #AFAFAF;
+}
+
+.infocontent2{
+	width:48%;
+	padding-left:13px;
+	display: inline-block;
+}
+
+.btn.supreviewBtn{
+	color: #5a554f;
+	border-radius: 50px;
+	padding: 10px 30px;
+	background: none;
+	font-size: 14px;
+	text-transform: uppercase;
+	-webkit-transition: all 0.3s ease 0s;
+	-moz-transition: all 0.3s ease 0s;
+	-ms-transition: all 0.3s ease 0s;
+	-o-transition: all 0.3s ease 0s;
+	transition: all 0.3s ease 0s;
+	width:100%;
+	border : 2px solid #eb9579;	
+}
+
+.btn.supreviewBtn:hover{
+	color: #fff;
+	background-color: #eb9579;
+}
+
+
+.form-control{
+	display:inline;
+	box-shadow: none;
+	border: 1px solid #dedede;
+	padding: 6px 20px;
+	background: none;
+	color: #959595;
+	font-size: 14px;
+	border-radius: 0;
+}
+
+.form-control:focus{
+	box-shadow: none;
+}
+
+.btn.reviewBtn{
+	color: #5a554f;
+	border-radius: 50px;
+	padding: 10px 30px;
+	background: none;
+	font-size: 14px;
+	text-transform: uppercase;
+	-webkit-transition: all 0.3s ease 0s;
+	-moz-transition: all 0.3s ease 0s;
+	-ms-transition: all 0.3s ease 0s;
+	-o-transition: all 0.3s ease 0s;
+	transition: all 0.3s ease 0s;
+	border : 2px solid #eb9579;	
+	float:right;
+
+}
+
+.btn.reviewBtn:hover{
+	color: #fff;
+	background-color: #eb9579;
+}
+
+.reviewPoint{
+	display: inline-block;
+	margin-left: 15px;
+}
+
+
+.comments-list .comment-date{
+	font-style: italic;
+	color: #959595;
+	margin-bottom: 20px;
+	float:right;
+}
+
+.comments-list .comment-author{
+	margin-bottom: 0;
+	margin-top:0;
+	float:left;
+}
+
+.comment-body hr{
+	margin-bottom: 5px;
+	width: 100%;
+}
+
+/*info form joomi 추가*/
+
+.infoThemaDropDown li ul{
+	display:none;
+	height:auto;
+	padding: 0px;
+	margin: 0px;
+	border: 0px;
+	position: absolute;
+}
+
+.infoThemaDropDown li:hover ul {
+	display:block;
+}
+
+.infoForm1{
+	display:inline-block;
+	width:50%;
+	margin-right: 18%;
+}
+
+.infoForm1 input{
+	width:100%;
+}
+
+.infoForm1 select{
+	width:49%;
+}
+
+.infoForm1 select:nth-child(2n){
+	float: right;
+}
+
+
+.infoFormMainFrame{
+	width:100%;
+}
+
+.infoFormSubFrame{
+	margin-left: 18%;
+	width:10%;
+	display: inline-block;
+	border-right: 1px solid #AFAFAF;
+}
+
+.btn.infoFormBtn{
+	color: #5a554f;
+	border-radius: 50px;
+	padding: 10px 30px;
+	background: none;
+	font-size: 14px;
+	text-transform: uppercase;
+	-webkit-transition: all 0.3s ease 0s;
+	-moz-transition: all 0.3s ease 0s;
+	-ms-transition: all 0.3s ease 0s;
+	-o-transition: all 0.3s ease 0s;
+	transition: all 0.3s ease 0s;
+	width:28%;
+	border : 2px solid #eb9579;	
+}
+
+.btn.infoFormBtn:nth-child(2n-1){
+	margin-left:19%;
+}
+
+.btn.infoFormBtn:nth-child(2n){
+	float:right;
+	margin-right:23%;
+}
+
+.btn.infoFormBtn:hover{
+	color: #fff;
+	background-color: #eb9579;
+}
+
+.infoFormLocFrame{
+	width:100%;
 }

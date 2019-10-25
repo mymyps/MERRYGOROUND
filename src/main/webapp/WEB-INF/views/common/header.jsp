@@ -4,6 +4,7 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 
+
 <!DOCTYPE html>
 <html lang="ko">
 
@@ -12,6 +13,8 @@
 <title>Merry-go-round</title>
 <meta name="description" content="">
 <meta name="author" content="">
+   
+   
 
 	<!-- Mobile Specific Metas
 	================================================== -->
@@ -27,6 +30,44 @@
 	<link rel="apple-touch-icon-precomposed" sizes="72x72" href="${pageContext.request.contextPath }/resources/img/favicon/favicon-72x72.png">
 	<link rel="apple-touch-icon-precomposed" href="${pageContext.request.contextPath }/resources/img/favicon/favicon-54x54.png">
 
+	
+<!-- 	<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" -->
+<!-- 	integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" -->
+<!-- 	crossorigin="anonymous"></script> -->
+	
+	<!-- Javascript Files ================================================== -->
+
+	<!-- initialize jQuery Library -->
+	<script type="text/javascript" src="${pageContext.request.contextPath }/resources/js/jquery.js"></script>
+	<!-- Bootstrap jQuery -->
+	<script type="text/javascript" src="${pageContext.request.contextPath }/resources/js/bootstrap.min.js"></script>
+	<!-- Style Switcher -->
+	<script type="text/javascript" src="${pageContext.request.contextPath }/resources/js/style-switcher.js"></script>
+	<!-- Owl Carousel -->
+	<script type="text/javascript" src="${pageContext.request.contextPath }/resources/js/owl.carousel.js"></script>
+	<!-- PrettyPhoto -->
+	<script type="text/javascript" src="${pageContext.request.contextPath }/resources/js/jquery.prettyPhoto.js"></script>
+	<!-- Bxslider -->
+	<script type="text/javascript" src="${pageContext.request.contextPath }/resources/js/jquery.flexslider.js"></script>
+	<!-- CD Hero slider -->
+	<script type="text/javascript" src="${pageContext.request.contextPath }/resources/js/cd-hero.js"></script>
+	<!-- Isotope -->
+	<script type="text/javascript" src="${pageContext.request.contextPath }/resources/js/isotope.js"></script>
+	<script type="text/javascript" src="${pageContext.request.contextPath }/resources/js/ini.isotope.js"></script>
+	<!-- Wow Animation -->
+	<script type="text/javascript" src="${pageContext.request.contextPath }/resources/js/wow.min.js"></script>
+	<!-- SmoothScroll -->
+	<script type="text/javascript" src="${pageContext.request.contextPath }/resources/js/smoothscroll.js"></script>
+	<!-- Eeasing -->
+	<script type="text/javascript" src="${pageContext.request.contextPath }/resources/js/jquery.easing.1.3.js"></script>
+	<!-- Counter -->
+	<script type="text/javascript" src="${pageContext.request.contextPath }/resources/js/jquery.counterup.min.js"></script>
+	<!-- Waypoints -->
+	<script type="text/javascript" src="${pageContext.request.contextPath }/resources/js/waypoints.min.js"></script>
+	<!-- Template custom -->
+	<script type="text/javascript" src="${pageContext.request.contextPath }/resources/js/custom.js"></script>
+	</div><!-- Body inner end -->
+	
 	<!-- CSS
 	================================================== -->
 
@@ -149,8 +190,8 @@
 										class="fa fa-angle-down"></i></a>
 								<div class="dropdown-menu">
 									<ul>
-										<li><a href="blog-rightside.html">Blog with Sidebar</a></li>
-										<li><a href="blog-item.html">Blog Single</a></li>
+										<li><a href="${pageContext.request.contextPath }/info/infoForm">infoForm 임의연결</a></li>
+										<li><a href="${pageContext.request.contextPath }/info/infoView.do">infoView 임의연결</a></li>
 									</ul>
 								</div>
 							</li>
@@ -164,7 +205,7 @@
 									</ul>
 								</div>
 							</li>
-							<li><a href="${pageContext.request.contextPath}/serch/categoryList">Contact</a></li>
+							<li><a href="${pageContext.request.contextPath}">Contact</a></li>
 						</ul>
 					</nav>
 					<!--/ Navigation end -->
@@ -190,6 +231,4 @@
 				  </div>
 		</div>
 	</div>
-	
-	
 		

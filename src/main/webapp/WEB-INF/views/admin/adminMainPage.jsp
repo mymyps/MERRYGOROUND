@@ -445,11 +445,65 @@
 		</div>
 	</div>
 	<!-- /#right-panel -->
+	<script
+		src="https://cdn.jsdelivr.net/npm/jquery@2.2.4/dist/jquery.min.js"></script>
+	<script>
+	//console.log('${ac.get(0)}');
+	//console.log('${ac.get(1)}');
+	//consol.log('${ac.size()}');
+	//consol.log('${ac.get(0).title}');
+		
+	var testAr = [];
+	var ajaxPath = '<c:out value="${path}"/>';
+
+/* 		{
+		title: "123124",
+        start: new Date(1570233600000),
+        end: new Date(1570233600000),
+        className: "bg-danger"
+	}]; */
+	<c:forEach items="${ac}" var="item">
+		testAr.push({
+			title: "${item.title}",
+	        start: new Date(${item.start}),
+	        end: new Date(${item.end}),
+	        className: "${item.className}"
+		});
+	</c:forEach>
+
+	//var testAr1 = new Array();
+	
+	/*	testAr.push({
+			title: "${cal.title}",
+	        start: new Date(${cal.start}),
+	        end: new Date(${cal.end}),
+	        className: "${cal.className}"
+		});
+	*/
+	
+//	console.log("-------------");
+	var today = new Date($.now());
+	
+	// 테스트 초기값
+	
+	
+//	console.log(testAr);
+//	console.log("-------------");
+	
+//	console.log(testAr);
+//	console.log(test);
+	
+	
+	//title: '이존데',
+    //start: today,
+    //end: today,
+    //className: 'bg-danger'
+	
+	//defaultEvents.push(${ac});
+	</script>
 
 	<!-- Scripts -->
  	<script
-		src="https://cdn.jsdelivr.net/npm/jquery@2.2.4/dist/jquery.min.js"></script>
-	<script
 		src="https://cdn.jsdelivr.net/npm/popper.js@1.14.4/dist/umd/popper.min.js"></script>
 	<script
 		src="https://cdn.jsdelivr.net/npm/bootstrap@4.1.3/dist/js/bootstrap.min.js"></script>
@@ -465,5 +519,6 @@
 </section>
 </div>
 </body>
+
 </html>
 <%-- <jsp:include page="/WEB-INF/views/common/footer.jsp" /> --%>
