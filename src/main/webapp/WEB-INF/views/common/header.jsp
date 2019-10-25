@@ -83,6 +83,7 @@
 							
 
 							<!-- 마이페이지(로그인 후 이용가능) -->
+							<c:if test="${empty loginMember}">
 							<li class="dropdown active">
 								<a href="${pageContext.request.contextPath }" class="dropdown-toggle" data-toggle="dropdown">Login <i
 										class="fa fa-angle-down"></i></a>
@@ -95,16 +96,37 @@
 									</ul>
 								</div>
 							</li>
-							<li class="dropdown">
-								<a href="${pageContext.request.contextPath }" class="dropdown-toggle" data-toggle="dropdown">Mypage <i
+							</c:if>
+							<c:if test="${not empty loginMember }">
+								<li class="dropdown active">
+								<a href="${pageContext.request.contextPath }" class="dropdown-toggle" data-toggle="dropdown">${loginMember.id} 님 ㅎㅇ <i
 										class="fa fa-angle-down"></i></a>
 								<div class="dropdown-menu">
 									<ul>
-										<li><a href="portfolio-classic.html">Portfolio Classic</a></li>
+										<li><a href="${pageContext.request.contextPath }/member/logout.do">로그아웃</a></li>
+									</ul>
+								</div>
+							</li>
+							</c:if>
+							<li class="dropdown">
+								<a href="${pageContext.request.contextPath }" class="dropdown-toggle" data-toggle="dropdown">Mypage <i
+										class="fa fa-angle-down"></i></a>
+								<c:if test="${loginMember==null }">
+									<div class="dropdown-menu">
+									<ul>
+										<li><a href="portfolio-static.html">로그인후 이용가능</a></li>
+									</ul>
+								</div>
+								</c:if>
+								<c:if test="${loginMember!=null }">
+								<div class="dropdown-menu">
+									<ul>
+										<li><a href="${pageContext.request.contextPath }/sign/mypage.do?mNo=${loginMember.memberNum}">Portfolio Classic</a></li>
 										<li><a href="portfolio-static.html">Portfolio Static</a></li>
 										<li><a href="portfolio-item.html">Portfolio Single</a></li>
 									</ul>
 								</div>
+								</c:if>
 							</li>
 							<li class="dropdown">
 							<li>

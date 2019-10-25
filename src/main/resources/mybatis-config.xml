@@ -3,8 +3,8 @@
 <configuration>
 	<typeAliases>
 		<typeAlias type="com.mgr.merry.common.ArrayTypeHandler" alias="arrType"/>	
-		<!-- <typeAlias type="com.kh.spring.demo.model.vo.Dev" alias="dev"/>
-		<typeAlias type="com.kh.spring.demo.model.vo.Member" alias="m"/> -->
+		<!-- <typeAlias type="com.kh.spring.demo.model.vo.Dev" alias="dev"/>-->
+		<typeAlias type="com.mgr.merry.sign.model.vo.Members" alias="members"/> 
 	</typeAliases>
 	
 </configuration>

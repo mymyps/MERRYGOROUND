@@ -11,14 +11,16 @@ public class Members {
 	private int memberNum;
 	private String id;
 	private String pw;
-	private String memberName;
+	private String name;
 	private String birth;
 	private char gender;
 	private String phone;
 	private String email;
 	private Date enrolldate;
-	private int mlevel;
+	private int memberLevel;
+	private int status;
 	private String proimg;
 	private char cpstatus;
 	private String cpid;
+	private char emailcertify;
 }

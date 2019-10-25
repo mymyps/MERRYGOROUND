@@ -33,20 +33,20 @@
 <div class="limiter">
 		<div class="container-login100" style="background-image: url('images/bg-01.jpg');">
 			<div class="wrap-login100 p-l-55 p-r-55 p-t-65 p-b-54">
-				<form class="login100-form validate-form">
+				<form class="login100-form validate-form" action="${pageContext.request.contextPath}/sign/memberLogin.do" method="post">
 					<span class="login100-form-title p-b-49">
 						Login
 					</span>
 
 					<div class="wrap-input100 validate-input m-b-23" data-validate = "Username is reauired">
 						<span class="label-input100">ID</span>
-						<input class="input100" type="text" name="username" placeholder="아이디">
+						<input class="input100" type="text" name="id" placeholder="아이디">
 						<span class="focus-input100" data-symbol="&#xf206;"></span>
 					</div>
 
 					<div class="wrap-input100 validate-input" data-validate="Password is required">
 						<span class="label-input100">Password</span>
-						<input class="input100" type="password" name="pass" placeholder="비밀번호입력">
+						<input class="input100" type="password" name="pw" placeholder="비밀번호입력">
 						<span class="focus-input100" data-symbol="&#xf190;"></span>
 					</div>
 					
@@ -65,35 +65,12 @@
 						</div>
 					</div>
 
-					<div class="txt1 text-center p-t-54 p-b-20">
+					<div class="txt1 text-center p-t-54 p-b-20" type="submit">
 						<span>
 							Or Sign Up Using
 						</span>
 					</div>
 
-					<!-- <div class="flex-c-m">
-						<a href="#" class="login100-social-item bg1">
-							<i class="fa fa-facebook"></i>
-						</a>
-
-						<a href="#" class="login100-social-item bg2">
-							<i class="fa fa-twitter"></i>
-						</a>
-
-						<a href="#" class="login100-social-item bg3">
-							<i class="fa fa-google"></i>
-						</a>
-					</div> -->
-
-					<!-- <div class="flex-col-c p-t-155">
-						<span class="txt1 p-b-17">
-							Or Sign Up Using
-						</span>
-
-						<a href="#" class="txt2">
-							Sign Up
-						</a>
-					</div> -->
 				</form>
 			</div>
 		</div>
