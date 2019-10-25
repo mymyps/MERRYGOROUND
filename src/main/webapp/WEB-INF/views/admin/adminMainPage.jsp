@@ -448,20 +448,9 @@
 	<script
 		src="https://cdn.jsdelivr.net/npm/jquery@2.2.4/dist/jquery.min.js"></script>
 	<script>
-	//console.log('${ac.get(0)}');
-	//console.log('${ac.get(1)}');
-	//consol.log('${ac.size()}');
-	//consol.log('${ac.get(0).title}');
-		
 	var testAr = [];
 	var ajaxPath = '<c:out value="${path}"/>';
 
-/* 		{
-		title: "123124",
-        start: new Date(1570233600000),
-        end: new Date(1570233600000),
-        className: "bg-danger"
-	}]; */
 	<c:forEach items="${ac}" var="item">
 		testAr.push({
 			title: "${item.title}",
@@ -471,35 +460,44 @@
 		});
 	</c:forEach>
 
-	//var testAr1 = new Array();
-	
-	/*	testAr.push({
-			title: "${cal.title}",
-	        start: new Date(${cal.start}),
-	        end: new Date(${cal.end}),
-	        className: "${cal.className}"
-		});
-	*/
-	
-//	console.log("-------------");
 	var today = new Date($.now());
 	
-	// 테스트 초기값
+	//bar chart
+    var ctx = document.getElementById( "barChart" );
+    //    ctx.height = 200;
+    var myChart = new Chart( ctx, {
+        type: 'bar',
+        data: {
+            labels: [ "Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul" ],
+            datasets: [
+                {
+                    label: "My First dataset",
+                    data: [ 65, 59, 80, 81, 56, 55, 45 ],
+                    borderColor: "rgba(0, 194, 146, 0.9)",
+                    borderWidth: "0",
+                    backgroundColor: "rgba(0, 194, 146, 0.5)"
+                            },
+                {
+                    label: "My Second dataset",
+                    data: [ 28, 48, 40, 19, 86, 27, 76 ],
+                    borderColor: "rgba(0,0,0,0.09)",
+                    borderWidth: "0",
+                    backgroundColor: "rgba(0,0,0,0.07)"
+                            }
+                        ]
+        },
+        options: {
+            scales: {
+                yAxes: [ {
+                    ticks: {
+                        beginAtZero: true
+                    }
+                                } ]
+            }
+        }
+    } );
 	
 	
-//	console.log(testAr);
-//	console.log("-------------");
-	
-//	console.log(testAr);
-//	console.log(test);
-	
-	
-	//title: '이존데',
-    //start: today,
-    //end: today,
-    //className: 'bg-danger'
-	
-	//defaultEvents.push(${ac});
 	</script>
 
 	<!-- Scripts -->
@@ -516,6 +514,14 @@
 	<script
 		src="https://cdn.jsdelivr.net/npm/fullcalendar@3.9.0/dist/fullcalendar.min.js"></script>
 	<script src="${pageContext.request.contextPath }/resources/admin/assets/js/init/fullcalendar-init.js"></script>
+	
+	<!--  Chart js -->
+	<script src="https://cdn.jsdelivr.net/npm/chart.js@2.7.3/dist/Chart.bundle.min.js"></script>
+    <script src="${pageContext.request.contextPath }/resources/admin/assets/js/init/chartjs-init.js"></script>
+    
+    <!--Flot Chart-->
+    <script src="https://cdn.jsdelivr.net/npm/jquery.flot@0.8.3/jquery.flot.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/flot-spline@0.0.1/js/jquery.flot.spline.min.js"></script>
 </section>
 </div>
 </body>
