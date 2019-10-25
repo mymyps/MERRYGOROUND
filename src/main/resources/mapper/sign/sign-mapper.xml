@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="sign">
+	<insert id="insertMember" parameterType="members">
+		INSERT INTO MEMBERS VALUES(members_seq.nextval,#{id},#{pw},#{name},#{birth},#{gender},#{phone},#{email},default,default,default,default,default,default,default,'1234')
+	</insert>
+	<select id="selectMemberOne" resultType="members" parameterType="members"> 
+		SELECT * FROM MEMBERS WHERE id=#{id}
+	</select>
+	<select id="selectMember" resultType="members" parameterType="_int">
+		select * from members where membernum=#{memNo}
+	</select>
+	<update id="updateMember">
+		update members set id=#{id},name=#{name},birth=#{birth},phone=#{phone},email=#{email} where memberNum=#{memberNum}
+	</update>
+</mapper>

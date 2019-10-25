@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="admin">
+	<!-- <insert id="insertDev" parameterType="dev">
+		insert into dev values(seq_dev_no.nextval, #{devName}, #{devAge}, #{devEmail}, #{devGender},
+			<foreach collection="devLang" item="Lang" separator="," open="'" close="'">
+				${lang}
+			</foreach>
+			#{devLang typeHandler = com.kh.spring.common.ArrayTypeHandler}
+			#{devLang, typeHandler=arrType} )
+	</insert>
+	<resultMap type="dev" id="devMap">
+		<result column="devlang" property="devLang" typeHandler="arrType"/>
+	</resultMap>
+	<select id="selectDevList" resultMap="devMap">
+		select * from dev
+	</select>
+	
+	<select id="memberLogin" parameterType="m" resultType="_int">
+		select count(*) from member where userid = #{userId} and password = #{password}
+	</select> -->
+	<insert id="calSave" parameterType="cal">
+		insert into admincalendar values(#{title}, #{start}, #{end}, #{className})
+	</insert>
+	
+	<select id="calLoad" resultType="cal">
+		select * from admincalendar
+	</select>
+	
+	<delete id="calDel" parameterType="cal">
+		delete from admincalendar where title=#{title} and "START"='${start}'
+	</delete>
+	
+	<update id="calMod" parameterType="cal">
+		update admincalendar 
+			set title=#{title}
+		where "START"='${start}'
+	</update>
+	
+</mapper>
+
+
+
