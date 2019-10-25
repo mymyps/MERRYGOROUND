@@ -9,6 +9,12 @@
 
 <!-- 관리자 페이지 css -->
 <jsp:include page="/WEB-INF/views/admin/common/adminHeader.jsp" />
+<link href="https://cdn.jsdelivr.net/npm/chartist@0.11.0/dist/chartist.min.css" rel="stylesheet">
+<link href="https://cdn.jsdelivr.net/npm/jqvmap@1.5.1/dist/jqvmap.min.css" rel="stylesheet">
+<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/morris.js/0.5.1/morris.css">
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.0/jquery.min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/raphael/2.1.0/raphael-min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/morris.js/0.5.1/morris.min.js"></script>
 
 		<!-- ---------------------------------------------------------------------------- -->
 		<!-- -------------------------     데이터      ------------------------------------ -->
@@ -175,7 +181,7 @@
 				<!--  Traffic  -->
 				<div class="row">
 					<div class="col-lg-12">
-						<div class="card">
+						<div class="card animated fadeIn">
 							<div class="card-body">
 								<h4 class="box-title"></h4>
 							</div>
@@ -445,8 +451,7 @@
 		</div>
 	</div>
 	<!-- /#right-panel -->
-	<script
-		src="https://cdn.jsdelivr.net/npm/jquery@2.2.4/dist/jquery.min.js"></script>
+	<script src="https://cdn.jsdelivr.net/npm/jquery@2.2.4/dist/jquery.min.js"></script>
 	<script>
 	var testAr = [];
 	var ajaxPath = '<c:out value="${path}"/>';
@@ -464,7 +469,8 @@
 	
 	//bar chart
     var ctx = document.getElementById( "barChart" );
-    //    ctx.height = 200;
+        ctx.height = 200;
+        //console.log("asdlkfjasljfa;dlskjf;alj");
     var myChart = new Chart( ctx, {
         type: 'bar',
         data: {
@@ -501,22 +507,18 @@
 	</script>
 
 	<!-- Scripts -->
- 	<script
-		src="https://cdn.jsdelivr.net/npm/popper.js@1.14.4/dist/umd/popper.min.js"></script>
-	<script
-		src="https://cdn.jsdelivr.net/npm/bootstrap@4.1.3/dist/js/bootstrap.min.js"></script>
-	<script
-		src="https://cdn.jsdelivr.net/npm/jquery-match-height@0.7.2/dist/jquery.matchHeight.min.js"></script>
+ 	<script src="https://cdn.jsdelivr.net/npm/popper.js@1.14.4/dist/umd/popper.min.js"></script>
+	<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.1.3/dist/js/bootstrap.min.js"></script>
+	<script src="https://cdn.jsdelivr.net/npm/jquery-match-height@0.7.2/dist/jquery.matchHeight.min.js"></script>
 	<script src="${pageContext.request.contextPath }/resources/admin/assets/js/main.js"></script>
  
 	<!--Chartist Chart-->
 	<script src="https://cdn.jsdelivr.net/npm/moment@2.22.2/moment.min.js"></script>
-	<script
-		src="https://cdn.jsdelivr.net/npm/fullcalendar@3.9.0/dist/fullcalendar.min.js"></script>
+	<script src="https://cdn.jsdelivr.net/npm/fullcalendar@3.9.0/dist/fullcalendar.min.js"></script>
 	<script src="${pageContext.request.contextPath }/resources/admin/assets/js/init/fullcalendar-init.js"></script>
 	
 	<!--  Chart js -->
-	<script src="https://cdn.jsdelivr.net/npm/chart.js@2.7.3/dist/Chart.bundle.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@2.7.3/dist/Chart.bundle.min.js"></script>
     <script src="${pageContext.request.contextPath }/resources/admin/assets/js/init/chartjs-init.js"></script>
     
     <!--Flot Chart-->

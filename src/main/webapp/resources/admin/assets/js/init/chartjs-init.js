@@ -218,6 +218,7 @@
 
     //bar chart
     var ctx = document.getElementById( "barChart" );
+    console.log(ctx);
     //    ctx.height = 200;
     var myChart = new Chart( ctx, {
         type: 'bar',
