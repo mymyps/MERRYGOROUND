@@ -10,6 +10,7 @@
 		</layout>
 	</appender>
 	
+<<<<<<< HEAD
 	<!--파일에 로그 찍기  -->
     <!--다른 Appender를 이용하면됨  DailyRollingFileAppender -->
     <appender name="filelogger" class="org.apache.log4j.DailyRollingFileAppender">
@@ -21,6 +22,8 @@
 		</layout>
     </appender>
 	
+=======
+>>>>>>> won
 	<!-- Application Loggers -->
 	<logger name="com.mgr.merry">
 		<level value="info" />
