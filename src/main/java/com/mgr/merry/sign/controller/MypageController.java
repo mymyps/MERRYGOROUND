@@ -44,5 +44,14 @@ public class MypageController {
 		model.addAttribute("loc", loc);
 		return "sign/msg";
 	}
-
+	@RequestMapping("/member/updatePw.do")
+	public String pwUpdate() {
+		
+		return "";
+	}
+	@RequestMapping("/member/cupemail.do")
+	public String cupemail() {
+		
+		return "";
+	}
 }

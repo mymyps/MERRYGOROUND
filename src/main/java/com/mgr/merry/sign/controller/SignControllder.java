@@ -97,7 +97,7 @@ public class SignControllder {
 		String email = request.getParameter("email");
 
 		// sendEmail(email,authNum);
-		SMTPTemplate.sendmail("인증번호 : "+authNum, email, "현식이형바보");
+		SMTPTemplate.sendmail("인증번호 : "+authNum, email, "현식");
 		
 		return authNum;
 	}
@@ -106,7 +106,7 @@ public class SignControllder {
 		String host = "smtp.gmail.com"; // smtp서버
 		String subject = "인증번호";
 		String fromName = "관리자";
-		String from = "11agumon@gamil.com";
+		String from = "mgrmgr1004@gamil.com";
 		String to1 = email;
 		String content = "인증번호[" + authNum + "]";
 

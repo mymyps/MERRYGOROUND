@@ -139,7 +139,7 @@
 								</div> --%>
 							<div class="wrap-input100 validate-input m-b-23 idname" reauired>
 								<span class="label-input100">이메일</span> <input class="input100"
-									type="email" name="email" placeholder="이메일"> <span
+									type="email" name="email" placeholder="이메일" value=${members.email }> <span
 									class="focus-input100" data-symbol="&#xf206;"></span>
 								<%-- <a href="${pageContext.request.contextPath }/emailAuth.do?email="+'$("input[name=email]").val()'>이메일인증</a> --%>
 								<!-- <button type="button" onclick="connectEmailAuth();" name="btn_auth">이메일인증</button> -->
@@ -174,10 +174,24 @@
 				        	
 				            <h3>커플요청하기</h3> 
 							<div>
-								<form>
-									<input type="text" name="cupleemail" placeholder="커플이메일입력">
-									<input type="button" class="btn btn-outline-success" value="요청하기" >
-								</form>	
+								<form class="login100-form validate-form" action="${path}/member/cupemail.do" onsubmit="return checkKey1();">
+								<div class="wrap-input100 validate-input m-b-23 idname" reauired>
+								<span class="label-input100"></span>
+									<input class="input100" type="email" name="email"
+										placeholder="커플 이메일 입력"> <span class="focus-input100"
+										data-symbol="&#xf206;"></span>
+									<button onclick="btn_auth()">이메일요청</button>
+								</div>
+									
+								<div class="wrap-input100 validate-input m-b-23 idname" reauired>
+									<span class="label-input100"></span> 
+									<input
+										class="input100" type="number" name="authkey"
+										placeholder="인증번호"> <span class="focus-input100"
+										data-symbol="&#xf206;"></span>
+								</div>
+								<input type="submit" class="btn btn-outline-success" value="완료" >
+							</form>	
 							</div>							 
 				        </div>
 				        <div class="tab-pane animated fadeIn" id="tab_c">
@@ -216,11 +230,27 @@
 					
 							</div>
 				        </div>
-				        <div class="tab-pane animated fadeIn" id="tab_d">
-				            <i class="fa fa-pagelines big"></i>
-				            <h3>비밀번호 변경</h3> 
-				            <p>Over the year we have lots of experience in our field. In sit amet massa sapien. Vestibulum diam turpis, gravida in lobortis id, ornare a eros. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam sagittis nulla non elit dignissim suscipit. Duis lorem nulla, eleifend.</p>
-				        </div>
+				    <div class="tab-pane animated fadeIn" id="tab_d">
+				            <h3>비밀번호 변경</h3>
+						<form class="login100-form validate-form" action="${path}/member/updatePw.do" onsubmit="return checkPw();">
+						<div class="wrap-input100 validate-input" reauired>
+							<span class="label-input100">기존 비밀번호</span> <input
+								class="input100" type="password" id="pw" name="pw" reauired>
+							<span class="focus-input100" data-symbol="&#xf190;"></span>
+						</div>
+						<div class="wrap-input100 validate-input" reauired>
+							<span class="label-input100">변경할 비밀번호</span> <input
+								class="input100" type="password" id="pw" name="pw" reauired>
+							<span class="focus-input100" data-symbol="&#xf190;"></span>
+						</div>
+						<!-- <div class="wrap-input100 validate-input" reauired>
+							<span class="label-input100">Password</span> <input
+								class="input100" type="password" id="pw" name="pw" reauired>
+							<span class="focus-input100" data-symbol="&#xf190;"></span>
+						</div> -->
+						<input type="submit" class="btn btn-outline-success" value="변경" >
+						</form>
+					</div>
 				        <div class="tab-pane animated fadeIn" id="tab_e">
 				            <i class="fa fa-support big"></i>
 				            <h3>24/7 Dedicated Support</h3> 
@@ -268,8 +298,6 @@
 	        },error : function(data){
 	        	console.log(data);
 	        }
-	        
-	    
 	    });
 	    alert("인증번호를 발송했습니다.");
 	}
@@ -285,7 +313,7 @@
 			return true;
 		}else{
 			/* */
-			alert("메일인증번호다름");
+			alert("메일인증번호확인");
 			return false;
 			}
 		}
@@ -295,5 +323,19 @@
 		}
 		
 	}
+	function checkKey1(){
+		var input_authkey = $("input[name=authkey]").val();
+		var receiveKey = sessionStorage.getItem("authkey");
+		var memberemail = $("input[name=email]").val();
+		if(input_authkey== receiveKey){
+			/* 인증키가 일치 했을때 */
+			sessionStorage.removeItem("authkey");
+			return true;
+		}else{
+			/* */
+			alert("메일인증번호확인");
+			return false;
+			}
+		}
 	</script>
 <jsp:include page="/WEB-INF/views/common/footer.jsp"/>

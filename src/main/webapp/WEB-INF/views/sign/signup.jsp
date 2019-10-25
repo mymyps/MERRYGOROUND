@@ -14,10 +14,10 @@
 <script src="https://code.jquery.com/jquery-3.4.1.js"
 	integrity="sha256-WpOohJOqMqqyKL9FccASB9O0KwACQJpFTUBLTYOVvVU="
 	crossorigin="anonymous"></script>
-<section id="content">
-	<div class="limiter">
-		<div class="container-login100" >
-			<div class="wrap-login100 p-l-55 p-r-55 p-t-65 p-b-54">
+	<section id="content">
+		<div class="limiter">
+			<div class="container-login100" >
+				<div class="wrap-login100 p-l-55 p-r-55 p-t-65 p-b-54">
 				<form class="login100-form validate-form" action="${path}/member/membersignup.do" method="post" onsubmit="return checkKey();">
 					<span class="login100-form-title p-b-49">
 						Sign up

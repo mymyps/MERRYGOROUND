@@ -121,7 +121,7 @@
 								<c:if test="${loginMember!=null }">
 								<div class="dropdown-menu">
 									<ul>
-										<li><a href="${pageContext.request.contextPath }/sign/mypage.do?mNo=${loginMember.memberNum}">Portfolio Classic</a></li>
+										<li><a href="${pageContext.request.contextPath }/sign/mypage.do?mNo=${loginMember.memberNum}">개인정보수정</a></li>
 										<li><a href="portfolio-static.html">Portfolio Static</a></li>
 										<li><a href="portfolio-item.html">Portfolio Single</a></li>
 									</ul>
