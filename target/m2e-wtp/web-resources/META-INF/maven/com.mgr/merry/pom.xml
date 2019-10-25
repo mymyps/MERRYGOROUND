@@ -229,6 +229,22 @@
 			<version>2.9.10</version>
 		</dependency>
 
+
+		<!--@@@@@@@@@@@@@@이메일 @@@@@@@@@@@@@@@ -->
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-context-support</artifactId>
+			<version>${org.springframework-version}</version>
+		</dependency>
+		<dependency>
+			<groupId>com.sun.mail</groupId>
+			<artifactId>javax.mail</artifactId>
+			<version>1.6.1</version>
+		</dependency>
+
+
+
+
 		<!-- Test -->
 		<dependency>
 			<groupId>junit</groupId>

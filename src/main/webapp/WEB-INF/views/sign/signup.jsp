@@ -11,11 +11,14 @@
 	<link rel="icon" type="image/png" href="${pageContext.request.contextPath }/resources/imageshs/icons/favicon.ico"/>
 	<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath }/resources/login/fontshs/font-awesome-4.7.0/css/font-awesome.min.css">
 	<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath }/resources/login/fontshs/iconic/css/material-design-iconic-font.min.css">
+<script src="https://code.jquery.com/jquery-3.4.1.js"
+	integrity="sha256-WpOohJOqMqqyKL9FccASB9O0KwACQJpFTUBLTYOVvVU="
+	crossorigin="anonymous"></script>
 <section id="content">
 	<div class="limiter">
 		<div class="container-login100" >
 			<div class="wrap-login100 p-l-55 p-r-55 p-t-65 p-b-54">
-				<form class="login100-form validate-form" action="${path}/member/membersignup.do" method="post">
+				<form class="login100-form validate-form" action="${path}/member/membersignup.do" method="post" onsubmit="return checkKey();">
 					<span class="login100-form-title p-b-49">
 						Sign up
 					</span>
@@ -33,7 +36,7 @@
 					</div>
 					<div class="wrap-input100 validate-input m-b-23 idname" reauired>
 						<span class="label-input100">이름</span>
-						<input class="input100" type="text" id ="memberName" name="memberName" placeholder="이름">
+						<input class="input100" type="text" id ="name" name="name" placeholder="이름">
 						<span class="focus-input100" data-symbol="&#xf206;"></span>
 					</div>
 					<div class="wrap-input100 validate-input m-b-23 idname" reauired>
@@ -57,6 +60,14 @@
 					<div class="wrap-input100 validate-input m-b-23 idname" reauired>
 						<span class="label-input100">이메일</span>
 						<input class="input100" type="email" name="email" placeholder="이메일">
+						<span class="focus-input100" data-symbol="&#xf206;"></span>
+						<%-- <a href="${pageContext.request.contextPath }/emailAuth.do?email="+'$("input[name=email]").val()'>이메일인증</a> --%>
+						<!-- <button type="button" onclick="connectEmailAuth();" name="btn_auth">이메일인증</button> -->
+						<button type="button" id="btn_auth">이메일인증</button>
+					</div>
+					<div class="wrap-input100 validate-input m-b-23 idname" reauired>
+						<span class="label-input100">인증번호</span>
+						<input class="input100" type="number" name="authkey" placeholder="인증번호">
 						<span class="focus-input100" data-symbol="&#xf206;"></span>
 					</div>
 					<div class="text-right p-t-8 p-b-31">
@@ -90,4 +101,47 @@
 
 	<div id="dropDownSelect1"></div>
 </section>
+
+<script>
+	function connectEmailAuth(){
+		var email = $("input[name=email]").val();
+		location.href='${path}/emailAuth.do?email='+email;
+	}
+
+	function windowopenPopup(){
+		var email = $("input[name=email]").val();
+		 window.open('${path}/emailAuth.do?email='+email, 'window팝업', 'width=300, height=300, menubar=no, status=no, toolbar=no');
+	
+	}
+	
+	$("#btn_auth").click(function(){
+	    $.ajax({
+	        type:"POST",
+	        url:"${path}/signauth.do",
+	        data : {email : $("input[name=email]").val()},
+	        success: function(data){
+				sessionStorage.setItem("authkey",data);
+	        }});
+	    alert("인증번호를 발송했습니다.");
+	});
+	
+	function checkKey(){
+		var input_authkey = $("input[name=authkey]").val();
+		var receiveKey = sessionStorage.getItem("authkey");
+		
+		if(input_authkey== receiveKey){
+			/* 인증키가 일치 했을때 */
+			sessionStorage.removeItem("authkey");
+			return true;
+		}else{
+			/* */
+			alert("불일치");
+			return false;
+		}
+		
+	}
+</script>
+
+
+
 <jsp:include page="/WEB-INF/views/common/footer.jsp"/>
