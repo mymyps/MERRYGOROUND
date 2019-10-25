@@ -11,6 +11,6 @@ public interface SearchService {
 	List<Map<String,Object>> allList();
 	
 	//테마별 검색 
-	List<InfoUpload> themaList(int themaNum, int level);
+	List<InfoUpload> themaList(int themaNum, int themaLevel);
 
 }

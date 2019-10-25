@@ -26,11 +26,11 @@ public class SearchServiceImpl implements SearchService {
 	}
 
 	@Override
-	public List<InfoUpload> themaList(int themanum, int level) {
+	public List<InfoUpload> themaList(int themanum, int themaLevel) {
 
 		int themaNumRef=0;
 
-		if(level ==1) { //메인테마라면
+		if(themaLevel ==1) { //메인테마라면
 
 			//themaList1 로 검색하고 
 

@@ -1,22 +1,36 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="info">
+	
 	<insert id="insertInfo" parameterType="map">
 		<!-- INSERT INTO INFO_UPLOAD VALUES(SEQ_INFO_UPLOAD_NUM.NEXTVAL, #{localSubNum}, #{supNum},
 		#{themaNum},#{infoupTitle}, default, default, #{infoupPhone}, default, default) -->
+		<!-- #{localNum}, #{supNum}, #{themaNum} 추가해야함 -->
 		INSERT INTO INFO_UPLOAD VALUES(SEQ_INFO_UPLOAD_NUM.NEXTVAL, 1, 1, 1,#{infoupTitle}, default, #{infoupPayment}, #{infoupPhone}, #{infoupTime}, default)
 		<!-- <selectKey keyProperty="infoupNum" resultType="_int" order="AFTER">
 			SELECT SEQ_INFO_UPLOAD_NUM.CURRVAL FROM DUAL
 		</selectKey> -->
 	</insert>
+	
 	<insert id="insertInfoImg" parameterType="com.mgr.merry.info.model.vo.InfoUploadImg">
 		INSERT INTO INFO_UPLOAD_IMG VALUES(#{infoupNum}, SEQ_INFO_UPLOAD_IMG_NUM.NEXTVAL, #{fileReName})
 	</insert>
 	
-	<!-- <select id="selectInfo" resultType="map" parameterType="_int">
+	<select id="selectInfo" resultType="map" parameterType="_int">
 		select * from info_upload where infoupNum=#{infoNum}
 	</select>
+	
 	<select id="selectInfoImg" resultType="com.mgr.merry.info.model.vo.InfoUploadImg" parameterType="_int">
 		select * from info_upload_img where infoupNum=#{infoNum}
-	</select> -->
+	</select>
+	
+	<delete id="deleteInfo">
+		DELETE FROM INFO_UPLOAD WHERE INFOUPNUM=#{infoupNum}
+	</delete>
+	
+	<delete id="deleteInfoImg">
+		DELETE FROM INFO_UPLOAD_IMG WHERE INFOUPNUM=#{infoupNum}
+	</delete>
+	
+	
 </mapper>

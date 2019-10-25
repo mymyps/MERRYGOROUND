@@ -22,6 +22,7 @@ public class InfoServiceImpl implements InfoService {
 	@Autowired
 	SqlSessionTemplate session;
 	
+	// 수정중
 	@Override
 	public int insertInfo(Map<String, String> param, InfoUploadImg infoimg) throws Exception {
 		int result=0;
@@ -40,14 +41,35 @@ public class InfoServiceImpl implements InfoService {
 		return result;
 	}
 
-//	@Override
-//	public Map<String, String> selectInfo(int infoNum) {
-//		return dao.selectInfo(session, infoNum);
-//	}
-//
-//	@Override
-//	public InfoUploadImg selectInfoImg(int infoNum) {
-//		return dao.selectInfoImg(session, infoNum);
-//	}
+	// 수정중
+	@Override
+	public Map<String, String> selectInfo(int infoupNum) {
+		return dao.selectInfo(session, infoupNum);
+	}
+
+	// 수정중
+	@Override
+	public InfoUploadImg selectInfoImg(int infoupNum) {
+		return dao.selectInfoImg(session, infoupNum);
+	}
+
+	// 수정중
+	@Override
+	public int deleteInfo(int infoupNum) {
+		int result=0;
+		result=dao.deleteInfo(session, infoupNum);
+		if(result==0) throw new RuntimeException();
+		
+		return result;
+	}
+
+	@Override
+	public int deleteInfoImg(int infoupNum) {
+		int result=0;
+		result=dao.deleteInfoImg(session, infoupNum);
+		if(result==0) throw new RuntimeException();
+		return 0;
+	}
+
 
 }

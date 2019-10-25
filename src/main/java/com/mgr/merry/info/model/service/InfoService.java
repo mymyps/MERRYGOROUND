@@ -9,8 +9,12 @@ public interface InfoService {
 
 	int insertInfo(Map<String, String> param, InfoUploadImg infoimg) throws Exception;
 
-//	Map<String, String> selectInfo(int infoNum);
-//
-//	InfoUploadImg selectInfoImg(int infoNum);
+	Map<String, String> selectInfo(int infoupNum);
+
+	InfoUploadImg selectInfoImg(int infoupNum);
+
+	int deleteInfo(int infoNum);
+
+	int deleteInfoImg(int infoupNum);
 
 }

@@ -48,19 +48,6 @@
                                 <p>INFO - TIME VALUE</p>
                             </div>
                         </div>
-                        <!-- Author info start -->
-                        <!-- <div class="about-author">
-                            <div class="author-img pull-left">
-                                <img src="images/blog/author.jpg" alt="" />
-                            </div>
-                            <div class="author-info">
-                                <h3>SUPPORTERS NAME <span>SUP - MEMBER - ID</span></h3>
-                                <p>SUP - MEMBER - EMAIL</p>
-                                <p>SUP - MEMBER - PHONE</p>
-                                    
-                            </div>
-                            
-                        </div> -->
                         <br><br>
                         <div>
                             <form>

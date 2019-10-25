@@ -37,12 +37,12 @@ public class SearchController {
 	@RequestMapping("/search/themaList")
 	
 	public String themaList(@RequestParam("themaNum") int themaNum,
-			                @RequestParam("level") int level,
+			                @RequestParam("themaLevel") int themaLevel,
 			                Model model) {
 	
 	
 	
-	List<InfoUpload> list = service.themaList(themaNum, level);
+	List<InfoUpload> list = service.themaList(themaNum, themaLevel);
 	model.addAttribute("list",list);
 		
 	return "search/classifyByTheme";
