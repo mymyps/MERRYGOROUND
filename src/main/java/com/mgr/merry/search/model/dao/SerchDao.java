@@ -8,15 +8,13 @@ import org.mybatis.spring.SqlSessionTemplate;
 import com.mgr.merry.info.model.vo.InfoUpload;
 
 public interface SerchDao {
-	
+   
 	List<Map<String,Object>> allList(SqlSessionTemplate session);
 	
-	//Å×¸¶º° ÄÚ½º ¸®½ºÆ® ¸ŞÀÎÅ×¸¶
-
-	List<InfoUpload> themaList(SqlSessionTemplate session, int themaNum, int themaNumRef);
+	//ë©”ì¸í…Œë§ˆ ê²€ìƒ‰
+	List<InfoUpload> themaList(SqlSessionTemplate session, Map<String,Object> param, String themaNumRef);
+    //ì„œë¸Œí…Œë§ˆ ê²€ìƒ‰
+	List<InfoUpload> themaList(SqlSessionTemplate session, Map<String,Object> param);
 	
-	
-	//Å×¸¶º° ÄÚ½º ¸®½ºÆ® µğÅ×ÀÏ Å×¸¶ 
-
-	List<InfoUpload> themaList(SqlSessionTemplate session, int themaNum);
+	List<InfoUpload> localList(SqlSessionTemplate session, int localNum);
 }

@@ -92,9 +92,10 @@
 }
 
 
-#themarow>:nth-child(n+2) {
-margin-top: -50px;
-}
+/* #themarow>:nth-child(n+2) { */
+/* /* margin-top: -50px; */ */
+/* margin-top:-10px; */
+/* } */
 
 
 
