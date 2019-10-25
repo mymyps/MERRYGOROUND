@@ -7,6 +7,9 @@
 <jsp:param name ="pageTitle" value=""/>
 </jsp:include>
 
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+   integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+   crossorigin="anonymous"></script>
 <style>
 		.img{
 			position: relative;
@@ -35,10 +38,10 @@
 					<div class="post-content">
 						<div class="post-header clearfix">
 								<h1>
-									숙소가기전 우븟 재래시장!
+									<c:out value='${cboard["COUPLETITLE"]}'></c:out>
 								</h1>
 								<div class="post-meta">
-									<span class="post-meta-author">작성자 <a href="#"> (작성자)</a></span>
+									<span class="post-meta-author">작성자 <a href="#"> <c:out value='${cboard["ID"] }'></c:out></a></span>
 									<!-- <span class="post-meta-cats">in <a href="#"> News</a></span> -->
 									<div class="pull-right">
 										<span class="post-meta-comments"><a href="#"><i class="fa fa-comment-o"></i> (댓글 수)</a></span>
@@ -49,52 +52,35 @@
 							</div><!-- post heading end -->
 							<br>
 
-						<!-- post image start -->
+						<!-- 첫이미지, 리스트에 보일 이미지 post image start -->
 						<div class="post-image-wrapper">
-							<img src="../imgS/1-1.jpg" class="img"  alt="" />
+							<img src="${path }/resources/images/couple/1-1.jpg" class="img"  alt="" />
 							<!-- <span class="blog-date"> May 03, 2015</span> -->
 						</div><!-- post image end -->
 						
+<!-- 						내용부분 -->
 						<div class="entry-content">
-							<p> 발리 자유여행 코스로 우붓 재래시장은 꼬옥 들러봐야 합니다
-
-									꾸따, 스미냑등 쇼핑센터, 시장등 여러군데 다녀보았는데
-									
-									우붓 재래시장이 젤 싸.. 기념품등.. 구매하실때는 무조껀 여기로 꼬꼬우!!!</p>
+							<input id="hidden" type="hidden" value='${cboard["COUPLECONTENT"] }'/>
+<!-- 							<p>  -->
+<%-- 								<c:out value='${cboard["COUPLECONTENT"] }'></c:out> --%>
+<!-- 							</p> -->
 							
 						</div><br>
+						<script>
+							$(function(){
+								var content = $('#hidden').val();
+								console.log(content);
+								$('.entry-content').append(content);
+								//////
+// 								var content2 = "<c:out value='${cboard["COUPLECONTENT"] }'/>";
+// 								console.log(content2);
+// 								$('.entry-content').append(content2);
+							});
+						</script>
 
 
-						<!-- Blog post start -->
-					<div class="post-content">
-							<!-- post image start -->
-							<div class="post-image-wrapper">
-								<img src="../imgS/1-1-1.jpg" class="img"  alt="" />
-								<!-- <span class="blog-date"> May 03, 2015</span> -->
-							</div><!-- post image end -->
-							
-							<div class="entry-content">
-								<p> 발리 자유여행 코스로 우붓 재래시장은 꼬옥 들러봐야 합니다
-	
-										꾸따, 스미냑등 쇼핑센터, 시장등 여러군데 다녀보았는데
-										
-										우붓 재래시장이 젤 싸.. 기념품등.. 구매하실때는 무조껀 여기로 꼬꼬우!!!</p>
-								
-							</div>
-
-						<!-- Author info start -->
-						<!-- <div class="about-author">
-							<div class="author-img pull-left">
-								<img src="images/blog/author.jpg" alt="" />
-							</div>
-							<div class="author-info">
-								<h3>Josefine Kristy <span>Web Developer</span></h3>
-								<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur vestibulum eget justo sit amet varius.</p>
-								<p class="author-url">Website: <span><a href="#">http://www.spikeincor.eu</a></span></p>
-
-							</div>
-						</div> -->
-						<!-- Author info end -->
+						<hr><hr><hr>
+					
 
 						<div class="gap-30"></div>
 

@@ -9,5 +9,7 @@ public interface CoupleBoardDao {
 	int selectCoupleBoardCount(SqlSessionTemplate session);
 	List<Map<String,String>> selectCoupleBoardList(SqlSessionTemplate session,int cPage, int numPerPage);
 	
+	Map<String,String> selectCoupleBoard(SqlSessionTemplate session, int no);
+	
 	int insertCoupleBoard(SqlSessionTemplate session, Map<String,String> param);
 }

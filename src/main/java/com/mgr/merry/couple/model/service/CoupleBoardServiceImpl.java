@@ -35,6 +35,12 @@ public class CoupleBoardServiceImpl implements CoupleBoardService {
 		
 		return result;
 	}
+
+	@Override
+	public Map<String, String> selectCoupleBoard(int no) {
+		return cdao.selectCoupleBoard(session,no);
+	}
+	
 	
 	
 	

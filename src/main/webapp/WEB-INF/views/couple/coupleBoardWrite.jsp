@@ -7,6 +7,7 @@
 <jsp:param name ="pageTitle" value=""/>
 </jsp:include>
 
+<script src="http://code.jquery.com/jquery-3.4.1.min.js"></script>
 <!-- include libraries(jQuery, bootstrap) -->
 	<link href="http://netdna.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.css" rel="stylesheet">
 	<script src="http://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.js"></script> 
@@ -16,7 +17,6 @@
 	<script src="http://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.12/summernote.js"></script>
 	<!-- include summernote-ko-KR -->
 	<script src="${path }/resources/dist/lang/summernote-ko-KR.js"></script>
-
 
 	<style>
 		.modal-dialog{
@@ -34,7 +34,7 @@
 		<h2 style="text-align: center;">게시글 작성</h2>
 		<input type="text" name="title" style="width: 40%;" placeholder="제목" class="form-control" required/>
 			<br>
-			<input type="text" name="writer" style="width: 20%;" placeholder="작성자" class="form-control" required/>
+			<input type="text" name="writer" value="1000" style="width: 20%;" placeholder="작성자" class="form-control" required/>
 			<br>
 			<textarea id="summernote" name="content" required></textarea>
 		<div><br>
@@ -45,11 +45,46 @@
 	<script>
 	$('#summernote').summernote({
 		placeholder: '내용',
-		tabsize: 2,
+		tabsize: 4,
 		height: 400,
 		width: '100%',
-		maxHeight: 500
+		maxHeight: 500,
+		callbacks : {
+			onImageUpload: function(files, editor, welEditable){
+			console.log(editor);
+			console.log(files);
+			for (var i = files.length -1; i>=0; i--){
+				sendFile(files[i], this);
+			}
+		}}
 	});
+	function sendFile(file, edi, welEditable){
+		var imgUrl = "resources/images/couple/"
+		console.log(imgUrl);
+		//파일전송을 위한 폼생성
+		var form_data = new FormData();
+		form_data.append("image",file);
+		$.ajax({
+			data: form_data,
+			type: "post",
+			url: "${path}/summernote_imageUpload.do",
+			cache: false,
+			contentType: false,
+			enctype: "multipart/form-data",
+			processData: false,
+			success: function(savename){
+				//imgUrl = imgUrl + savename;
+				console.log(savename);
+				console.log(edi);
+	        	$(edi).summernote('editor.insertImage', savename);
+	        	alert("성공!"+savename);
+			},
+			error: function(){
+				alert("summernote 에러");
+			}
+		});
+
+	}
 	</script>
 		</div>
 	</div>

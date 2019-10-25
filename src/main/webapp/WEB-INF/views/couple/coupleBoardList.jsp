@@ -7,6 +7,8 @@
 <jsp:param name ="pageTitle" value="커플게시판"/>
 </jsp:include>
 
+
+<script src="http://code.jquery.com/jquery-3.4.1.min.js"></script>
 <style>
 	.img{
 		position: relative;
@@ -56,15 +58,29 @@
 					<div class="post postmb">
 						<!-- post image start -->
 						<div class="post-image-wrapper">
-							<a href="${path }/couple/coupleBoardView"> <img src="${path}/resources/images/couple/1-1.jpg"	class="img" alt="" />
+							<a href='${path }/couple/coupleBoardView?no=${c["COUPLENUM"]}'> <img src="${path}/resources/images/couple/1-1.jpg"	class="img" alt="" />
 																	 <!-- 마지막 파일명만 따로 불러오든, 전체경로를 다 받아오든  -->
 								<p class="img-content"><c:out value='${c["COUPLETITLE"] }'></c:out></p>
 								<span class="blog-date"> <fmt:formatDate value='${c["COUPLEDATE"] }'/></span>
 							</a>
+							<input id="hidden" type="hidden" value='${c["COUPLECONTENT"] }'/>
 						</div>
 						<!-- post image end -->
 					</div>
 				</c:forEach>
+					<script>
+						$(function(){
+							var f = $('#hidden').val();
+							console.log("수정전: "+f);
+							console.log("시작인덱스: "+f.indexOf('img src='));
+							console.log("끝 인덱스: "+f.indexOf('px;">'));
+							console.log("----------------------------------------");
+							console.log("수정후 :  "+f.substring( f.indexOf('img src=')+16,f.indexOf('style')-2 ));
+							console.log("========================================");
+							
+							$('.img')[0].attr('src','${path}/'+f.substring( f.indexOf('img src=')+16,f.indexOf('style')-2 ));
+						});
+					</script>
 				
 
 				<div class="paging">

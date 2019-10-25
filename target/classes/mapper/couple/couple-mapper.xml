@@ -1,15 +1,27 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD MApper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="couple">
+	<resultMap type="HashMap" id="clobBoard">
+		<result property="COUPLECONTENT" column="COUPLECONTENT" jdbcType="CLOB" javaType="java.lang.String"/>
+	</resultMap>
+	
 	<select id="selectCoupleBoardCount" resultType="_int">
 		select count(*) from c_upload
 	</select>
-	<select id="selectCoupleBoardList" resultType="map">
+<!-- 	<select id="selectCoupleBoardList" resultType="map"> -->
+<!-- 		select * from c_upload order by coupledate desc  -->
+<!-- 	</select> -->
+	<select id="selectCoupleBoardList" resultType="map" resultMap="clobBoard">
 		select * from c_upload order by coupledate desc 
 	</select>
 	
 	<insert id="insertCoupleBoard" parameterType="map">
-		insert into c_upload values(10, #{writer},3000,#{title},#{content},sysdate,1)
+		insert into c_upload values(c_upload_seq.nextval, #{writer},3000,#{title},#{content},sysdate,1)
 	</insert>
+	
+<!-- 	<select id="selectCoupleBoard" parameterType="_int" resultType="map"> -->
+	<select id="selectCoupleBoard" parameterType="_int" resultType="map" resultMap="clobBoard">
+		select * from c_upload c,members m where c.couplenum=#{no} and m.membernum=c.membernum
+	</select>
 
 </mapper>

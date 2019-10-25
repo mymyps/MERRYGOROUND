@@ -25,6 +25,11 @@ public class CoupleBoardDaoImpl implements CoupleBoardDao {
 	public int insertCoupleBoard(SqlSessionTemplate session, Map<String, String> param) {
 		return session.insert("couple.insertCoupleBoard",param);
 	}
+
+	@Override
+	public Map<String, String> selectCoupleBoard(SqlSessionTemplate session, int no) {
+		return session.selectOne("couple.selectCoupleBoard",no);
+	}
 	
 	
 	
