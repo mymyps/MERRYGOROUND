@@ -22,39 +22,55 @@ import com.mgr.merry.search.model.service.SearchService;
 
 @Controller
 public class SearchController {
+
 	private Logger logger = LoggerFactory.getLogger(SearchController.class);
 
 	@Autowired
 	SearchService service;
-	
-	
 
-	@RequestMapping("/search/themaList")
-	public String themaList(@RequestParam("themaNum") String themaNum, 
-			                @RequestParam("level") int level, Model model) {
+	@RequestMapping("/search/subThemaList")
+	public String subThemaList(@RequestParam("themaNum") String themaNum,
+			@RequestParam("themaNumRef") String themaNumRef, Model model) {
 
-		logger.debug("" + themaNum);
-		logger.debug("" + level);
-
-		Map<String, Object> param = new HashMap();
+		Map<String, Object> param = new HashMap<String, Object>();
 		param.put("themaNum", themaNum);
-		param.put("level", level);
+		param.put("themaNumRef", themaNumRef);
 
-		List<InfoUpload> list = service.themaList(param);
+		List<InfoUpload> list = service.subThemaList(param);
 		model.addAttribute("list", list);
+
 		logger.debug("" + param);
+		logger.debug("컨트롤러에서 서브테마 리스트 : " + list);
 
 		return "search/classifyByTheme";
 
 	}
 
-	@RequestMapping("/search/localList")
+	@RequestMapping("/search/mainThemaList")
+	public String mainThemaList(@RequestParam("themaNumRef") String themaNumRef, Model model) {
+
+		List<InfoUpload> list = service.mainThemaList(themaNumRef);
+		model.addAttribute("themaNumRef", themaNumRef);
+		model.addAttribute("list", list);
+
+		logger.debug("themaNumRef : " + themaNumRef);
+		logger.debug("컨트롤러에서 메인테마 리스트 : " + list);
+
+		return "search/classifyByTheme";
+
+	}
+
+	@RequestMapping("/search/locList")
 
 	public String localList(@RequestParam("localNum") int localNum, Model model) {
 
-		List<InfoUpload> locList = service.localList(localNum);
-		model.addAttribute("locList", locList);
-		return "search/classfyByLoc";
+		List<InfoUpload> list = service.localList(localNum);
+		model.addAttribute("locList", list);
+
+		logger.debug("localNum : " + localNum);
+		logger.debug("컨트롤러에서 지역 리스트 : " + list);
+
+		return "search/classifyByLoc";
 
 	}
 

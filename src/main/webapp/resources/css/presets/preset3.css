@@ -175,7 +175,7 @@ ul.navbar-nav > li.active > a{
 ================================================== */
 
 .isotope-nav ul li a{
-	border: 1px solid #EB9579;
+	border: 1px solid #EB9579 !important;
 }
 
 .isotope-nav ul a.active, 

@@ -66,7 +66,7 @@
 	<script type="text/javascript" src="${pageContext.request.contextPath }/resources/js/waypoints.min.js"></script>
 	<!-- Template custom -->
 	<script type="text/javascript" src="${pageContext.request.contextPath }/resources/js/custom.js"></script>
-	</div><!-- Body inner end -->
+	
 	
 	<!-- CSS
 	================================================== -->

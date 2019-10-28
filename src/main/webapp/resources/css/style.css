@@ -76,26 +76,27 @@
 }
 
 
-.ts-padding {
-  padding: 30px;
+.ts-padding2 {
+  padding: 27px;
 }
 
 
 .listImg{
 
 	position: relative;
-	top: 20px;
+	top: 45px !important;
 	left: 50px;
 	height: 170px;
 	width: 214px;
+
 	
 }
 
 
-/* #themarow>:nth-child(n+2) { */
-/* /* margin-top: -50px; */ */
-/* margin-top:-10px; */
-/* } */
+#themarow2>:nth-child(n+2) {
+/* margin-top: -50px; */
+margin-top:-95px;
+}
 
 
 
@@ -108,8 +109,10 @@
 
 #themenameBrown{
 
-	color: #5a554f !important;
+/* 	color: #5a554f !important; */
 }
+
+
 
 
 
@@ -723,6 +726,8 @@ blockquote {
 	color: #fff;
 	border: 1px solid transparent;
 }
+
+
 
 /* Header area
 ================================================== */
@@ -1591,12 +1596,15 @@ ul.navbar-nav > li > a i{
 .isotope-nav ul li a{
 	color: #5a554f;
   	padding: 5px 15px 8px;
-  	border: 1px solid #ddd;
+/*   	border: 1px solid #ddd; */
+    border : 1px solid #EB9579;
   	-webkit-transition: all 0.3s;
   	-moz-transition: all 0.3s;
   	-o-transition: all 0.3s;
   	transition: all 0.3s;
 }
+
+
 
 .isotope-nav ul a.active, 
 .isotope-nav ul a:hover{

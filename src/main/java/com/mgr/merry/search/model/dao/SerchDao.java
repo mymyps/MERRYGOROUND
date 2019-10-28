@@ -11,10 +11,11 @@ public interface SerchDao {
    
 	List<Map<String,Object>> allList(SqlSessionTemplate session);
 	
-	//메인테마 검색
-	List<InfoUpload> themaList(SqlSessionTemplate session, Map<String,Object> param, String themaNumRef);
-    //서브테마 검색
-	List<InfoUpload> themaList(SqlSessionTemplate session, Map<String,Object> param);
+	List<InfoUpload> subThemaList(SqlSessionTemplate session, Map<String, Object> param);
+	
+	List<InfoUpload> mainThemaList(SqlSessionTemplate session, String themaNumRef);
 	
 	List<InfoUpload> localList(SqlSessionTemplate session, int localNum);
+	
+	
 }
