@@ -58,11 +58,9 @@ public class InfoController {
 		InfoUploadImg infoImg = service.selectInfoImg(infoupNum);
 		List review = rservice.selectReview(infoupNum);
 		
-		System.out.println("인포컨트롤러 리뷰 :"+review);
 		mv.addObject("info", info);
 		mv.addObject("infoImg", infoImg);
 		mv.addObject("review", review);
-		System.out.println("인포컨트롤러 인포이미지 : "+infoImg);
 		mv.setViewName("info/infoView");
 
 		return mv;

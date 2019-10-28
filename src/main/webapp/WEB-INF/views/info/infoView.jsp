@@ -50,15 +50,15 @@
                         </div>
                         <br><br>
                         <div>
-                            <form>
+                            <form name="supReview" action="${pageContext.request.contextPath }/supUp/supReview?infoupNum=${info.INFOUPNUM}" method="post">
                                 <button class="btn supreviewBtn" type="submit">서포터즈 리뷰 바로가기</button> 
                             </form>
                             <br>
-                            <form>
+                            <form name="infoUpdate" action="${pageContext.request.contextPath }/info/infoUpdate?infoupNum=${info.INFOUPNUM}" method="post">
                                 <button class="btn supreviewBtn" type="submit">INFOMATION 수정</button> 
                             </form>
                             <br>
-                            <form>
+                            <form name="infoDelete" action="${pageContext.request.contextPath }/info/infoDelete?infoupNum=${info.INFOUPNUM }" method="post" enctype="multipart/form-data">
                                 <button class="btn supreviewBtn" type="submit">INFOMATION 삭제</button> 
                             </form>
                         </div>

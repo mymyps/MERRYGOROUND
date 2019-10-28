@@ -12,7 +12,7 @@
 	<div class="container">
 		<form name="infoForm"
 			action="${pageContext.request.contextPath }/info/infoFormEnd.do"
-			method="post" onsubmit="return validate();"
+			method="post"
 			enctype="multipart/form-data">
 			<div class="row">
 				<!-- Blog start -->
