@@ -4,6 +4,8 @@ import java.util.List;
 import java.util.Map;
 
 import com.mgr.merry.info.model.vo.InfoUpload;
+import com.mgr.merry.search.model.vo.Location;
+import com.mgr.merry.search.model.vo.Thema;
 
 public interface SearchService {
 	
@@ -14,5 +16,11 @@ public interface SearchService {
 	
 	//지역별 검색
 	List<InfoUpload> localList(int localNum);
+
+	List<Thema> selectThemaList3();
+
+	List<Thema> selectThemaList4();
+
+	List<Location> selectLocationList();
 
 }

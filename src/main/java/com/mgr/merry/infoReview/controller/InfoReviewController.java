@@ -1,5 +1,6 @@
 package com.mgr.merry.infoReview.controller;
 
+import java.util.List;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
@@ -11,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.mgr.merry.infoReview.model.service.InfoReviewService;
+import com.mgr.merry.infoReview.model.vo.InfoReview;
 
 @Controller
 public class InfoReviewController {
@@ -48,5 +50,4 @@ public class InfoReviewController {
 		}
 		return "/info/infoView";
 	}
-	
 }

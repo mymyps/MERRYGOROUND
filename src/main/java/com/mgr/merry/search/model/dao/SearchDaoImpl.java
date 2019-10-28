@@ -7,6 +7,8 @@ import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.stereotype.Repository;
 
 import com.mgr.merry.info.model.vo.InfoUpload;
+import com.mgr.merry.search.model.vo.Location;
+import com.mgr.merry.search.model.vo.Thema;
 
 @Repository
 public class SearchDaoImpl implements SerchDao {
@@ -37,6 +39,21 @@ public class SearchDaoImpl implements SerchDao {
 	public List<InfoUpload> localList(SqlSessionTemplate session, int localNum) {
 	
 		return session.selectList("search.localList",localNum);
+	}
+
+	@Override
+	public List<Thema> selectThemaList3(SqlSessionTemplate session) {
+		return session.selectList("search.themaList3");
+	}
+
+	@Override
+	public List<Thema> selectThemaList4(SqlSessionTemplate session) {
+		return session.selectList("search.themaList4");
+	}
+
+	@Override
+	public List<Location> selectLocationList(SqlSessionTemplate session) {
+		return session.selectList("search.locationList");
 	}
 
 

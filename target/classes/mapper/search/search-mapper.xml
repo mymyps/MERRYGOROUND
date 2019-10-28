@@ -56,5 +56,18 @@
 	 WHERE lo.LOCALNUM=#{localNum}
 	    </select>
   
-  
+	<!-- themanumref가 null이 아닌 thema 리스트 ( 서브테마 ) 가져오기 -->
+	<select id = "themaList3" resultType="map">
+		select * from thema where themanumref is not null
+	</select>
+	
+	<!-- themanumref가 null인 thema리스트 (메인테마) 가져오기 -->
+	<select id = "themaList4" resultType="map">
+		select * from thema where themanumref is null
+	</select>
+	
+	<!-- locationList -->
+	<select id = "locationList" resultType="map">
+		SELECT * FROM LOCATION
+	</select>
  </mapper>

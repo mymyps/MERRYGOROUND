@@ -41,6 +41,7 @@ public class SearchController {
 		param.put("level", level);
 
 		List<InfoUpload> list = service.themaList(param);
+		System.out.println("서치컨트롤러 리스트 :"+list);
 		model.addAttribute("list", list);
 		logger.debug("" + param);
 

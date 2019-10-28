@@ -9,6 +9,8 @@ import org.springframework.stereotype.Service;
 
 import com.mgr.merry.info.model.vo.InfoUpload;
 import com.mgr.merry.search.model.dao.SerchDao;
+import com.mgr.merry.search.model.vo.Location;
+import com.mgr.merry.search.model.vo.Thema;
 
 @Service
 public class SearchServiceImpl implements SearchService {
@@ -54,5 +56,23 @@ public class SearchServiceImpl implements SearchService {
 	public List<InfoUpload> localList(int localNum) {
 		
 		return dao.localList(session, localNum);
+	}
+
+
+	@Override
+	public List<Thema> selectThemaList3() {
+		return dao.selectThemaList3(session);
+	}
+
+
+	@Override
+	public List<Thema> selectThemaList4() {
+		return dao.selectThemaList4(session);
+	}
+
+
+	@Override
+	public List<Location> selectLocationList() {
+		return dao.selectLocationList(session);
 	}
 }

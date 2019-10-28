@@ -3,21 +3,19 @@
 <mapper namespace="info">
 	
 	<insert id="insertInfo" parameterType="map">
-		<!-- INSERT INTO INFO_UPLOAD VALUES(SEQ_INFO_UPLOAD_NUM.NEXTVAL, #{localSubNum}, #{supNum},
-		#{themaNum},#{infoupTitle}, default, default, #{infoupPhone}, default, default) -->
 		<!-- #{localNum}, #{supNum}, #{themaNum} 추가해야함 -->
-		INSERT INTO INFO_UPLOAD VALUES(SEQ_INFO_UPLOAD_NUM.NEXTVAL, 1, 1, 1,#{infoupTitle}, default, #{infoupPayment}, #{infoupPhone}, #{infoupTime}, default)
+		INSERT INTO INFO_UPLOAD VALUES(SEQ_INFO_UPLOAD_NUM.NEXTVAL, #{localNum}, 1, #{themaSubNum},#{infoupTitle}, default, #{infoupPayment}, #{infoupPhone}, #{infoupTime}, default)
 		<!-- <selectKey keyProperty="infoupNum" resultType="_int" order="AFTER">
 			SELECT SEQ_INFO_UPLOAD_NUM.CURRVAL FROM DUAL
 		</selectKey> -->
 	</insert>
 	
 	<insert id="insertInfoImg" parameterType="com.mgr.merry.info.model.vo.InfoUploadImg">
-		INSERT INTO INFO_UPLOAD_IMG VALUES(#{infoupNum}, SEQ_INFO_UPLOAD_IMG_NUM.NEXTVAL, #{fileReName})
+		INSERT INTO INFO_UPLOAD_IMG VALUES(SEQ_INFO_UPLOAD_NUM.CURRVAL, SEQ_INFO_UPLOAD_IMG_NUM.NEXTVAL, #{fileReName})
 	</insert>
 	
 	<select id="selectInfo" resultType="map" parameterType="_int">
-		select * from info_upload where infoupNum=#{infoNum}
+		select * from info_upload i join thema t on i.themanum=t.themanum join location l on i.localnum=l.localnum where infoupNum=#{infoNum}
 	</select>
 	
 	<select id="selectInfoImg" resultType="com.mgr.merry.info.model.vo.InfoUploadImg" parameterType="_int">

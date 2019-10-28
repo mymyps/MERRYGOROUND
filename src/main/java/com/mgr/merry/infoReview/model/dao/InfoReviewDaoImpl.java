@@ -1,9 +1,12 @@
 package com.mgr.merry.infoReview.model.dao;
 
+import java.util.List;
 import java.util.Map;
 
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.stereotype.Repository;
+
+import com.mgr.merry.infoReview.model.vo.InfoReview;
 
 @Repository
 public class InfoReviewDaoImpl implements InfoReviewDao {
@@ -21,6 +24,12 @@ public class InfoReviewDaoImpl implements InfoReviewDao {
 	@Override
 	public int updateReview(SqlSessionTemplate session, int infoReviewNum) {
 		return session.update("review.updateReview", infoReviewNum);
+	}
+
+	@Override
+	public List<InfoReview> selectReview(SqlSessionTemplate session, int infoupNum) {
+		// TODO Auto-generated method stub
+		return session.selectList("review.selectReview", infoupNum);
 	}
 
 }

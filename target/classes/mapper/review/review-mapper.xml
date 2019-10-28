@@ -5,5 +5,7 @@
 	<!-- insert into info_review values(inforeviewNum, infoupNum, infoReviewContent, infoReviewPoint, info -->
 		INSERT INTO INFO_REVIEW VALUES(SEQ_INFO_REVIEW_NUM.NEXTVAL, #{infoupNum}, #{infoReviewContent}, #{infoReviewPoint}, default, default)
 	</insert>
-
+	<select id="selectReview" resultType="map">
+		SELECT * FROM INFO_REVIEW I JOIN MEMBERS M ON I.MEMBERNUM=M.MEMBERNUM WHERE INFOUPNUM=#{infoupNum}
+	</select>
 </mapper>

@@ -2,6 +2,7 @@ package com.mgr.merry.info.controller;
 
 import java.io.File;
 import java.text.SimpleDateFormat;
+import java.util.List;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
@@ -15,6 +16,11 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.mgr.merry.info.model.service.InfoService;
 import com.mgr.merry.info.model.vo.InfoUploadImg;
+import com.mgr.merry.infoReview.model.service.InfoReviewService;
+import com.mgr.merry.infoReview.model.vo.InfoReview;
+import com.mgr.merry.search.model.service.SearchService;
+import com.mgr.merry.search.model.vo.Location;
+import com.mgr.merry.search.model.vo.Thema;
 
 @Controller
 public class InfoController {
@@ -22,9 +28,26 @@ public class InfoController {
 	@Autowired
 	InfoService service;
 
-	@RequestMapping("/info/infoForm")
-	public String infoForm() {
-		return "info/infoForm";
+	@Autowired
+	SearchService sservice;
+	
+	@Autowired
+	InfoReviewService rservice;
+	
+	@RequestMapping("/info/infoForm.do")
+	public ModelAndView infoForm() {
+		ModelAndView mv = new ModelAndView();
+		List<Thema> themaList = sservice.selectThemaList3();
+		List<Thema> themaList2 = sservice.selectThemaList4();
+		List<Location> locationList = sservice.selectLocationList();
+		
+		mv.addObject("themaList", themaList);
+		mv.addObject("themaList2", themaList2);
+		mv.addObject("locationList", locationList);
+		mv.setViewName("info/infoForm");
+		
+		
+		return mv;
 	}
 
 //	infoList에서 infoupNum을 받아야함
@@ -33,9 +56,13 @@ public class InfoController {
 		ModelAndView mv = new ModelAndView();
 		Map<String, String> info = service.selectInfo(infoupNum);
 		InfoUploadImg infoImg = service.selectInfoImg(infoupNum);
-
+		List review = rservice.selectReview(infoupNum);
+		
+		System.out.println("인포컨트롤러 리뷰 :"+review);
 		mv.addObject("info", info);
 		mv.addObject("infoImg", infoImg);
+		mv.addObject("review", review);
+		System.out.println("인포컨트롤러 인포이미지 : "+infoImg);
 		mv.setViewName("info/infoView");
 
 		return mv;
