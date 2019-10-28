@@ -9,13 +9,17 @@
 
 <!-- 관리자 페이지 css -->
 <jsp:include page="/WEB-INF/views/admin/common/adminHeader.jsp" />
-<link href="https://cdn.jsdelivr.net/npm/chartist@0.11.0/dist/chartist.min.css" rel="stylesheet">
+<!-- <link href="https://cdn.jsdelivr.net/npm/chartist@0.11.0/dist/chartist.min.css" rel="stylesheet"> -->
 <link href="https://cdn.jsdelivr.net/npm/jqvmap@1.5.1/dist/jqvmap.min.css" rel="stylesheet">
-<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/morris.js/0.5.1/morris.css">
-<script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.0/jquery.min.js"></script>
-<script src="//cdnjs.cloudflare.com/ajax/libs/raphael/2.1.0/raphael-min.js"></script>
-<script src="//cdnjs.cloudflare.com/ajax/libs/morris.js/0.5.1/morris.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/jquery@2.2.4/dist/jquery.min.js"></script>
 
+<!-- 모리스 차트 -->
+<script src="http://cdnjs.cloudflare.com/ajax/libs/raphael/2.1.2/raphael-min.js"></script>
+<script src="${pageContext.request.contextPath }/resources/admin/assets/js/init/morris.js"></script>
+<script src="http://cdnjs.cloudflare.com/ajax/libs/morris.js/0.5.1/morris.min.js"></script>
+<link rel="stylesheet" href="${pageContext.request.contextPath }/resources/admin/assets/css/morris.css">
+
+	
 		<!-- ---------------------------------------------------------------------------- -->
 		<!-- -------------------------     데이터      ------------------------------------ -->
 		<!-- ---------------------------------------------------------------------------- -->
@@ -190,8 +194,8 @@
 								<div class="col-lg-6">
 									<div class="card">
 										<div class="card-body">
-											<h4 class="mb-3">Bar chart</h4>
-											<canvas id="barChart"></canvas>
+											<h4 class="mb-3">업로드 글</h4>
+											<div id="morrisBars"></div>
 										</div>
 									</div>
 								</div>
@@ -200,11 +204,11 @@
 								<div class="col-lg-4">
 									<div class="card-body">
 										<div class="progress-box progress-1">
-											<h4 class="por-title">Visits</h4>
-											<div class="por-txt">테마1 (10%)</div>
+											<h4 class="por-title">테마별 조회</h4>
+											<div class="por-txt">테마1 (40%)</div>
 											<div class="progress mb-2" style="height: 5px;">
 												<div class="progress-bar bg-flat-color-1" role="progressbar"
-													style="width: 90%;" aria-valuenow="5" aria-valuemin="0"
+													style="width: 40%;" aria-valuenow="5" aria-valuemin="0"
 													aria-valuemax="100"></div>
 											</div>
 										</div>
@@ -451,8 +455,9 @@
 		</div>
 	</div>
 	<!-- /#right-panel -->
-	<script src="https://cdn.jsdelivr.net/npm/jquery@2.2.4/dist/jquery.min.js"></script>
+	
 	<script>
+	
 	var testAr = [];
 	var ajaxPath = '<c:out value="${path}"/>';
 
@@ -467,44 +472,25 @@
 
 	var today = new Date($.now());
 	
-	//bar chart
-    var ctx = document.getElementById( "barChart" );
-        ctx.height = 200;
-        //console.log("asdlkfjasljfa;dlskjf;alj");
-    var myChart = new Chart( ctx, {
-        type: 'bar',
-        data: {
-            labels: [ "Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul" ],
-            datasets: [
-                {
-                    label: "My First dataset",
-                    data: [ 65, 59, 80, 81, 56, 55, 45 ],
-                    borderColor: "rgba(0, 194, 146, 0.9)",
-                    borderWidth: "0",
-                    backgroundColor: "rgba(0, 194, 146, 0.5)"
-                            },
-                {
-                    label: "My Second dataset",
-                    data: [ 28, 48, 40, 19, 86, 27, 76 ],
-                    borderColor: "rgba(0,0,0,0.09)",
-                    borderWidth: "0",
-                    backgroundColor: "rgba(0,0,0,0.07)"
-                            }
-                        ]
-        },
-        options: {
-            scales: {
-                yAxes: [ {
-                    ticks: {
-                        beginAtZero: true
-                    }
-                                } ]
-            }
-        }
-    } );
+	/* morrisChart */
+	<!-- 1:날짜  2:총 글수 3:총 리뷰수 -->
+	var dateBoard = [
+	  	  {"period": "2012-10-01", "licensed": 407, "sorned": 660},
+		  {"period": "2012-09-30", "licensed": 351, "sorned": 629},
+		  {"period": "2012-09-29", "licensed": 269, "sorned": 618},
+		  {"period": "2012-09-20", "licensed": 246, "sorned": 661},
+		  {"period": "2012-09-19", "licensed": 257, "sorned": 667}
+		];
+	new Morris.Bar({
+		element: 'morrisBars',
+	  	data: dateBoard,
+	  	xkey: 'period',
+	  	ykeys: ['licensed', 'sorned'],
+	  	labels: ['Licensed', 'SORN'],
+	  	xLabelAngle: 60
+	});
 	
-	
-	</script>
+    </script>
 
 	<!-- Scripts -->
  	<script src="https://cdn.jsdelivr.net/npm/popper.js@1.14.4/dist/umd/popper.min.js"></script>
@@ -512,21 +498,20 @@
 	<script src="https://cdn.jsdelivr.net/npm/jquery-match-height@0.7.2/dist/jquery.matchHeight.min.js"></script>
 	<script src="${pageContext.request.contextPath }/resources/admin/assets/js/main.js"></script>
  
-	<!--Chartist Chart-->
 	<script src="https://cdn.jsdelivr.net/npm/moment@2.22.2/moment.min.js"></script>
 	<script src="https://cdn.jsdelivr.net/npm/fullcalendar@3.9.0/dist/fullcalendar.min.js"></script>
 	<script src="${pageContext.request.contextPath }/resources/admin/assets/js/init/fullcalendar-init.js"></script>
 	
+	
 	<!--  Chart js -->
-    <script src="https://cdn.jsdelivr.net/npm/chart.js@2.7.3/dist/Chart.bundle.min.js"></script>
-    <script src="${pageContext.request.contextPath }/resources/admin/assets/js/init/chartjs-init.js"></script>
+<%--     <script src="https://cdn.jsdelivr.net/npm/chart.js@2.7.3/dist/Chart.bundle.min.js"></script>
+    <script src="${pageContext.request.contextPath }/resources/admin/assets/js/init/chartjs-init.js"></script> --%>
     
     <!--Flot Chart-->
-    <script src="https://cdn.jsdelivr.net/npm/jquery.flot@0.8.3/jquery.flot.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/flot-spline@0.0.1/js/jquery.flot.spline.min.js"></script>
+<!--     <script src="https://cdn.jsdelivr.net/npm/jquery.flot@0.8.3/jquery.flot.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/flot-spline@0.0.1/js/jquery.flot.spline.min.js"></script> -->
 </section>
 </div>
 </body>
-
 </html>
 <%-- <jsp:include page="/WEB-INF/views/common/footer.jsp" /> --%>

@@ -34,6 +34,10 @@ public class AdminController {
 		// 기본 달력 이벤트 로드
 		calList = service.calLoad();
 		model.addAttribute("ac", calList);
+		
+		//메인화면 테마별 글 조회
+		
+		
 		return "admin/adminMainPage";
 	}
 	
