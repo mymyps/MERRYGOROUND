@@ -58,7 +58,7 @@
                                 <button class="btn supreviewBtn" type="submit">INFOMATION 수정</button> 
                             </form>
                             <br>
-                            <form name="infoDelete" action="${pageContext.request.contextPath }/info/infoDelete?infoupNum=${info.INFOUPNUM }" method="post" enctype="multipart/form-data">
+                            <form name="infoDelete" action="${pageContext.request.contextPath }/info/infoStatus0?infoupNum=${info.INFOUPNUM }" method="post" enctype="multipart/form-data">
                                 <button class="btn supreviewBtn" type="submit">INFOMATION 삭제</button> 
                             </form>
                         </div>

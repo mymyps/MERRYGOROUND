@@ -4,7 +4,7 @@
 	<select id="selectSupUpload" resultType="map" parameterType="_int">
 		SELECT * FROM SUPPORTERS_UPLOAD WHERE INFOUPNUM=#{infoupNum}
 	</select>
-	<select id=selectSupUploadImg" resultType="com.mgr.merry.supUpload.model.vo.SupUploadImg">
+<!-- 	<select id=selectSupUploadImg" resultType="com.mgr.merry.supUpload.model.vo.SupUploadImg">
 	
-	</select>
+	</select> -->
 </mapper>
