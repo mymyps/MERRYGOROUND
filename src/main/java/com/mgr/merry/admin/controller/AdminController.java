@@ -69,6 +69,18 @@ public class AdminController {
 		mv.addObject("uploadTop5", uploadTop5);
 		mv.addObject("supPayMain5", supPayMain5);
 		
+		// 서포터즈 리스트
+		List<Map<String, String>> supListMain = service.supListMain();
+		mv.addObject("supListMain", supListMain);
+		
+		// 서포터즈 신청 리스트
+		List<Map<String, String>> supConfirmMain = service.supConfirmMain();
+		mv.addObject("supConfirmMain", supConfirmMain);
+		
+		// 업로드 글 리스트
+		List<Map<String, String>> infoUploadMain = service.infoUploadMain();
+		mv.addObject("infoUploadMain", infoUploadMain);
+		
 		//-----------------------------------//
 		mv.setViewName("admin/adminMainPage");
 		

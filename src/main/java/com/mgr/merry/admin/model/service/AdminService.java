@@ -19,5 +19,8 @@ public interface AdminService {
 	int topCouple();
 	List<Map<String, String>> uploadTop();
 	List<Map<String, String>> supPayMain();
+	List<Map<String, String>> supListMain();
+	List<Map<String, String>> supConfirmMain();
+	List<Map<String, String>> infoUploadMain();
 
 }

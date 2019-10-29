@@ -74,5 +74,19 @@ public class AdminServiceImpl implements AdminService{
 		return dao.supPayMain(sqlSession);
 	}
 	
+	@Override
+	public List<Map<String, String>> supListMain() {
+		return dao.supListMain(sqlSession);
+	}
+	
+	@Override
+	public List<Map<String, String>> supConfirmMain() {
+		return dao.supConfirmMain(sqlSession);
+	}
+	
+	@Override
+	public List<Map<String, String>> infoUploadMain() {
+		return dao.infoUploadMain(sqlSession);
+	}
 	
 }

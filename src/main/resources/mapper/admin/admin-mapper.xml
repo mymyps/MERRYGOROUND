@@ -46,7 +46,7 @@
 	
 	<select id="topInfoUpload" resultType="_int">
 		select count(*) "info" from info_upload
-		where infoupstatus='Y'
+		where infoupstatus=1 
 		order by infoupdate desc
 	</select>
 	
@@ -87,6 +87,33 @@
 		where rnum between 1 and 5
 	</select>
 	
+	<!-- 서포터즈 리스트 -->
+	<select id="supListMain" resultType="map">
+		select * from(
+		select rownum as rnum, a.* from(
+			select * from supporters
+    			join members using(membernum)
+				where MEMBERLEVEL = 2 and status = 1
+			order by supenrolldate desc
+		)a order by 4 desc)
+		where rnum between 1 and 5
+	</select>
+	
+	<select id="supConfirmMain" resultType="map">
+		select * from(
+			select rownum as rnum, a.* from(
+				select * from members where supstatus = 1 and status = 1
+			)a order by 4 desc)
+		where rnum between 1 and 4
+	</select>
+	
+	<select id="infoUploadMain" resultType="map">
+		select to_date(infoupdate) "infoup", count(*) "dayInfo" 
+		from info_upload
+			where (infoupdate between TO_DATE(sysdate-5) and TO_DATE(sysdate)) and infoupstatus = 1
+		GROUP by to_date(infoupdate)
+		order by 1
+	</select>
 	
 	
 	

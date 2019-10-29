@@ -20,4 +20,7 @@ public interface AdminDao {
 	int topCouple(SqlSessionTemplate session);
 	List<Map<String, String>> uploadTop(SqlSessionTemplate session);
 	List<Map<String, String>> supPayMain(SqlSessionTemplate session);
+	List<Map<String, String>> supListMain(SqlSessionTemplate session);
+	List<Map<String, String>> supConfirmMain(SqlSessionTemplate session);
+	List<Map<String, String>> infoUploadMain(SqlSessionTemplate session);
 }

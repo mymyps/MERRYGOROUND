@@ -66,6 +66,21 @@ public class AdminDaoImpl implements AdminDao{
 		return session.selectList("admin.supPayMain");
 	}
 	
+	@Override
+	public List<Map<String, String>> supListMain(SqlSessionTemplate session) {
+		return session.selectList("admin.supListMain");
+	}
+	
+	@Override
+	public List<Map<String, String>> supConfirmMain(SqlSessionTemplate session) {
+		return session.selectList("admin.supConfirmMain");
+	}
+	
+	@Override
+	public List<Map<String, String>> infoUploadMain(SqlSessionTemplate session) {
+		return session.selectList("admin.infoUploadMain");
+	}
+	
 	
 	
 }

@@ -124,16 +124,24 @@
 								</div>
 								<div class="table-stats order-table ov-h">
 									<table class="table ">
+										<thead>
+											<tr>
+												<th scope="col">#</th>
+												<th scope="col">제목</th>
+												<th scope="col">번호</th>
+												<th scope="col">날짜</th>
+												<th scope="col">*</th>
+											</tr>
+										</thead>
 										<tbody>
 											<c:forEach items="${uploadTop5 }" var="up" varStatus="i">
 											<tr>
 												<fmt:parseNumber var="test" value="${up['ravg'] }" integerOnly="true"/>
-												<td class="index"><c:out value="${i.count }"/></td>
+												<td scope="row"><c:out value="${i.count }"/></td>
 												<td class="serial"><c:out value="${up['INFOUPTITLE'] }"/></td>
 												<td><span class="name"><c:out value="${up['INFOUPNUM'] }"/></span></td>
-												<td><span class="product"><c:out value="${up['INFOUPDATE'] }"/></span></td>
-												<td><span class="count"><fmt:formatNumber value="${test}" pattern=".00"/></span></td>
-												
+												<td><span class="product"><fmt:formatDate value="${up['INFOUPDATE'] }" pattern="yyyy.MM.dd"/></span></td>
+												<td><span class="count"> <fmt:formatNumber value="${test}" pattern=".00"/> </span></td>
 											</tr>
 											</c:forEach>
 
@@ -151,21 +159,26 @@
 								</div>
 								<div class="table-stats order-table ov-h">
 									<table class="table ">
-										<tbody>
+										<thead>
 											<tr>
-												<td class="serial">2.</td>
-												<td class="avatar">
-													<div class="round-img">
-														<a href="#"><img class="rounded-circle"
-															src="images/avatar/2.jpg" alt=""></a>
-													</div>
-												</td>
-												<td>#5468</td>
-												<td><span class="name">Gregory Dixon</span></td>
-												<td><span class="product">iPad</span></td>
-												<td><span class="count">250</span></td>
-
+												<th scope="col">#</th>
+												<th scope="col">서포터번호</th>
+												<th scope="col">서포터등급</th>
+												<th scope="col">포상금</th>
 											</tr>
+										</thead>
+										<tbody>
+										<!-- supPayMain5 -->
+											<c:forEach items="${supPayMain5 }" var="sp" varStatus="i">
+											<tr>
+												<fmt:parseNumber var="test" value="${sp['rsum'] }" integerOnly="true"/>
+												<td scope="row"><c:out value="${i.count }"/></td>
+												<td class="serial"><c:out value="${sp['SUPNUM'] }"/></td>
+												<td><span class="name"><c:out value="${sp['SUPLEVEL'] }"/></span></td>
+												<td><span class="count"><fmt:formatNumber value="${test}" pattern="#########"/></span></td>
+												
+											</tr>
+											</c:forEach>
 
 										</tbody>
 									</table>
@@ -241,47 +254,31 @@
 											<thead>
 												<tr>
 													<th class="serial">#</th>
-													<th class="avatar">Avatar</th>
+													<th class="avatar">사진</th>
 													<th>ID</th>
-													<th>Name</th>
-													<th>Product</th>
-													<th>Quantity</th>
+													<th>이름</th>
+													<th>전화번호</th>
+													<th>가입날짜</th>
 													<!-- <th>Status</th> -->
 												</tr>
 											</thead>
 											<tbody>
-												<tr>
-													<td class="serial">1</td>
-													<td class="avatar">
+											<!-- supListMain -->
+											<c:forEach items="${supListMain }" var="sl" varStatus="i">
+											<tr>
+												<td scope="row"><c:out value="${i.count }"/></td>
+												<td class="avatar">
 														<div class="round-img">
-															<a href="#"><img class="rounded-circle"
-																src="images/avatar/1.jpg" alt=""></a>
+															<a href="#"><img class="rounded-circle" 
+															src="${path }resources/images/${sl['PROIMG']}" alt=""></a>
 														</div>
 													</td>
-													<td>#5469</td>
-													<td><span class="name">Louis Stanley</span></td>
-													<td><span class="product">iMax</span></td>
-													<td><span class="count">231</span></td>
-
-												</tr>
-
-
-												<tr>
-													<td class="serial">2.</td>
-													<td class="avatar">
-														<div class="round-img">
-															<a href="#"><img class="rounded-circle"
-																src="images/avatar/2.jpg" alt=""></a>
-														</div>
-													</td>
-													<td>#5468</td>
-													<td><span class="name">??????</span></td>
-													<td><span class="product">??????</span></td>
-													<td><span class="count">250</span></td>
-
-												</tr>
-
-
+												<td class="serial"><c:out value="${sl['ID'] }"/></td>
+												<td><span class="name"><c:out value="${sl['NAME'] }"/></span></td>
+												<td><c:out value="${sl['PHONE'] }"/></td>
+												<td><fmt:formatDate value="${sl['ENROLLDATE'] }" pattern="yyyy.MM.dd"/></td>
+											</tr>
+											</c:forEach>
 											</tbody>
 										</table>
 									</div>
@@ -303,25 +300,22 @@
 										<thead>
 											<tr>
 												<th scope="col">#</th>
-												<th scope="col">First</th>
-												<th scope="col">Last</th>
-												<th scope="col">Handle</th>
+												<th scope="col">ID</th>
+												<th scope="col">이름</th>
+												<th scope="col">가입날짜</th>
 											</tr>
 										</thead>
 										<tbody>
+										<!-- supConfirmMain -->
+											<c:forEach items="${supConfirmMain }" var="sc" varStatus="i">
 											<tr>
-												<th scope="row">1</th>
-												<td>Mark</td>
-												<td>Otto</td>
-												<td>@mdo</td>
+												<td scope="row"><c:out value="${i.count }"/></td>
+												<td class="serial"><c:out value="${sc['ID'] }"/></td>
+												<td><span class="name"><c:out value="${sc['NAME'] }"/></span></td>
+												<td><fmt:formatDate value="${sc['ENROLLDATE'] }" pattern="yyyy.MM.dd"/></td>
+												<%-- <td><c:out value="${sc['ENROLLDATE'] }"/></td> --%>
 											</tr>
-											<tr>
-												<th scope="row">2</th>
-												<td>???</td>
-												<td>??????</td>
-												<td>????</td>
-											</tr>
-
+											</c:forEach>
 										</tbody>
 									</table>
 								</div>
@@ -475,13 +469,23 @@
 	
 	/* morrisChart */
 	<!-- 1:날짜  2:총 글수 3:총 리뷰수 -->
-	var dateBoard = [
+	var dateBoard = [];
+	<c:forEach items="${infoUploadMain}" var="iu">
+		dateBoard.push({
+			"period" : '<fmt:formatDate value="${iu.infoup}" pattern="yyyy-MM-dd" />',
+			"licensed" : ${iu.dayInfo},
+			"sorned" : 0
+		});
+	</c:forEach>
+	
+
+	/* var dateBoard = [
 	  	  {"period": "2012-10-01", "licensed": 407, "sorned": 660},
 		  {"period": "2012-09-30", "licensed": 351, "sorned": 629},
 		  {"period": "2012-09-29", "licensed": 269, "sorned": 618},
 		  {"period": "2012-09-20", "licensed": 246, "sorned": 661},
 		  {"period": "2012-09-19", "licensed": 257, "sorned": 667}
-		];
+		]; */
 	new Morris.Bar({
 		element: 'morrisBars',
 	  	data: dateBoard,
