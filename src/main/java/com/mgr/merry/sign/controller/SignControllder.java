@@ -1,6 +1,8 @@
 package com.mgr.merry.sign.controller;
 
+import java.io.File;
 import java.util.Properties;
+import java.util.UUID;
 
 import javax.mail.Message;
 import javax.mail.MessagingException;
@@ -19,16 +21,17 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.bind.support.SessionStatus;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.mgr.merry.common.SMTPTemplate;
 import com.mgr.merry.sign.model.service.SignService;
 import com.mgr.merry.sign.model.vo.Members;
 
+//session
 @SessionAttributes(value= {"loginMember"})
 @Controller
 public class SignControllder {
@@ -49,8 +52,32 @@ public class SignControllder {
 	}
 	//회원가입
 	@RequestMapping("/member/membersignup.do")
-	public String membersignup(Members m, Model model) {
+	public String membersignup(Members m, Model model,MultipartFile upFile,HttpServletRequest request) {
 //		System.out.println("!!!!!!!!!!!!!!!!!" + m);
+		System.out.println("파일 이름: {}"+ upFile.getOriginalFilename());
+		System.out.println("파일 크기: {}"+ upFile.getSize());
+		
+		// 파일 이름 변경
+	    UUID uuid = UUID.randomUUID();
+	    String saveName = uuid + "_" + upFile.getOriginalFilename();
+	    System.out.println("saveName: {}"+saveName);
+	    
+	    // 저장할 File 객체를 생성(껍데기 파일)ㄴ
+	    String saveFile=request.getSession().getServletContext().getRealPath("/resources/images/member");
+	 // 파일 실제 저장하기
+
+        try {
+        	upFile.transferTo(new File(saveFile + "/" + saveName));
+        	m.setProimg(saveName);
+        	System.out.println("m     :  "+m);
+     
+        } catch (Exception e) { //IlligalStateException|IOException
+
+           e.printStackTrace();
+        }
+		
+        
+		
 		m.setPw(pwEncoder.encode(m.getPw()));
 		int result = service.insertMember(m);
 		String msg = "";
@@ -65,20 +92,46 @@ public class SignControllder {
 		return "sign/msg";
 
 	}
-
-//	 @RequestMapping("/email.do") 
-//	 public String email() { 
-//		 return "sign/mail"; 
-//		 }
+	//비밀번호찾기
+	@RequestMapping("/member/searchpw.do")
+	public String searchpw(Members m,Model model) {
+		return "sign/searchpw";
+	}
 	
+	@RequestMapping("/member/searchpwend.do")
+	public ModelAndView searchpwend(Members m) {
+		System.out.println("비밀번호찾기"+m);
+		ModelAndView mv= new ModelAndView();
+		mv.setViewName("sign/searchpwend");
+		mv.addObject("email",m.getEmail());
+		mv.addObject("id",m.getId());
+		return mv;
+	}
+	@RequestMapping("/sign/updatepw")
+	public String pwUpdate(Members m,Model model) {
+		m.setPw(pwEncoder.encode(m.getPw()));
+		System.out.println("updatepass"+m);
+		int result = service.pwUpdate(m);
+		
+		String msg = "";
+		String loc = "";
+		if (result > 0) {
+			msg = "완료";
+		} else {
+			msg = "실패";
+		}
+		model.addAttribute("msg", msg);
+		model.addAttribute("loc", loc);
+		return "sign/msg";
+	}
 	@RequestMapping("/emailAuth.do")
 	public ModelAndView emailAuth(HttpServletResponse response, HttpServletRequest request) throws Exception {
 		String email = request.getParameter("email");
 		String authNum = RandomNum();
 
-		// sendEmail(email,authNum);
+		 sendEmail(email,authNum);
 
-		SMTPTemplate.sendmail("인증번호 : "+authNum, email, "현식이형바보");
+		SMTPTemplate.sendmail("인증번호 : "+authNum, email, "현식");
 
 		ModelAndView mv = new ModelAndView();
 		mv.setViewName("sign/mail");
@@ -95,8 +148,11 @@ public class SignControllder {
 		System.out.println("인증메일발송");
 		String authNum = RandomNum();
 		String email = request.getParameter("email");
-
-		// sendEmail(email,authNum);
+		
+//		String cupemail=request.getParameter("cupemail");
+//		System.out.println("####!@#cupemail"+cupemail);
+		
+//		 sendEmail(email,authNum);
 		SMTPTemplate.sendmail("인증번호 : "+authNum, email, "현식");
 		
 		return authNum;
@@ -106,7 +162,7 @@ public class SignControllder {
 		String host = "smtp.gmail.com"; // smtp서버
 		String subject = "인증번호";
 		String fromName = "관리자";
-		String from = "mgrmgr1004@gamil.com";
+		String from = "mgrmgr1004@gmail.com";
 		String to1 = email;
 		String content = "인증번호[" + authNum + "]";
 
