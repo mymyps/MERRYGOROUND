@@ -10,7 +10,6 @@ public class InfoUpload {
    private int infoupNum;
    private int localNum;
    private int supNum;
-   private String themaSubNum;
    private String infoupTitle;
    private Date infoupDate;
    private int infoupPayment;
@@ -18,21 +17,14 @@ public class InfoUpload {
    private String infoupTime;
    private String infoupStatus;
  
-   //resultType info.model.vo로 받기위해 변수 추가할게요
-   private InfoUploadImg InfoUploadImg;
-   private com.mgr.merry.search.model.vo.Location Location;
-   private com.mgr.merry.search.model.vo.Thema Thema;
-   
+   //테이블 join해서 resultType info.model.vo로 받기위해 변수 추가할게요(info_upload , infoupimg, thema, location 4개 테이블 조인)
+
     //InfoUploadImg
 	private int fileNum;
 	private String fileReName;
-	
 	//location
-	
 	private String localName;
-		
 	//thema
-	
 	private String themaName;
 	private String themaNum;
 	private String themaNumRef;
