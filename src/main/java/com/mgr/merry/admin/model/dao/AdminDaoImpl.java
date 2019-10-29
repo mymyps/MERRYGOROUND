@@ -1,6 +1,7 @@
 package com.mgr.merry.admin.model.dao;
 
 import java.util.List;
+import java.util.Map;
 
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.stereotype.Repository;
@@ -29,4 +30,42 @@ public class AdminDaoImpl implements AdminDao{
 	public int calMod(SqlSessionTemplate session, AdminCalendar cal) {
 		return session.update("admin.calMod", cal);
 	}
+	
+	@Override
+	public List<Map<String, String>> adminThemaMain(SqlSessionTemplate session) {
+		return session.selectList("admin.adminThemaMain");
+	}
+	
+	@Override
+	public int topInfoUpload(SqlSessionTemplate session) {
+		return session.selectOne("admin.topInfoUpload");
+	}
+	
+	@Override
+	public int topCouple(SqlSessionTemplate session) {
+		return session.selectOne("admin.topCouple");
+	}
+	
+	@Override
+	public int topSupporters(SqlSessionTemplate session) {
+		return session.selectOne("admin.topSupporters");
+	}
+	
+	@Override
+	public int topSupStatus(SqlSessionTemplate session) {
+		return session.selectOne("admin.topSupStatus");
+	}
+	
+	@Override
+	public List<Map<String, String>> uploadTop(SqlSessionTemplate session) {
+		return session.selectList("admin.uploadTopMain");
+	}
+	
+	@Override
+	public List<Map<String, String>> supPayMain(SqlSessionTemplate session) {
+		return session.selectList("admin.supPayMain");
+	}
+	
+	
+	
 }

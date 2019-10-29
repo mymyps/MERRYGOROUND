@@ -1,6 +1,7 @@
 package com.mgr.merry.admin.model.dao;
 
 import java.util.List;
+import java.util.Map;
 
 import org.mybatis.spring.SqlSessionTemplate;
 
@@ -12,4 +13,11 @@ public interface AdminDao {
 	List<AdminCalendar> calLoad(SqlSessionTemplate session);
 	int calDel(SqlSessionTemplate session, AdminCalendar cal);
 	int calMod(SqlSessionTemplate session, AdminCalendar cal);
+	List<Map<String, String>> adminThemaMain(SqlSessionTemplate session);
+	int topInfoUpload(SqlSessionTemplate session);
+	int topSupporters(SqlSessionTemplate session);
+	int topSupStatus(SqlSessionTemplate session);
+	int topCouple(SqlSessionTemplate session);
+	List<Map<String, String>> uploadTop(SqlSessionTemplate session);
+	List<Map<String, String>> supPayMain(SqlSessionTemplate session);
 }

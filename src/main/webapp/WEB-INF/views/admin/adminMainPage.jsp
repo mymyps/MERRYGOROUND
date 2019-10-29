@@ -40,7 +40,7 @@
 									<div class="stat-content">
 										<div class="text-left dib">
 											<div class="stat-text">
-												$<span class="count">23569</span>
+												$<span class="count"><c:out value="${topResult }"/></span>
 											</div>
 											<div class="stat-heading">게시글수</div>
 										</div>
@@ -61,7 +61,7 @@
 									<div class="stat-content">
 										<div class="text-left dib">
 											<div class="stat-text">
-												<span class="count">3435</span>
+												<span class="count"><c:out value="${topSupporters }"/></span>
 											</div>
 											<div class="stat-heading">서포터즈</div>
 										</div>
@@ -81,7 +81,7 @@
 									<div class="stat-content">
 										<div class="text-left dib">
 											<div class="stat-text">
-												<span class="count">349</span>
+												<span class="count"><c:out value="${topSupStatus }"/></span>
 											</div>
 											<div class="stat-heading">신청</div>
 										</div>
@@ -101,9 +101,9 @@
 									<div class="stat-content">
 										<div class="text-left dib">
 											<div class="stat-text">
-												<span class="count">2986</span>
+												<span class="count"><c:out value="${topCouple }"/></span>
 											</div>
-											<div class="stat-heading">신고</div>
+											<div class="stat-heading">커플</div>
 										</div>
 									</div>
 								</div>
@@ -125,20 +125,17 @@
 								<div class="table-stats order-table ov-h">
 									<table class="table ">
 										<tbody>
+											<c:forEach items="${uploadTop5 }" var="up" varStatus="i">
 											<tr>
-												<td class="serial">1.</td>
-												<td class="avatar">
-													<div class="round-img">
-														<a href="#"><img class="rounded-circle"
-															src="images/avatar/1.jpg" alt=""></a>
-													</div>
-												</td>
-												<td>#5469</td>
-												<td><span class="name">Louis Stanley</span></td>
-												<td><span class="product">iMax</span></td>
-												<td><span class="count">231</span></td>
-
+												<fmt:parseNumber var="test" value="${up['ravg'] }" integerOnly="true"/>
+												<td class="index"><c:out value="${i.count }"/></td>
+												<td class="serial"><c:out value="${up['INFOUPTITLE'] }"/></td>
+												<td><span class="name"><c:out value="${up['INFOUPNUM'] }"/></span></td>
+												<td><span class="product"><c:out value="${up['INFOUPDATE'] }"/></span></td>
+												<td><span class="count"><fmt:formatNumber value="${test}" pattern=".00"/></span></td>
+												
 											</tr>
+											</c:forEach>
 
 										</tbody>
 									</table>
@@ -204,13 +201,17 @@
 								<div class="col-lg-4">
 									<div class="card-body">
 										<div class="progress-box progress-1">
-											<h4 class="por-title">테마별 조회</h4>
-											<div class="por-txt">테마1 (40%)</div>
+											<!-- mainThema - (list) -->
+											<h4 class="por-title">테마별 조회(Thema)</h4>
+											<c:set var = 'rto' value="${rto }"/>
+											<c:forEach items="${mainThema }" var="t" varStatus="i">
+											<div class="por-txt"><c:out value="${t['THEMANAME'] }"/> <c:out value="${t['COUNT'] }"/>회</div>
 											<div class="progress mb-2" style="height: 5px;">
-												<div class="progress-bar bg-flat-color-1" role="progressbar"
-													style="width: 40%;" aria-valuenow="5" aria-valuemin="0"
+												<div class="progress-bar bg-flat-color-${i.count }" role="progressbar"
+													style="width: <c:out value="${t['COUNT']/rto}"/>%;" aria-valuenow="5" aria-valuemin="0"
 													aria-valuemax="100"></div>
 											</div>
+											</c:forEach>
 										</div>
 
 									</div>
@@ -232,7 +233,7 @@
 						<div class="col-xl-7">
 							<div class="card">
 								<div class="card-body">
-									<h4 class="box-title">서포터즈 목록(명단)</h4>
+									<h4 class="box-title">서포터즈 목록(최근명단)</h4>
 								</div>
 								<div class="card-body--">
 									<div class="table-stats order-table ov-h">
@@ -295,7 +296,7 @@
 						<div class="col-lx-4">
 							<div class="card">
 								<div class="card-header">
-									<strong class="card-title">신청목록</strong>
+									<strong class="card-title">신청 목록(최근명단)</strong>
 								</div>
 								<div class="card-body">
 									<table class="table">
