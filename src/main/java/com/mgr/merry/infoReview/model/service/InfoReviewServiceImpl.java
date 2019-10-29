@@ -31,19 +31,18 @@ public class InfoReviewServiceImpl implements InfoReviewService {
 		return dao.updateReview(session, infoReviewNum);
 	}
 
-	// 수정중
-	@Override
-	public int insertReview(Map<String, String> param) {
-		int result = 0;
-		result=dao.insertReview(session, param);
-		if(result==0) throw new RuntimeException();
-		
-		return result;
-	}
 
 	@Override
 	public List<InfoReview> selectReview(int infoupNum) {
 		return dao.selectReview(session, infoupNum);
+	}
+
+	@Override
+	public int insertReview(Map<String, String> param) {
+		int result = 0;
+		result = dao.insertReview(session, param);
+		if(result==0) throw new RuntimeException();
+		return result;
 	}
 
 }

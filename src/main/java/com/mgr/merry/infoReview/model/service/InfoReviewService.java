@@ -11,8 +11,8 @@ public interface InfoReviewService {
 
 	int updateReview(int infoReviewNum);
 
-	int insertReview(Map<String, String> param);
-
 	List<InfoReview> selectReview(int infoupNum);
+
+	int insertReview(Map<String, String> param);
 
 }

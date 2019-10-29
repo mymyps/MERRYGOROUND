@@ -66,13 +66,14 @@
 
                         <div class="gap-30"></div>
                         <div class="comments-form">
-                            <h3>MEMBER REVIEW</h3>
-                            <form role="form">
+                            <h3>멤버 리뷰 등록하기</h3>
+                            <form name="insertReview" action="${pageContext.request.contextPath }/infoReview/insertInfoReview?infoupNum=${info.INFOUPNUM}" method="post">
                                 <div class="form-group">
-                                    <textarea class="form-control required-field" id="message" placeholder="" rows="4" required></textarea>
+                                평점 <input type="number" step="1" max="5" min="0" name="infoReviewPoint" /><br><br>
+                                    <input type="text" name="infoReviewContent" class="form-control required-field" id="message" placeholder="" rows="4" required></textarea>
                                     
                                 </div>
-                                <button class="btn reviewBtn" type="submit">Post Comment</button>
+                                <button class="btn reviewBtn" type="submit">리뷰 등록</button>
                             </form>
                         </div><!-- Comments form end -->
                         <br><br><br><br>

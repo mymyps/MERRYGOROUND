@@ -21,11 +21,21 @@ public class InfoReviewController {
 	InfoReviewService service;
 	
 	// 수정중
-	@RequestMapping("/info/reviewInsert")
+	@RequestMapping("/infoReview/insertInfoReview")
 	public ModelAndView insertReview (@RequestParam Map<String, String> param, HttpServletRequest request){
 		int result = 0;
 		result = service.insertReview(param);
+		
+		String msg = "";
+
+		if (result > 0) {
+			msg = "INFO가 등록되었습니다.";
+		} else {
+			msg = "INFO 등록 실패";
+		}
 		ModelAndView mv = new ModelAndView();
+		mv.addObject("msg", msg);
+		mv.setViewName("common/msg");
 		return mv;
 	}
 	
