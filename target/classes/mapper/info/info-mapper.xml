@@ -47,5 +47,9 @@
 		where INFOUPNUM=#{infoupNum}
 	</update>
 	
+	<update id="updateInfoStatus0">
+		UPDATE INFO_UPLOAD SET INFOUPSTATUS=0 WHERE INFOUPNUM=#{infoupNum}
+	</update>
+	
 	
 </mapper>

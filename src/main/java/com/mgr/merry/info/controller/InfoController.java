@@ -120,7 +120,7 @@ public class InfoController {
 		int result = 0;
 		result = service.infoStatus0(infoupNum);
 		
-		return "/info/infoList";
+		return "/"; // 나중에 경로 바꿀것
 	}
 	
 	@RequestMapping("/info/infoUpdate")
@@ -178,7 +178,6 @@ public class InfoController {
 			e.printStackTrace();
 		}
 		String msg = "";
-//		String loc = "/info/infoList.do";
 
 		if (result > 0) {
 			msg = "INFO 수정 완료";
@@ -187,7 +186,6 @@ public class InfoController {
 		}
 		ModelAndView mv = new ModelAndView();
 		mv.addObject("msg", msg);
-//		mv.addObject("loc", loc);
 		mv.setViewName("common/msg");
 		return mv;
 	

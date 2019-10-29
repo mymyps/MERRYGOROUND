@@ -71,8 +71,7 @@ public class InfoServiceImpl implements InfoService {
 	
 	@Override
 	public int infoStatus0(int infoupNum) {
-		// TODO Auto-generated method stub
-		return 0;
+		return dao.updateInfoStatus0(session, infoupNum);
 	}
 
 	@Override
