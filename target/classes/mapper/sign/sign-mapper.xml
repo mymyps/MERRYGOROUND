@@ -2,7 +2,7 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="sign">
 	<insert id="insertMember" parameterType="members">
-		INSERT INTO MEMBERS VALUES(members_seq.nextval,#{id},#{pw},#{name},#{birth},#{gender},#{phone},#{email},default,default,default,default,default,default,default,'1234')
+		INSERT INTO MEMBERS VALUES(members_seq.nextval,#{id},#{pw},#{name},#{birth},#{gender},#{phone},#{email},default,default,default,#{proimg},default,default,default,default)
 	</insert>
 	<select id="selectMemberOne" resultType="members" parameterType="members"> 
 		SELECT * FROM MEMBERS WHERE id=#{id}
@@ -11,6 +11,32 @@
 		select * from members where membernum=#{memNo}
 	</select>
 	<update id="updateMember">
-		update members set id=#{id},name=#{name},birth=#{birth},phone=#{phone},email=#{email} where memberNum=#{memberNum}
+		update members set id=#{id},name=#{name},birth=#{birth},phone=#{phone},email=#{email},proimg=#{proimg} where memberNum=#{memberNum}
 	</update>
+	<update id="updatePw">
+		update members set pw=#{pw} where memberNum=#{memberNum}
+	</update>
+<!-- 	<update id="updateCode">
+		update members set code=#{authNum} where email=#{email}
+	</update> -->
+	<update id="updateCode">
+		update members set code=#{code} where email=#{email}
+	</update>
+	<update id="updatecupemailcode" parameterType="map">
+		update members set cpid=#{m2.email},cpstatus='1' where email=#{m.email}
+	</update>
+	<update id="updatecupemailcode2" parameterType="map">
+		update members set cpid=#{email},cpstatus='1' where email=#{email2}
+	</update>
+	<select id="selectCp" resultType="members" parameterType="members">
+		select * from members where code=#{code}
+	</select>
+	<update id="pwUpdate">
+		update members set pw=#{pw} where id=#{id}
+	</update>
+	<update id="updatesuple">
+		update members set supstatus=1 where memberNum=#{num}
+	</update>
+	
+	
 </mapper>

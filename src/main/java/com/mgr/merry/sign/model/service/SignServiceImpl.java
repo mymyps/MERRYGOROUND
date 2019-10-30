@@ -1,7 +1,7 @@
 package com.mgr.merry.sign.model.service;
 
 
-import java.util.List;
+import java.util.Map;
 
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -37,5 +37,41 @@ public class SignServiceImpl implements SignService {
 	public int updateMember(Members m) {
 		return dao.updateMember(session,m);
 	}
-
+	@Override
+	public int updatePw(Members m) {
+		return dao.updatePw(session,m);
+	}
+//	@Override
+//	public int updateCode(Map<String,String> map) {
+//		return dao.updateCode(session,map);
+//	}
+	@Override
+	public int updateCode(Members m) {
+		return dao.updateCode(session, m);
+	}
+//	@Override
+//	public int updatecupemailcode(Members m2) {
+//		return dao.updatecupemailcode(session, m2);
+//	}
+	@Override
+	public Members selectCp(Members m) {
+		return dao.selectCp(session,m);
+	}
+	@Override
+	public int updatecupemailcode(Map<String, Object> map) {
+		return dao.updatecupemailcode(session,map);
+	}
+	@Override
+	public int updatecupemailcode2(Map<String, String> emailmap) {
+		return dao.updatecupemailcode2(session,emailmap);
+	}
+	@Override
+	public int pwUpdate(Members m) {
+		return dao.pwUpdate(session,m);
+	}
+	@Override
+	public int updatesuple(int num) {
+		return dao.updatesuple(session,num);
+	}
+	
 }

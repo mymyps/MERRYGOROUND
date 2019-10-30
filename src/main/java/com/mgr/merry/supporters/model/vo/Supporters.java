@@ -11,5 +11,4 @@ public class Supporters {
 	private int memberNum;
 	private String supLevel;
 	private Date supEnrollDate;
-	private String supStatus;
 }
