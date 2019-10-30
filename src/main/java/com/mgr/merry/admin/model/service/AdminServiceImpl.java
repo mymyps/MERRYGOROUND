@@ -94,4 +94,5 @@ public class AdminServiceImpl implements AdminService{
 		return dao.boardPage(sqlSession);
 	}
 	
+
 }

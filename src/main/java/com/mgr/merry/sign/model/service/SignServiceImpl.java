@@ -74,4 +74,5 @@ public class SignServiceImpl implements SignService {
 		return dao.updatesuple(session,num);
 	}
 	
+
 }

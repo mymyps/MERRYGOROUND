@@ -24,4 +24,5 @@ public interface AdminService {
 	List<Map<String, String>> infoUploadMain();
 	List<Map<String, String>> boardPage();
 
+
 }

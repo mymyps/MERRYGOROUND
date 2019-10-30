@@ -40,6 +40,21 @@ public class InfoDaoImpl implements InfoDao {
 		return session.delete("info.deleteInfoImg", infoupNum);
 	}
 
+	@Override
+	public int selectInfoNum(SqlSessionTemplate session) {
+		return session.selectOne("info.selectInfoNum");
+	}
+
+	@Override
+	public int updateInfo(SqlSessionTemplate session, Map<String, String> param) {
+		return session.update("info.updateInfo", param);
+	}
+
+	@Override
+	public int updateInfoStatus0(SqlSessionTemplate session, int infoupNum) {
+		return session.update("info.updateInfoStatus0", infoupNum);
+	}
+
 
 
 

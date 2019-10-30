@@ -118,8 +118,7 @@
                     		<div class="row" id="themarow">
 						<div class="col-md-8 ts-padding themaContent">
 							<h3 style="margin-top: -2px;">
-<%-- 							<a href="${path}주미꺼controller?themaNum=${list.supupnu}" id="themenameBrown">${list.infoUpTitle}</a> --%>
-                            ${list.infoupTitle}
+								<a href="${pageContext.request.contextPath }/info/infoView.do?infoupNum=${list.infoupNum }">${list.infoupTitle}</a>
 							</h3>
 							<p>이용시간 : ${list.infoupTime} / 전화번호 : ${list.infoupPhone}</p>
 							<hr style="height: 0.5px; background-color: rgb(214, 206, 194);" >
@@ -127,7 +126,7 @@
 							</div>
 							<div class="col-md-4 ts-padding about-img" >
 							
-							<img class="listImg" src="${list.fileReName}" alt="이미지 준비중">
+							<img class="listImg" src="${path }/resources/upload/info/${list.fileReName}" alt="이미지 준비중">
 						</div>
 					</div>
 					<br>

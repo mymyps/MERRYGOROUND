@@ -20,4 +20,5 @@ public interface SignDao {
 	int updatecupemailcode2(SqlSessionTemplate session,Map<String,String> emailmap);
 	int pwUpdate(SqlSessionTemplate session,Members m);
 	int updatesuple(SqlSessionTemplate session,int num);
+
 }
