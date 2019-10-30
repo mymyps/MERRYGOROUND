@@ -12,7 +12,7 @@
 	<div class="container">
 		<form name="infoForm"
 			action="${pageContext.request.contextPath }/info/infoFormEnd.do"
-			method="post" onsubmit="return validate();"
+			method="post"
 			enctype="multipart/form-data">
 			<div class="row">
 				<!-- Blog start -->
@@ -43,14 +43,15 @@
 								<div>
 									<div class="infoFormSubFrame">테마</div>
 									<p class="infoForm1">
-										<select id="" name="themaNum" class="infoFormLocFrame">
-											<%-- <%
-												for(Thema t : list){
-											%>
-												<option value="<%t.getThemaNum%>"><%t.getThemaName%></option>
-											<%
-												}
-											%> --%>
+										<select id="" name="themaNum" class="mainThema">
+											<c:forEach items="${themaList2 }" var="t">
+												<option value="${t['THEMANUM'] }">${t['THEMANAME'] }</option>
+											</c:forEach>
+										</select>
+										<select id="" name="themaSubNum">
+											<c:forEach items="${themaList }" var="t">
+												<option value="${t['THEMANUM'] }">${t['THEMANAME'] }</option>
+											</c:forEach>
 										</select>
 									</p>
 								</div>
@@ -58,19 +59,12 @@
 								<div>
 									<div class="infoFormSubFrame">장소</div>
 									<p class="infoForm1">
-										<select id="" name="themaNum" class="mainThema">
-											<option value="">MAIN LOCATION</option>
-											<%-- <%
-												for(Thema t : list){
-											%>
-												<option value="<%t.getThemaNum%>"><%t.getThemaName%></option>
-											<%
-												}
-											%> --%>
+										<select id="" name="localNum" class="infoFormLocFrame">
+											<c:forEach items="${locationList }" var="l">
+												<option value="${l['LOCALNUM'] }">${l['LOCALNAME'] }</option>
+											</c:forEach>
 										</select>
-										<select id="" name="themaSubNum">
-											<option value="">SUB LOCATION</option>
-										</select>
+										
 									</p>
 								</div>
 								<div>
@@ -113,7 +107,6 @@
 		</form>
 	</div>
 	<!--/ row end -->
-	</div>
 	<!--/ container end -->
 </section>
 

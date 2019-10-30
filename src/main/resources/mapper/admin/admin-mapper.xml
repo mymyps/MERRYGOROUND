@@ -115,7 +115,16 @@
 		order by 1
 	</select>
 	
-	
+	<select id="boardPage" resultType="map">
+		select * from(
+			select rownum as rnum, a.* from(
+				select infouptitle, themaname, localname, infouppayment, infoupphone, infouptime, infoupdate from info_upload
+					inner join location using(localnum)
+					inner join thema using(themanum)
+				where infoupstatus = 1
+			order by infoupdate desc
+		) a) 	
+	</select>
 	
 	
 	

@@ -3,21 +3,22 @@
 <mapper namespace="info">
 	
 	<insert id="insertInfo" parameterType="map">
-		<!-- INSERT INTO INFO_UPLOAD VALUES(SEQ_INFO_UPLOAD_NUM.NEXTVAL, #{localSubNum}, #{supNum},
-		#{themaNum},#{infoupTitle}, default, default, #{infoupPhone}, default, default) -->
 		<!-- #{localNum}, #{supNum}, #{themaNum} 추가해야함 -->
-		INSERT INTO INFO_UPLOAD VALUES(SEQ_INFO_UPLOAD_NUM.NEXTVAL, 1, 1, 1,#{infoupTitle}, default, #{infoupPayment}, #{infoupPhone}, #{infoupTime}, default)
+		INSERT INTO INFO_UPLOAD VALUES(SEQ_INFO_UPLOAD_NUM.NEXTVAL, #{localNum}, 1, #{themaSubNum},#{infoupTitle}, default, #{infoupPayment}, #{infoupPhone}, #{infoupTime}, default)
 		<!-- <selectKey keyProperty="infoupNum" resultType="_int" order="AFTER">
 			SELECT SEQ_INFO_UPLOAD_NUM.CURRVAL FROM DUAL
 		</selectKey> -->
 	</insert>
 	
 	<insert id="insertInfoImg" parameterType="com.mgr.merry.info.model.vo.InfoUploadImg">
-		INSERT INTO INFO_UPLOAD_IMG VALUES(#{infoupNum}, SEQ_INFO_UPLOAD_IMG_NUM.NEXTVAL, #{fileReName})
+		INSERT INTO INFO_UPLOAD_IMG VALUES(SEQ_INFO_UPLOAD_NUM.CURRVAL, SEQ_INFO_UPLOAD_IMG_NUM.NEXTVAL, #{fileReName})
+		<selectKey keyProperty="infoupNum" resultType="_int" order="BEFORE">
+			select seq_info_upload_num.currval from dual
+		</selectKey>
 	</insert>
 	
 	<select id="selectInfo" resultType="map" parameterType="_int">
-		select * from info_upload where infoupNum=#{infoNum}
+		select * from info_upload i join thema t on i.themanum=t.themanum join location l on i.localnum=l.localnum where infoupNum=#{infoNum}
 	</select>
 	
 	<select id="selectInfoImg" resultType="com.mgr.merry.info.model.vo.InfoUploadImg" parameterType="_int">
@@ -31,6 +32,24 @@
 	<delete id="deleteInfoImg">
 		DELETE FROM INFO_UPLOAD_IMG WHERE INFOUPNUM=#{infoupNum}
 	</delete>
+	
+	<update id="updateInfo" parameterType="map">
+		UPDATE INFO_UPLOAD
+		SET
+		INFOUPNUM=#{infoupNum},
+		LOCALNUM=#{localNum},
+		THEMANUM=#{themaSubNum},
+		INFOUPTITLE=#{infoupTitle},
+		INFOUPDATE=default,
+		INFOUPPAYMENT=#{infoupPayment},
+		INFOUPPHONE=#{infoupPhone},
+		INFOUPTIME=#{infoupTime}
+		where INFOUPNUM=#{infoupNum}
+	</update>
+	
+	<update id="updateInfoStatus0">
+		UPDATE INFO_UPLOAD SET INFOUPSTATUS=0 WHERE INFOUPNUM=#{infoupNum}
+	</update>
 	
 	
 </mapper>

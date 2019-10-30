@@ -27,14 +27,12 @@ public class InfoServiceImpl implements InfoService {
 	public int insertInfo(Map<String, String> param, InfoUploadImg infoimg) throws Exception {
 		int result=0;
 		int result2=0;
-		result=dao.insertInfo(session, param);
-		if(result==0) throw new RuntimeException();
+		
+		result=dao.insertInfo(session, param); // info_upload테이블 insert
+		
+		if(result==0) throw new RuntimeException(); 
 		if(result>0) {
-			// 임의로 infoupNum 지정하겠음!
-			// 나중에 infoView 완성했을 때 modelAndView ~ 매개변수로 int infoupNum받아오기
-//			infoimg.setInfoupNum(Integer.parseInt(param.get("infoupNum")));
-			infoimg.setInfoupNum(1);
-			result2=dao.insertInfoImg(session, infoimg);
+			result2=dao.insertInfoImg(session, infoimg); // info_upload_img 
 			if(result2==0) throw new Exception();
 		}
 		
@@ -54,21 +52,46 @@ public class InfoServiceImpl implements InfoService {
 	}
 
 	// 수정중
+//	@Override
+//	public int deleteInfo(int infoupNum) {
+//		int result=0;
+//		result=dao.deleteInfo(session, infoupNum);
+//		if(result==0) throw new RuntimeException();
+//		
+//		return result;
+//	}
+//
+//	@Override
+//	public int deleteInfoImg(int infoupNum) {
+//		int result=0;
+//		result=dao.deleteInfoImg(session, infoupNum);
+//		if(result==0) throw new RuntimeException();
+//		return 0;
+//	}
+	
 	@Override
-	public int deleteInfo(int infoupNum) {
-		int result=0;
-		result=dao.deleteInfo(session, infoupNum);
-		if(result==0) throw new RuntimeException();
-		
-		return result;
+	public int infoStatus0(int infoupNum) {
+		return dao.updateInfoStatus0(session, infoupNum);
 	}
 
 	@Override
-	public int deleteInfoImg(int infoupNum) {
-		int result=0;
-		result=dao.deleteInfoImg(session, infoupNum);
-		if(result==0) throw new RuntimeException();
-		return 0;
+	public int updateInfo(Map<String, String> param, InfoUploadImg infoimg, int infoupNum) throws Exception {
+		int result=0; // info update
+		int result2=0; // img 삭제
+		int result3=0; // img insert
+		
+		result=dao.updateInfo(session, param);
+		System.out.println("서비스 업데이트 : "+result);
+		
+		if(result==0) throw new RuntimeException(); 
+		if(result>0) {
+			result2 = dao.deleteInfoImg(session, infoupNum);
+			result3 = dao.insertInfoImg(session, infoimg);
+			if(result3==0) throw new Exception();
+		}
+		
+		
+		return result;
 	}
 
 

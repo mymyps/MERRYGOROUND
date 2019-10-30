@@ -80,5 +80,26 @@ public class SearchController {
 
 		return "search/placeOnAMap";
 	}
+	
+	@RequestMapping("/search/themaList")
+	public String themaList(@RequestParam("themaNum") String themaNum, 
+			                @RequestParam("level") int level, Model model) {
+
+		logger.debug("" + themaNum);
+		logger.debug("" + level);
+
+		Map<String, Object> param = new HashMap();
+		param.put("themaNum", themaNum);
+		param.put("level", level);
+
+		List<InfoUpload> list = service.themaList(param);
+		System.out.println("서치컨트롤러 리스트 :"+list);
+		model.addAttribute("list", list);
+		logger.debug("" + param);
+
+		return "search/classifyByTheme";
+
+	}
+
 
 }

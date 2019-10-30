@@ -123,8 +123,16 @@ public class AdminController {
 	
 	//게시글 뷰 로드
 	@RequestMapping("/admin/board")
-	public String boardPage() {
-		return "admin/board";
+	public ModelAndView boardPage() {
+
+		// 전체글 조회
+		List<Map<String, String>> list = service.boardPage(); 
+		
+		ModelAndView mv = new ModelAndView();
+		mv.addObject("list", list);
+		mv.setViewName("admin/board");
+		
+		return mv;
 	}
 	
 	//서포터즈 글 뷰 로드
@@ -170,4 +178,5 @@ public class AdminController {
 	}
 	
 	
+
 }
