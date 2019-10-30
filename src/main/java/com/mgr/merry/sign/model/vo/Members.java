@@ -48,4 +48,6 @@ public class Members {
 	private char cpstatus;
 	private String cpid;
 	private char emailcertify;
+	private String code;
+	private String supstatus;
 }

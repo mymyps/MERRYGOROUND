@@ -37,6 +37,98 @@
 		where "START"='${start}'
 	</update>
 	
+	<select id="adminThemaMain" resultType="map">
+		select themanum, thema.themaname, count(themanum) "COUNT" from info_upload
+		join thema using(themanum)
+		group by themanum, thema.themaname
+		order by 3 desc
+	</select>
+	
+	<select id="topInfoUpload" resultType="_int">
+		select count(*) "info" from info_upload
+		where infoupstatus=1 
+		order by infoupdate desc
+	</select>
+	
+	<select id="topCouple" resultType="_int">
+		select (count(*)/2) "cp" from members
+		where status=1 and cpid is not null
+	</select>
+	
+	<select id="topSupporters" resultType="_int">
+		select count(*) "supt" from supporters
+	</select>
+	
+	<!-- 서포터즈 신청자 --> 
+	<select id="topSupStatus" resultType="_int">
+		select count(*) "supStatus" from members
+		where SUPSTATUS = '1'
+	</select>
+	
+	<!-- 게시글 추천 5 -->
+	<select id="uploadTopMain" resultType="map">
+		select * from(
+		select rownum as rnum, a.* from(
+		select infouptitle ,infoupnum, infoupdate, avg(inforeviewpoint) "ravg" from info_review
+		join info_upload using(infoupnum)
+		group by infoupnum, infouptitle, infoupdate
+		)a order by 5 desc)
+		where rnum between 1 and 5
+	</select>
+	
+	<!-- 서포터즈 상금 5 -->
+	<select id="supPayMain" resultType="map">
+		select * from(
+		select rownum as rnum, a.* from(
+		select supnum, suplevel, sum(infouppayment) "rsum" from supporters
+		join info_upload using(supnum)
+		group by supnum, suplevel
+		)a order by 4 desc)
+		where rnum between 1 and 5
+	</select>
+	
+	<!-- 서포터즈 리스트 -->
+	<select id="supListMain" resultType="map">
+		select * from(
+		select rownum as rnum, a.* from(
+			select * from supporters
+    			join members using(membernum)
+				where MEMBERLEVEL = 2 and status = 1
+			order by supenrolldate desc
+		)a order by 4 desc)
+		where rnum between 1 and 5
+	</select>
+	
+	<select id="supConfirmMain" resultType="map">
+		select * from(
+			select rownum as rnum, a.* from(
+				select * from members where supstatus = 1 and status = 1
+			)a order by 4 desc)
+		where rnum between 1 and 4
+	</select>
+	
+	<select id="infoUploadMain" resultType="map">
+		select to_date(infoupdate) "infoup", count(*) "dayInfo" 
+		from info_upload
+			where (infoupdate between TO_DATE(sysdate-5) and TO_DATE(sysdate)) and infoupstatus = 1
+		GROUP by to_date(infoupdate)
+		order by 1
+	</select>
+	
+	<select id="boardPage" resultType="map">
+		select * from(
+			select rownum as rnum, a.* from(
+				select infouptitle, themaname, localname, infouppayment, infoupphone, infouptime, infoupdate from info_upload
+					inner join location using(localnum)
+					inner join thema using(themanum)
+				where infoupstatus = 1
+			order by infoupdate desc
+		) a) 	
+	</select>
+	
+	
+	
+	
 </mapper>
 
 

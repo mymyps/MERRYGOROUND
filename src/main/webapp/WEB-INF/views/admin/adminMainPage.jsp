@@ -9,7 +9,17 @@
 
 <!-- 관리자 페이지 css -->
 <jsp:include page="/WEB-INF/views/admin/common/adminHeader.jsp" />
+<!-- <link href="https://cdn.jsdelivr.net/npm/chartist@0.11.0/dist/chartist.min.css" rel="stylesheet"> -->
+<link href="https://cdn.jsdelivr.net/npm/jqvmap@1.5.1/dist/jqvmap.min.css" rel="stylesheet">
+<script src="https://cdn.jsdelivr.net/npm/jquery@2.2.4/dist/jquery.min.js"></script>
 
+<!-- 모리스 차트 -->
+<script src="http://cdnjs.cloudflare.com/ajax/libs/raphael/2.1.2/raphael-min.js"></script>
+<script src="${pageContext.request.contextPath }/resources/admin/assets/js/init/morris.js"></script>
+<script src="http://cdnjs.cloudflare.com/ajax/libs/morris.js/0.5.1/morris.min.js"></script>
+<link rel="stylesheet" href="${pageContext.request.contextPath }/resources/admin/assets/css/morris.css">
+
+	
 		<!-- ---------------------------------------------------------------------------- -->
 		<!-- -------------------------     데이터      ------------------------------------ -->
 		<!-- ---------------------------------------------------------------------------- -->
@@ -30,7 +40,7 @@
 									<div class="stat-content">
 										<div class="text-left dib">
 											<div class="stat-text">
-												$<span class="count">23569</span>
+												$<span class="count"><c:out value="${topResult }"/></span>
 											</div>
 											<div class="stat-heading">게시글수</div>
 										</div>
@@ -51,7 +61,7 @@
 									<div class="stat-content">
 										<div class="text-left dib">
 											<div class="stat-text">
-												<span class="count">3435</span>
+												<span class="count"><c:out value="${topSupporters }"/></span>
 											</div>
 											<div class="stat-heading">서포터즈</div>
 										</div>
@@ -71,7 +81,7 @@
 									<div class="stat-content">
 										<div class="text-left dib">
 											<div class="stat-text">
-												<span class="count">349</span>
+												<span class="count"><c:out value="${topSupStatus }"/></span>
 											</div>
 											<div class="stat-heading">신청</div>
 										</div>
@@ -91,9 +101,9 @@
 									<div class="stat-content">
 										<div class="text-left dib">
 											<div class="stat-text">
-												<span class="count">2986</span>
+												<span class="count"><c:out value="${topCouple }"/></span>
 											</div>
-											<div class="stat-heading">신고</div>
+											<div class="stat-heading">커플</div>
 										</div>
 									</div>
 								</div>
@@ -114,21 +124,26 @@
 								</div>
 								<div class="table-stats order-table ov-h">
 									<table class="table ">
-										<tbody>
+										<thead>
 											<tr>
-												<td class="serial">1.</td>
-												<td class="avatar">
-													<div class="round-img">
-														<a href="#"><img class="rounded-circle"
-															src="images/avatar/1.jpg" alt=""></a>
-													</div>
-												</td>
-												<td>#5469</td>
-												<td><span class="name">Louis Stanley</span></td>
-												<td><span class="product">iMax</span></td>
-												<td><span class="count">231</span></td>
-
+												<th scope="col">#</th>
+												<th scope="col">제목</th>
+												<th scope="col">번호</th>
+												<th scope="col">날짜</th>
+												<th scope="col">*</th>
 											</tr>
+										</thead>
+										<tbody>
+											<c:forEach items="${uploadTop5 }" var="up" varStatus="i">
+											<tr>
+												<fmt:parseNumber var="test" value="${up['ravg'] }" integerOnly="true"/>
+												<td scope="row"><c:out value="${i.count }"/></td>
+												<td class="serial"><c:out value="${up['INFOUPTITLE'] }"/></td>
+												<td><span class="name"><c:out value="${up['INFOUPNUM'] }"/></span></td>
+												<td><span class="product"><fmt:formatDate value="${up['INFOUPDATE'] }" pattern="yyyy.MM.dd"/></span></td>
+												<td><span class="count"> <fmt:formatNumber value="${test}" pattern=".00"/> </span></td>
+											</tr>
+											</c:forEach>
 
 										</tbody>
 									</table>
@@ -144,21 +159,26 @@
 								</div>
 								<div class="table-stats order-table ov-h">
 									<table class="table ">
-										<tbody>
+										<thead>
 											<tr>
-												<td class="serial">2.</td>
-												<td class="avatar">
-													<div class="round-img">
-														<a href="#"><img class="rounded-circle"
-															src="images/avatar/2.jpg" alt=""></a>
-													</div>
-												</td>
-												<td>#5468</td>
-												<td><span class="name">Gregory Dixon</span></td>
-												<td><span class="product">iPad</span></td>
-												<td><span class="count">250</span></td>
-
+												<th scope="col">#</th>
+												<th scope="col">서포터번호</th>
+												<th scope="col">서포터등급</th>
+												<th scope="col">포상금</th>
 											</tr>
+										</thead>
+										<tbody>
+										<!-- supPayMain5 -->
+											<c:forEach items="${supPayMain5 }" var="sp" varStatus="i">
+											<tr>
+												<fmt:parseNumber var="test" value="${sp['rsum'] }" integerOnly="true"/>
+												<td scope="row"><c:out value="${i.count }"/></td>
+												<td class="serial"><c:out value="${sp['SUPNUM'] }"/></td>
+												<td><span class="name"><c:out value="${sp['SUPLEVEL'] }"/></span></td>
+												<td><span class="count"><fmt:formatNumber value="${test}" pattern="#########"/></span></td>
+												
+											</tr>
+											</c:forEach>
 
 										</tbody>
 									</table>
@@ -175,7 +195,7 @@
 				<!--  Traffic  -->
 				<div class="row">
 					<div class="col-lg-12">
-						<div class="card">
+						<div class="card animated fadeIn">
 							<div class="card-body">
 								<h4 class="box-title"></h4>
 							</div>
@@ -184,8 +204,8 @@
 								<div class="col-lg-6">
 									<div class="card">
 										<div class="card-body">
-											<h4 class="mb-3">Bar chart</h4>
-											<canvas id="barChart"></canvas>
+											<h4 class="mb-3">업로드 글</h4>
+											<div id="morrisBars"></div>
 										</div>
 									</div>
 								</div>
@@ -194,13 +214,17 @@
 								<div class="col-lg-4">
 									<div class="card-body">
 										<div class="progress-box progress-1">
-											<h4 class="por-title">Visits</h4>
-											<div class="por-txt">테마1 (10%)</div>
+											<!-- mainThema - (list) -->
+											<h4 class="por-title">테마별 조회(Thema)</h4>
+											<c:set var = 'rto' value="${rto }"/>
+											<c:forEach items="${mainThema }" var="t" varStatus="i">
+											<div class="por-txt"><c:out value="${t['THEMANAME'] }"/> <c:out value="${t['COUNT'] }"/>회</div>
 											<div class="progress mb-2" style="height: 5px;">
-												<div class="progress-bar bg-flat-color-1" role="progressbar"
-													style="width: 90%;" aria-valuenow="5" aria-valuemin="0"
+												<div class="progress-bar bg-flat-color-${i.count }" role="progressbar"
+													style="width: <c:out value="${t['COUNT']/rto}"/>%;" aria-valuenow="5" aria-valuemin="0"
 													aria-valuemax="100"></div>
 											</div>
+											</c:forEach>
 										</div>
 
 									</div>
@@ -222,7 +246,7 @@
 						<div class="col-xl-7">
 							<div class="card">
 								<div class="card-body">
-									<h4 class="box-title">서포터즈 목록(명단)</h4>
+									<h4 class="box-title">서포터즈 목록(최근명단)</h4>
 								</div>
 								<div class="card-body--">
 									<div class="table-stats order-table ov-h">
@@ -230,47 +254,31 @@
 											<thead>
 												<tr>
 													<th class="serial">#</th>
-													<th class="avatar">Avatar</th>
+													<th class="avatar">사진</th>
 													<th>ID</th>
-													<th>Name</th>
-													<th>Product</th>
-													<th>Quantity</th>
+													<th>이름</th>
+													<th>전화번호</th>
+													<th>가입날짜</th>
 													<!-- <th>Status</th> -->
 												</tr>
 											</thead>
 											<tbody>
-												<tr>
-													<td class="serial">1</td>
-													<td class="avatar">
+											<!-- supListMain -->
+											<c:forEach items="${supListMain }" var="sl" varStatus="i">
+											<tr>
+												<td scope="row"><c:out value="${i.count }"/></td>
+												<td class="avatar">
 														<div class="round-img">
-															<a href="#"><img class="rounded-circle"
-																src="images/avatar/1.jpg" alt=""></a>
+															<a href="#"><img class="rounded-circle" 
+															src="${path }resources/images/${sl['PROIMG']}" alt=""></a>
 														</div>
 													</td>
-													<td>#5469</td>
-													<td><span class="name">Louis Stanley</span></td>
-													<td><span class="product">iMax</span></td>
-													<td><span class="count">231</span></td>
-
-												</tr>
-
-
-												<tr>
-													<td class="serial">2.</td>
-													<td class="avatar">
-														<div class="round-img">
-															<a href="#"><img class="rounded-circle"
-																src="images/avatar/2.jpg" alt=""></a>
-														</div>
-													</td>
-													<td>#5468</td>
-													<td><span class="name">??????</span></td>
-													<td><span class="product">??????</span></td>
-													<td><span class="count">250</span></td>
-
-												</tr>
-
-
+												<td class="serial"><c:out value="${sl['ID'] }"/></td>
+												<td><span class="name"><c:out value="${sl['NAME'] }"/></span></td>
+												<td><c:out value="${sl['PHONE'] }"/></td>
+												<td><fmt:formatDate value="${sl['ENROLLDATE'] }" pattern="yyyy.MM.dd"/></td>
+											</tr>
+											</c:forEach>
 											</tbody>
 										</table>
 									</div>
@@ -285,32 +293,29 @@
 						<div class="col-lx-4">
 							<div class="card">
 								<div class="card-header">
-									<strong class="card-title">신청목록</strong>
+									<strong class="card-title">신청 목록(최근명단)</strong>
 								</div>
 								<div class="card-body">
 									<table class="table">
 										<thead>
 											<tr>
 												<th scope="col">#</th>
-												<th scope="col">First</th>
-												<th scope="col">Last</th>
-												<th scope="col">Handle</th>
+												<th scope="col">ID</th>
+												<th scope="col">이름</th>
+												<th scope="col">가입날짜</th>
 											</tr>
 										</thead>
 										<tbody>
+										<!-- supConfirmMain -->
+											<c:forEach items="${supConfirmMain }" var="sc" varStatus="i">
 											<tr>
-												<th scope="row">1</th>
-												<td>Mark</td>
-												<td>Otto</td>
-												<td>@mdo</td>
+												<td scope="row"><c:out value="${i.count }"/></td>
+												<td class="serial"><c:out value="${sc['ID'] }"/></td>
+												<td><span class="name"><c:out value="${sc['NAME'] }"/></span></td>
+												<td><fmt:formatDate value="${sc['ENROLLDATE'] }" pattern="yyyy.MM.dd"/></td>
+												<%-- <td><c:out value="${sc['ENROLLDATE'] }"/></td> --%>
 											</tr>
-											<tr>
-												<th scope="row">2</th>
-												<td>???</td>
-												<td>??????</td>
-												<td>????</td>
-											</tr>
-
+											</c:forEach>
 										</tbody>
 									</table>
 								</div>
@@ -445,23 +450,12 @@
 		</div>
 	</div>
 	<!-- /#right-panel -->
-	<script
-		src="https://cdn.jsdelivr.net/npm/jquery@2.2.4/dist/jquery.min.js"></script>
+	
 	<script>
-	//console.log('${ac.get(0)}');
-	//console.log('${ac.get(1)}');
-	//consol.log('${ac.size()}');
-	//consol.log('${ac.get(0).title}');
-		
+	
 	var testAr = [];
 	var ajaxPath = '<c:out value="${path}"/>';
 
-/* 		{
-		title: "123124",
-        start: new Date(1570233600000),
-        end: new Date(1570233600000),
-        className: "bg-danger"
-	}]; */
 	<c:forEach items="${ac}" var="item">
 		testAr.push({
 			title: "${item.title}",
@@ -471,54 +465,58 @@
 		});
 	</c:forEach>
 
-	//var testAr1 = new Array();
-	
-	/*	testAr.push({
-			title: "${cal.title}",
-	        start: new Date(${cal.start}),
-	        end: new Date(${cal.end}),
-	        className: "${cal.className}"
-		});
-	*/
-	
-//	console.log("-------------");
 	var today = new Date($.now());
 	
-	// 테스트 초기값
+	/* morrisChart */
+	<!-- 1:날짜  2:총 글수 3:총 리뷰수 -->
+	var dateBoard = [];
+	<c:forEach items="${infoUploadMain}" var="iu">
+		dateBoard.push({
+			"period" : '<fmt:formatDate value="${iu.infoup}" pattern="yyyy-MM-dd" />',
+			"licensed" : ${iu.dayInfo},
+			"sorned" : 0
+		});
+	</c:forEach>
 	
+
+	/* var dateBoard = [
+	  	  {"period": "2012-10-01", "licensed": 407, "sorned": 660},
+		  {"period": "2012-09-30", "licensed": 351, "sorned": 629},
+		  {"period": "2012-09-29", "licensed": 269, "sorned": 618},
+		  {"period": "2012-09-20", "licensed": 246, "sorned": 661},
+		  {"period": "2012-09-19", "licensed": 257, "sorned": 667}
+		]; */
+	new Morris.Bar({
+		element: 'morrisBars',
+	  	data: dateBoard,
+	  	xkey: 'period',
+	  	ykeys: ['licensed', 'sorned'],
+	  	labels: ['Licensed', 'SORN'],
+	  	xLabelAngle: 60
+	});
 	
-//	console.log(testAr);
-//	console.log("-------------");
-	
-//	console.log(testAr);
-//	console.log(test);
-	
-	
-	//title: '이존데',
-    //start: today,
-    //end: today,
-    //className: 'bg-danger'
-	
-	//defaultEvents.push(${ac});
-	</script>
+    </script>
 
 	<!-- Scripts -->
- 	<script
-		src="https://cdn.jsdelivr.net/npm/popper.js@1.14.4/dist/umd/popper.min.js"></script>
-	<script
-		src="https://cdn.jsdelivr.net/npm/bootstrap@4.1.3/dist/js/bootstrap.min.js"></script>
-	<script
-		src="https://cdn.jsdelivr.net/npm/jquery-match-height@0.7.2/dist/jquery.matchHeight.min.js"></script>
+ 	<script src="https://cdn.jsdelivr.net/npm/popper.js@1.14.4/dist/umd/popper.min.js"></script>
+	<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.1.3/dist/js/bootstrap.min.js"></script>
+	<script src="https://cdn.jsdelivr.net/npm/jquery-match-height@0.7.2/dist/jquery.matchHeight.min.js"></script>
 	<script src="${pageContext.request.contextPath }/resources/admin/assets/js/main.js"></script>
  
-	<!--Chartist Chart-->
 	<script src="https://cdn.jsdelivr.net/npm/moment@2.22.2/moment.min.js"></script>
-	<script
-		src="https://cdn.jsdelivr.net/npm/fullcalendar@3.9.0/dist/fullcalendar.min.js"></script>
+	<script src="https://cdn.jsdelivr.net/npm/fullcalendar@3.9.0/dist/fullcalendar.min.js"></script>
 	<script src="${pageContext.request.contextPath }/resources/admin/assets/js/init/fullcalendar-init.js"></script>
+	
+	
+	<!--  Chart js -->
+<%--     <script src="https://cdn.jsdelivr.net/npm/chart.js@2.7.3/dist/Chart.bundle.min.js"></script>
+    <script src="${pageContext.request.contextPath }/resources/admin/assets/js/init/chartjs-init.js"></script> --%>
+    
+    <!--Flot Chart-->
+<!--     <script src="https://cdn.jsdelivr.net/npm/jquery.flot@0.8.3/jquery.flot.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/flot-spline@0.0.1/js/jquery.flot.spline.min.js"></script> -->
 </section>
 </div>
 </body>
-
 </html>
 <%-- <jsp:include page="/WEB-INF/views/common/footer.jsp" /> --%>

@@ -6,7 +6,7 @@ pageEncoding="UTF-8"%>
 			<div class="row">
 				<div class="col-md-3 col-sm-12 footer-widget footer-about-us" id="footerPosition">
 					<h3 class="widget-title">About team</h3>
-					<p>권헌수 김현식 서현희 송주미 최장원 캬캬캬캬호호호호 우리팀 화이팅
+					<p>권헌수 김현식 서현희 송주미 최장원 캬캬캬호호호호 우리팀 화이팅 병승쌤 사랑해요
 					</p>
 					<h4>Address</h4>
 					<p>사랑시 고백구 행복동 1004-486</p>

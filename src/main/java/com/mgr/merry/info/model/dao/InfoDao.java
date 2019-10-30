@@ -20,5 +20,12 @@ public interface InfoDao {
 
 	int deleteInfoImg(SqlSessionTemplate session, int infoupNum);
 
+	int selectInfoNum(SqlSessionTemplate session);
+
+	int updateInfo(SqlSessionTemplate session, Map<String, String> param);
+
+	int updateInfoStatus0(SqlSessionTemplate session, int infoupNum);
+
+
 
 }

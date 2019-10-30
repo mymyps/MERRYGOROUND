@@ -13,8 +13,8 @@ public interface InfoService {
 
 	InfoUploadImg selectInfoImg(int infoupNum);
 
-	int deleteInfo(int infoNum);
+	int infoStatus0(int infoupNum);
 
-	int deleteInfoImg(int infoupNum);
+	int updateInfo(Map<String, String> param, InfoUploadImg infoimg, int infoupNum) throws Exception;
 
 }

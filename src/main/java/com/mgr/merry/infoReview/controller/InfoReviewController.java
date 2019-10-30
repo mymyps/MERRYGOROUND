@@ -1,5 +1,6 @@
 package com.mgr.merry.infoReview.controller;
 
+import java.util.List;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
@@ -11,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.mgr.merry.infoReview.model.service.InfoReviewService;
+import com.mgr.merry.infoReview.model.vo.InfoReview;
 
 @Controller
 public class InfoReviewController {
@@ -19,11 +21,21 @@ public class InfoReviewController {
 	InfoReviewService service;
 	
 	// 수정중
-	@RequestMapping("/info/reviewInsert")
+	@RequestMapping("/infoReview/insertInfoReview")
 	public ModelAndView insertReview (@RequestParam Map<String, String> param, HttpServletRequest request){
 		int result = 0;
 		result = service.insertReview(param);
+		
+		String msg = "";
+
+		if (result > 0) {
+			msg = "INFO가 등록되었습니다.";
+		} else {
+			msg = "INFO 등록 실패";
+		}
 		ModelAndView mv = new ModelAndView();
+		mv.addObject("msg", msg);
+		mv.setViewName("common/msg");
 		return mv;
 	}
 	
@@ -48,5 +60,4 @@ public class InfoReviewController {
 		}
 		return "/info/infoView";
 	}
-	
 }

@@ -34,6 +34,56 @@ public class SignDaoImpl implements SignDao {
 //		map.put("memberNum",memberNum);
 		return session.update("sign.updateMember",m);
 	}
+
+	@Override
+	public int updatePw(SqlSessionTemplate session, Members m) {
+		return session.update("sign.updatePw",m);
+	}
+
+
+//	@Override
+//	public int updateCode(SqlSessionTemplate session,Map<String,String> map) {
+//		return session.update("sign.updateCode",map);
+//	}
+	@Override
+	public int updateCode(SqlSessionTemplate session, Members m) {
+		return session.update("sign.updateCode",m);
+	}
+
+//	@Override
+//	public int updatecupemailcode(SqlSessionTemplate session, Members m2) {
+//		return session.update("sign.updatecupemailcode",m2);
+//	}
+
+	@Override
+	public Members selectCp(SqlSessionTemplate session, Members m) {
+		return session.selectOne("sign.selectCp",m);
+	}
+
+	@Override
+	public int updatecupemailcode(SqlSessionTemplate session, Map<String, Object> map) {
+		System.out.println("daoimpl1"+map);
+		return session.update("sign.updatecupemailcode",map);
+	}
+	@Override
+	public int updatecupemailcode2(SqlSessionTemplate session, Map<String, String> emailmap) {
+		System.out.println("daoimpl2"+emailmap);
+		return session.update("sign.updatecupemailcode2",emailmap);
+	}
+
+	@Override
+	public int pwUpdate(SqlSessionTemplate session, Members m) {
+		return session.update("sign.pwUpdate",m);
+	}
+
+	@Override
+	public int updatesuple(SqlSessionTemplate session, int num) {
+		return session.update("sign.updatesuple",num);
+	}
+
+
 	
+	
+
 
 }

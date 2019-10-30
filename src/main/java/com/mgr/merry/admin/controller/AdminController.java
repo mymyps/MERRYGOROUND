@@ -3,6 +3,7 @@ package com.mgr.merry.admin.controller;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.http.HttpServletResponse;
 
@@ -12,6 +13,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.servlet.ModelAndView;
 
 import com.mgr.merry.admin.model.service.AdminService;
 import com.mgr.merry.admin.model.vo.AdminCalendar;
@@ -27,14 +29,62 @@ public class AdminController {
 	
 	// main -> 관리자 뷰로드
 	@RequestMapping("/admin/adminMain")
-	public String adminMainPage(Model model) {
+	public ModelAndView adminMainPage() {
 		
+		ModelAndView mv = new ModelAndView();
 		List<AdminCalendar> calList = new ArrayList<AdminCalendar>();
 		
 		// 기본 달력 이벤트 로드
 		calList = service.calLoad();
-		model.addAttribute("ac", calList);
-		return "admin/adminMainPage";
+		mv.addObject("ac", calList);
+		
+		//메인화면 테마별 글 조회
+		List<Map<String, String>> themaListMain = service.adminThemaMain();
+		mv.addObject("mainThema", themaListMain);
+		
+		//테마별 조회 데이터
+		double rto = 0;
+		for (Map<String, String> m : themaListMain) {
+			String tmp = String.valueOf(m.get("COUNT"));
+			rto += Integer.parseInt(tmp);
+		}
+		rto = rto/100;
+		log.debug("result count : "+ rto);
+		mv.addObject("rto", rto);
+		
+		//상단 총 데이터 집계
+		int topResult = service.topInfoUpload();
+		int topSupporters = service.topSupporters();
+		int topSupStatus = service.topSupStatus();
+		int topCouple = service.topCouple();
+		log.debug(""+topResult + " / " + topSupporters + " / " + topSupStatus + " / " + topCouple);
+		mv.addObject("topResult", topResult);
+		mv.addObject("topSupporters", topSupporters);
+		mv.addObject("topSupStatus", topSupStatus);
+		mv.addObject("topCouple", topCouple);
+		
+		// 게시글 추천(top5)
+		List<Map<String, String>> uploadTop5 = service.uploadTop();
+		List<Map<String, String>> supPayMain5 = service.supPayMain();
+		mv.addObject("uploadTop5", uploadTop5);
+		mv.addObject("supPayMain5", supPayMain5);
+		
+		// 서포터즈 리스트
+		List<Map<String, String>> supListMain = service.supListMain();
+		mv.addObject("supListMain", supListMain);
+		
+		// 서포터즈 신청 리스트
+		List<Map<String, String>> supConfirmMain = service.supConfirmMain();
+		mv.addObject("supConfirmMain", supConfirmMain);
+		
+		// 업로드 글 리스트
+		List<Map<String, String>> infoUploadMain = service.infoUploadMain();
+		mv.addObject("infoUploadMain", infoUploadMain);
+		
+		//-----------------------------------//
+		mv.setViewName("admin/adminMainPage");
+		
+		return mv;
 	}
 	
 	// calendar 저장
@@ -73,8 +123,16 @@ public class AdminController {
 	
 	//게시글 뷰 로드
 	@RequestMapping("/admin/board")
-	public String boardPage() {
-		return "admin/board";
+	public ModelAndView boardPage() {
+
+		// 전체글 조회
+		List<Map<String, String>> list = service.boardPage(); 
+		
+		ModelAndView mv = new ModelAndView();
+		mv.addObject("list", list);
+		mv.setViewName("admin/board");
+		
+		return mv;
 	}
 	
 	//서포터즈 글 뷰 로드
@@ -120,4 +178,5 @@ public class AdminController {
 	}
 	
 	
+
 }

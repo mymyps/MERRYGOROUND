@@ -4,7 +4,7 @@
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 <c:set var="path" value="${pageContext.request.contextPath}"/>
 <jsp:include page="/WEB-INF/views/common/header.jsp">
-	<jsp:param name="pageTitle" value="demo"/>
+	<jsp:param name="pageTitle" value="INFOMATION"/>
 </jsp:include>
 <section id="content">
 
@@ -18,87 +18,84 @@
                     <!-- Blog post start -->
                     <div class="post-content">
                         <h1 class="post-title text-center">
-                            <a href="blog-item.html">INFO TITLE</a>
+                            <a href="blog-item.html">${info.INFOUPTITLE}</a>
                         </h1>
                         <div class="post-header clearfix">
                         
                             <div class="post-meta">
-                                <span class="post-meta-author">INFO<a href="#"> NUM</a></span>
-                                <span class="post-meta-cats infoDate">INFO<a href="#"> DATE</a></span>
+                                <span class="post-meta-author">NUM<a href="#"> ${info.INFOUPNUM }</a></span>
+                                <span class="post-meta-cats infoDate">DATE<a href="#"> ${info.INFOUPDATE }</a></span>
                             </div><!-- post meta end -->
                         </div><!-- post heading end -->
                         <hr>
                         <!-- post image start -->
                         <div class="post-image-wrapper">
-                            <img src="images/blog/blog1.jpg" class="infoimg"  alt="" />
+                            <img src="${path }/resources/upload/info/${infoImg.fileReName}" class="infoimg"  alt="" />
                         </div><!-- post image end -->
                         <div class="entry-content">
                             <div class="infocontent1">
-                                <p>INFO - THEMA</p>
-                                <p>INFO - LOCATION</p>
-                                <p>INFO - PAY</p>
-                                <p>INFO - PHONE</p>
-                                <p>INFO - TIME</p>
+                                <p>테마</p>
+                                <p>위치</p>
+                                <p>가격</p>
+                                <p>번호</p>
+                                <p>영업시간</p>
                             </div>
                             <div class="infocontent2">
-                                <p>INFO - THEMA VALUE</p>
-                                <p>INFO - LOCATION VALUE</p>
-                                <p>INFO - PAY VALUE</p>
-                                <p>INFO - PHONE VALUE</p>
-                                <p>INFO - TIME VALUE</p>
+                                <p>${info.THEMANAME }</p>
+                                <p>${info.LOCALNAME }</p>
+                                <p>${info.INFOUPPAYMENT }</p>
+                                <p>${info.INFOUPPHONE }</p>
+                                <p>${info.INFOUPTIME }</p>
                             </div>
                         </div>
                         <br><br>
                         <div>
-                            <form>
+                            <form name="supReview" action="${pageContext.request.contextPath }/supUp/supReview?infoupNum=${info.INFOUPNUM}" method="post">
                                 <button class="btn supreviewBtn" type="submit">서포터즈 리뷰 바로가기</button> 
+                            </form>
+                            <br>
+                            <form name="infoUpdate" action="${pageContext.request.contextPath }/info/infoUpdate?infoupNum=${info.INFOUPNUM}" method="post">
+                                <button class="btn supreviewBtn" type="submit">INFOMATION 수정</button> 
+                            </form>
+                            <br>
+                            <form name="infoDelete" action="${pageContext.request.contextPath }/info/infoStatus0?infoupNum=${info.INFOUPNUM }" method="post">
+                                <button class="btn supreviewBtn" type="submit">INFOMATION 삭제</button> 
                             </form>
                         </div>
                         <!-- Author info end -->
 
                         <div class="gap-30"></div>
                         <div class="comments-form">
-                            <h3>MEMBER REVIEW</h3>
-                            <form role="form">
+                            <h3>멤버 리뷰 등록하기</h3>
+                            <form name="insertReview" action="${pageContext.request.contextPath }/infoReview/insertInfoReview?infoupNum=${info.INFOUPNUM}" method="post">
                                 <div class="form-group">
-                                    <textarea class="form-control required-field" id="message" placeholder="" rows="4" required></textarea>
+                                평점 <input type="number" step="1" max="5" min="0" name="infoReviewPoint" /><br><br>
+                                    <input type="text" name="infoReviewContent" class="form-control required-field" id="message" placeholder="" rows="4" required></textarea>
                                     
                                 </div>
-                                <button class="btn reviewBtn" type="submit">Post Comment</button>
+                                <button class="btn reviewBtn" type="submit">리뷰 등록</button>
                             </form>
                         </div><!-- Comments form end -->
                         <br><br><br><br>
                         <!-- Post comment start -->
                         <div id="post-comments">
-                            <div class="comments-counter"><a href="#">NN개의 리뷰를 남기셨습니다.</a></div>
                             <ul class="comments-list">
                                 <li>
-                                    <div class="comment">
-                                        <img class="comment-avatar pull-left" alt="" src="images/blog/avator1.png">
-                                        
-                                        <div class="comment-body">
-                                            <h4 class="comment-author">Jack Ruler</h4>
-                                            <div class="comment-date">March 29, 2014 at 1:38 pm</div>
-                                            <div class="reviewPoint">
-                                                REVIEW POINT 4.0/5.0
-                                            </div>
-                                            <hr>
-                                            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. In magna ligula, faucibus sed ligula ut, venenatis mattis diam. Proin feugiat mollis nibh.</p>
-                                        </div>
-                                    </div>
-                                    <div class="comment last">
-                                            <img class="comment-avatar pull-left" alt="" src="images/blog/avator1.png">
-                                            
-                                            <div class="comment-body">
-                                                <h4 class="comment-author">Jack Ruler</h4>
-                                                <div class="comment-date">March 29, 2014 at 1:38 pm</div>
-                                                <div class="reviewPoint">
-                                                    REVIEW POINT 4.0/5.0
-                                                </div>
-                                                <hr>
-                                                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. In magna ligula, faucibus sed ligula ut, venenatis mattis diam. Proin feugiat mollis nibh.</p>
-                                            </div>
-                                        </div>
+	                                <c:forEach items="${review}" var="r" >
+	                                    <div class="comment">
+	                                        <img class="comment-avatar pull-left" alt="" src="images/blog/avator1.png">
+	                                        
+	                                        <div class="comment-body">
+	                                            <h4 class="comment-author"><c:out value='${r["NAME"] }'/></h4>
+	                                            <div class="comment-date"><c:out value='${r["INFOREVIEWDATE"] }'/></div>
+	                                            <div class="reviewPoint">
+	                                                평점 <c:out value='${r["INFOREVIEWPOINT"] }'/> / 5
+	                                            </div>
+	                                            <hr>
+	                                            <p><c:out value='${r["INFOREVIEWCONTENT"] }'/></p>
+	                                        </div>
+	                                    </div>
+                                    </c:forEach>
                                 </li><!-- Comments-list li end -->
                             </ul><!-- Comments-list ul end -->
                         </div><!-- Post comment end -->

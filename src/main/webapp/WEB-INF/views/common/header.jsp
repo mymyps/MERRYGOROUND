@@ -66,7 +66,7 @@
 	<script type="text/javascript" src="${pageContext.request.contextPath }/resources/js/waypoints.min.js"></script>
 	<!-- Template custom -->
 	<script type="text/javascript" src="${pageContext.request.contextPath }/resources/js/custom.js"></script>
-	</div><!-- Body inner end -->
+	
 	
 	<!-- CSS
 	================================================== -->
@@ -133,7 +133,7 @@
 										<li><a href="${pageContext.request.contextPath }/member/login.do">로그인</a></li>
 										<li><a href="${pageContext.request.contextPath }/member/signup.do">회원가입</a></li>
 										<li><a href="${pageContext.request.contextPath }">아이디찾기</a></li>
-										<li><a href="${pageContext.request.contextPath }">비밀번호찾기</a></li>
+										<li><a href="${pageContext.request.contextPath }/member/searchpw.do">비밀번호찾기</a></li>
 									</ul>
 								</div>
 							</li>
@@ -162,9 +162,10 @@
 								<c:if test="${loginMember!=null }">
 								<div class="dropdown-menu">
 									<ul>
-										<li><a href="${pageContext.request.contextPath }/sign/mypage.do?mNo=${loginMember.memberNum}">Portfolio Classic</a></li>
-										<li><a href="portfolio-static.html">Portfolio Static</a></li>
-										<li><a href="portfolio-item.html">Portfolio Single</a></li>
+										<li><a href="${pageContext.request.contextPath }/sign/mypage.do?mNo=${loginMember.memberNum}">개인정보수정</a></li>
+										<li><a href="${pageContext.request.contextPath }/sign/mypage.do?mNo=${loginMember.memberNum}">내 작성글 보기</a></li>
+										<li><a href="${pageContext.request.contextPath }/sign/mypage.do?mNo=${loginMember.memberNum}">커플요청</a></li>
+										<li><a href="${pageContext.request.contextPath }/sign/mypage.do?mNo=${loginMember.memberNum}">비밀번호 변경</a></li>
 									</ul>
 								</div>
 								</c:if>
@@ -190,7 +191,7 @@
 										class="fa fa-angle-down"></i></a>
 								<div class="dropdown-menu">
 									<ul>
-										<li><a href="${pageContext.request.contextPath }/info/infoForm">infoForm 임의연결</a></li>
+										<li><a href="${pageContext.request.contextPath }/info/infoForm.do">infoForm 임의연결</a></li>
 										<li><a href="${pageContext.request.contextPath }/info/infoView.do">infoView 임의연결</a></li>
 									</ul>
 								</div>
@@ -231,4 +232,5 @@
 				  </div>
 		</div>
 	</div>
+
 		
