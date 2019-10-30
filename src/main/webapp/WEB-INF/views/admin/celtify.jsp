@@ -3,9 +3,6 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 <c:set var="path" value="${pageContext.request.contextPath}" />
-<%-- <jsp:include page="/WEB-INF/views/common/header.jsp">
-<jsp:param name="pageTitle" value=""/>
-</jsp:include> --%>
 <jsp:include page="/WEB-INF/views/admin/common/adminHeader.jsp" />
 
 <!-- ---------------------------------------------------------------------------- -->
@@ -51,76 +48,34 @@
                                             <table id="bootstrap-data-table" class="table table table-striped table-bordered">
                                                 <thead>
                                                     <tr>
-                                                        <th class="serial">#</th>
-                                                        <th class="avatar">Avatar</th>
+                                                        <th>S번호</th>
+                                                        <th class="avatar">face</th>
                                                         <th>ID</th>
-                                                        <th>Name</th>
-                                                        <th>Product</th>
-                                                        <th>Quantity</th>
-                                                        <th>Status</th>
-                                                    </tr>
+                                                        <th>성별</th>
+                                                        <th>연락처</th>
+                                                        <th>e-mail</th>
+                                                        <th>인가</th>
+                                                	</tr>
                                                 </thead>
                                                 <tbody>
-                                                    <tr>
-                                                        <td class="serial">1.</td>
-                                                        <td class="avatar">
-                                                            <div class="round-img">
-                                                                <a href="#"><img class="rounded-circle" src="images/avatar/1.jpg" alt=""></a>
-                                                            </div>
-                                                        </td>
-                                                        <td> #5469 </td>
-                                                        <td>  <span class="name">Louis Stanley</span> </td>
-                                                        <td> <span class="product">iMax</span> </td>
-                                                        <td><span class="count">231</span></td>
-                                                        <td>
-                                                            <span class="badge badge-complete">Complete</span>
-                                                        </td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td class="serial">2.</td>
-                                                        <td class="avatar">
-                                                            <div class="round-img">
-                                                                <a href="#"><img class="rounded-circle" src="images/avatar/2.jpg" alt=""></a>
-                                                            </div>
-                                                        </td>
-                                                        <td> #5468 </td>
-                                                        <td>  <span class="name">Gregory Dixon</span> </td>
-                                                        <td> <span class="product">iPad</span> </td>
-                                                        <td><span class="count">250</span></td>
-                                                        <td>
-                                                            <span class="badge badge-complete">Complete</span>
-                                                        </td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td class="serial">3.</td>
-                                                        <td class="avatar">
-                                                            <div class="round-img">
-                                                                <a href="#"><img class="rounded-circle" src="images/avatar/3.jpg" alt=""></a>
-                                                            </div>
-                                                        </td>
-                                                        <td> #5467 </td>
-                                                        <td>  <span class="name">Catherine Dixon</span> </td>
-                                                        <td> <span class="product">SSD</span> </td>
-                                                        <td><span class="count">250</span></td>
-                                                        <td>
-                                                            <span class="badge badge-complete">Complete</span>
-                                                        </td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td class="serial">4.</td>
-                                                        <td class="avatar">
-                                                            <div class="round-img">
-                                                                <a href="#"><img class="rounded-circle" src="images/avatar/4.jpg" alt=""></a>
-                                                            </div>
-                                                        </td>
-                                                        <td> #5466 </td>
-                                                        <td>  <span class="name">Mary Silva</span> </td>
-                                                        <td> <span class="product">Magic Mouse</span> </td>
-                                                        <td><span class="count">250</span></td>
-                                                        <td>
-                                                            <span class="badge badge-pending">Pending</span>
-                                                        </td>
-                                                    </tr>
+                                                <c:forEach items="${list }" var="b" varStatus="i">
+	                                            <tr>
+	                                            	<td><c:out value="${b['MEMBERNUM'] }"/></td>
+	                                            	<td class="avatar">
+	                                                    <div class="round-img">
+	                                                        <a href="#"><img class="rounded-circle" src="${path }images/avatar/<c:out value="${b['PROIMG'] }"/>" alt=""></a>
+	                                                    </div>
+                                                    </td>
+	                                                <td><span class="name"><c:out value="${b['ID'] }"/></span></td>
+	                                                <td><c:out value="${b['GENDER'] }"/></td>
+	                                                <td><c:out value="${b['PHONE'] }"/></td>
+	                                                <td><c:out value="${b['EMAIL'] }"/></td>
+	                                                <td>
+                                                        <span class="badge badge-complete">승인</span>
+                                                    </td>
+	                                            </tr>
+	                                            </c:forEach>
+                                                    
                                                 </tbody>
                                             </table>
                                         </div> <!-- /.table-stats -->

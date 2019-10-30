@@ -23,6 +23,14 @@ public interface AdminService {
 	List<Map<String, String>> supConfirmMain();
 	List<Map<String, String>> infoUploadMain();
 	List<Map<String, String>> boardPage();
-
+	List<Map<String , String>> supBoard();
+	List<Map<String , String>> supportersList();
+	List<Map<String , String>> supportersPay();
+	List<Map<String , String>> users();
+	List<Map<String , String>> location();
+	List<Map<String , String>> thema();
+	List<Map<String , String>> celtify();
+	int themaAdd(String strTmp);
+	int themaAddAdd(String strTmp);
 
 }
