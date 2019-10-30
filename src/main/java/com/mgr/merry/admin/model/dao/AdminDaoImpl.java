@@ -81,6 +81,11 @@ public class AdminDaoImpl implements AdminDao{
 		return session.selectList("admin.infoUploadMain");
 	}
 	
+	@Override
+	public List<Map<String, String>> boardPage(SqlSessionTemplate session) {
+		return session.selectList("admin.boardPage");
+	}
+	
 	
 	
 }

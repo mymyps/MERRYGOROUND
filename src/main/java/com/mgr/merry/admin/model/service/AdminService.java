@@ -22,5 +22,6 @@ public interface AdminService {
 	List<Map<String, String>> supListMain();
 	List<Map<String, String>> supConfirmMain();
 	List<Map<String, String>> infoUploadMain();
+	List<Map<String, String>> boardPage();
 
 }

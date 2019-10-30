@@ -89,4 +89,9 @@ public class AdminServiceImpl implements AdminService{
 		return dao.infoUploadMain(sqlSession);
 	}
 	
+	@Override
+	public List<Map<String, String>> boardPage() {
+		return dao.boardPage(sqlSession);
+	}
+	
 }
