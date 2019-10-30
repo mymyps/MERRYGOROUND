@@ -29,9 +29,9 @@ public class InfoReviewController {
 		String msg = "";
 
 		if (result > 0) {
-			msg = "INFO가 등록되었습니다.";
+			msg = "리뷰가 등록되었습니다.";
 		} else {
-			msg = "INFO 등록 실패";
+			msg = "리뷰 등록 실패";
 		}
 		ModelAndView mv = new ModelAndView();
 		mv.addObject("msg", msg);
@@ -40,18 +40,15 @@ public class InfoReviewController {
 	}
 	
 	// 수정중
-	@RequestMapping("/info/reviewDelete")
-	public String deleteReview(int infoReviewNum) {
+	@RequestMapping("/info/status0InfoReview")
+	public String status0InfoReview(int infoReviewNum) {
 		int result = 0;
-		result = service.deleteReview(infoReviewNum);
-		if(result==0) {
-			
-		}
-		return "/info/infoView";
+		result = service.status0InfoReview(infoReviewNum);
+		return "/";
 	}
 	
 	//수정중
-	@RequestMapping("/info/reviewUpdate")
+	@RequestMapping("/info/updateInfoReview")
 	public String updateReview(int infoReviewNum) {
 		int result = 0;
 		result = service.updateReview(infoReviewNum);

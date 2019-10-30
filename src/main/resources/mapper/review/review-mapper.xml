@@ -7,4 +7,7 @@
 	<select id="selectReview" resultType="map">
 		SELECT * FROM INFO_REVIEW I JOIN MEMBERS M ON I.MEMBERNUM=M.MEMBERNUM WHERE INFOUPNUM=#{infoupNum}
 	</select>
+	<update id="status0InfoReview">
+		UPDATE INFO_REVIEW SET INFOREVIEWSTATUS=0 WHERE INFOREVIEWNUM=#{infoReviewNum}
+	</update>
 </mapper>

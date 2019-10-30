@@ -18,12 +18,6 @@ public class InfoReviewServiceImpl implements InfoReviewService {
 	
 	@Autowired
 	InfoReviewDao dao;
-	
-	// 수정중
-	@Override
-	public int deleteReview(int infoReviewNum) {
-		return dao.deleteReview(session, infoReviewNum);
-	}
 
 	// 수정중
 	@Override
@@ -43,6 +37,12 @@ public class InfoReviewServiceImpl implements InfoReviewService {
 		result = dao.insertReview(session, param);
 		if(result==0) throw new RuntimeException();
 		return result;
+	}
+
+
+	@Override
+	public int status0InfoReview(int infoReviewNum) {
+		return dao.status0InfoReview(session, infoReviewNum);
 	}
 
 }
