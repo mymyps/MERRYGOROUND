@@ -30,8 +30,8 @@ public class SMTPTemplate extends Authenticator {
 
 	public static boolean sendmail(String content, String to, String subject) {
 		boolean isSend = true;
-		String user = "11agumon@gmail.com"; // 네이버일 경우 네이버 계정, gmail경우 gmail 계정
-		String password = "gustlrl.41";
+		String user = "mgrmgr1004@gmail.com"; // 네이버일 경우 네이버 계정, gmail경우 gmail 계정
+		String password = "mgr.1004";
 		// SMTP 서버 정보를 설정한다.
 		Properties prop = new Properties();
 		prop.put("mail.smtp.host", "smtp.gmail.com");

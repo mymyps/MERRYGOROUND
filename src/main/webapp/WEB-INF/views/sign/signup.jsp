@@ -14,11 +14,11 @@
 <script src="https://code.jquery.com/jquery-3.4.1.js"
 	integrity="sha256-WpOohJOqMqqyKL9FccASB9O0KwACQJpFTUBLTYOVvVU="
 	crossorigin="anonymous"></script>
-<section id="content">
-	<div class="limiter">
-		<div class="container-login100" >
-			<div class="wrap-login100 p-l-55 p-r-55 p-t-65 p-b-54">
-				<form class="login100-form validate-form" action="${path}/member/membersignup.do" method="post" onsubmit="return checkKey();">
+	<section id="content">
+		<div class="limiter">
+			<div class="container-login100" >
+				<div class="wrap-login100 p-l-55 p-r-55 p-t-65 p-b-54">
+				<form class="login100-form validate-form" action="${path}/member/membersignup.do" method="post" onsubmit="return checkKey();" enctype="multipart/form-data">
 					<span class="login100-form-title p-b-49">
 						Sign up
 					</span>
@@ -69,6 +69,16 @@
 						<span class="label-input100">인증번호</span>
 						<input class="input100" type="number" name="authkey" placeholder="인증번호">
 						<span class="focus-input100" data-symbol="&#xf206;"></span>
+					</div>
+					<!-- 사진 -->
+					<div class="input-group-prepend" style="padding: 0px;">
+						<span class="input-group-text">본인사진</span>
+					</div>
+					<div class="custom-file">
+					<label class="custom-file-label" for="upFile1"></label>
+						<input type="file" class="custom-file-input" name="upFile"
+							id="upFile1"> 
+							
 					</div>
 					<div class="text-right p-t-8 p-b-31">
 						<a href="#">
