@@ -95,7 +95,7 @@
 			                                            </div>
 			                                            <hr>
 			                                            <p><c:out value='${r["INFOREVIEWCONTENT"] }'/></p>
-			                                            <form name="updateInfoReview" action="${pageContext.request.contextPath }/info/updateInfoReview?infoReviewNum=${r['INFOREVIEWNUM']}" method="post">
+			                                            <form name="updateInfoReview" action="${pageContext.request.contextPath }/info/updateInfoReview?infoReviewNum=${r['INFOREVIEWNUM']}?infoupNum=${r['INFOUPNUM']}" method="post">
 							                                <button class="btn" type="submit">리뷰 수정</button> 
 							                            </form>
 							                            <br>

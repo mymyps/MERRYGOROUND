@@ -41,10 +41,10 @@ public class InfoReviewController {
 	
 	// 수정중
 	@RequestMapping("/info/status0InfoReview")
-	public String status0InfoReview(int infoReviewNum) {
+	public String status0InfoReview(int infoReviewNum, int infoupNum) {
 		int result = 0;
 		result = service.status0InfoReview(infoReviewNum);
-		return "/";
+		return "/info/infoView?infoupNum"+infoupNum;
 	}
 	
 	//수정중

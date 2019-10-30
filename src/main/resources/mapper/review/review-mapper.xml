@@ -2,7 +2,7 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="review">
 	<insert id="insertReview" parameterType="map">
-		INSERT INTO INFO_REVIEW VALUES(SEQ_INFO_REVIEW_NUM.NEXTVAL, 1, #{infoupNum}, #{infoReviewContent}, #{infoReviewPoint}, default, default)
+		INSERT INTO INFO_REVIEW VALUES(SEQ_INFO_REVIEW_NUM.NEXTVAL, 41, #{infoupNum}, #{infoReviewContent}, #{infoReviewPoint}, default, default)
 	</insert>
 	<select id="selectReview" resultType="map">
 		SELECT * FROM INFO_REVIEW I JOIN MEMBERS M ON I.MEMBERNUM=M.MEMBERNUM WHERE INFOUPNUM=#{infoupNum}
