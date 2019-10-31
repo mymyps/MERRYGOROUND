@@ -33,5 +33,6 @@ public interface AdminDao {
 	List<Map<String , String>> celtify(SqlSessionTemplate session);
 	int themaAdd(SqlSessionTemplate sesstion, String strTmp);
 	int themaAddAdd(SqlSessionTemplate sesstion, String strTmp);
+	int cletifyAdmin(SqlSessionTemplate session, int memberNum);
 	
 }

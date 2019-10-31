@@ -185,7 +185,7 @@
 	
 	<select id="celtify" resultType="map">
 		select * from members
-			where supstatus = 1
+			where supstatus = 1 and memberlevel = 1 
 		order by enrolldate desc
 	</select>
 	
@@ -198,6 +198,13 @@
 	<insert id="themaAddAdd" parameterType="String" >
 		insert into thema values(#{strTmp}, seq, ??????)
 	</insert>
+	
+	<update id="cletifyAdmin" parameterType="_int" >
+		update members set MEMBERLEVEL = 2 
+		where MEMBERNUM = #{memberNum}
+	</update>
+	
+	
 	
 </mapper>
 

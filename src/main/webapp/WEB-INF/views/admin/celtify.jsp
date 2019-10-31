@@ -4,6 +4,7 @@
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 <c:set var="path" value="${pageContext.request.contextPath}" />
 <jsp:include page="/WEB-INF/views/admin/common/adminHeader.jsp" />
+<script src="https://cdn.jsdelivr.net/npm/jquery@2.2.4/dist/jquery.min.js"></script>
 
 <!-- ---------------------------------------------------------------------------- -->
 <!-- -------------------------     데이터      ------------------------------------ -->
@@ -48,7 +49,7 @@
                                             <table id="bootstrap-data-table" class="table table table-striped table-bordered">
                                                 <thead>
                                                     <tr>
-                                                        <th>S번호</th>
+                                                        <th>M번호</th>
                                                         <th class="avatar">face</th>
                                                         <th>ID</th>
                                                         <th>성별</th>
@@ -60,7 +61,7 @@
                                                 <tbody>
                                                 <c:forEach items="${list }" var="b" varStatus="i">
 	                                            <tr>
-	                                            	<td><c:out value="${b['MEMBERNUM'] }"/></td>
+	                                            	<td class="fy${i.count }"><c:out value="${b['MEMBERNUM'] }"/></td>
 	                                            	<td class="avatar">
 	                                                    <div class="round-img">
 	                                                        <a href="#"><img class="rounded-circle" src="${path }images/avatar/<c:out value="${b['PROIMG'] }"/>" alt=""></a>
@@ -71,7 +72,8 @@
 	                                                <td><c:out value="${b['PHONE'] }"/></td>
 	                                                <td><c:out value="${b['EMAIL'] }"/></td>
 	                                                <td>
-                                                        <span class="badge badge-complete">승인</span>
+                                                        <span class="badge badge-complete celti" id="fy${i.count }" >승 인</span>
+                                                        <span class="badge badge-complete celti2" style="display:none">승 인</span>
                                                     </td>
 	                                            </tr>
 	                                            </c:forEach>
@@ -104,5 +106,38 @@
 
     </div>
     <!-- /#right-panel -->
+    <script type="text/javascript">
+	    $(function(){
+	        $(".celti").on("click",function(e){
+	         	console.log($('.'+this.id).text());
+	         	var memberNum = $('.'+this.id).text();
+	        	var cTest = confirm("서포터즈로 승인 할까요?");
+				if(cTest == true){
+					//ajax
+		        	$.ajax({
+						url: '${path }/admin/cletify.do',
+						data: {'memberNum': memberNum},
+						success: function (data) {
+							console.log("승인했습니다.");
+							console.log(typeof(data));
+							if(data=="true"){
+								$(".celti").hide();
+								$(".celti2").css('background-color', 'black').show();
+							}else{
+								alert("승인이 불가합니다");
+							}
+			            },
+	                    error : function(e) {
+	                    	console.log("ajax error");
+	                    }
+					});
+				}else{
+					return false;
+				}
+	        	
+	        });
+	    });
+	</script>
+	
 
     <jsp:include page="/WEB-INF/views/admin/common/tableJs.jsp" />

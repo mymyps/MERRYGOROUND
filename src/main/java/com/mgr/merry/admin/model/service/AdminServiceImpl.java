@@ -138,4 +138,9 @@ public class AdminServiceImpl implements AdminService{
 	public int themaAddAdd(String strTmp) {
 		return dao.themaAddAdd(sqlSession, strTmp);
 	}
+	
+	@Override
+	public int cletifyAdmin(int memberNum) {
+		return dao.cletifyAdmin(sqlSession, memberNum);
+	}
 }

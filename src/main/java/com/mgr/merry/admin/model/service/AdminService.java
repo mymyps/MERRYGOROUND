@@ -32,5 +32,6 @@ public interface AdminService {
 	List<Map<String , String>> celtify();
 	int themaAdd(String strTmp);
 	int themaAddAdd(String strTmp);
+	int cletifyAdmin(int memberNum);
 
 }

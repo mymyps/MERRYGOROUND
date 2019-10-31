@@ -130,5 +130,10 @@ public class AdminDaoImpl implements AdminDao{
 	public int themaAddAdd(SqlSessionTemplate sesstion, String strTmp) {
 		return sesstion.insert("admin.themaAddAdd", strTmp);
 	}
+	
+	@Override
+	public int cletifyAdmin(SqlSessionTemplate session, int memberNum) {
+		return session.update("admin.cletifyAdmin", memberNum);
+	}
 
 }

@@ -242,5 +242,22 @@ public class AdminController {
 		
 		res.getWriter().print(true);
 	}
+	
+	// 서포터즈 승인
+	@RequestMapping("/admin/cletify.do")
+	public void cletifyAdmin(@RequestParam(value="memberNum") int memberNum, HttpServletResponse res) throws IOException {
+		
+		log.debug("value ==  " + memberNum);
+		int result = service.cletifyAdmin(memberNum);
+		log.debug("result ==  "+result);
+		
+		if (result > 0) {
+			log.debug("true-->");
+			res.getWriter().print(true);
+		}
+		else
+			res.getWriter().print(false);
+		
+	}
 
 }
