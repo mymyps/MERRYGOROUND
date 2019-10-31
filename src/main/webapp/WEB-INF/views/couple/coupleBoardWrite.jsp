@@ -46,9 +46,9 @@
 	$('#summernote').summernote({
 		placeholder: '내용',
 		tabsize: 4,
-		height: 400,
+		height: 600,
 		width: '100%',
-		maxHeight: 500,
+		maxHeight: 1200,
 		callbacks : {
 			onImageUpload: function(files, editor, welEditable){
 			console.log(editor);
