@@ -52,8 +52,8 @@ public class InfoController {
 		return mv;
 	}
 
-	// infoView로 들엉가기
-	// 완료
+	// infoView로 들어가기
+	// supUpload의 여부 확인 추가하기 ( 버튼 서포터즈 리뷰 작성하기 or 서포터즈 리뷰 가기 )
 	@RequestMapping("/info/infoView")
 	public ModelAndView infoView(int infoupNum) {
 		ModelAndView mv = new ModelAndView();

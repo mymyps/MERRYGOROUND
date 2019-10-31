@@ -53,6 +53,9 @@
                             <form name="supReview" action="${pageContext.request.contextPath }/supUp/supReview?infoupNum=${info.INFOUPNUM}" method="post">
                                 <button class="btn supreviewBtn" type="submit">서포터즈 리뷰 바로가기</button> 
                             </form>
+                            <form name="supReviewForm" action="${pageContext.request.contextPath }/supUp/supReviewForm?infoupNum=${info.INFOUPNUM}" method="post">
+                                <button class="btn supreviewBtn" type="submit">서포터즈 리뷰 작성하기</button> 
+                            </form>
                             <br>
                             <form name="infoUpdate" action="${pageContext.request.contextPath }/info/infoUpdate?infoupNum=${info.INFOUPNUM}" method="post">
                                 <button class="btn supreviewBtn" type="submit">INFOMATION 수정</button> 
