@@ -140,6 +140,11 @@ public class AdminServiceImpl implements AdminService{
 	}
 	
 	@Override
+	public Map<String, String> celtifyData(int memberNum) {
+		return dao.celtifyData(sqlSession, memberNum);
+	}
+	
+	@Override
 	public int cletifyAdmin(int memberNum) {
 		return dao.cletifyAdmin(sqlSession, memberNum);
 	}

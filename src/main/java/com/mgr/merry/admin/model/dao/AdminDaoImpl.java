@@ -132,6 +132,11 @@ public class AdminDaoImpl implements AdminDao{
 	}
 	
 	@Override
+	public Map<String, String> celtifyData(SqlSessionTemplate session, int memberNum) {
+		return session.selectOne("admin.celtifyData", memberNum);
+	}
+	
+	@Override
 	public int cletifyAdmin(SqlSessionTemplate session, int memberNum) {
 		return session.update("admin.cletifyAdmin", memberNum);
 	}

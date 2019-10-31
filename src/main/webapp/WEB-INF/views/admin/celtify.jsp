@@ -6,6 +6,47 @@
 <jsp:include page="/WEB-INF/views/admin/common/adminHeader.jsp" />
 <script src="https://cdn.jsdelivr.net/npm/jquery@2.2.4/dist/jquery.min.js"></script>
 
+<!-- modal style -->
+<style>
+.modal {
+  display: none; /* Hidden by default */
+  position: fixed; /* Stay in place */
+  z-index: 1; /* Sit on top */
+  padding-top: 100px; /* Location of the box */
+  left: 200;
+  top: 0;
+  width: 80%; /* Full width */
+  height: 100%; /* Full height */
+  overflow: auto; /* Enable scroll if needed */
+  background-color: rgb(0,0,0); /* Fallback color */
+  background-color: rgba(0,0,0,0.2); /* Black w/ opacity */
+}
+
+/* Modal Content */
+.modal-content {
+  background-color: #fefefe;
+  margin: auto;
+  padding: 20px;
+  border: 1px solid #888;
+  width: 80%;
+}
+
+/* The Close Button */
+.close {
+  color: #aaaaaa;
+  float: right;
+  font-size: 28px;
+  font-weight: bold;
+}
+
+.close:hover,
+.close:focus {
+  color: #000;
+  text-decoration: none;
+  cursor: pointer;
+}
+</style>
+
 <!-- ---------------------------------------------------------------------------- -->
 <!-- -------------------------     데이터      ------------------------------------ -->
 <!-- ---------------------------------------------------------------------------- -->
@@ -105,38 +146,93 @@
 
 
     </div>
+    
+    <!-- modal view -->
+    <div id="myModal" class="modal">
+    	<div class="modal-content">
+    		<span class="close">&times;</span>
+    		<p>sjdflaksjdflkagfahsdfjklsfjsfasflkasdhfkjas</p>
+    		<button class="btn btn-danger" type="button" onclick="celClick();">승 인</button>
+    		<button class="btn btn-success" onclick="celClose();">닫 기</button>
+    	</div>
+    
+    </div>
     <!-- /#right-panel -->
     <script type="text/javascript">
+    	
+    	var memberNum = 0;
+    	
+    	function celClick() {
+		    var cTest = confirm("승인 할까요?");
+			if(cTest == true){
+				//ajax
+				console.log(memberNum);
+
+				$.ajax({
+					url: '${path }/admin/cletify.end',
+					data: {'memberNum': memberNum},
+					success: function (data) {
+						//console.log(typeof(data));
+						if(data=="true"){
+							console.log("승인했습니다.");
+							$(".celti").hide();
+							$(".celti2").css('background-color', 'black').show();
+						}else{
+							alert("승인이 불가합니다");
+						}
+		            },
+		            error : function(e) {
+		            	console.log("ajax error");
+		            }
+				});
+			}else{
+				return false;
+			}
+		}
+    	
 	    $(function(){
 	        $(".celti").on("click",function(e){
-	         	console.log($('.'+this.id).text());
-	         	var memberNum = $('.'+this.id).text();
-	        	var cTest = confirm("서포터즈로 승인 할까요?");
-				if(cTest == true){
-					//ajax
-		        	$.ajax({
-						url: '${path }/admin/cletify.do',
-						data: {'memberNum': memberNum},
-						success: function (data) {
-							console.log("승인했습니다.");
-							console.log(typeof(data));
-							if(data=="true"){
-								$(".celti").hide();
-								$(".celti2").css('background-color', 'black').show();
-							}else{
-								alert("승인이 불가합니다");
-							}
-			            },
-	                    error : function(e) {
-	                    	console.log("ajax error");
-	                    }
-					});
-				}else{
-					return false;
-				}
+	        	
+	        	memberNum = $('.'+this.id).text();
+	        	console.log(memberNum);
+	        	
+	        	$.ajax({
+	        		url: '${path}/admin/celtify.do',
+	        		data: {'memberNum': memberNum},
+	        		success: function (data) {
+						console.log("승인관련 데이터조회 완료");
+						console.log(data);
+						modal.style.display = "block"; // 성공시 모달뷰 로드
+					},
+					error : function (e) {
+						console.log("error" + e);
+					}
+				});
 	        	
 	        });
+            
 	    });
+	    
+	    /* modal view */
+	    var modal = document.getElementById("myModal");
+	    //var btn = document.getElementById("myBtn");
+	    var span = document.getElementsByClassName("close")[0];
+	    //btn.onclick = function () {
+		//	modal.style.display = "block";
+		//}
+	    span.onclick = function () {
+			modal.style.display = "none";
+		}
+	    window.onclick = function (e) {
+			if(e.target == modal){
+				modal.style.display = "none";
+			}
+		}
+	    
+	    function celClose() {
+			modal.style.display = "none";
+		}
+	    
 	</script>
 	
 

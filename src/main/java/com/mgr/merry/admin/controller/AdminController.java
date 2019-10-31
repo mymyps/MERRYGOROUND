@@ -13,8 +13,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.mgr.merry.admin.model.service.AdminService;
 import com.mgr.merry.admin.model.vo.AdminCalendar;
 
@@ -243,10 +246,25 @@ public class AdminController {
 		res.getWriter().print(true);
 	}
 	
+	@RequestMapping("/admin/celtify.do")
+	@ResponseBody
+	public String cletifyAdmin(@RequestParam(value="memberNum") int memberNum) throws JsonProcessingException{
+		//json(return type)
+		Map<String, String> map = service.celtifyData(memberNum);
+		
+		//json 처리
+		ObjectMapper mapper = new ObjectMapper();
+		
+		return mapper.writeValueAsString(map);
+	}
+	
 	// 서포터즈 승인
-	@RequestMapping("/admin/cletify.do")
+	@RequestMapping("/admin/cletify.end")
 	public void cletifyAdmin(@RequestParam(value="memberNum") int memberNum, HttpServletResponse res) throws IOException {
 		
+		// 맴버넘버를 통해 모달에 띄어줄내용을 받아와야함
+		
+		// 받아온 내용을 토대로 승인진행
 		log.debug("value ==  " + memberNum);
 		int result = service.cletifyAdmin(memberNum);
 		log.debug("result ==  "+result);
