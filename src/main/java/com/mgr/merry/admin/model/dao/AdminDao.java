@@ -24,5 +24,16 @@ public interface AdminDao {
 	List<Map<String, String>> supConfirmMain(SqlSessionTemplate session);
 	List<Map<String, String>> infoUploadMain(SqlSessionTemplate session);
 	List<Map<String, String>> boardPage(SqlSessionTemplate session);
-
+	List<Map<String, String>> supBoard(SqlSessionTemplate session);
+	List<Map<String, String>> supportersList(SqlSessionTemplate session);
+	List<Map<String , String>> supportersPay(SqlSessionTemplate session);
+	List<Map<String , String>> users(SqlSessionTemplate session);
+	List<Map<String , String>> location(SqlSessionTemplate session);
+	List<Map<String , String>> thema(SqlSessionTemplate session);
+	List<Map<String , String>> celtify(SqlSessionTemplate session);
+	int themaAdd(SqlSessionTemplate sesstion, String strTmp);
+	int themaAddAdd(SqlSessionTemplate sesstion, String strTmp);
+	Map<String, String> celtifyData(SqlSessionTemplate session, int memberNum);
+	int cletifyAdmin(SqlSessionTemplate session, int memberNum);
+	
 }

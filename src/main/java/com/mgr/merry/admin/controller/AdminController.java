@@ -11,10 +11,13 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.mgr.merry.admin.model.service.AdminService;
 import com.mgr.merry.admin.model.vo.AdminCalendar;
 
@@ -137,46 +140,142 @@ public class AdminController {
 	
 	//서포터즈 글 뷰 로드
 	@RequestMapping("/admin/supBoard")
-	public String subBoard() {
-		return "admin/supBoard";
+	public ModelAndView subBoard() {
+		
+		// 서포터즈 리뷰
+		List<Map<String , String>> list = service.supBoard();
+		
+		ModelAndView mv = new ModelAndView();
+		mv.addObject("list", list);
+		mv.setViewName("admin/supBoard");
+		
+		return mv;
 	}
 	
 	//서포터즈 리스트 뷰 로드
 	@RequestMapping("/admin/supportersList")
-	public String supportersList() {
-		return "admin/supportersList";
+	public ModelAndView supportersList() {
+		
+		List<Map<String , String>> list = service.supportersList();
+		
+		ModelAndView mv = new ModelAndView();
+		mv.addObject("list", list);
+		mv.setViewName("admin/supportersList");
+				
+		return mv;
 	}
 	
 	//서포터즈 후원 뷰 로드
 	@RequestMapping("/admin/supportersPay")
-	public String supportersPay() {
-		return "admin/supportersPay";
+	public ModelAndView supportersPay() {
+		
+		List<Map<String , String>> list = service.supportersPay();
+		
+		ModelAndView mv = new ModelAndView();
+		mv.addObject("list", list);
+		mv.setViewName("admin/supportersPay");
+				
+		return mv;
 	}
 	
 	// 유저 관리뷰 로드
 	@RequestMapping("/admin/users")
-	public String users() {
-		return "admin/users";
+	public ModelAndView users() {
+		
+		List<Map<String , String>> list = service.users();
+		
+		ModelAndView mv = new ModelAndView();
+		mv.addObject("list", list);
+		mv.setViewName("admin/users");
+				
+		return mv;
 	}
 	
 	//지역 관리 뷰 로드
 	@RequestMapping("/admin/location")
-	public String location() {
-		return "admin/location";
+	public ModelAndView location() {
+		
+		List<Map<String , String>> list = service.location();
+		
+		ModelAndView mv = new ModelAndView();
+		mv.addObject("list", list);
+		mv.setViewName("admin/location");
+		
+		return mv;
 	}
 	
 	//테마 관리 뷰 로드
 	@RequestMapping("/admin/thema")
-	public String thema() {
-		return "amdin/thema";
+	public ModelAndView thema() {
+		
+		List<Map<String , String>> list = service.thema();
+		
+		ModelAndView mv = new ModelAndView();
+		mv.addObject("list", list);
+		mv.setViewName("admin/thema");
+		
+		return mv;
 	}
 	
 	//승인 뷰 로드
 	@RequestMapping("/admin/celtify")
-	public String celtify() {
-		return "admin/celtify";
+	public ModelAndView celtify() {
+		
+		List<Map<String , String>> list = service.celtify();
+		
+		ModelAndView mv = new ModelAndView();
+		mv.addObject("list", list);
+		mv.setViewName("admin/celtify");
+		
+		return mv;
 	}
 	
+	// 테마추가(ajax)
+	@RequestMapping("/admin/themaAdd.do")
+	public void themaAdd(@RequestParam(value="strTmp") String strTmp, HttpServletResponse res) throws IOException {
+		// 테마 확인후 추가
+//		log.debug("=====  " + strTmp);
+		
+		// 테마가 있는지 확인
+		int result = service.themaAdd(strTmp);
+		log.debug(""+result);
+		if(result > 0) {
+			result = service.themaAddAdd(strTmp);
+		}
+		
+		res.getWriter().print(true);
+	}
 	
+	@RequestMapping("/admin/celtify.do")
+	@ResponseBody
+	public String cletifyAdmin(@RequestParam(value="memberNum") int memberNum) throws JsonProcessingException{
+		//json(return type)
+		Map<String, String> map = service.celtifyData(memberNum);
+		
+		//json 처리
+		ObjectMapper mapper = new ObjectMapper();
+		
+		return mapper.writeValueAsString(map);
+	}
+	
+	// 서포터즈 승인
+	@RequestMapping("/admin/cletify.end")
+	public void cletifyAdmin(@RequestParam(value="memberNum") int memberNum, HttpServletResponse res) throws IOException {
+		
+		// 맴버넘버를 통해 모달에 띄어줄내용을 받아와야함
+		
+		// 받아온 내용을 토대로 승인진행
+		log.debug("value ==  " + memberNum);
+		int result = service.cletifyAdmin(memberNum);
+		log.debug("result ==  "+result);
+		
+		if (result > 0) {
+			log.debug("true-->");
+			res.getWriter().print(true);
+		}
+		else
+			res.getWriter().print(false);
+		
+	}
 
 }

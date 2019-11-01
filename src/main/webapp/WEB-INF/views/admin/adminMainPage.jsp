@@ -3,8 +3,8 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 <c:set var="path" value="${pageContext.request.contextPath}" />
-<%-- <jsp:include page="/WEB-INF/views/common/header.jsp" /> --%>
-<%--     <jsp:param name="관라자페이지" value="adminMainPage" />
+<%-- <jsp:include page="/WEB-INF/views/common/header.jsp" />
+	<jsp:param name="관라자페이지" value="adminMainPage" />
 </jsp:include> --%>
 
 <!-- 관리자 페이지 css -->
@@ -18,8 +18,6 @@
 <script src="${pageContext.request.contextPath }/resources/admin/assets/js/init/morris.js"></script>
 <script src="http://cdnjs.cloudflare.com/ajax/libs/morris.js/0.5.1/morris.min.js"></script>
 <link rel="stylesheet" href="${pageContext.request.contextPath }/resources/admin/assets/css/morris.css">
-
-	
 		<!-- ---------------------------------------------------------------------------- -->
 		<!-- -------------------------     데이터      ------------------------------------ -->
 		<!-- ---------------------------------------------------------------------------- -->
@@ -320,15 +318,7 @@
 									</table>
 								</div>
 							</div>
-
-
-
-
-
-
-
-
-
+							
 						</div>
 					</div>
 					<!-- /.orders -->
@@ -401,44 +391,6 @@
 						</div>
 					</div>
 					<!-- /#event-modal -->
-
-
-					<!-- <div class="modal fade none-border" id="add-category">
-                   <div class="modal-dialog">
-                       <div class="modal-content">
-                           <div class="modal-header">
-                               <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-                               <h4 class="modal-title"><strong>카테고리 추가 </strong></h4>
-                           </div>
-                           <div class="modal-body">
-                               <form>
-                                   <div class="row">
-                                       <div class="col-md-6">
-                                           <label class="control-label">카테고리 이름</label>
-                                           <input class="form-control form-white" placeholder="이름 입력" type="text" name="category-name"/>
-                                       </div>
-                                       <div class="col-md-6">
-                                           <label class="control-label">색상 선택</label>
-                                           <select class="form-control form-white" data-placeholder="색상 선택..." name="category-color">
-                                               <option value="success">녹색</option>
-                                               <option value="danger">빨강</option>
-                                               <option value="info">청색</option>
-                                               <option value="pink">핑크</option>
-                                               <option value="primary">파랑</option>
-                                               <option value="warning">노랑</option>
-                                           </select>
-                                       </div>
-                                   </div>
-                               </form>
-                           </div>
-                           <div class="modal-footer">
-                               <button type="button" class="btn btn-default waves-effect" data-dismiss="modal">Close</button>
-                               <button type="button" class="btn btn-danger waves-effect waves-light save-category" data-dismiss="modal">Save</button>
-                           </div>
-                       </div>
-                   </div>
-               </div> -->
-
 				</div>
 				<!-- .animated -->
 			</div>
@@ -478,14 +430,6 @@
 		});
 	</c:forEach>
 	
-
-	/* var dateBoard = [
-	  	  {"period": "2012-10-01", "licensed": 407, "sorned": 660},
-		  {"period": "2012-09-30", "licensed": 351, "sorned": 629},
-		  {"period": "2012-09-29", "licensed": 269, "sorned": 618},
-		  {"period": "2012-09-20", "licensed": 246, "sorned": 661},
-		  {"period": "2012-09-19", "licensed": 257, "sorned": 667}
-		]; */
 	new Morris.Bar({
 		element: 'morrisBars',
 	  	data: dateBoard,
@@ -505,18 +449,9 @@
  
 	<script src="https://cdn.jsdelivr.net/npm/moment@2.22.2/moment.min.js"></script>
 	<script src="https://cdn.jsdelivr.net/npm/fullcalendar@3.9.0/dist/fullcalendar.min.js"></script>
-	<script src="${pageContext.request.contextPath }/resources/admin/assets/js/init/fullcalendar-init.js"></script>
+	<script src="${pageContext.request.contextPath}/resources/admin/assets/js/init/fullcalendar-init.js"></script>
 	
-	
-	<!--  Chart js -->
-<%--     <script src="https://cdn.jsdelivr.net/npm/chart.js@2.7.3/dist/Chart.bundle.min.js"></script>
-    <script src="${pageContext.request.contextPath }/resources/admin/assets/js/init/chartjs-init.js"></script> --%>
-    
-    <!--Flot Chart-->
-<!--     <script src="https://cdn.jsdelivr.net/npm/jquery.flot@0.8.3/jquery.flot.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/flot-spline@0.0.1/js/jquery.flot.spline.min.js"></script> -->
 </section>
 </div>
 </body>
 </html>
-<%-- <jsp:include page="/WEB-INF/views/common/footer.jsp" /> --%>
