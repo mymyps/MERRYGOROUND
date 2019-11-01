@@ -191,7 +191,7 @@
 										class="fa fa-angle-down"></i></a>
 								<div class="dropdown-menu">
 									<ul>
-										<li><a href="${pageContext.request.contextPath }/info/infoForm.do">infoForm 임의연결</a></li>
+										<li><a href="${pageContext.request.contextPath }/info/infoForm.do?mNum=${loginMember.memberNum}">infoForm 임의연결</a></li>
 										<li><a href="${pageContext.request.contextPath }/info/infoView.do">infoView 임의연결</a></li>
 										<li><a href="${pageContext.request.contextPath }/supLv/supLvForm.do">서포터즈 신청 임의연결</a></li>
 										<li><a href="${pageContext.request.contextPath }/supUp/supReviewForm.do">서포터즈 리뷰폼 임의연결</a></li>

@@ -23,7 +23,6 @@
 						<hr>
 						<div class="entry-content">
 							<div class="infoFormMainFrame">
-								<div>
 									<div class="infoFormSubFrame">이미지1</div>
 									<p class="infoForm1">
 										<input type="file" name="supLvImg1"/>
