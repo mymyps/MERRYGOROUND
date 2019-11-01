@@ -38,5 +38,38 @@
 		update members set supstatus=1 where memberNum=#{num}
 	</update>
 	
+	<select id="selectSup" resultType="supporters" parameterType="_int">
+		select * from SUPPORTERS where membernum=#{memNo}
+	</select>
+	<select id="selectSupt3" resultType="map" parameterType="_int">
+		select * from supporters 
+			inner join supporters_upload using(supNum)
+			inner join supporters_upload_img using(supupNum)
+			where supNum=#{supNum}
+	</select>
+	<select id="selectMemberOne2" resultType="_int" parameterType="members">
+		select count(*) from members where id=#{id}
+	</select>
+	<select id="selectSlut" resultType="suplvupload" parameterType="_int">
+		select * from supporters_lv_upload where suplvnum=#{supNum}
+	</select>
+
+	<insert id="insertSupporter" parameterType="map" >
+		insert into supporters_lv_upload values(seq_sup_lv_num.nextval,#{memberNum},#{content},sysdate)
+		<selectKey keyProperty="suplvnum" resultType="integer" order="AFTER" >
+			select seq_sup_lv_num.currval from dual
+		</selectKey>
+	</insert>
+	
+	<insert id="insertSupporterFile" parameterType="map">
+		insert into supporters_lv_upload_img values(#{suplvnum},#{file0},#{file1},#{file2},#{file3},#{file4})
+	</insert>
+	
+	<update id="updatestatus" parameterType="map">
+		update members set supstatus=1 where memberNum=#{memberNum}
+	</update>
+	<select id="checkId" resultType="members" parameterType="members">
+		select * from members where id=#{id}
+	</select>
 	
 </mapper>

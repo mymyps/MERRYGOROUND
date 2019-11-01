@@ -132,8 +132,9 @@
 									<ul>
 										<li><a href="${pageContext.request.contextPath }/member/login.do">로그인</a></li>
 										<li><a href="${pageContext.request.contextPath }/member/signup.do">회원가입</a></li>
-										<li><a href="${pageContext.request.contextPath }">아이디찾기</a></li>
+										<%-- <li><a href="${pageContext.request.contextPath }">dd</a></li> --%>
 										<li><a href="${pageContext.request.contextPath }/member/searchpw.do">비밀번호찾기</a></li>
+										
 									</ul>
 								</div>
 							</li>
@@ -150,7 +151,7 @@
 							</li>
 							</c:if>
 							<li class="dropdown">
-								<a href="${pageContext.request.contextPath }" class="dropdown-toggle" data-toggle="dropdown">Mypage <i
+								<a href="${pageContext.request.contextPath }/sign/mypage.do?mNo=${loginMember.memberNum}">Mypage <i
 										class="fa fa-angle-down"></i></a>
 								<c:if test="${loginMember==null }">
 									<div class="dropdown-menu">
@@ -159,7 +160,7 @@
 									</ul>
 								</div>
 								</c:if>
-								<c:if test="${loginMember!=null }">
+								<%-- <c:if test="${loginMember!=null }">
 								<div class="dropdown-menu">
 									<ul>
 										<li><a href="${pageContext.request.contextPath }/sign/mypage.do?mNo=${loginMember.memberNum}">개인정보수정</a></li>
@@ -168,7 +169,7 @@
 										<li><a href="${pageContext.request.contextPath }/sign/mypage.do?mNo=${loginMember.memberNum}">비밀번호 변경</a></li>
 									</ul>
 								</div>
-								</c:if>
+								</c:if> --%>
 							</li>
 							<li class="dropdown">
 							<li>
@@ -233,3 +234,7 @@
 		</div>
 	</div>
 		
+		
+<script>
+	console.log(sessionStorage.getItem("loginMember"));
+</script>

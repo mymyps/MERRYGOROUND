@@ -1,6 +1,7 @@
 package com.mgr.merry.sign.model.service;
 
 
+import java.util.List;
 import java.util.Map;
 
 import org.mybatis.spring.SqlSessionTemplate;
@@ -10,6 +11,9 @@ import org.springframework.stereotype.Service;
 
 import com.mgr.merry.sign.model.dao.SignDao;
 import com.mgr.merry.sign.model.vo.Members;
+import com.mgr.merry.supLvupload.model.vo.SupLvUpload;
+import com.mgr.merry.supLvupload.model.vo.SupLvUploadImg;
+import com.mgr.merry.supporters.model.vo.Supporters;
 
 @Service
 public class SignServiceImpl implements SignService {
@@ -69,9 +73,61 @@ public class SignServiceImpl implements SignService {
 	public int pwUpdate(Members m) {
 		return dao.pwUpdate(session,m);
 	}
+//	@Override
+//	public int updatesuple(int num) {
+//		return dao.updatesuple(session,num);
+//	}
+	
 	@Override
-	public int updatesuple(int num) {
-		return dao.updatesuple(session,num);
+	public Supporters selectSup(int memNo) {
+		return dao.selectSup(session, memNo);
 	}
+	@Override
+	public Map<String, Object> selectSupt3(int supNum) {
+		return dao.selectSupt3(session,supNum);
+	}
+	@Override
+	public int selectMemberOne2(Members m) {
+		return dao.selectMemberOne2(session,m);
+	}
+//	@Override
+//	public int insertsuplvimg(Map<String, String> param, List<SupLvUploadImg> supuploadimg) throws Exception {
+//		int result2=0;
+//		result2=dao.insertsuplvimg(session,param);//board���̺� ������ �Է�!
+//		if(result2==0) throw new RuntimeException();
+//		//result=0;
+//		if(supuploadimg.size()>0) {
+//			for(SupLvUploadImg a : supuploadimg) {
+//				a.setSuplvNum(Integer.parseInt(param.get("supNo")));
+//				result2=dao.insertsuplvimg(session,a);
+//				if(result2==0) throw new Exception();
+//			}
+//		}
+//		
+//		return result2;
+//	}
+//	@Override
+//	public SupLvUpload selectSlul(SupLvUpload slut, int slutNum) {
+//		return dao.selectSlul(session,slutNum);
+//	}
+	@Override
+	public int insertSupporter(Map<String, Object> data) {
+		return dao.inserSupporter(session, data);
+	}
+	@Override
+	public int insertSupporterFile(Map<String, Object> data) {
+		return dao.insertSupporterFile(session, data);
+	}
+	@Override
+	public int updatestatus(Map<String, Object> data) {
+		return dao.updatestatus(session,data);
+	}
+	@Override
+	public Members checkId(Members m) {
+		return dao.checkId(session,m);
+	}
+	
+
+	
 	
 }
