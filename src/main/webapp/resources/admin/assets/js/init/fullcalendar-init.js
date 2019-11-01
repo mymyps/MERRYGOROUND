@@ -21,6 +21,7 @@
     /* on drop */
     CalendarApp.prototype.onDrop = function (eventObj, date) { 
         var $this = this;
+        console.log("onDrop");
             // retrieve the dropped element's stored Event Object
             var originalEventObject = eventObj.data('eventObject');
             var $categoryClass = eventObj.attr('data-class');
@@ -33,13 +34,16 @@
             // render the event on the calendar
             $this.$calendar.fullCalendar('renderEvent', copiedEventObject, true);
             // is the "remove after drop" checkbox checked?
+            
             if ($('#drop-remove').is(':checked')) {
+            	console.log("onDrop end");
                 // if so, remove the element from the "Draggable Events" list
                 eventObj.remove();
             }
     },
     /* on click on event */
     CalendarApp.prototype.onEventClick =  function (calEvent, jsEvent, view) {
+    	console.log("onEventClick");
         var $this = this;
             var form = $("<form></form>");
             form.append("<label>event 변경 내용</label>");
@@ -110,6 +114,7 @@
     },
     /* on select */
     CalendarApp.prototype.onSelect = function (start, end, allDay) {
+//    	console.log(CalendarApp.prototype);
         var $this = this;
             $this.$modal.modal({
                 backdrop: 'static'
@@ -195,27 +200,43 @@
             $this.$calendarObj.fullCalendar('unselect');
     },
     CalendarApp.prototype.enableDrag = function() {
-        //init events
-        $(this.$event).each(function () {
+    	//init events
+    	$(this.$event).each(function () {
             // create an Event Object (http://arshaw.com/fullcalendar/docs/event_data/Event_Object/)
             // it doesn't need to have a start or end
-        	
-            var eventObject = {
-                title: $.trim($(this).text()) // use the element's text as the event title
+            eventObject = {
+                title: $.trim($(this).text()), // use the element's text as the event title
+                stick: true
             };
             // store the Event Object in the DOM element so we can get to it later
             $(this).data('eventObject', eventObject);
+            
             // make the event draggable using jQuery UI
             $(this).draggable({
-                zIndex: 999,
+            	zIndex: 999,
                 revert: true,      // will cause the event to go back to its
-                revertDuration: 0  //  original position after the drag
+                revertDuration: 0  //  original position after the drag,
             });
+            
         });
-    }
+    },CalendarApp.prototype.onEventDrop = function(event, delta, revertFunc, jsEvent, ui, view) {
+    	//event, delta, revertFunc, jsEvent, ui, view
+    	//드래그이벤트 발생
+    	console.log(event);
+    	console.log(delta);
+    	console.log(revertFunc);
+    	console.log(jsEvent);
+    	console.log(ui);
+    	console.log(view);
+
+    };
+    
+    
+    
     /* Initializing */
     CalendarApp.prototype.init = function() {
         this.enableDrag();
+
         /*  Initialize the calendar  */
         var date = new Date();
         var d = date.getDate();
@@ -261,10 +282,11 @@
             droppable: true, // this allows things to be dropped onto the calendar !!!
             eventLimit: true, // allow "more" link when too many events
             selectable: true,
-            drop: function(date) { $this.onDrop($(this), date); },
+            drop: function(date, jsEvent, ui, resourceId) { $this.onDrop($(this), date); },
             select: function (start, end, allDay) { $this.onSelect(start, end, allDay); },
-            eventClick: function(calEvent, jsEvent, view) { $this.onEventClick(calEvent, jsEvent, view); }
-
+            eventClick: function(calEvent, jsEvent, view) { $this.onEventClick(calEvent, jsEvent, view); },
+            eventDrop: function(event, delta, revertFunc, jsEvent, ui, view) { $this.onEventDrop(event, delta, revertFunc, jsEvent, ui, view); }
+            
         });
 
         //on new event
@@ -277,6 +299,8 @@
             }
 
         });
+        
+    
     },
 
    //init CalendarApp

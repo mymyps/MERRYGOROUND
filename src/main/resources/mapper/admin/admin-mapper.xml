@@ -20,7 +20,7 @@
 		select count(*) from member where userid = #{userId} and password = #{password}
 	</select> -->
 	<insert id="calSave" parameterType="cal">
-		insert into admincalendar values(#{title}, #{start}, #{end}, #{className})
+		insert into admincalendar values( 9999, #{title}, #{start}, #{end}, #{className})
 	</insert>
 	
 	<select id="calLoad" resultType="cal">
