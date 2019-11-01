@@ -53,10 +53,10 @@
 							<br>
 
 						<!-- 첫이미지, 리스트에 보일 이미지 post image start -->
-						<div class="post-image-wrapper">
-							<img src="${path }/resources/images/couple/1-1.jpg" class="img"  alt="" />
-							<!-- <span class="blog-date"> May 03, 2015</span> -->
-						</div><!-- post image end -->
+<!-- 						<div class="post-image-wrapper"> -->
+<%-- 							<img src="${path }/resources/images/couple/1-1.jpg" class="img"  alt="" /> --%>
+<!-- 							<span class="blog-date"> May 03, 2015</span> -->
+<!-- 						</div>post image end -->
 						
 <!-- 						내용부분 -->
 						<div class="entry-content">
@@ -77,9 +77,9 @@
 // 								$('.entry-content').append(content2);
 							});
 						</script>
-
-
-						<hr><hr><hr>
+						<button class="btn btn-primary pull-left" onclick='location.href="${path }/couple/updateCoupleBoard?no=${cboard["COUPLENUM"]}"'>글 수정</button>
+						<button class="btn btn-primary pull-right" onclick='location.href="${path }/couple/deleteCoupleBoard?no=${cboard["COUPLENUM"]}"'>글 삭제</button> 
+						<br><br><hr><hr><hr>
 					
 
 						<div class="gap-30"></div>

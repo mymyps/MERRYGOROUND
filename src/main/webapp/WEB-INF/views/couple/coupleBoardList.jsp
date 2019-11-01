@@ -28,6 +28,7 @@
 		font-size: 26px;
 		font-weight: bold;
 		text-shadow: 0 0 3px black;
+		z-index: 4;
 
 	}
 	.post span{
@@ -47,7 +48,7 @@
 			<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
 				<div>
 					<br>
-					<button class="btn btn-primary pull-right"
+					<button style="z-index: 5;" class="btn btn-primary pull-right"
 						onclick='location.href="${path}/couple/coupleBoardWrite"'>글 작성</button>
 				</div>
 				<br>
@@ -58,7 +59,7 @@
 					<div class="post postmb">
 						<!-- post image start -->
 						<div class="post-image-wrapper">
-							<a href='${path }/couple/coupleBoardView?no=${c["COUPLENUM"]}'> <img src="${path}/resources/images/couple/1-1.jpg"	class="img" alt="" />
+							<a href='${path }/couple/coupleBoardView?no=${c["COUPLENUM"]}'> <img src='${path}/resources/images/couple/${c["FILERENAME"]}'	class="img" alt="" />
 																	 <!-- 마지막 파일명만 따로 불러오든, 전체경로를 다 받아오든  -->
 								<p class="img-content"><c:out value='${c["COUPLETITLE"] }'></c:out></p>
 								<span class="blog-date"> <fmt:formatDate value='${c["COUPLEDATE"] }'/></span>
@@ -68,32 +69,19 @@
 						<!-- post image end -->
 					</div>
 				</c:forEach>
-					<script>
-						$(function(){
-							var f = $('#hidden').val();
-							console.log("수정전: "+f);
-							console.log("시작인덱스: "+f.indexOf('img src='));
-							console.log("끝 인덱스: "+f.indexOf('px;">'));
-							console.log("----------------------------------------");
-							console.log("수정후 :  "+f.substring( f.indexOf('img src=')+16,f.indexOf('style')-2 ));
-							console.log("========================================");
-							
-							$('.img')[0].attr('src','${path}/'+f.substring( f.indexOf('img src=')+16,f.indexOf('style')-2 ));
-						});
-					</script>
 				
-
-				<div class="paging">
-					<ul class="pagination">
-						<li><a href="#"><i class="fa fa-angle-left"></i></a></li>
-						<li class="active"><a href="#">1</a></li>
-						<li><a href="#">2</a></li>
-						<li><a href="#">3</a></li>
-						<li><a href="#">4</a></li>
-						<li><a href="#">5</a></li>
-						<li><a href="#"><i class="fa fa-angle-right"></i></a></li>
-					</ul>
-				</div>
+				${pageBar }
+<!-- 				<div class="paging"> -->
+<!-- 					<ul class="pagination"> -->
+<!-- 						<li><a href="#"><i class="fa fa-angle-left"></i></a></li> -->
+<!-- 						<li class="active"><a href="#">1</a></li> -->
+<!-- 						<li><a href="#">2</a></li> -->
+<!-- 						<li><a href="#">3</a></li> -->
+<!-- 						<li><a href="#">4</a></li> -->
+<!-- 						<li><a href="#">5</a></li> -->
+<!-- 						<li><a href="#"><i class="fa fa-angle-right"></i></a></li> -->
+<!-- 					</ul> -->
+<!-- 				</div> -->
 
 
 
