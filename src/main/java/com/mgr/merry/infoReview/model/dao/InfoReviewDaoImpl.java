@@ -32,4 +32,9 @@ public class InfoReviewDaoImpl implements InfoReviewDao {
 		return session.selectList("review.selectReview", infoupNum);
 	}
 
+	@Override
+	public int status0InfoReview(SqlSessionTemplate session, int infoReviewNum) {
+		return session.update("review.status0InfoReview", infoReviewNum);
+	}
+
 }

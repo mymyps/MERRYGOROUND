@@ -94,5 +94,59 @@ public class AdminServiceImpl implements AdminService{
 		return dao.boardPage(sqlSession);
 	}
 	
+	@Override
+	public List<Map<String, String>> supBoard() {
+		return dao.supBoard(sqlSession);
+	}
+	
+	@Override
+	public List<Map<String, String>> supportersList() {
+		return dao.supportersList(sqlSession);
+	}
+	
+	@Override
+	public List<Map<String, String>> supportersPay() {
+		return dao.supportersPay(sqlSession);
+	}
+	
+	@Override
+	public List<Map<String, String>> users() {
+		return dao.users(sqlSession);
+	}
+	
+	@Override
+	public List<Map<String, String>> location() {
+		return dao.location(sqlSession);
+	}
+	
+	@Override
+	public List<Map<String, String>> thema() {
+		return dao.thema(sqlSession);
+	}
+	
+	@Override
+	public List<Map<String, String>> celtify() {
+		return dao.celtify(sqlSession);
+	}
+	
+	@Override
+	public int themaAdd(String strTmp) {
+		return dao.themaAdd(sqlSession, strTmp);
+	}
+
+	@Override
+	public int themaAddAdd(String strTmp) {
+		return dao.themaAddAdd(sqlSession, strTmp);
+	}
+	
+	@Override
+	public Map<String, String> celtifyData(int memberNum) {
+		return dao.celtifyData(sqlSession, memberNum);
+	}
+	
+	@Override
+	public int cletifyAdmin(int memberNum) {
+		return dao.cletifyAdmin(sqlSession, memberNum);
+	}
 
 }

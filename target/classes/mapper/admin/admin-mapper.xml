@@ -40,6 +40,7 @@
 	<select id="adminThemaMain" resultType="map">
 		select themanum, thema.themaname, count(themanum) "COUNT" from info_upload
 		join thema using(themanum)
+		where infoupstatus=1 
 		group by themanum, thema.themaname
 		order by 3 desc
 	</select>
@@ -71,6 +72,7 @@
 		select rownum as rnum, a.* from(
 		select infouptitle ,infoupnum, infoupdate, avg(inforeviewpoint) "ravg" from info_review
 		join info_upload using(infoupnum)
+        where infoupstatus = 1
 		group by infoupnum, infouptitle, infoupdate
 		)a order by 5 desc)
 		where rnum between 1 and 5
@@ -126,6 +128,91 @@
 		) a) 	
 	</select>
 	
+	<select id="supBoard" resultType="map">
+		select * from(
+			select rownum as rnum, a.* from(
+				select supnum, supuptitle, themaname, localname, supupdate from supporters_upload
+					inner join location using(localnum)
+					inner join thema using(themanum)
+				where supupstatus = 1
+			order by supupdate desc
+		) a)
+	</select>
+	
+	<select id="supportersList" resultType="map">
+		select * from(
+			select rownum as rnum, a.* from(
+				select * from supporters
+					join members using(membernum)
+				where status = 1 and memberlevel = 2
+			) a)
+	</select>
+	
+	<select id="supportersPay" resultType="map">
+		select * from(
+			select rownum as rnum, a.* from(
+				select count(supnum) "UPLOAD", proimg, suplevel, sum(suppay) "SUM", id, phone, enrolldate from supporters
+					join members using(membernum)
+					join supporters_upload using(supnum)
+				group by supnum, proimg, suplevel, suppay, id, phone, enrolldate
+			order by 5 desc
+		) a)
+	</select>
+	
+	<select id="usersAdmin" resultType="map">
+		select * from(
+			select rownum as rnum, a.* from(
+				select * from members
+				where memberlevel != 0
+			order by enrolldate desc
+		) a)
+	</select>
+	
+	<select id="locationAdmin" resultType="map">
+		select * from(
+			select rownum as rnum, a.* from(
+				select * from location
+		) a)
+	</select>
+	
+	<select id="themaAdmin" resultType="map">
+		select * from(
+    		select rownum as rnum, a.* from(
+        		select * from thema
+        		where themanumref is not null
+		) a)
+	</select>
+	
+	<select id="celtify" resultType="map">
+		select * from members
+			where supstatus = 1 and memberlevel = 1 
+		order by enrolldate desc
+	</select>
+	
+	<!-- 테마 확인 -->
+	<select id="themaAdd" parameterType="String" resultType="_int">
+		select count(*) from thema
+			where THEMANAME LIKE '%'||#{strTmp}||'%'
+	</select>
+	
+	<insert id="themaAddAdd" parameterType="String" >
+		insert into thema values(#{strTmp}, seq, ??????)
+	</insert>
+	
+	<!-- 서포터즈 승인전 데이터 -->
+	<select id="celtifyData" parameterType="_int" resultType="map">
+		select membernum, id, name, phone, email, enrolldate, proimg, sublvcontent, suplvenrolldate
+			,fileorgname1, fileorgname2, fileorgname3, fileorgname4, fileorgname5
+		from members
+			join supporters_lv_upload using(membernum)
+			join supporters_lv_upload_img using(suplvnum)
+		where membernum = #{memberNum} and supstatus = 1
+	</select>
+	
+	<update id="cletifyAdmin" parameterType="_int" >
+		update members set MEMBERLEVEL = 2 
+		where MEMBERNUM = #{memberNum}
+	</update>
 	
 	
 	

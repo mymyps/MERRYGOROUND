@@ -49,7 +49,8 @@
             });
             $this.$modal.find('.delete-event').show().end().find('.save-event').hide().end().find('.modal-body').empty().prepend(form).end().find('.delete-event').unbind('click').click(function () {
             	// 이벤트 삭제
-//            	console.log("remove event ->");
+//            	//console.log("remove event ->");
+            	//console.log(calEvent);
             	var calTmp = {
 	        		title: calEvent.title,
 	        		start: typeof calEvent.start._i === "number"? calEvent.start._i:calEvent.start._i.getTime(),

@@ -53,6 +53,9 @@
                             <form name="supReview" action="${pageContext.request.contextPath }/supUp/supReview?infoupNum=${info.INFOUPNUM}" method="post">
                                 <button class="btn supreviewBtn" type="submit">서포터즈 리뷰 바로가기</button> 
                             </form>
+                            <form name="supReviewForm" action="${pageContext.request.contextPath }/supUp/supReviewForm?infoupNum=${info.INFOUPNUM}" method="post">
+                                <button class="btn supreviewBtn" type="submit">서포터즈 리뷰 작성하기</button> 
+                            </form>
                             <br>
                             <form name="infoUpdate" action="${pageContext.request.contextPath }/info/infoUpdate?infoupNum=${info.INFOUPNUM}" method="post">
                                 <button class="btn supreviewBtn" type="submit">INFOMATION 수정</button> 
@@ -81,21 +84,32 @@
                         <div id="post-comments">
                             <ul class="comments-list">
                                 <li>
+                                	<c:if test="${not empty review }">
 	                                <c:forEach items="${review}" var="r" >
-	                                    <div class="comment">
-	                                        <img class="comment-avatar pull-left" alt="" src="images/blog/avator1.png">
-	                                        
-	                                        <div class="comment-body">
-	                                            <h4 class="comment-author"><c:out value='${r["NAME"] }'/></h4>
-	                                            <div class="comment-date"><c:out value='${r["INFOREVIEWDATE"] }'/></div>
-	                                            <div class="reviewPoint">
-	                                                평점 <c:out value='${r["INFOREVIEWPOINT"] }'/> / 5
-	                                            </div>
-	                                            <hr>
-	                                            <p><c:out value='${r["INFOREVIEWCONTENT"] }'/></p>
-	                                        </div>
-	                                    </div>
+		                                	<c:if test="${r['INFOREVIEWSTATUS']==1}">
+			                                    <div class="comment">
+			                                        <img class="comment-avatar pull-left" alt="" src="images/blog/avator1.png">
+			                                        
+			                                        <div class="comment-body">
+			                                            <h4 class="comment-author"><c:out value='${r["NAME"] }'/></h4>
+			                                            <div class="comment-date"><c:out value='${r["INFOREVIEWDATE"] }'/></div>
+			                                            <div class="reviewPoint">
+			                                                평점 <c:out value='${r["INFOREVIEWPOINT"] }'/> / 5
+			                                            </div>
+			                                            <hr>
+			                                            <p><c:out value='${r["INFOREVIEWCONTENT"] }'/></p>
+			                                            <form name="updateInfoReview" action="${pageContext.request.contextPath }/info/updateInfoReview?infoReviewNum=${r['INFOREVIEWNUM']}?infoupNum=${r['INFOUPNUM']}" method="post">
+							                                <button class="btn" type="submit">리뷰 수정</button> 
+							                            </form>
+							                            <br>
+							                            <form name="deleteInfoReview" action="${pageContext.request.contextPath }/info/status0InfoReview?infoReviewNum=${r['INFOREVIEWNUM']}" method="post">
+							                                <button class="btn" type="submit">리뷰 삭제</button> 
+							                            </form>
+			                                        </div>
+			                                    </div>
+		                                    </c:if>
                                     </c:forEach>
+                                    </c:if>
                                 </li><!-- Comments-list li end -->
                             </ul><!-- Comments-list ul end -->
                         </div><!-- Post comment end -->

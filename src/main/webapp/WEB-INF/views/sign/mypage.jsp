@@ -62,6 +62,7 @@
 					  			</div>
 					  		</a>
 						  </li>
+						  <c:if test="${!empty map}">
 						  <li>
 								<a class="animated fadeIn" href="#tab_c" data-toggle="tab">
 									<span class="tab-icon"><i class="fa fa-android"></i></span>
@@ -70,6 +71,7 @@
 									</div>
 								</a>
 						  </li>
+						  </c:if>
 					  	<li>
 						  	<a class="animated fadeIn" href="#tab_b" data-toggle="tab">
 								  <!-- <span class="tab-icon"><i class="fa fa-briefcase"></i></span> -->
@@ -232,8 +234,11 @@
 									<div class="col-md-4 col-sm-4 wow fadeInDown" data-wow-delay=".5s">
 										<button onclick="detailView()">
 										<div class="service-content">
-											<span class="service-image"><img class="img-responsive" src="images/pages/service-1.jpg" alt="" /></span>
-											<h3>제목Multipurpose Concept</h3>
+											<span class="service-image">
+												<img class="img-supupload_img_f" src="${path}/resources/images/member/${map['FILERENAME'] }" width="180px" height="200px"/>
+											</span>
+											
+											<h3>${map['SUPUPTITLE'] }</h3>
 											
 										</div>
 										</button>
@@ -363,16 +368,14 @@
 <br>
 요금 등 서비스 이용으로 발생한 분쟁에 대해 소송이 제기될 경우 회사의 본사 소재지를 관할하는 법원을 전속 관할법원으로 합니다.
 							</div>
-								<form class="login100-form validate-form" action="${path}/member/requestsup.do" >
+								<form class="login100-form validate-form" action="${path}/member/requestsup.do" enctype="multipart/form-data" method="post">
 								<input class="input100" type="hidden" name="memberNum" value=${members.memberNum }>
-								<%-- <div class="wrap-input100 validate-input m-b-23 idname" reauired>
-									<span class="label-input100"></span>
-									<input class="input100" type="hidden" name="email" value=${members.email }>
-									<input
-										class="input100" type="number" name="code"
-										placeholder="인증번호"> <span class="focus-input100"
-										data-symbol="&#xf206;"></span>
-								</div> --%>
+								<input  type="file" class="custom-file-input" name="upFile" id="upFile"> 
+								<input  type="file" class="custom-file-input" name="upFile" id="upFile">
+								<input  type="file" class="custom-file-input" name="upFile" id="upFile">
+								<input  type="file" class="custom-file-input" name="upFile" id="upFile">
+								<input  type="file" class="custom-file-input" name="upFile" id="upFile"> 
+								<input type ="text" class="custom-file-input" name="suplvContent" placeholder="asdasdadasd">
 								<input type="submit" class="btn btn-dark inbtn-10" value="신청하기" >
 							</form>	
 							</div>							 
@@ -515,4 +518,5 @@
 		}
 	}
 	</script>
+>>>>>>> origin/sik2
 <jsp:include page="/WEB-INF/views/common/footer.jsp"/>

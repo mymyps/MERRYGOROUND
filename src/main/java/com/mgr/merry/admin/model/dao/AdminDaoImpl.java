@@ -86,7 +86,60 @@ public class AdminDaoImpl implements AdminDao{
 		return session.selectList("admin.boardPage");
 	}
 	
+	@Override
+	public List<Map<String, String>> supBoard(SqlSessionTemplate session) {
+		return session.selectList("admin.supBoard");
+	}
 	
+	@Override
+	public List<Map<String, String>> supportersList(SqlSessionTemplate session) {
+		return session.selectList("admin.supportersList");
+	}
 	
+	@Override
+	public List<Map<String, String>> supportersPay(SqlSessionTemplate session) {
+		return session.selectList("admin.supportersPay");
+	}
+	
+	@Override
+	public List<Map<String, String>> users(SqlSessionTemplate session) {
+		return session.selectList("admin.usersAdmin");
+	}
+	
+	@Override
+	public List<Map<String, String>> location(SqlSessionTemplate session) {
+		return session.selectList("admin.locationAdmin");
+	}
+	
+	@Override
+	public List<Map<String, String>> thema(SqlSessionTemplate session) {
+		return session.selectList("admin.themaAdmin");
+	}
+	
+	@Override
+	public List<Map<String, String>> celtify(SqlSessionTemplate session) {
+		return session.selectList("admin.celtify");
+	}
+	
+	@Override
+	public int themaAdd(SqlSessionTemplate sesstion, String strTmp) {
+		return sesstion.selectOne("admin.themaAdd", strTmp);
+	}
+	
+	@Override
+	public int themaAddAdd(SqlSessionTemplate sesstion, String strTmp) {
+		return sesstion.insert("admin.themaAddAdd", strTmp);
+	}
+	
+	@Override
+	public Map<String, String> celtifyData(SqlSessionTemplate session, int memberNum) {
+		return session.selectOne("admin.celtifyData", memberNum);
+	}
+	
+	@Override
+	public int cletifyAdmin(SqlSessionTemplate session, int memberNum) {
+		return session.update("admin.cletifyAdmin", memberNum);
+	}
+
 
 }
