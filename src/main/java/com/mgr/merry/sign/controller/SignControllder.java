@@ -1,6 +1,7 @@
 package com.mgr.merry.sign.controller;
 
 import java.io.File;
+import java.io.IOException;
 import java.util.Properties;
 import java.util.UUID;
 
@@ -27,12 +28,12 @@ import org.springframework.web.bind.support.SessionStatus;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.mgr.merry.admin.model.vo.AdminCalendar;
 import com.mgr.merry.common.SMTPTemplate;
 import com.mgr.merry.sign.model.service.SignService;
 import com.mgr.merry.sign.model.vo.Members;
-
+@SessionAttributes(value= {"loginMember"}) 
 //session
-@SessionAttributes(value= {"loginMember"})
 @Controller
 public class SignControllder {
 	@Autowired
@@ -50,34 +51,45 @@ public class SignControllder {
 	public String signup() {
 		return "sign/signup";
 	}
-	//회원가입
+	//아이디 중복 확인
+	@RequestMapping("/sign/checkId.do")
+	public void calSave(Members m, HttpServletResponse res) throws IOException {
+		//비지니스 로직
+		System.out.println("checkid"+m);
+		Members result = service.checkId(m);
+		System.out.println("성공여부 : " + result);
+		if(result==null) {
+			res.getWriter().print(true);
+		}else {
+			res.getWriter().print(false);
+		}
+	}
+	// 회원가입
 	@RequestMapping("/member/membersignup.do")
-	public String membersignup(Members m, Model model,MultipartFile upFile,HttpServletRequest request) {
+	public String membersignup(Members m, Model model, MultipartFile upFile, HttpServletRequest request) {
 //		System.out.println("!!!!!!!!!!!!!!!!!" + m);
-		System.out.println("파일 이름: {}"+ upFile.getOriginalFilename());
-		System.out.println("파일 크기: {}"+ upFile.getSize());
-		
+		System.out.println("파일 이름: {}" + upFile.getOriginalFilename());
+		System.out.println("파일 크기: {}" + upFile.getSize());
+
 		// 파일 이름 변경
-	    UUID uuid = UUID.randomUUID();
-	    String saveName = uuid + "_" + upFile.getOriginalFilename();
-	    System.out.println("saveName: {}"+saveName);
-	    
-	    // 저장할 File 객체를 생성(껍데기 파일)ㄴ
-	    String saveFile=request.getSession().getServletContext().getRealPath("/resources/images/member");
-	 // 파일 실제 저장하기
+		UUID uuid = UUID.randomUUID();
+		String saveName = uuid + "_" + upFile.getOriginalFilename();
+		System.out.println("saveName: {}" + saveName);
 
-        try {
-        	upFile.transferTo(new File(saveFile + "/" + saveName));
-        	m.setProimg(saveName);
-        	System.out.println("m     :  "+m);
-     
-        } catch (Exception e) { //IlligalStateException|IOException
+		// 저장할 File 객체를 생성(껍데기 파일)ㄴ
+		String saveFile = request.getSession().getServletContext().getRealPath("/resources/images/member");
+		// 파일 실제 저장하기
 
-           e.printStackTrace();
-        }
-		
-        
-		
+		try {
+			upFile.transferTo(new File(saveFile + "/" + saveName));
+			m.setProimg(saveName);
+			System.out.println("m     :  " + m);
+
+		} catch (Exception e) { // IlligalStateException|IOException
+
+			e.printStackTrace();
+		}
+
 		m.setPw(pwEncoder.encode(m.getPw()));
 		int result = service.insertMember(m);
 		String msg = "";
@@ -92,27 +104,29 @@ public class SignControllder {
 		return "sign/msg";
 
 	}
-	//비밀번호찾기
+
+	// 비밀번호찾기
 	@RequestMapping("/member/searchpw.do")
-	public String searchpw(Members m,Model model) {
+	public String searchpw(Members m, Model model) {
 		return "sign/searchpw";
 	}
-	
+
 	@RequestMapping("/member/searchpwend.do")
 	public ModelAndView searchpwend(Members m) {
-		System.out.println("비밀번호찾기"+m);
-		ModelAndView mv= new ModelAndView();
+		System.out.println("비밀번호찾기" + m);
+		ModelAndView mv = new ModelAndView();
 		mv.setViewName("sign/searchpwend");
-		mv.addObject("email",m.getEmail());
-		mv.addObject("id",m.getId());
+		mv.addObject("email", m.getEmail());
+		mv.addObject("id", m.getId());
 		return mv;
 	}
+
 	@RequestMapping("/sign/updatepw")
-	public String pwUpdate(Members m,Model model) {
+	public String pwUpdate(Members m, Model model) {
 		m.setPw(pwEncoder.encode(m.getPw()));
-		System.out.println("updatepass"+m);
+		System.out.println("updatepass" + m);
 		int result = service.pwUpdate(m);
-		
+
 		String msg = "";
 		String loc = "";
 		if (result > 0) {
@@ -124,37 +138,37 @@ public class SignControllder {
 		model.addAttribute("loc", loc);
 		return "sign/msg";
 	}
+
 	@RequestMapping("/emailAuth.do")
 	public ModelAndView emailAuth(HttpServletResponse response, HttpServletRequest request) throws Exception {
 		String email = request.getParameter("email");
 		String authNum = RandomNum();
 
-		 sendEmail(email,authNum);
+		sendEmail(email, authNum);
 
-		SMTPTemplate.sendmail("인증번호 : "+authNum, email, "현식");
+		SMTPTemplate.sendmail("인증번호 : " + authNum, email, "현식");
 
 		ModelAndView mv = new ModelAndView();
 		mv.setViewName("sign/mail");
 		mv.addObject("email", email);
 		mv.addObject("authNum", authNum);
-		
+
 		return mv;
 	}
-	
-	
+
 	@RequestMapping("/signauth.do")
 	@ResponseBody
 	public String signauth(HttpServletRequest request) throws Exception {
 		System.out.println("인증메일발송");
 		String authNum = RandomNum();
 		String email = request.getParameter("email");
-		
+
 //		String cupemail=request.getParameter("cupemail");
 //		System.out.println("####!@#cupemail"+cupemail);
-		
+
 //		 sendEmail(email,authNum);
-		SMTPTemplate.sendmail("인증번호 : "+authNum, email, "현식");
-		
+		SMTPTemplate.sendmail("인증번호 : " + authNum, email, "현식");
+
 		return authNum;
 	}
 
@@ -203,45 +217,41 @@ public class SignControllder {
 		}
 		return buffer.toString();
 	}
+	//로그인
 	@RequestMapping("/sign/memberLogin.do")
-	public String memberLogin(Members m, Model model,SessionStatus session) {
-		
-//		logger.debug(m.getId());
-//		logger.debug(m.getPw());
+	public String memberLogin(Members m, Model model,SessionStatus session, HttpServletRequest request,SessionStatus status) {
+//		m.setPw(pwEncoder.encode(m.getPw()));
+
+//		HttpSession session = request.getSession();
 		
 		Members result = service.selectMemberOne(m);
-//		logger.debug(result.toString());
-		String msg="";
-		String loc="/";
-//		if(m2.getPassword().equals(m.getPassword())) {
-//		logger.debug(pwEncoder.encode(m.getPassword()));
-//		logger.debug(result.getPassword());
-		if(pwEncoder.matches(m.getPw(), result.getPw())) {
-			msg="로그인 성공";
+		String msg = "";
+		String loc = "/";
+		if (result==null) {
+			msg = "아이디없음";
+		} 
+		else if (pwEncoder.matches(m.getPw(), result.getPw())) {
+			msg = "로그인 성공";
 			model.addAttribute("loginMember", result);
-			System.out.println(session.toString());
-		}
-		else if(m.getId()!=result.getId()) {
-			msg="아이디가 없습니다.";
-		}
-		else{
-			msg="비밀번호가 틀립니다.";
+//			session.setAttribute("loginMember", result);
 			
+		} else {
+			msg = "비밀번호가 틀립니다.";
 		}
-		
-		model.addAttribute("msg",msg);
-		model.addAttribute("loc",loc);
-		
+		model.addAttribute("msg", msg);
+		model.addAttribute("loc", loc);
+
 		return "sign/msg";
 	}
-	//로그아웃
+
+	// 로그아웃
 	@RequestMapping("/member/logout.do")
-	public String logout(HttpSession session,SessionStatus status) {
+	public String logout(HttpSession session, SessionStatus status) {
 //		session.invalidate();
-		if(!status.isComplete()) {
+		if (!status.isComplete()) {
 			status.setComplete();
 		}
 		return "redirect:/";
 	}
-	
+
 }

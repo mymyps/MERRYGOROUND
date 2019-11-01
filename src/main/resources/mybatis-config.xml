@@ -5,6 +5,7 @@
 		<typeAlias type="com.mgr.merry.common.ArrayTypeHandler" alias="arrType"/>	
 		<typeAlias type="com.mgr.merry.sign.model.vo.Members" alias="members"/> 
 		<typeAlias type="com.mgr.merry.admin.model.vo.AdminCalendar" alias="cal"/>
+		<typeAlias type="com.mgr.merry.supporters.model.vo.Supporters" alias="sup"/>
 	</typeAliases>
 	
 </configuration>

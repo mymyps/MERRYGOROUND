@@ -38,5 +38,24 @@
 		update members set supstatus=1 where memberNum=#{num}
 	</update>
 	
+	<select id="selectSup" resultType="sup" parameterType="_int">
+		select * from SUPPORTERS where membernum=#{memNo}
+	</select>
+	<select id="selectSupt3" resultType="map" parameterType="_int">
+		select * from supporters 
+			inner join supporters_upload using(supNum)
+			inner join supporters_upload_img using(supupNum)
+			where supNum=#{supNum}
+	</select>
+	<select id="selectMemberOne2" resultType="_int" parameterType="members">
+		select count(*) from members where id=#{id}
+	</select>
+	
+	<update id="updatestatus" parameterType="map">
+		update members set supstatus=1 where memberNum=#{memberNum}
+	</update>
+	<select id="checkId" resultType="members" parameterType="members">
+		select * from members where id=#{id}
+	</select>
 	
 </mapper>
