@@ -36,4 +36,5 @@ public interface AdminDao {
 	Map<String, String> celtifyData(SqlSessionTemplate session, int memberNum);
 	int cletifyAdmin(SqlSessionTemplate session, int memberNum);
 	
+
 }

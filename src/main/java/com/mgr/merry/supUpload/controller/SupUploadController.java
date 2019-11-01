@@ -31,4 +31,9 @@ public class SupUploadController {
 		return mv;
 	}
 	
+	@RequestMapping("/supUp/supReviewForm.do")
+	public String supReviewForm(/* int infoupNum */) {
+		return "supUp/supReviewForm";
+	}
+	
 }

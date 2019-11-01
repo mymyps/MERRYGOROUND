@@ -17,4 +17,6 @@ public interface InfoReviewDao {
 
 	List<InfoReview> selectReview(SqlSessionTemplate session, int infoupNum);
 
+	int status0InfoReview(SqlSessionTemplate session, int infoReviewNum);
+
 }

@@ -35,4 +35,5 @@ public interface AdminService {
 	Map<String, String> celtifyData(int memberNum);
 	int cletifyAdmin(int memberNum);
 
+
 }

@@ -112,8 +112,7 @@
                     		<div class="row" id="themarow2">
 						<div class="col-md-8 ts-padding2 themaContent">
 							<h3 style="margin-top: -2px;">
-<%-- 							<a href="${path}/info/infoView?infoupNum=${list.infoupNum}" id="themenameBrown">${list.infoUpTitle}</a> --%>
-                            <c:out value='${list.infoupTitle}'/>
+ 							<a href="${pageContext.request.contextPath }/info/infoView.do?infoupNum=${list.infoupNum }"><c:out value='${list.infoupTitle}'/></a>
 							</h3>
 							<p>이용시간 : <c:out value='${list.infoupTime}'/> / 전화번호 : <c:out value='${list.infoupPhone}'/></p>
 							<hr style="height: 0.5px; background-color: rgb(214, 206, 194);" >

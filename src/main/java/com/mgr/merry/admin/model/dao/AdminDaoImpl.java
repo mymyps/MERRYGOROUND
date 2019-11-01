@@ -141,4 +141,5 @@ public class AdminDaoImpl implements AdminDao{
 		return session.update("admin.cletifyAdmin", memberNum);
 	}
 
+
 }
