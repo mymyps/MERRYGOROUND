@@ -16,9 +16,9 @@ public class InfoUpload {
    private String infoupPhone;
    private String infoupTime;
    private String infoupStatus;
+   private String infoAddr;
  
    //테이블 join해서 resultType info.model.vo로 받기위해 변수 추가할게요(info_upload , infoupimg, thema, location 4개 테이블 조인)
-
     //InfoUploadImg
 	private int fileNum;
 	private String fileReName;

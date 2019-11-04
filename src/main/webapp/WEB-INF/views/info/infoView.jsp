@@ -42,7 +42,7 @@
                             </div>
                             <div class="infocontent2">
                                 <p>${info.THEMANAME }</p>
-                                <p>${info.LOCALNAME }</p>
+                                <p>${info.INFOADDR }</p>
                                 <p>${info.INFOUPPAYMENT }</p>
                                 <p>${info.INFOUPPHONE }</p>
                                 <p>${info.INFOUPTIME }</p>
@@ -71,6 +71,7 @@
                         <div class="comments-form">
                             <h3>멤버 리뷰 등록하기</h3>
                             <form name="insertReview" action="${pageContext.request.contextPath }/infoReview/insertInfoReview?infoupNum=${info.INFOUPNUM}" method="post">
+                                <input type="text" value="${loginMember.memberNum}" name="memNum">
                                 <div class="form-group">
                                 평점 <input type="number" step="1" max="5" min="0" name="infoReviewPoint" /><br><br>
                                     <input type="text" name="infoReviewContent" class="form-control required-field" id="message" placeholder="" rows="4" required></textarea>

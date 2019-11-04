@@ -96,7 +96,7 @@
  										<!-- <input type="text" class="form-control start-postcode"
 											name="post-number" placeholder="우 편 번 호"
 											style="text-align: center" id="st-addr-post" readonly> -->
-										<input type="text" class="form-control start-addr" name="start-addr"
+										<input type="text" class="form-control start-addr" name="infoAddr"
 											placeholder="주소를 검색해주세요" onkeydown="JavaScript:Enter_Check(1);"
 											id="st-addr" readonly>
 										<div class="input-group-append">
@@ -104,10 +104,6 @@
 												id="button-addon1" onclick="execDaumPostcode(1)">주소 찾기</button>
 										</div>
 									</div>
-								
-									<input type="text" class="form-control start-addr-detail"
-										name="start-detail" id="address" placeholder="상세 주소를 입력해주세요"
-										value="" required>
 								</div>
 								
 								<br>

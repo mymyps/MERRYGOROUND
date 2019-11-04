@@ -4,7 +4,7 @@
 	
 	<insert id="insertInfo" parameterType="map">
 		<!-- #{localNum}, #{supNum}, #{themaNum} 추가해야함 -->
-		INSERT INTO INFO_UPLOAD VALUES(SEQ_INFO_UPLOAD_NUM.NEXTVAL, #{localNum}, #{supNum}, #{themaSubNum},#{infoupTitle}, default, #{infoupPayment}, #{infoupPhone}, #{infoupTime}, default)
+		INSERT INTO INFO_UPLOAD VALUES(SEQ_INFO_UPLOAD_NUM.NEXTVAL, #{localNum}, #{supNum}, #{themaSubNum},#{infoupTitle}, default, #{infoupPayment}, #{infoupPhone}, #{infoupTime}, default, #{infoAddr})
 		<!-- <selectKey keyProperty="infoupNum" resultType="_int" order="AFTER">
 			SELECT SEQ_INFO_UPLOAD_NUM.CURRVAL FROM DUAL
 		</selectKey> -->
