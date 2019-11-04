@@ -1,241 +1,343 @@
-<%@ page language="java" contentType="text/html;charset=utf-8" pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html;charset=utf-8"
+	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
-<c:set var = "path" value="${pageContext.request.contextPath}"/>
-<jsp:include page ="/WEB-INF/views/common/header.jsp">
-<jsp:param name ="pageTitle" value=""/>
+<c:set var="path" value="${pageContext.request.contextPath}" />
+<jsp:include page="/WEB-INF/views/common/header.jsp">
+	<jsp:param name="pageTitle" value="지도로 찾기" />
 </jsp:include>
-<!--Tmap API관련   -->
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-    <!--appKey = 어쩌구 -> Tmap사이트에서 받은 고유키 입니당-->
-    <script src="https://api2.sktelecom.com/tmap/js?version=1&format=javascript&appKey=9b9bcfec-7c62-4c75-8854-04b5c8e68f51"></script>
-    
 
-<script>
-	
-// 	$(document).ready(function() {
-// 		initTmap();
-// 	});
-	
-// 	function setVariables(){    
-// 	    zoom = 16;  // zoom level입니다.  0~19 레벨을 서비스 하고 있습니다. 
-// 	}
-	
-// 	function initTmap(){
-// 		// map 생성
-// 		// Tmapv2.Map을 이용하여, 지도가 들어갈 div, 넓이, 높이를 설정합니다.
-// 		map = new Tmapv2.Map("map",  // "map" : 지도가 표시될 div의 id
-// 		{
-// 			center: new Tmapv2.LatLng(37.566481622437934,126.98502302169841), // 지도 초기 좌표
-// 			width: "100%", // map의 width 설정
-// 			height: "400px" // map의 height 설정
-// 		});
+<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=a70d9f47dd92a2c810ce5d8c69f6b406"></script>
+
+<section style="padding: 0px 0;">
+<div id="map"
+			style="width: 100%; height: 650px; position: relative; overflow: hidden;">
+
+    </div>
+	<div class="map_wrap">
+		<p id="result1"></p>
+		<p id="result2"></p>
+					<form class="navbar-form navbar-left" action="/action_page.php">
+      <div class="form-group">
+        <input type="text" class="form-control" placeholder="Search" >
+      </div>
+      <button type="submit" class="btn btn-default">Submit</button>
+    </form>
 		
-// 		map.setZoom(12);
 
-// 	//마커 표시하기 
-// 	var marker = new Tmapv2.Marker({
-// 		position: new Tmapv2.LatLng(37.566481622437934,126.98502302169841),
-// 		map: map
-// 	});	
-	
-// 	//선 그리기 
-//     var polyline = new Tmapv2.Polyline({
-//         path: [new Tmapv2.LatLng(37.566381,126.985123),
-//         	new Tmapv2.LatLng(37.566581,126.985123),
-//         	new Tmapv2.LatLng(37.566381,126.985273),
-//         	new Tmapv2.LatLng(37.566581,126.985423),
-//         	new Tmapv2.LatLng(37.566381,126.985423)],
-//         strokeColor: "#dd00dd",
-//         strokeWeight: 6,
-//         map: map
-//     });
-	
-// 	//다각형 그리기 
-// 	   var polygon = new Tmapv2.Polygon({
-//         paths: [new Tmapv2.LatLng(37.566610,126.985666),
-//             new Tmapv2.LatLng(37.566595,126.985985),
-//             new Tmapv2.LatLng(37.566512,126.986071),
-//             new Tmapv2.LatLng(37.566397,126.985894),
-//             new Tmapv2.LatLng(37.566395,126.985664)],
-//         fillColor:"pink",
-//         draggable: true,
-//         map: map
-//     });
-	
-// 	} 
+		<div id="menu_wrap" class="bg_white">
+			<div class="option">
+				<div>
+					<input type="text" value="" placeholder="키워드를 입력하세요"
+						id="keyword" size="15">
+					<button id="submit">검색하기</button>
+				</div>
 
-							
-// 1. 지도 띄우기
+			</div>
+			<hr>
+			<ul id="placesList"></ul>
+			<div id="pagination"></div>
+		</div>
+
+	</div>
+
+	<script>
 	
-	$(document).ready(function() {
-		initTmap();
-	});
-	
-	function setVariables(){    
-	    zoom = 16;  // zoom level입니다.  0~19 레벨을 서비스 하고 있습니다. 
-	}
-	
-	
-	function initTmap(){
-		// map 생성
-		// Tmapv2.Map을 이용하여, 지도가 들어갈 div, 넓이, 높이를 설정합니다.
-		map = new Tmapv2.Map("map",  // "map" : 지도가 표시될 div의 id
-		{
-			center: new Tmapv2.LatLng(37.566481622437934,126.98502302169841), // 지도 초기 좌표
-			width: "100%", // map의 width 설정
-			height: "400px" // map의 height 설정
+	/* 지도~ */
+	var markers = [];
+	var mapContainer = document.getElementById('map'), // 지도를 표시할 div 
+	mapOption = {
+		center : new kakao.maps.LatLng(37.566826, 126.9786567), // 지도의 중심좌표
+		level : 3
+	};
+        //맵 생성
+		var map = new kakao.maps.Map(mapContainer, mapOption);
+        
+		/* 접속위치를 받아오기 */
+		// HTML5의 geolocation으로 사용할 수 있는지 확인합니다 
+		if (navigator.geolocation) {
+
+			// GeoLocation을 이용해서 접속 위치를 얻어옵니다
+			navigator.geolocation.getCurrentPosition(function(position) {
+
+				var lat = position.coords.latitude; // 위도
+				var lon = position.coords.longitude; // 경도
+				
+
+				var locPosition = new kakao.maps.LatLng(lat, lon), // 마커가 표시될 위치를 geolocation으로 얻어온 좌표로 생성합니다
+				message = '<div style="padding:5px;">현재위치</div>'; // 인포윈도우에 표시될 내용입니다
+				
+				var resultDiv1 = document.getElementById('result1');
+				var resultDiv2 = document.getElementById('result2');
+				
+				resultDiv1.innerHTML = lat;
+				resultDiv2.innerHTML = lon;
+
+				// 마커와 인포윈도우를 표시합니다
+				displayMarker(locPosition, message);
+
+			});
+
+		} else { // HTML5의 GeoLocation을 사용할 수 없을때 마커 표시 위치와 인포윈도우 내용을 설정합니다
+
+			var locPosition = new kakao.maps.LatLng(33.450701, 126.570667), message = 'geolocation을 사용할수 없어요..'
+
+			displayMarker(locPosition, message);
+		}
+		//지도에 마커와 인포윈도우를 표시하는 함수입니다
+		function displayMarker(locPosition, message) {
+
+			// 마커를 생성합니다
+			var marker = new kakao.maps.Marker({
+				map : map,
+				position : locPosition
+			});
+
+			var iwContent = message, // 인포윈도우에 표시할 내용
+			iwRemoveable = true;
+
+			// 인포윈도우를 생성합니다
+			var infowindow = new kakao.maps.InfoWindow({
+				content : iwContent,
+				removable : iwRemoveable
+			});
+
+			// 인포윈도우를 마커위에 표시합니다 
+			infowindow.open(map, marker);
+
+			// 지도 중심좌표를 접속위치로 변경합니다
+			markers.push(marker);
+			map.setCenter(locPosition);
+		}
+
+		/* 이동된 위치 중심좌표 반환하기 */
+		// 마우스 드래그로 지도 이동이 완료되었을 때 마지막 파라미터로 넘어온 함수를 호출하도록 이벤트를 등록합니다
+		kakao.maps.event.addListener(map, 'dragend', function() {
+
+			// 지도 중심좌표를 얻어옵니다 
+			var latlng = map.getCenter();
+
+			var y = latlng.getLat();
+			var x = latlng.getLng();
+
+			/* var message = '변경된 지도 중심좌표는 ' + latlng.getLat() + ' 이고, ';
+			message += '경도는 ' + latlng.getLng() + ' 입니다'; */
+			
+			var resultDiv1 = document.getElementById('result1');
+			var resultDiv2 = document.getElementById('result2');
+
+			resultDiv1.innerHTML = y;
+			resultDiv2.innerHTML = x;
 		});
 		
-		map.setZoom(12);
-map.setCenter(new Tmap.LonLat("127.058908811749", "37.52084364186228").transform("EPSG:4326", "EPSG:3857"), 12);
-routeLayer = new Tmap.Layer.Vector("route");
-map.addLayer(routeLayer);
-
-markerStartLayer = new Tmap.Layer.Markers("start");
-markerEndLayer = new Tmap.Layer.Markers("end");
-markerWaypointLayer = new Tmap.Layer.Markers("waypoint");
-markerWaypointLayer2 = new Tmap.Layer.Markers("waypoint2");
-pointLayer = new Tmap.Layer.Vector("point");
-
-// 2. 시작, 도착 심볼찍기
-// 시작
-map.addLayer(markerStartLayer);
-
-var size = new Tmap.Size(24, 38);
-var offset = new Tmap.Pixel(-(size.w / 2), -size.h);
-var icon = new Tmap.IconHtml("<img src='http://tmapapis.sktelecom.com/upload/tmap/marker/pin_r_m_s.png' />", size, offset);
-var marker_s = new Tmap.Marker(new Tmap.LonLat("127.02810900563199", "37.519892712436906").transform("EPSG:4326", "EPSG:3857"), icon);
-markerStartLayer.addMarker(marker_s);
-
-// 도착
-map.addLayer(markerEndLayer);
-
-var size = new Tmap.Size(24, 38);
-var offset = new Tmap.Pixel(-(size.w / 2), -size.h);
-var icon = new Tmap.IconHtml("<img src='http://tmapapis.sktelecom.com/upload/tmap/marker/pin_r_m_e.png' />", size, offset);
-var marker_e = new Tmap.Marker(new Tmap.LonLat("127.13281976335786", "37.52130314703887").transform("EPSG:4326", "EPSG:3857"), icon);
-markerEndLayer.addMarker(marker_e);
-
-//경유지 마커 제거
-markerWaypointLayer.clearMarkers();
-markerWaypointLayer2.clearMarkers();
-
-
-// 3. 경유지 심볼 찍기
-map.addLayer(markerWaypointLayer);
-
-var size = new Tmap.Size(24, 38);
-var offset = new Tmap.Pixel(-(size.w / 2), -size.h); 
-var icon = new Tmap.IconHtml("<img src='http://tmapapis.sktelecom.com/upload/tmap/marker/pin_b_m_p.png' />", size, offset);
-var marker = new Tmap.Marker(new Tmap.LonLat("127.04724656694417","37.524162226778515").transform("EPSG:4326", "EPSG:3857"), icon);
-markerWaypointLayer.addMarker(marker);
-
-var size = new Tmap.Size(24, 38);
-var offset = new Tmap.Pixel(-(size.w / 2), -size.h);
-var icon = new Tmap.IconHtml("<img src='http://tmapapis.sktelecom.com/upload/tmap/marker/pin_b_m_p.png' />", size, offset);
-var marker = new Tmap.Marker(new Tmap.LonLat("127.10887300128256","37.5289781669373").transform("EPSG:4326", "EPSG:3857"), icon);
-markerWaypointLayer.addMarker(marker);
-
-markerWaypointLayer2.clearMarkers();
-
-
-// 4. 경로 탐색 API 사용요청
-var startX = 127.02810900563199;
-var startY = 37.519892712436906;
-var endX = 127.13281976335786;
-var endY = 37.52130314703887;
-var passList = "127.04724656694417,37.524162226778515_127.10887300128256,37.5289781669373";
-var prtcl;
-var headers = {}; 
-headers["appKey"]="발급appKey";
-$.ajax({
-		method:"POST",
-		headers : headers,
-		url:"https://apis.openapi.sk.com/tmap/routes?version=1&format=xml",//
-		async:false,
-		data:{
-			startX : startX,
-			startY : startY,
-			endX : endX,
-			endY : endY,
-			passList : passList,
-			reqCoordType : "WGS84GEO",
-			resCoordType : "EPSG3857",
-			angle : "172",
-			searchOption : "0",
-			trafficInfo : "Y" //교통정보 표출 옵션입니다.
-		},
-		success:function(response){
-			prtcl = response;
 		
-		//5. 경로탐색 결과 Line 그리기
-		//출발지,도착지 마커 제거
-		markerStartLayer.clearMarkers();
-		markerEndLayer.clearMarkers();
-		//경유지 마커 제거
-		markerWaypointLayer.clearMarkers();
+		
+		// 지도 위에 표시되고 있는 마커를 모두 제거합니다
+		function removeMarker() {
+			for (var i = 0; i < markers.length; i++) {
+				markers[i].setMap(null);
+			}
+			markers = [];
+		}
+		
+		// 검색 결과 목록이나 마커를 클릭했을 때 장소명을 표출할 인포윈도우를 생성합니다
+		var infowindow = new kakao.maps.InfoWindow({
+			zIndex : 1
+		});
+		
+		/* 검색 버튼 클릭시!! 로직*/
+		$('#submit').click(function(){
+			
+			var keyword=$('#keyword').val();
+			var y=$('#result1').html();
+			console.log(y);
+			var x=$('#result2').html();
+			
+			$.ajax({
+				url:"<%=request.getContextPath()%>/search/mapSearch",
+				type : "post",
+				data : {
+					keyword : keyword,
+					y : y,
+					x : x
+				},
+				dataType : "JSON",
+				success : function(data) {
+					
+					removeMarker();
+
+					var positions = data;
+					var pagination=Math.ceil(positions.length/5+positions.length%5*0.01);
+					var cPage=1;
+					if(positions.length==0){
+						alert('반경 70km 이내에 검색결과가 없습니다.');
+					}else{
+						displayPlaces(data,cPage,pagination);
 						
-		var trafficColors = {
-				extractStyles:true,
-				
-				/* 실제 교통정보가 표출되면 아래와 같은 Color로 Line이 생성됩니다. */
-				trafficDefaultColor:"#000000", //Default
-				trafficType1Color:"#009900", //원할
-				trafficType2Color:"#8E8111", //지체
-				trafficType3Color:"#FF0000"  //정체
-				
-			};    
-		var kmlForm = new Tmap.Format.KML(trafficColors).readTraffic(prtcl);
-		routeLayer = new Tmap.Layer.Vector("vectorLayerID"); //백터 레이어 생성
-		routeLayer.addFeatures(kmlForm); 교통정보를 백터 레이어에 추가   
-		
-		map.addLayer(routeLayer); // 지도에 백터 레이어 추가
-		
-		markerWaypointLayer2 = new Tmap.Layer.Markers("waypoint2");
-		map.addLayer(markerWaypointLayer2);
-		
-		var size = new Tmap.Size(24, 38);
-		var offset = new Tmap.Pixel(-(size.w / 2), -size.h); 
-		var icon = new Tmap.IconHtml("<img src='http://tmapapis.sktelecom.com/upload/tmap/marker/pin_b_m_p.png' />", size, offset);
-		var marker = new Tmap.Marker(new Tmap.LonLat("127.07389565460413","37.5591696189164").transform("EPSG:4326", "EPSG:3857"), icon);
-		markerWaypointLayer2.addMarker(marker);
-		
-		var size = new Tmap.Size(24, 38);
-		var offset = new Tmap.Pixel(-(size.w / 2), -size.h);
-		var icon = new Tmap.IconHtml("<img src='http://tmapapis.sktelecom.com/upload/tmap/marker/pin_b_m_p.png' />", size, offset);
-		var marker = new Tmap.Marker(new Tmap.LonLat("127.13346617572014", "37.52127761904626").transform("EPSG:4326", "EPSG:3857"), icon);
-		markerWaypointLayer2.addMarker(marker);
-		
-		
-		
-		// 6. 경로탐색 결과 반경만큼 지도 레벨 조정
-		map.zoomToExtent(routeLayer.getDataExtent());
-		
-	},
-	error:function(request,status,error){
-		console.log("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
-	}
-});
+						displayPagination(data,cPage,pagination);
+					}
+					
+				},
 
+				error : function(data) {
+				}
 
+			})
+		})
+		function displayPlaces(places,cPage,pagination){
+			
+			var listEl = document.getElementById('placesList'), 
+		    menuEl = document.getElementById('menu_wrap'),
+		    fragment = document.createDocumentFragment(), 
+		    bounds = new kakao.maps.LatLngBounds(), 
+		    listStr = '';
+			
+			// 검색 결과 목록에 추가된 항목들을 제거합니다
+		    removeAllChildNods(listEl);
 
+		    // 지도에 표시되고 있는 마커를 제거합니다
+		    removeMarker();
+		    
+		    
+		    for ( var i=0; i<places.length; i++ ) {
+		    	console.log('여기 들어오니?');
 
-</script> 
-	
-	
-	
-</script>
+		        // 마커를 생성하고 지도에 표시합니다
+		        var placePosition = new kakao.maps.LatLng(places[i].loc_y, places[i].loc_x);
+		        var startNo=(cPage-1)*5+1;
+		        var endNo=startNo+4;
+		         if(i>=startNo-1 && i<=endNo-1){
+		        	 var itemEl=getListItem(i, places[i]);
+		        } 
+		          // 검색 결과 항목 Element를 생성합니다
 
-<section id="content">
-<div id="map_div">
- 
- 
- </div>
- 
- <p id="result">요기는 Tmap조회 결과 들어갈 공간이에요!!!</p>
+		         /*    var coords = new kakao.maps.LatLng(places[0].loc_y,
+		            		places[0].loc_x);  */
+							
+				    var marker = new kakao.maps.Marker({
+				        map: map, // 마커를 표시할 지도
+				        position: placePosition // 마커를 표시할 위치
+				    });
+				    marker.setMap(map);
+				    markers.push(marker); 
+				    
+				 // 검색된 장소 위치를 기준으로 지도 범위를 재설정하기위해
+			        // LatLngBounds 객체에 좌표를 추가합니다
+			        bounds.extend(placePosition);
+				    
+				   (function(marker,title,addr,tel,pCode,placePosition){
+					   kakao.maps.event.addListener(marker, 'click',
+								function() {
+						   var content = '<div style="padding:5px;z-index:1; width:300px;height:100px;">'
+								   +'<p>'+title+'</p>'
+								   +'<p>'+addr+'</p>'
+								   +'<p>'+tel+'</p>'
+								   +'<a href="<%=request.getContextPath()%>/search/detailView?pCode='+pCode+'&from=2019-19-24&to=2019-19-25"><button>예매하러가기</button></a>'
+									+ '</div>';
+							
+
+					infowindow.setContent(content);
+					infowindow.open(map, marker);
+					map.setCenter(placePosition);
+								});
+					   if(i>=startNo-1 && i<=endNo-1){
+					   itemEl.onclick =function() {
+						   var content = '<div style="padding:5px;z-index:1; width:300px;height:100px;">'
+							   +'<p>'+title+'</p>'
+							   +'<p>'+addr+'</p>'
+							   +'<p>'+tel+'</p>'
+							   +'<a href="<%=request.getContextPath()%>/search/detailView?pCode='+pCode+'"><button>예매하러가기</button></a>'
+								+ '</div>';
+						
+
+						infowindow.setContent(content);
+						infowindow.open(map, marker);
+						map.setCenter(placePosition);
+						
+			            };
+					   }
+				   })(marker,places[i].pName,places[i].pAddr,places[i].pTel,places[i].pCode,placePosition);
+				    
+/* 				    map.setCenter(coords); */
+				if(i>=startNo-1 && i<=endNo-1){
+		        fragment.appendChild(itemEl);
+				}
+		    }
+
+		    // 검색결과 항목들을 검색결과 목록 Elemnet에 추가합니다
+		    listEl.appendChild(fragment);
+		    menuEl.scrollTop = 0;
+
+		    // 검색된 장소 위치를 기준으로 지도 범위를 재설정합니다
+		    map.setBounds(bounds);
+		}
+		
+		
+		// 검색결과 항목을 Element로 반환하는 함수입니다
+		function getListItem(index, places) {
+
+		    var el = document.createElement('li'),
+		    itemStr = '<span class="markerbg marker_' + (index+1) + '"></span>' +
+		                '<div class="info">' +
+		                '   <h5>' + places.pName + '</h5>';
+
+		    
+		        itemStr += '    <span>' +  places.pAddr  + '</span>'; 
+
+		                 
+		      itemStr += '  <span class="tel">' + places.pTel  + '</span>' +
+		                '</div>';           
+
+		    el.innerHTML = itemStr;
+		    el.className = 'item';
+
+		    return el;
+		}
+		
+	 	// 검색결과 목록 하단에 페이지번호를 표시는 함수입니다
+		function displayPagination(places,cPage,pagination) {
+		    var paginationEl = document.getElementById('pagination'),
+		        fragment = document.createDocumentFragment(),
+		        i; 
+
+		    // 기존에 추가된 페이지번호를 삭제합니다
+		    while (paginationEl.hasChildNodes()) {
+		        paginationEl.removeChild (paginationEl.lastChild);
+		    }
+
+		    for (i=1; i<=pagination; i++) {
+		        var el = document.createElement('a');
+		        el.href = "#";
+		        el.innerHTML = i;
+
+		        if (i===cPage) {
+		            el.className = 'on';
+		        } else {
+		            el.onclick = (function(i) {
+		                return function() {
+		                	cPage=i;
+		                	displayPlaces(places,cPage,pagination);
+		                	displayPagination(places,cPage,pagination)
+		                }
+		            })(i);
+		        }
+
+		        fragment.appendChild(el);
+		    }
+		    paginationEl.appendChild(fragment);
+		} 
+		
+		// 검색결과 목록의 자식 Element를 제거하는 함수입니다
+		function removeAllChildNods(el) {   
+		    while (el.hasChildNodes()) {
+		        el.removeChild (el.lastChild);
+		    }
+		}
+		
+	</script>
+
 
 </section>
 
-<jsp:include page="/WEB-INF/views/common/footer.jsp"/>
+<jsp:include page="/WEB-INF/views/common/footer.jsp" />

@@ -1,83 +1,113 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<beans xmlns="http://www.springframework.org/schema/beans"
-	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-	xmlns:tx="http://www.springframework.org/schema/tx"
+
+
+<beans
+	xsi:schemaLocation="http://www.springframework.org/schema/beans https://www.springframework.org/schema/beans/spring-beans.xsd http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-4.3.xsd http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-4.3.xsd"
 	xmlns:aop="http://www.springframework.org/schema/aop"
-	xsi:schemaLocation="http://www.springframework.org/schema/beans https://www.springframework.org/schema/beans/spring-beans.xsd http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-4.3.xsd http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-4.3.xsd">
+	xmlns:tx="http://www.springframework.org/schema/tx"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns="http://www.springframework.org/schema/beans">
 
 	<!-- Root Context: defines shared resources visible to all other web components -->
 
+
 	<!-- db연결에 필요한 데이터를 BasicDataSource객체에 넣음 -->
-	<bean id="realDataSource"
-		class="org.apache.commons.dbcp.BasicDataSource" destroy-method="close">
-		<property name="driverClassName" value="oracle.jdbc.driver.OracleDriver" />
-		<property name="url" value="jdbc:oracle:thin:@rclass.iptime.org:1521:xe" />
-		<property name="username" value="MERRYGOROUND" />
-		<property name="password" value="mgr1004" />
+
+
+
+
+	<bean destroy-method="close"
+		class="org.apache.commons.dbcp.BasicDataSource" id="realDataSource">
+		<property value="oracle.jdbc.driver.OracleDriver"
+			name="driverClassName" />
+		<property value="jdbc:oracle:thin:@rclass.iptime.org:1521:xe"
+			name="url" />
+		<property value="MERRYGOROUND" name="username" />
+		<property value="mgr1004" name="password" />
 	</bean>
+
 	<!-- 로그를 출력하기 위한 라이브러리 추가 -->
-	<bean id="dataSource"
-		class="net.sf.log4jdbc.Log4jdbcProxyDataSource">
+
+
+	<bean class="net.sf.log4jdbc.Log4jdbcProxyDataSource"
+		id="dataSource">
 		<constructor-arg ref="realDataSource" />
 		<property name="logFormatter">
 			<bean class="net.sf.log4jdbc.tools.Log4JdbcCustomFormatter">
-				<property name="loggingType" value="MULTI_LINE" />
-				<property name="sqlPrefix" value="[SQL]" />
+				<property value="MULTI_LINE" name="loggingType" />
+				<property value="[SQL]" name="sqlPrefix" />
 			</bean>
 		</property>
 	</bean>
+
 	<!-- Mybatis에서 SqlSession객체를 생성하는 factoryBean을 springbean으로 등록 -->
-	<bean id="sqlSessionFactoryBean"
-		class="org.mybatis.spring.SqlSessionFactoryBean">
+
+	<bean class="org.mybatis.spring.SqlSessionFactoryBean"
+		id="sqlSessionFactoryBean">
 		<property name="dataSource" ref="dataSource" />
-		<property name="mapperLocations"
-			value="classpath*:mapper/**/*.xml"></property>
-		<property name="configLocation"
-			value="classpath:mybatis-config.xml"></property>
+		<property value="classpath*:mapper/**/*.xml"
+			name="mapperLocations" />
+		<property value="classpath:mybatis-config.xml"
+			name="configLocation" />
 	</bean>
-	   <!-- SessionTemplate를 이용한 springbean으로 등록하여 활용  -->
-    <bean id="sqlSessionTemplate" class="org.mybatis.spring.SqlSessionTemplate">
-	     <!--위의 sqlSessionFactoryBean 이 들어옴  -->
-	     <!--생성자를 이용 , index = 매개변수의 순서-->
-	    <constructor-arg index="0" ref="sqlSessionFactoryBean"/>
-    </bean>
+
+	<!-- SessionTemplate를 이용한 springbean으로 등록하여 활용 -->
+
+	<bean class="org.mybatis.spring.SqlSessionTemplate"
+		id="sqlSessionTemplate">
+
+		<!--위의 sqlSessionFactoryBean 이 들어옴 -->
+
+
+		<!--생성자를 이용 , index = 매개변수의 순서 -->
+
+
+		<constructor-arg ref="sqlSessionFactoryBean" index="0" />
+	</bean>
 
 	<!-- 트랜젝션 처리 -->
-	<!-- <bean id="transactionManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
-		<property name="dataSource" ref="dataSource"></property>
-	</bean> -->
-	<!-- annotation -->
-	<!-- <tx:annotation-driven transaction-manager="transactionManager"/> -->
-	
-	<!-- 선언적방식으로 트랜젝션처리 -->
-	<!-- <tx:advice id="txAdvice" transaction-manager="transactionManager">
-		<tx:attributes>
-		 	<tx:method name="insert*" rollback-for="Exception"/>
-		 	<tx:method name="update*" rollback-for="Exception"/>
-		</tx:attributes>
-	</tx:advice> -->
-	<!-- aop와 연결하여 트랜젝션을 적용 -->
-	<!-- <aop:config>
-		<aop:pointcut expression="execution(* com.kh.spring..*ServiceImpl.*(..))" id="serviceMethod"/>
-		<aop:advisor advice-ref="txAdvice" pointcut-ref="serviceMethod"/>
-	</aop:config> -->
-	
-	<bean id="mailSender" class = "org.springframework.mail.javamail.JavaMailSenderImpl">
-      <property name="host" value="smtp.gmail.com" />
-      <property name="port" value="587" />
-      <property name="username" value="mgrmgr1004@gmail.com" />
-      <property name="password" value="mgr.1004" />
-      
-      <property name="javaMailProperties">
-         <props>
-               <prop key="mail.transport.protocol">smtp</prop>
-               <prop key="mail.smtp.auth">true</prop>
-               <prop key="mail.smtp.starttls.enable">true</prop>
-               <prop key="mail.debug">true</prop>
-         </props>
-      </property>
 
-    </bean>
-	
-	
+
+	<!-- <bean id="transactionManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager"><property 
+		name="dataSource" ref="dataSource"></property></bean> -->
+
+
+	<!-- annotation -->
+
+
+	<!-- <tx:annotation-driven transaction-manager="transactionManager"/> -->
+
+
+	<!-- 선언적방식으로 트랜젝션처리 -->
+
+
+	<!-- <tx:advice id="txAdvice" transaction-manager="transactionManager"><tx:attributes><tx:method 
+		name="insert*" rollback-for="Exception"/><tx:method name="update*" rollback-for="Exception"/></tx:attributes></tx:advice> -->
+
+
+	<!-- aop와 연결하여 트랜젝션을 적용 -->
+
+
+	<!-- <aop:config><aop:pointcut expression="execution(* com.kh.spring..*ServiceImpl.*(..))" 
+		id="serviceMethod"/><aop:advisor advice-ref="txAdvice" pointcut-ref="serviceMethod"/></aop:config> -->
+
+
+	<bean class="org.springframework.mail.javamail.JavaMailSenderImpl"
+		id="mailSender">
+		<property value="smtp.gmail.com" name="host" />
+		<property value="587" name="port" />
+		<property value="mgrmgr1004@gmail.com" name="username" />
+		<property value="mgr.1004" name="password" />
+
+
+		<property name="javaMailProperties">
+			<props>
+				<prop key="mail.transport.protocol">smtp</prop>
+				<prop key="mail.smtp.auth">true</prop>
+				<prop key="mail.smtp.starttls.enable">true</prop>
+				<prop key="mail.debug">true</prop>
+			</props>
+		</property>
+	</bean>
+
 </beans>

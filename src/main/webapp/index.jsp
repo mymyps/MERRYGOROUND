@@ -4,7 +4,7 @@
 <jsp:include page="/WEB-INF/views/common/header.jsp"/>
 
 		
-		<!-- Slider start -->
+<!-- Slider start -->
 		<section id="home" class="no-padding">
 			<div id="main-slide" class="cd-hero">
 				<ul class="cd-hero-slider">
@@ -13,9 +13,11 @@
 							<img class="" src="${pageContext.request.contextPath}/resources/images/merry2.jpg" alt="slider">
 						</div>
 						<div class="cd-full-width">
-							<h2>Merry-go-round</h2>
+							<h2>Merry-Go-Round</h2>
 							<br>
-							<h3>매일 매일 똑같은 영화-밥-카페 데이트에 질리셨나요 식상한 데이트에 지치셨나요<br>당좡시작하세욤 Start now!!!!</h3>
+							<br>
+							<h4 style="color:white;">매일, 매번 똑같은 영화-밥-카페 데이트코스에 질리셨나요? 식상한 데이트에 지치셨나요?
+							<br>메리고라운드와 함께 색다른 데이트를 경험해보세요:)</h4>
 							<a href="${pageContext.request.contextPath }/couple/coupleBoardList">임시연결 </a>	
 							<a href="${pageContext.request.contextPath }/couple/abc">abc </a>	
 						</div> <!-- .cd-full-width -->
@@ -32,7 +34,6 @@
 
 		<!-- 지역별로 검색하기  -->
 		<section id="mapHref" class="service angle">
-			
 			<!-- 제목-->
 			<div class="container">
 				<span class="title-icon pull-left"><i class="fa fa-university"></i></span>
@@ -43,7 +44,6 @@
 				</h2>
 			</div>
 			<!-- 지도 이미지 -->
-
 	<div class="container" id="mapcontainer">
 		<img src="${pageContext.request.contextPath}/resources/images/mapsearch.png" usemap="#mapSearch">
 		<map id="mapSearch" name="mapSearch">
@@ -80,7 +80,6 @@
 	</div>
 </section>
 
-
 		<!-- 테마/카테고리별로 검색하기 start -->
 		<section id="portfolio" class="portfolio">
 			<div class="container">
@@ -94,6 +93,7 @@
 						</h2>
 					</div>
 				</div> <!-- Title row end -->
+			
 				<!--Isotope filter start -->
 				<div class="row text-center">
 					<div class="isotope-nav" data-isotope-nav="isotope">
@@ -105,191 +105,176 @@
 						</ul>
 					</div>
 				</div><!-- Isotope filter end -->
-				<div class="row">
-					<div id="isotope" class="isotope">
-						
-						<!-- 먹거리 -->
-						<!-- 한식 -->
-						<div class="col-sm-3 web-design isotope-item">
+			
+			<div class="row">
+				<div id="isotope" class="isotope">
+					<!-- 먹거리 -->
+					<!-- 한식 -->
+					<div class="col-sm-3 web-design isotope-item">
+						<div class="grid">
+							<figure class="effect-oscar">
+								<img src="${pageContext.request.contextPath}/resources/images/portfolio/korean.jpg" alt="" class="img-thumbnail">
+								<figcaption>
+									<h2><a href="${pageContext.request.contextPath}/search/subThemaList?themaNum=2&themaNumRef=1" >한식</a></h2>
+								
+							    </figcaption>
+							</figure>
+						</div>
+					</div>
+					<!-- 일식 -->
+					<div class="col-sm-3 web-design isotope-item">
 							<div class="grid">
 								<figure class="effect-oscar">
-									<img src="${pageContext.request.contextPath}/resources/images/portfolio/korean.jpg" alt="" class="img-thumbnail">
+									<img src="${pageContext.request.contextPath}/resources/images/portfolio/japan.jpg" alt="" class="img-thumbnail">
 									<figcaption>
-										<h2><a href="${pageContext.request.contextPath}/search/subThemaList?themaNum=101&themaNumRef=100" >한식</a></h2>
-									
-								    </figcaption>
+											<h2><a href="${pageContext.request.contextPath}/search/subThemaList?themaNum=3&themaNumRef=1">일식</a></h2>
+										</figcaption>
 								</figure>
 							</div>
 						</div>
-						<!-- 일식 -->
+						<!-- 양식 -->
 						<div class="col-sm-3 web-design isotope-item">
 								<div class="grid">
 									<figure class="effect-oscar">
-										<img src="${pageContext.request.contextPath}/resources/images/portfolio/japan.jpg" alt="" class="img-thumbnail">
+										<img src="${pageContext.request.contextPath}/resources/images/portfolio/yang.jpg" alt="" class="img-thumbnail">
 										<figcaption>
-											
-												<h2><a href="${pageContext.request.contextPath}/search/subThemaList?themaNum=102&themaNumRef=100">일식</a></h2>
-											
-												
-											</figcaption>
+											<h2><a href="${pageContext.request.contextPath}/search/subThemaList?themaNum=4&themaNumRef=1">양식</a></h2>
+										</figcaption>
 									</figure>
 								</div>
 							</div>
-							<!-- 양식 -->
+							<!-- 아시안푸드 -->
 							<div class="col-sm-3 web-design isotope-item">
 									<div class="grid">
 										<figure class="effect-oscar">
-											<img src="${pageContext.request.contextPath}/resources/images/portfolio/yang.jpg" alt="" class="img-thumbnail">
+											<img src="${pageContext.request.contextPath}/resources/images/portfolio/asia.jpg" alt="" class="img-thumbnail">
 											<figcaption>
-												<h2><a href="${pageContext.request.contextPath}/search/subThemaList?themaNum=103&themaNumRef=100">양식</a></h2>
-											
-											</figcaption>
+													<h2><a href="${pageContext.request.contextPath}/search/subThemaList?themaNum=5&themaNumRef=1">아시안푸드</a></h2>
+												</figcaption>
 										</figure>
 									</div>
 								</div>
-								<!-- 아시안푸드 -->
+								<!-- 중식 -->
 								<div class="col-sm-3 web-design isotope-item">
 										<div class="grid">
 											<figure class="effect-oscar">
-												<img src="${pageContext.request.contextPath}/resources/images/portfolio/asia.jpg" alt="" class="img-thumbnail">
+												<img src="${pageContext.request.contextPath}/resources/images/portfolio/china.jpg" alt="" class="img-thumbnail">
 												<figcaption>
-														<h2><a href="${pageContext.request.contextPath}/search/subThemaList?themaNum=104&themaNumRef=100">아시안푸드</a></h2>
-													
+														<h2><a href="${pageContext.request.contextPath}/search/subThemaList?themaNum=6&themaNumRef=1">중식</a></h2>
 													</figcaption>
 											</figure>
 										</div>
 									</div>
-									<!-- 중식 -->
-									<div class="col-sm-3 web-design isotope-item">
-											<div class="grid">
-												<figure class="effect-oscar">
-													<img src="${pageContext.request.contextPath}/resources/images/portfolio/china.jpg" alt="" class="img-thumbnail">
-													<figcaption>
-															<h2><a href="${pageContext.request.contextPath}/search/subThemaList?themaNum=105&themaNumRef=100">중식</a></h2>
-															
-														</figcaption>
-												</figure>
-											</div>
-										</div>
-										<!-- 먹거리 끝 -->
-						
-						<!-- 놀거리 -->
-						<!-- 실내데이트 -->
-						<div class="col-sm-3 development isotope-item">
+									<!-- 먹거리 끝 -->
+					
+					<!-- 놀거리 -->
+					<!-- 실내데이트 -->
+					<div class="col-sm-3 development isotope-item">
+						<div class="grid">
+							<figure class="effect-oscar">
+								<img src="${pageContext.request.contextPath}/resources/images/portfolio/indoor.jpg" alt="" class="img-thumbnail">
+								<figcaption>
+										<h2><a href="${pageContext.request.contextPath}/search/subThemaList?themaNum=8&themaNumRef=7">실내데이트</a></h2>
+									</figcaption>
+							</figure>
+						</div>
+					</div>
+					<!-- 야외데이트 -->
+					<div class="col-sm-3 development isotope-item">
 							<div class="grid">
 								<figure class="effect-oscar">
-									<img src="${pageContext.request.contextPath}/resources/images/portfolio/indoor.jpg" alt="" class="img-thumbnail">
+									<img src="${pageContext.request.contextPath}/resources/images/portfolio/out.jpg" alt="" class="img-thumbnail">
 									<figcaption>
-											<h2><a href="${pageContext.request.contextPath}/search/subThemaList?themaNum=201&themaNumRef=200">실내데이트</a></h2>
-											
+											<h2><a href="${pageContext.request.contextPath}/search/subThemaList?themaNum=9&themaNumRef=7">야외데이트</a></h2>
 										</figcaption>
 								</figure>
 							</div>
 						</div>
-						<!-- 야외데이트 -->
-						<div class="col-sm-3 development isotope-item">
-								<div class="grid">
-									<figure class="effect-oscar">
-										<img src="${pageContext.request.contextPath}/resources/images/portfolio/out.jpg" alt="" class="img-thumbnail">
-										<figcaption>
-												<h2><a href="${pageContext.request.contextPath}/search/subThemaList?themaNum=202&themaNumRef=200">야외데이트</a></h2>
-											
-											</figcaption>
-									</figure>
-								</div>
-							</div>
-							<!-- 산책하기 좋은곳 -->
-						<div class="col-sm-3 development isotope-item">
-								<div class="grid">
-									<figure class="effect-oscar">
-										<img src="${pageContext.request.contextPath}/resources/images/portfolio/walk.jpg" alt="" class="img-thumbnail">
-										<figcaption>
-												<h2><a href="${pageContext.request.contextPath}/search/subThemaList?themaNum=203&themaNumRef=200">산책하기 좋은 곳</a></h2>
-												
-										</figcaption>
-									</figure>
-								</div>
-							</div>
-							<!-- 연극,공연 -->
-						<div class="col-sm-3 development isotope-item">
-								<div class="grid">
-									<figure class="effect-oscar">
-										<img src="${pageContext.request.contextPath}/resources/images/portfolio/play.jpg" alt="" class="img-thumbnail">
-										<figcaption>
-												<h2><a href="${pageContext.request.contextPath}/search/subThemaList?themaNum=204&themaNumRef=200">연극 /공연</a></h2>
-												
-										</figcaption>
-									</figure>
-								</div>
-							</div>
-							<!-- 마사지 -->
-						<div class="col-sm-3 development isotope-item">
-								<div class="grid">
-									<figure class="effect-oscar">
-										<img src="${pageContext.request.contextPath}/resources/images/portfolio/ma.jpg" alt="" class="img-thumbnail">
-										<figcaption>
-												<h2><a href="${pageContext.request.contextPath}/search/subThemaList?themaNum=205&themaNumRef=200">마사지</a></h2>
-												
-										</figcaption>
-									</figure>
-								</div>
-							</div>
-							<!-- 놀거리 끝 -->
-						
-						<!-- 카페/술 -->
-						<!-- 칵테일&펍 -->
-						<div class="col-sm-3 joomla isotope-item">
+						<!-- 산책하기 좋은곳 -->
+					<div class="col-sm-3 development isotope-item">
 							<div class="grid">
 								<figure class="effect-oscar">
-									<img src="${pageContext.request.contextPath}/resources/images/portfolio/pub.jpg" alt="" class="img-thumbnail">
+									<img src="${pageContext.request.contextPath}/resources/images/portfolio/walk.jpg" alt="" class="img-thumbnail">
 									<figcaption>
-											<h2><a href="${pageContext.request.contextPath}/search/subThemaList?themaNum=301&themaNumRef=300">칵테일 /펍</a></h2>
-											
+											<h2><a href="${pageContext.request.contextPath}/search/subThemaList?themaNum=10&themaNumRef=7">산책하기 좋은 곳</a></h2>
 									</figcaption>
 								</figure>
 							</div>
 						</div>
-						<!-- 디저트특집 -->
-						<div class="col-sm-3 joomla isotope-item">
-								<div class="grid">
-									<figure class="effect-oscar">
-										<img src="${pageContext.request.contextPath}/resources/images/portfolio/dal.jpg" alt="" class="img-thumbnail">
-										<figcaption>
-												<h2><a href="${pageContext.request.contextPath}/search/subThemaList?themaNum=302&themaNumRef=300">달다구리</a></h2>
-												
-										</figcaption>
-									</figure>
-								</div>
+						<!-- 연극,공연 -->
+					<div class="col-sm-3 development isotope-item">
+							<div class="grid">
+								<figure class="effect-oscar">
+									<img src="${pageContext.request.contextPath}/resources/images/portfolio/play.jpg" alt="" class="img-thumbnail">
+									<figcaption>
+											<h2><a href="${pageContext.request.contextPath}/search/subThemaList?themaNum=11&themaNumRef=7">연극 /공연</a></h2>
+									</figcaption>
+								</figure>
 							</div>
-							<!-- 포토존있는곳 -->
-						<div class="col-sm-3 joomla isotope-item">
-								<div class="grid">
-									<figure class="effect-oscar">
-										<img src="${pageContext.request.contextPath}/resources/images/portfolio/zone.jpg" alt="" class="img-thumbnail">
-										<figcaption>
-												<h2><a href="${pageContext.request.contextPath}/search/subThemaList?themaNum=303&themaNumRef=300">포토존 있는 곳</a></h2>
-												
-										</figcaption>
-									</figure>
-								</div>
+						</div>
+						<!-- 마사지 -->
+					<div class="col-sm-3 development isotope-item">
+							<div class="grid">
+								<figure class="effect-oscar">
+									<img src="${pageContext.request.contextPath}/resources/images/portfolio/ma.jpg" alt="" class="img-thumbnail">
+									<figcaption>
+											<h2><a href="${pageContext.request.contextPath}/search/subThemaList?themaNum=12&themaNumRef=7">마사지</a></h2>
+									</figcaption>
+								</figure>
 							</div>
-							<!-- 공부하기 좋은곳 -->
-						<div class="col-sm-3 joomla isotope-item">
-								<div class="grid">
-									<figure class="effect-oscar">
-										<img src="${pageContext.request.contextPath}/resources/images/portfolio/study.jpg" alt="" class="img-thumbnail">
-										<figcaption>
-												<h2><a href="${pageContext.request.contextPath}/search/subThemaList?themaNum=304&themaNumRef=300">공부하기 좋은 곳</a></h2>
-										</figcaption>		
-									  </figure>
-								</div>
+						</div>
+						<!-- 놀거리 끝 -->
+					<!-- 카페/술 -->
+					<!-- 칵테일&펍 -->
+					<div class="col-sm-3 joomla isotope-item">
+						<div class="grid">
+							<figure class="effect-oscar">
+								<img src="${pageContext.request.contextPath}/resources/images/portfolio/pub.jpg" alt="" class="img-thumbnail">
+								<figcaption>
+										<h2><a href="${pageContext.request.contextPath}/search/subThemaList?themaNum=14&themaNumRef=13">칵테일 /펍</a></h2>
+								</figcaption>
+							</figure>
+						</div>
+					</div>
+					<!-- 디저트특집 -->
+					<div class="col-sm-3 joomla isotope-item">
+							<div class="grid">
+								<figure class="effect-oscar">
+									<img src="${pageContext.request.contextPath}/resources/images/portfolio/dal.jpg" alt="" class="img-thumbnail">
+									<figcaption>
+											<h2><a href="${pageContext.request.contextPath}/search/subThemaList?themaNum=15&themaNumRef=13">달다구리</a></h2>
+									</figcaption>
+								</figure>
 							</div>
-						</div><!-- Isotope content end -->
-				</div><!-- Content row end -->
-			</div><!-- Container end -->
-		</section><!-- 테마별 검색 끝 -->
-
-
+						</div>
+						<!-- 포토존있는곳 -->
+					<div class="col-sm-3 joomla isotope-item">
+							<div class="grid">
+								<figure class="effect-oscar">
+									<img src="${pageContext.request.contextPath}/resources/images/portfolio/zone.jpg" alt="" class="img-thumbnail">
+									<figcaption>
+											<h2><a href="${pageContext.request.contextPath}/search/subThemaList?themaNum=16&themaNumRef=13">포토존 있는 곳</a></h2>
+									</figcaption>
+								</figure>
+							</div>
+						</div>
+						<!-- 공부하기 좋은곳 -->
+					<div class="col-sm-3 joomla isotope-item">
+							<div class="grid">
+								<figure class="effect-oscar">
+									<img src="${pageContext.request.contextPath}/resources/images/portfolio/study.jpg" alt="" class="img-thumbnail">
+									<figcaption>
+											<h2><a href="${pageContext.request.contextPath}/search/subThemaList?themaNum=17&themaNumRef=13">공부하기 좋은 곳</a></h2>
+									</figcaption>		
+								  </figure>
+							</div>
+						</div>
+					</div><!-- Isotope content end -->
+			</div><!-- Content row end -->
+		</div><!-- Container end -->
+	</section><!-- 테마별 검색 끝 -->
+	
+	
 		<!-- 추천 데이트 -->
 		<section id="team" class="team">
 			<div class="container">
@@ -375,10 +360,10 @@
 			<div class="container">
 				<div class="row">
 					<div class="col-md-12 text-center">
-						<h2>가까운 데이트코스가 궁금하세요?</h2>
-						<h3>당신의 위치를 기반으로 코스를 보여줍니다:)</h3>
+						<h2>주변 데이트 장소가 궁금하세요?</h2>
+						<h3>위치를 기반으로 데이트 장소를 보여줍니다:)</h3>
 						<p>
-							<a href="${pageContext.request.contextPath}/search/tMapSerch" class="btn btn-primary white">내 주변 데이트장소 검색</a>
+							<a href="${pageContext.request.contextPath}/search/mapSearch" class="btn btn-primary white">내 주변 데이트장소 검색</a>
 						</p>
 					</div>
 				</div>
@@ -386,10 +371,7 @@
 		</section>
 		<!-- 현 위치기반 검색 끝 -->
 
-
 		<!-- 공지사항 브리핑 화면 -->
-
-
 		<section class="noticeBref">
 			<div class=" container">
 			<div class="row">
@@ -406,7 +388,6 @@
 							style="display: block; width: 5820px; left: 0px; transition: all 0ms ease 0s; transform: translate3d(0px, 0px, 0px);">
 							<div class="owl-item" style="width: 970px;">
 								<div class="item">
-									
 									<div class="testimonial-content">
 										<h3>서포터즈 상시모집</h3>
 										<p>
@@ -434,10 +415,8 @@
 
   $(document).ready(function(){
 	  $("#ban").hide();  
-	 
 	
   });
-  
  
 	
  </script>

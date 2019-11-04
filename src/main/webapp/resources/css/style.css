@@ -64,6 +64,14 @@
 
 /* By Honey  */
 
+
+/* By Honey  */
+
+
+#locGrayLi ul li a{
+border: 1px lightgray !important;
+}
+
 .themaContent
 {
 	background: #f4f4f4;
@@ -112,8 +120,6 @@ margin-top:-95px;
 
 /* 	color: #5a554f !important; */
 }
-
-
 
 
 

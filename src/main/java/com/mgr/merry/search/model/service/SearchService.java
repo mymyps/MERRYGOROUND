@@ -8,20 +8,18 @@ import com.mgr.merry.search.model.vo.Location;
 import com.mgr.merry.search.model.vo.Thema;
 
 public interface SearchService {
+List<Map<String,Object>> allList();
 	
-	List<Map<String,Object>> allList();
-	
-	//테마별 검색 
-		List<InfoUpload> themaList(Map<String, Object> param);
-		
 	//서브테마로 조회
 	List<InfoUpload> subThemaList(Map<String, Object> param);
 	
 	//메인테마로 조회
-	List<InfoUpload> mainThemaList(String themaNumRef);
+	List<InfoUpload> mainThemaList(int themaNumRef);
 	
 	//지역별 검색
 	List<InfoUpload> localList(int localNum);
+	
+	List<Map<String,Object>> mapSearch(Map<String, Object> param);
 
 	List<Thema> selectThemaList3();
 

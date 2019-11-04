@@ -23,7 +23,7 @@ public class InfoUpload {
 	private int fileNum;
 	private String fileReName;
 	//location
-	private String localName;
+	private String localCity;
 	//thema
 	private String themaName;
 	private String themaNum;

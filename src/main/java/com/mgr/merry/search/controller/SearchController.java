@@ -29,8 +29,8 @@ public class SearchController {
 	SearchService service;
 
 	@RequestMapping("/search/subThemaList")
-	public String subThemaList(@RequestParam("themaNum") String themaNum,
-			@RequestParam("themaNumRef") String themaNumRef, Model model) {
+	public String subThemaList(@RequestParam("themaNum") int themaNum,
+			@RequestParam("themaNumRef") int themaNumRef, Model model) {
 
 		Map<String, Object> param = new HashMap<String, Object>();
 		param.put("themaNum", themaNum);
@@ -47,7 +47,7 @@ public class SearchController {
 	}
 
 	@RequestMapping("/search/mainThemaList")
-	public String mainThemaList(@RequestParam("themaNumRef") String themaNumRef, Model model) {
+	public String mainThemaList(@RequestParam("themaNumRef") int themaNumRef, Model model) {
 
 		List<InfoUpload> list = service.mainThemaList(themaNumRef);
 		model.addAttribute("themaNumRef", themaNumRef);
@@ -70,36 +70,50 @@ public class SearchController {
 		logger.debug("localNum : " + localNum);
 		logger.debug("컨트롤러에서 지역 리스트 : " + list);
 
-		return "search/classifyByLoc";
+		return "search/classifyByLoc2";
 
 	}
 
-	@RequestMapping("/search/tMapSerch")
+	@RequestMapping("/search/mapSearch")
 
-	public String tMapSerch() {
+	public String mapSerch() {
 
-		return "search/placeOnAMap";
+		return "search/placeOnAMap3";
 	}
 	
-	@RequestMapping("/search/themaList")
-	public String themaList(@RequestParam("themaNum") String themaNum, 
-			                @RequestParam("level") int level, Model model) {
-
-		logger.debug("" + themaNum);
-		logger.debug("" + level);
-
-		Map<String, Object> param = new HashMap();
-		param.put("themaNum", themaNum);
-		param.put("level", level);
-
-		List<InfoUpload> list = service.themaList(param);
-		System.out.println("서치컨트롤러 리스트 :"+list);
-		model.addAttribute("list", list);
-		logger.debug("" + param);
-
-		return "search/classifyByTheme";
-
+	
+	@RequestMapping("/search/mapSearchEnd")
+	
+	public void mapSerchEnd(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	
+		String keyword = request.getParameter("keyword");
+		double y=Double.parseDouble(request.getParameter("y"));
+		double x=Double.parseDouble(request.getParameter("x"));
+		
+		Map<String, Object> param = new HashMap<String, Object>();
+		param.put("keyword", keyword);
+		param.put("y", y);
+		param.put("x", x);
+		
+		List<Map<String,Object>> resultList = service.mapSearch(param);
+		
+		logger.debug(""+resultList);
+		
+		//타입을 json으로 바꿔줘야됨
+		response.setContentType("application/x-json; charset=UTF-8");
+		
+		//DTO 타입의 어레이리스트를 json 형태로 바꿔주는 구문(라이브러리 필수, zip->jar 확장자명 꼭 확인)
+//        String gson = new Gson().toJson(resultList);
+//        
+//        try {
+//            //ajax로 리턴해주는 부분
+//            response.getWriter().write(gson);
+//        } catch (JsonIOException e) {
+//            e.printStackTrace();
+//        } catch (IOException e) {
+//            e.printStackTrace();
+//        }
+		
 	}
-
 
 }

@@ -19,31 +19,16 @@ public class SearchDaoImpl implements SerchDao {
 		return session.selectList("search.allList");
 	}
 
-	//메인테마 조회 
-	@Override
-	public List<InfoUpload> themaList(SqlSessionTemplate session,Map<String,Object> param, String themaNumRef) {
-
-		param.put("themaNumRef", themaNumRef);
-
-		return session.selectList("search.themaList1",param);
-	}
-
-	// 서브테마 조회
-	@Override
-	public List<InfoUpload> themaList(SqlSessionTemplate session, Map<String,Object> param) {
-
-		return session.selectList("search.themaList2",param);
-	}
-
+	
 	@Override
 	public List<InfoUpload> subThemaList(SqlSessionTemplate session, Map<String, Object> param) {
 
 		return session.selectList("search.subThemaList", param);
 	}
-
+	
 	@Override
-	public List<InfoUpload> mainThemaList(SqlSessionTemplate session, String themaNumRef) {
-
+	public List<InfoUpload> mainThemaList(SqlSessionTemplate session, int themaNumRef) {
+	
 		return session.selectList("search.mainThemaList",themaNumRef);
 	}
 
@@ -67,5 +52,12 @@ public class SearchDaoImpl implements SerchDao {
 	public List<Location> selectLocationList(SqlSessionTemplate session) {
 		return session.selectList("search.locationList");
 	}
+
+	@Override
+	public List<Map<String, Object>> mapSearch(SqlSessionTemplate session, Map<String, Object> param) {
+		
+		return session.selectList("search.mapSearch",param);
+	}
+
 
 }
