@@ -148,5 +148,10 @@ public class AdminServiceImpl implements AdminService{
 	public int cletifyAdmin(int memberNum) {
 		return dao.cletifyAdmin(sqlSession, memberNum);
 	}
+	
+	@Override
+	public int calDropSave(AdminCalendar calTmp) {
+		return dao.calDropSave(sqlSession, calTmp);
+	}
 
 }

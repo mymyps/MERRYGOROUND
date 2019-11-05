@@ -20,7 +20,7 @@
 		select count(*) from member where userid = #{userId} and password = #{password}
 	</select> -->
 	<insert id="calSave" parameterType="cal">
-		insert into admincalendar values(#{title}, #{start}, #{end}, #{className})
+		insert into admincalendar values( 9999, #{title}, #{start}, #{end}, #{className})
 	</insert>
 	
 	<select id="calLoad" resultType="cal">
@@ -120,7 +120,7 @@
 	<select id="boardPage" resultType="map">
 		select * from(
 			select rownum as rnum, a.* from(
-				select infouptitle, themaname, localname, infouppayment, infoupphone, infouptime, infoupdate from info_upload
+				select infouptitle, themaname, localcity, infouppayment, infoupphone, infouptime, infoupdate from info_upload
 					inner join location using(localnum)
 					inner join thema using(themanum)
 				where infoupstatus = 1
@@ -131,12 +131,14 @@
 	<select id="supBoard" resultType="map">
 		select * from(
 			select rownum as rnum, a.* from(
-				select supnum, supuptitle, themaname, localname, supupdate from supporters_upload
-					inner join location using(localnum)
-					inner join thema using(themanum)
-				where supupstatus = 1
-			order by supupdate desc
-		) a)
+				select s.supnum, s.supuptitle, t.themaname, l.localcity, s.supupdate from supporters_upload s
+                    inner join info_upload i on(i.infoupnum = s.infoupnum)
+                    inner join location l on (i.localnum = l.localnum)
+                    inner join thema t on (i.themanum = t.themanum)
+                    where s.supupstatus = 1
+                order by s.supupdate desc
+			) a
+		)
 	</select>
 	
 	<select id="supportersList" resultType="map">
@@ -214,6 +216,12 @@
 		where MEMBERNUM = #{memberNum}
 	</update>
 	
+	<!-- 캘린더 드랍 -->
+	<update id="calDropSave" parameterType="cal">
+		update admincalendar 
+			set "START" = #{start}, "END" = #{end}
+		where title = #{title}
+	</update>
 	
 	
 </mapper>

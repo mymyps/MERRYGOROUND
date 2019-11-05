@@ -34,6 +34,7 @@ public interface AdminService {
 	int themaAddAdd(String strTmp);
 	Map<String, String> celtifyData(int memberNum);
 	int cletifyAdmin(int memberNum);
+	int calDropSave(AdminCalendar calTmp);
 
 
 }
