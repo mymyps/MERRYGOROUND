@@ -4,10 +4,9 @@
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 <c:set var = "path" value="${pageContext.request.contextPath}"/>
 <jsp:include page ="/WEB-INF/views/common/header.jsp">
-<jsp:param name ="pageTitle" value=""/>
+<jsp:param name ="pageTitle" value=""/>	
 </jsp:include>
 
-<script src="http://code.jquery.com/jquery-3.4.1.min.js"></script>
 <!-- include libraries(jQuery, bootstrap) -->
 	<link href="http://netdna.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.css" rel="stylesheet">
 	<script src="http://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.js"></script> 

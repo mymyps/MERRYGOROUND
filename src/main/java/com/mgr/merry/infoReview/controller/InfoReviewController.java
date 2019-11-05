@@ -63,12 +63,17 @@ public class InfoReviewController {
 	
 	//수정중
 	@RequestMapping("/info/updateInfoReview")
-	public String updateReview(int infoReviewNum) {
+	public ModelAndView updateReview(int infoReviewNum, int infoupNum) {
 		int result = 0;
 		result = service.updateReview(infoReviewNum);
+		System.out.println("업데이트 result :"+result);
 		if(result==0) {
 			
 		}
-		return "/info/infoView";
+		
+		ModelAndView mv = new ModelAndView();
+		mv.setViewName("info/infoView.do?infoupNum="+infoupNum);
+		
+		return mv;
 	}
 }
