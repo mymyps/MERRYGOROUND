@@ -192,8 +192,9 @@
                               class="fa fa-angle-down"></i></a>
                         <div class="dropdown-menu">
                            <ul>
-                              <li><a href="${pageContext.request.contextPath }/info/infoForm">infoForm 임의연결</a></li>
-                              <li><a href="${pageContext.request.contextPath }/info/infoView.do">infoView 임의연결</a></li>
+                              <li><a href="${pageContext.request.contextPath }/info/infoForm.do?mNum=${loginMember.memberNum}">infoForm 임의연결</a></li>
+                        <li><a href="${pageContext.request.contextPath }/info/infoView.do">infoView 임의연결</a></li>
+                              <input type="hidden" value="${loginMember.memberNum}" name="mNum"/>
                            </ul>
                         </div>
                      </li>

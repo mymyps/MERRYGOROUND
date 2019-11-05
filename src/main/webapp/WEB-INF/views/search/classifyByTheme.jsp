@@ -24,37 +24,38 @@
 		</div>
 		<!-- Title row end -->
 		
-		<!--메인 테마 메뉴 바 시작-->
-		<div class="row">
-			<div class="landing-tab clearfix">
-			 <ul class="nav nav-tabs nav-stacked col-md-3 col-sm-5">
-			              <li>
-			                  <a class="animated fadeIn" data-toggle="tab">
-			                      <span class="tab-icon"><i class="fa fa-info"></i></span>
-			                      <div class="tab-info">
-			                         <h3><a href="${path}/search/mainThemaList?themaNumRef=1" id="themenameBrown">먹거리</a></h3>
-			                    </div>
-			                  </a>
-			              </li>
-		               <li>
+	   <!--메인 테마 메뉴 바 시작-->
+      <div class="row">
+         <div class="landing-tab clearfix">
+          <ul class="nav nav-tabs nav-stacked col-md-3 col-sm-5">
+                       <li <c:if test="${1 eq param.themaNumRef}">class="active"</c:if>>
                            <a class="animated fadeIn" data-toggle="tab">
-		                       <span class="tab-icon"><i class="fa fa-briefcase"></i></span>
-		                       <div class="tab-info">
-		                          <h3><a href="${path}/search/mainThemaList?themaNumRef=7" id="themenameBrown">놀거리</a></h3>
-		                      </div>
-		                   </a>
-		              </li>
-			             <li>
-		                  <a class="animated fadeIn" data-toggle="tab">
-		                      <span class="tab-icon"><i class="fa fa-android"></i></span>
-		                      <div class="tab-info">
-		                       <h3><a href="${path}/search/mainThemaList?themaNumRef=13" id="themenameBrown">카페/술</a></h3>
-		                      </div>
-		                  </a>
-			            </li>
-			       </ul>
+                               <span class="tab-icon"><i class="fa fa-info"></i></span>
+                               <div class="tab-info">
+                                  <h3><a href="${path}/search/mainThemaList?themaNumRef=1" id="themenameBrown">먹거리</a></h3>
+                             </div>
+                           </a>
+                       </li>
+                     <li <c:if test="${7 eq param.themaNumRef}">class="active"</c:if>>
+                           <a class="animated fadeIn" data-toggle="tab">
+                             <span class="tab-icon"><i class="fa fa-briefcase"></i></span>
+                             <div class="tab-info">
+                                <h3><a href="${path}/search/mainThemaList?themaNumRef=7" id="themenameBrown">놀거리</a></h3>
+                            </div>
+                         </a>
+                    </li>
+                    <li <c:if test="${13 eq param.themaNumRef}">class="active"</c:if>>
+                        <a class="animated fadeIn" data-toggle="tab">
+                            <span class="tab-icon"><i class="fa fa-android"></i></span>
+                            <div class="tab-info">
+                             <h3><a href="${path}/search/mainThemaList?themaNumRef=13" id="themenameBrown">카페/술</a></h3>
+                            </div>
+                        </a>
+                     </li>
+                </ul>
 
-				<!-- 메인 테마 메뉴 바 끝-->
+            <!-- 메인 테마 메뉴 바 끝-->
+         
 			
 				<!-- 테마별 리스트 DIV시작 -->
 				   
@@ -110,8 +111,8 @@
                     		<div class="row" id="themarow2">
 						<div class="col-md-8 ts-padding2 themaContent">
 							<h3 style="margin-top: -2px;">
-<%-- 							<a href="${path}/info/infoView?infoupNum=${list.infoupNum}" id="themenameBrown">${list.infoUpTitle}</a> --%>
-                            <c:out value='${list.infoupTitle}'/>
+							<a href="${pageContext.request.contextPath }/info/infoView.do?infoupNum=${list.infoupNum }" style="color: #5a554f !important;"><c:out value='${list.infoupTitle}'/></a>
+<%--                             <c:out value='${list.infoupTitle}'/> --%>
 							</h3>
 							<p>이용시간 : <c:out value='${list.infoupTime}'/> / 전화번호 : <c:out value='${list.infoupPhone}'/></p>
 							<hr style="height: 0.5px; background-color: rgb(214, 206, 194);" >

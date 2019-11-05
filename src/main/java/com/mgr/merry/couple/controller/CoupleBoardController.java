@@ -78,6 +78,7 @@ public class CoupleBoardController {
 			
 		}else if(attachList.size()==0) {
 			msg="사진을 한장 이상 등록하세요";
+			//msg안에 script문과 return false
 		}else {
 			msg="게시물 등록 실패";
 		}
