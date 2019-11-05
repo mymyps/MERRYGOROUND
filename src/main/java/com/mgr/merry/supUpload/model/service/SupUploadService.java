@@ -2,6 +2,11 @@ package com.mgr.merry.supUpload.model.service;
 
 import java.util.Map;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
+import org.springframework.web.multipart.MultipartFile;
+
 import com.mgr.merry.supUpload.model.vo.SupUploadImg;
 import com.mgr.merry.supporters.model.vo.Supporters;
 
@@ -14,5 +19,8 @@ public interface SupUploadService {
 	int insertSupReview(Map<String, String> param);
 
 	Supporters selectSup(int memberNum);
+
+	void profileUpload(String email, MultipartFile file, HttpServletRequest request, HttpServletResponse response)
+			throws Exception;
 
 }
