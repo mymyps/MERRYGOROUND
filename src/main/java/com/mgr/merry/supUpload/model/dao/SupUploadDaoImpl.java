@@ -6,6 +6,7 @@ import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.stereotype.Repository;
 
 import com.mgr.merry.supUpload.model.vo.SupUploadImg;
+import com.mgr.merry.supporters.model.vo.Supporters;
 
 @Repository
 public class SupUploadDaoImpl implements SupUploadDao {
@@ -18,6 +19,16 @@ public class SupUploadDaoImpl implements SupUploadDao {
 	@Override
 	public SupUploadImg selectSupUploadImg(SqlSessionTemplate session, int infoupNum) {
 		return session.selectOne("supUp.selectSupUploadImg", infoupNum);
+	}
+
+	@Override
+	public int insertSupUpload(SqlSessionTemplate session, Map<String, String> param) {
+		return session.insert("supUp.insertSupUpload", param);
+	}
+
+	@Override
+	public Supporters selectSup(SqlSessionTemplate session, int memberNum) {
+		return session.selectOne("supUp.selectSup", memberNum);
 	}
 
 

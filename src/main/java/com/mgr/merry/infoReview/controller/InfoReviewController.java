@@ -13,6 +13,8 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.mgr.merry.infoReview.model.service.InfoReviewService;
 import com.mgr.merry.infoReview.model.vo.InfoReview;
+import com.mgr.merry.sign.model.service.SignService;
+import com.mgr.merry.sign.model.vo.Members;
 
 @Controller
 public class InfoReviewController {
@@ -23,6 +25,7 @@ public class InfoReviewController {
 	// 수정중
 	@RequestMapping("/infoReview/insertInfoReview")
 	public ModelAndView insertReview (@RequestParam Map<String, String> param, HttpServletRequest request){
+		
 		int result = 0;
 		result = service.insertReview(param);
 		
