@@ -153,5 +153,10 @@ public class AdminServiceImpl implements AdminService{
 	public int calDropSave(AdminCalendar calTmp) {
 		return dao.calDropSave(sqlSession, calTmp);
 	}
+	
+	@Override
+	public Map<String, String> adminNotice() {
+		return dao.adminNotice(sqlSession);
+	}
 
 }
