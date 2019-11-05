@@ -84,6 +84,10 @@ public class AdminController {
 		List<Map<String, String>> infoUploadMain = service.infoUploadMain();
 		mv.addObject("infoUploadMain", infoUploadMain);
 		
+		// 공지사항 출력
+		Map<String, String> adminNotice = service.adminNotice();
+		mv.addObject("adminNotice", adminNotice);
+		
 		//-----------------------------------//
 		mv.setViewName("admin/adminMainPage");
 		
@@ -286,5 +290,17 @@ public class AdminController {
 			res.getWriter().print(false);
 		
 	}
+	
+	@RequestMapping("/admin/adminNotice.do")
+	public void adminNoticeInsert(@RequestParam(value="ta") String ta, HttpServletResponse res) throws IOException{
+		log.debug(ta);
+		
+		//비지니스 로직처리(데이터 삽입)
+		
+		res.getWriter().print(true);
+	}
+	
+	
+	
 
 }

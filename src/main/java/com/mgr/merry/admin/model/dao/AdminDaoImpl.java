@@ -145,6 +145,11 @@ public class AdminDaoImpl implements AdminDao{
 	public int calDropSave(SqlSessionTemplate session, AdminCalendar calTmp) {
 		return session.update("admin.calDropSave", calTmp);
 	}
+	
+	@Override
+	public Map<String, String> adminNotice(SqlSessionTemplate session) {
+		return session.selectOne("admin.adminNotice");
+	}
 
 
 }

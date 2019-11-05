@@ -347,13 +347,17 @@
 
 						<div class="col-lg-4 col-md-6">
 							<div class="card ov-h">
-								<div class="card-body bg-flat-color-2">
+								<div class="card-body bg-flat-color-4">
 									<div id="flotBarChart" class="float-chart ml-4 mr-4">
-										<p>공지 사항</p>
+										<p style="color:black">공지 사항</p>
+										<p style="color:white"><c:out value="${adminNotice['NOTICECONTENT'] }" /></p>
+										<p style="color:red"><fmt:formatDate value="${adminNotice['NOTICEDATE'] }" pattern="yyyy-MM-dd"/></p>
 									</div>
 								</div>
 								<div id="cellPaiChart" class="float-chart">
-									<p>공지 사항 입력창</p>
+									<p>입력창 : &nbsp;<a style="color:olive;" href="#" class="noticeClick">공지사항 추가하기</a></p> 
+									<textarea class="txAA" cols="5" style="resize:none; width:100%; height:100px; padding:8px"></textarea>
+									
 								</div>
 							</div>
 							<!-- /.card -->
@@ -361,6 +365,7 @@
 						<div class="col-lg-2 col-md-6">
 							<div class="card weather-box">
 								<h4 class="weather-title box-title">추가 메모</h4>
+								<textarea cols="5" style="resize:none; width:100%; height:280px;"></textarea>
 								<div class="card-body">
 									<div class="weather-widget">
 										<div id="weather-one" class="weather-one"></div>
@@ -445,6 +450,27 @@
 	  	labels: ['Licensed', 'SORN'],
 	  	xLabelAngle: 60
 	});
+	
+	$('.noticeClick').click(function name() {
+		//alert('notice click');
+		//ajax
+		var ta = document.getElementsByClassName("txAA")[0].value;
+		console.log(ta);
+		
+		$.ajax({
+			url: '${pageContext.request.contextPath }/admin/adminNotice.do',
+			data: ta,
+			success: function (data) {
+				console.log("공지사항 추가되었습니다");
+				return false;
+			},
+                  error : function(e) {
+                  	console.log("notice ajax error");
+                  }
+		});
+		return false;
+	});
+	
 	
     </script>
 
