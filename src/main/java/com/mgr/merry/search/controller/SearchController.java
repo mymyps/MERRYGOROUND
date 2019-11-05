@@ -29,11 +29,11 @@ public class SearchController {
 	SearchService service;
 
 	@RequestMapping("/search/subThemaList")
-	public String subThemaList(@RequestParam(value = "cPage", required = false, defaultValue = "0") int cPage,
+	public String subThemaList(
 			@RequestParam("themaNum") int themaNum,
 			@RequestParam("themaNumRef") int themaNumRef, Model model) {
 
-		int numPerPage = 5;
+		
 		
 		Map<String, Object> param = new HashMap<String, Object>();
 		param.put("themaNum", themaNum);

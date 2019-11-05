@@ -1,59 +1,68 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD MApper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="couple">
-	<resultMap type="HashMap" id="clobBoard">
-		<result property="COUPLECONTENT" column="COUPLECONTENT" jdbcType="CLOB" javaType="java.lang.String"/>
-	</resultMap>
-	
-	<select id="selectCoupleBoardCount" resultType="_int">
-		select count(*) from c_upload
-	</select>
-	
-<!-- 	<select id="selectCoupleBoardList" resultType="map" resultMap="clobBoard"> -->
-<!-- 		select * from c_upload order by coupledate desc  -->
-<!-- 	</select> -->
-	<select id="selectCoupleBoardList" resultType="map" resultMap="clobBoard">
-		select * from c_upload c join c_upload_img ci on c.couplenum=ci.couplenum where flag=1 order by coupledate desc
-	</select>
-	
-	<insert id="insertCoupleBoard" parameterType="map">
-		insert into c_upload values(c_upload_seq.nextval, #{writer},3000,#{title},#{content},sysdate,1)
-		<selectKey keyProperty="coupleNum" resultType="string" order="AFTER">
-			select c_upload_seq.currval from dual
-		</selectKey>
-	</insert>
-	<insert id="insertAttachment" parameterType="com.mgr.merry.couple.model.vo.Attachment">
-		insert into c_upload_img values(seq_c_upload_img.nextval, #{coupleNum}, #{fileRename}, default, #{flag})
-	</insert>
-	
-<!-- 	<select id="selectCoupleBoard" parameterType="_int" resultType="map"> -->
-	<select id="selectCoupleBoard" parameterType="_int" resultType="map" resultMap="clobBoard">
-		select * from c_upload c,members m where c.couplenum=#{no} and m.membernum=c.membernum
-	</select>
-	
-	
-	<delete id="deleteCoupleBoard">
-		delete from c_upload where couplenum=#{no}
-	</delete>
-	
-	<delete id="deleteAttachment">
-		delete from c_upload_img where couplenum=#{no}
-	</delete>
-	
-	<update id="updateCoupleBoard" parameterType="map">
-		update c_upload set coupletitle=#{title},couplecontent=#{content} where couplenum=#{couplenum}
-	</update>
-	
-	<select id="selectAttachList" parameterType="map" resultType="com.mgr.merry.couple.model.vo.Attachment">
-		select * from c_upload_img where couplenum=#{couplenum}
-	</select>
-	
-	<insert id="insertAttachment2" parameterType="com.mgr.merry.couple.model.vo.Attachment">
-		insert into c_upload_img values(seq_c_upload_img.nextval, #{coupleNum}, #{fileRename}, default, 0)
-	</insert>
-	
-	<delete id="deleteAttachment2">
-		delete from c_upload_img where filerename=#{src}
-	</delete>
+   <resultMap type="HashMap" id="clobBoard">
+      <result property="COUPLECONTENT" column="COUPLECONTENT" jdbcType="CLOB" javaType="java.lang.String"/>
+   </resultMap>
+   
+   <select id="selectCoupleBoardCount" resultType="_int">
+      select count(*) from c_upload
+   </select>
+   
+<!--    <select id="selectCoupleBoardList" resultType="map" resultMap="clobBoard"> -->
+<!--       select * from c_upload order by coupledate desc  -->
+<!--    </select> -->
+   <select id="selectCoupleBoardList" resultType="map" resultMap="clobBoard">
+      select * from c_upload c join c_upload_img ci on c.couplenum=ci.couplenum where flag=1 order by coupledate desc
+   </select>
+   
+   <insert id="insertCoupleBoard" parameterType="map">
+      insert into c_upload values(seq_cupload_couplenum.nextval, #{writer},1000,#{content},sysdate,1,#{title})
+      <selectKey keyProperty="coupleNum" resultType="string" order="AFTER">
+         select seq_cupload_couplenum.currval from dual
+      </selectKey>
+   </insert>
+   <insert id="insertAttachment" parameterType="com.mgr.merry.couple.model.vo.Attachment">
+      insert into c_upload_img values(SEQ_C_UPLOAD_IMG.nextval,#{coupleNum}, #{fileRename}, #{flag})
+   </insert>
+   
+<!--    <select id="selectCoupleBoard" parameterType="_int" resultType="map"> -->
+   <select id="selectCoupleBoard" parameterType="_int" resultType="map" resultMap="clobBoard">
+      select * from c_upload c,members m where c.couplenum=#{no} and m.membernum=c.membernum
+   </select>
+   
+   
+   <delete id="deleteCoupleBoard">
+      delete from c_upload where couplenum=#{no}
+   </delete>
+   
+   <delete id="deleteAttachment">
+      delete from c_upload_img where couplenum=#{no}
+   </delete>
+   
+   <update id="updateCoupleBoard" parameterType="map">
+      update c_upload set coupletitle=#{title},couplecontent=#{content} where couplenum=#{couplenum}
+   </update>
+   
+   <select id="selectAttachList" parameterType="map" resultType="com.mgr.merry.couple.model.vo.Attachment">
+      select * from c_upload_img where couplenum=#{couplenum}
+   </select>
+   
+   <insert id="insertAttachment2" parameterType="com.mgr.merry.couple.model.vo.Attachment">
+      insert into c_upload_img values(seq_c_upload_img.nextval, #{coupleNum}, #{fileRename}, default, 0)
+   </insert>
+   
+   <delete id="deleteAttachment2">
+      delete from c_upload_img where filerename=#{src}
+   </delete>
+   
+   
+   <insert id="insertComment" parameterType="map">
+      insert into c_upload_comment values(#{coupleNum},#{comment},default)
+   </insert>
+   
+   <select id="selectCommentList" resultType="map">
+      select * from c_upload_comment where couplenum=#{no} order by coupledate
+   </select>
 
 </mapper>

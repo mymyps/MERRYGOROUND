@@ -32,7 +32,7 @@
 <section id="content">
 <div class="limiter">
 		<div class="container-login100" style="background-image: url('images/bg-01.jpg');">
-			<div class="wrap-login100 p-l-55 p-r-55 p-t-65 p-b-54">
+			<div class="wrap-login100 p-l-55 p-r-55 p-t-65 p-b-54"  style="margin-top:-300px;">
 				<form class="login100-form validate-form" action="${pageContext.request.contextPath}/sign/memberLogin.do" method="post">
 					<span class="login100-form-title p-b-49">
 						Login
@@ -56,14 +56,17 @@
 						</a>
 					</div>
 					
-					<div class="container-login100-form-btn">
-						<div class="wrap-login100-form-btn">
-							<div class="login100-form-bgbtn"></div>
-							<button class="login100-form-btn">
+<!-- 					<div class="container-login100-form-btn"> -->
+<!-- 						<div class="wrap-login100-form-btn"> -->
+<!-- 							<div class="login100-form-bgbtn"></div> -->
+						    <div style="margin-left:135px;">
+							<button class="btn btn-primary solid cd-btn">
 								Login
 							</button>
-						</div>
-					</div>
+							</div>
+<!-- 						</div> -->
+<!-- 					</div> -->
+					
 
 					<div class="txt1 text-center p-t-54 p-b-20" type="submit">
 						<span>

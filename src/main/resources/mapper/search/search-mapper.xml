@@ -33,6 +33,8 @@
 	 INNER JOIN LOCATION lo
 	 ON i.LOCALNUM=lo.LOCALNUM
 	 WHERE i.THEMANUM=#{themaNum} AND t.THEMANUMREF=#{themaNumRef}
+
+
 	 
 	</select>
 	  
