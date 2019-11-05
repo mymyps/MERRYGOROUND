@@ -4,6 +4,7 @@
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 <c:set var="path" value="${pageContext.request.contextPath}" />
 <jsp:include page="/WEB-INF/views/admin/common/adminHeader.jsp" />
+<script src="https://cdn.jsdelivr.net/npm/jquery@2.2.4/dist/jquery.min.js"></script>
 <!-- ---------------------------------------------------------------------------- -->
 <!-- -------------------------     데이터      ------------------------------------ -->
 <!-- ---------------------------------------------------------------------------- -->
@@ -66,7 +67,7 @@
                                             <c:forEach items="${list }" var="b" varStatus="i">
                                             <tr>
                                                 <td><c:out value="${b['RNUM'] }"/></td>
-                                                <td><c:out value="${b['LOCALNAME'] }"/></td>
+                                                <td><c:out value="${b['LOCALCITY'] }"/></td>
                                             </tr>
                                             </c:forEach>
                                             

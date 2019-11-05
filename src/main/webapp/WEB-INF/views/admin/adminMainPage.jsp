@@ -18,6 +18,12 @@
 <script src="${pageContext.request.contextPath }/resources/admin/assets/js/init/morris.js"></script>
 <script src="http://cdnjs.cloudflare.com/ajax/libs/morris.js/0.5.1/morris.min.js"></script>
 <link rel="stylesheet" href="${pageContext.request.contextPath }/resources/admin/assets/css/morris.css">
+<!-- 캘린더 시간만 감추기 -->
+<style>
+	.fc-time {
+    display:none;
+	}
+</style>
 		<!-- ---------------------------------------------------------------------------- -->
 		<!-- -------------------------     데이터      ------------------------------------ -->
 		<!-- ---------------------------------------------------------------------------- -->
@@ -347,14 +353,14 @@
 									</div>
 								</div>
 								<div id="cellPaiChart" class="float-chart">
-									<p>공지 사항</p>
+									<p>공지 사항 입력창</p>
 								</div>
 							</div>
 							<!-- /.card -->
 						</div>
 						<div class="col-lg-2 col-md-6">
 							<div class="card weather-box">
-								<h4 class="weather-title box-title">???????</h4>
+								<h4 class="weather-title box-title">추가 메모</h4>
 								<div class="card-body">
 									<div class="weather-widget">
 										<div id="weather-one" class="weather-one"></div>
@@ -409,6 +415,7 @@
 	var ajaxPath = '<c:out value="${path}"/>';
 
 	<c:forEach items="${ac}" var="item">
+		//console.log("${item}");
 		testAr.push({
 			title: "${item.title}",
 	        start: new Date(${item.start}),

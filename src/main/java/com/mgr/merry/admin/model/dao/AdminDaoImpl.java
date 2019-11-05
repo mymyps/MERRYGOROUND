@@ -140,6 +140,11 @@ public class AdminDaoImpl implements AdminDao{
 	public int cletifyAdmin(SqlSessionTemplate session, int memberNum) {
 		return session.update("admin.cletifyAdmin", memberNum);
 	}
+	
+	@Override
+	public int calDropSave(SqlSessionTemplate session, AdminCalendar calTmp) {
+		return session.update("admin.calDropSave", calTmp);
+	}
 
 
 }

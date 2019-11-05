@@ -35,6 +35,7 @@ public interface AdminDao {
 	int themaAddAdd(SqlSessionTemplate sesstion, String strTmp);
 	Map<String, String> celtifyData(SqlSessionTemplate session, int memberNum);
 	int cletifyAdmin(SqlSessionTemplate session, int memberNum);
+	int calDropSave(SqlSessionTemplate session, AdminCalendar calTmp);
 	
 
 }

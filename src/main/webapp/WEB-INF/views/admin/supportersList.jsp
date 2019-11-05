@@ -4,6 +4,7 @@
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 <c:set var="path" value="${pageContext.request.contextPath}" />
 <jsp:include page="/WEB-INF/views/admin/common/adminHeader.jsp" />
+<script src="https://cdn.jsdelivr.net/npm/jquery@2.2.4/dist/jquery.min.js"></script>
 <!-- ---------------------------------------------------------------------------- -->
 <!-- -------------------------     데이터      ------------------------------------ -->
 <!-- ---------------------------------------------------------------------------- -->

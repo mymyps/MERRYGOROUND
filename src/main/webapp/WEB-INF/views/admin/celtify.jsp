@@ -5,7 +5,6 @@
 <c:set var="path" value="${pageContext.request.contextPath}" />
 <jsp:include page="/WEB-INF/views/admin/common/adminHeader.jsp" />
 <script src="https://cdn.jsdelivr.net/npm/jquery@2.2.4/dist/jquery.min.js"></script>
-
 <!-- modal style -->
 <style>
 .modal {
