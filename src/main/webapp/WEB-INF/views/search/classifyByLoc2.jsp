@@ -19,7 +19,7 @@ border: 1px lightgray !important;
  <section id="portfolio" class="portfolio portfolio-box">
     <div class="container">
         <div class="row">
-            <div class="col-md-12 heading text-center">
+            <div class="col-md-12 heading text-center" style="margin-top:-30px;">
                 <span class="icon-pentagon wow bounceIn"><i class="fa fa-suitcase"></i></span>
                 <h2 class="title2">Local List
                     <span class="title-desc" style="color: white;">:)</span>
@@ -28,7 +28,7 @@ border: 1px lightgray !important;
         </div> <!-- Title row end -->
 
         <!--Isotope filter start -->
-        <div class="row text-center" style="margin-top:-50px;" >
+        <div class="row text-center" style="margin-top:-50px; border:1px !important" >
             <div class="isotope-nav" id="locGrayLi">
                 <ul>
                     <li><a href="${path}/search/locList?localNum=1">은평/서대문</a></li>
@@ -71,7 +71,7 @@ border: 1px lightgray !important;
         </div><!-- Isotope filter end -->
         
          
-        <div class="row text-center" style="margin-top:-20px;">
+        <div class="row text-center" style="margin-top:-60px;">
        
             <div class="isotope-nav" data-isotope-nav="isotope">
                 <ul>
@@ -85,17 +85,16 @@ border: 1px lightgray !important;
 			
 			<div class="row">
 			<div id="isotope" class="isotope">	
-                 <!--먹거리 -->
 				 <c:forEach items="${locList}" var="list">
-			    
+				 <!--먹거리 -->
 			    <c:if test="${1 eq list.themaNumRef}">
 			    <div class="col-sm-3 portfolio-static-item food isotope-item" style="margin-bottom:20px;">
 					<div class="grid">
 						<figure class="effect-oscar">
 							<img src="${path}/resources/images/beerparty.jpg" alt="">
 									<figcaption>
-								<a class="link icon-pentagon" href="portfolio-item.html"><i class="fa fa-link"></i></a>
-								<a class="view icon-pentagon" data-rel="prettyPhoto" href="images/portfolio/portfolio-bg1.jpg"><i class="fa fa-search"></i></a>            
+<!-- 								<a class="link icon-pentagon" href="portfolio-item.html"><i class="fa fa-link"></i></a> -->
+<a class="view icon-pentagon" data-rel="prettyPhoto" href="images/portfolio/portfolio-bg1.jpg"><i class="fa fa-search"></i></a> 
 							</figcaption>			
 						</figure>
 						<div class="portfolio-static-desc">
@@ -116,7 +115,7 @@ border: 1px lightgray !important;
 						<figure class="effect-oscar">
 							<img src="${path}/resources/images/coex.jpg" alt="">
 									<figcaption>
-								<a class="link icon-pentagon" href="portfolio-item.html"><i class="fa fa-link"></i></a>
+<!-- 								<a class="link icon-pentagon" href="portfolio-item.html"><i class="fa fa-link"></i></a> -->
 								<a class="view icon-pentagon" data-rel="prettyPhoto" href="images/portfolio/portfolio-bg1.jpg"><i class="fa fa-search"></i></a>            
 							</figcaption>			
 						</figure>
@@ -137,7 +136,7 @@ border: 1px lightgray !important;
 						<figure class="effect-oscar">
 							<img src="${path}/resources/images/banpo.JPG" alt="">
 									<figcaption>
-								<a class="link icon-pentagon" href="portfolio-item.html"><i class="fa fa-link"></i></a>
+<!-- 								<a class="link icon-pentagon" href="portfolio-item.html"><i class="fa fa-link"></i></a> -->
 								<a class="view icon-pentagon" data-rel="prettyPhoto" href="images/portfolio/portfolio-bg1.jpg"><i class="fa fa-search"></i></a>            
 							</figcaption>			
 						</figure>
