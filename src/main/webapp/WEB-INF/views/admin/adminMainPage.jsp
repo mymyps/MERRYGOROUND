@@ -465,7 +465,7 @@
 				return false;
 			},
                   error : function(e) {
-                  	console.log("notice ajax error");
+                  	console.log("ajax error");
                   }
 		});
 		return false;

@@ -112,7 +112,7 @@
 	<select id="infoUploadMain" resultType="map">
 		select to_date(infoupdate) "infoup", count(*) "dayInfo" 
 		from info_upload
-			where (infoupdate between TO_DATE(sysdate-5) and TO_DATE(sysdate)) and infoupstatus = 1
+			<!-- where (infoupdate between TO_DATE(sysdate-5) and TO_DATE(sysdate)) and infoupstatus = 1 -->
 		GROUP by to_date(infoupdate)
 		order by 1
 	</select>
