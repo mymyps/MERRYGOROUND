@@ -30,11 +30,12 @@
 		<div class="row">
 	
 	<!-- summernote 폼-->
+<!-- 	인포업로드에서 번호를 받아와서 그번호 DB작성 -->
 	<form action="${path }/couple/coupleBoardWriteEnd" method="post">
 		<h2 style="text-align: center;">게시글 작성</h2>
 		<input type="text" name="title" style="width: 40%;" placeholder="제목" class="form-control" required/>
 			<br>
-			<input type="text" name="writer" value="1000" style="width: 20%;" placeholder="작성자" class="form-control" required/>
+			<input type="text" name="writer" value="1" style="width: 20%;" placeholder="작성자" class="form-control" required/>
 			<br>
 			<textarea id="summernote" name="content" required></textarea>
 		<div><br>

@@ -19,6 +19,7 @@
 		action="${pageContext.request.contextPath }/info/infoFormEnd.do"
 		method="post" enctype="multipart/form-data">
 		<div class="container">
+		<input type="text" name="loginMemberNum" value="${loginMember.memberNum}">
 
 			<div class="row">
 				<!-- Blog start -->
@@ -26,62 +27,59 @@
 					<!-- Blog post start -->
 					<div class="post-content">
 						<h1 class="post-title text-center">
-							<a href="blog-item.html">INFOMATION 작성</a>
+							<a href="blog-item.html">서포터즈 리뷰 작성</a>
 						</h1>
 						<hr>
 						<div class="entry-content">
 							<div class="infoFormMainFrame">
 								<div>
-									<div class="infoFormSubFrame">제목</div>
+									<div class="infoFormSubFrame">인포메이션 번호</div>
 									<p class="infoForm1">
-										<input type="text" placeholder="INFO TITLE" name="infoupTitle" />
+										${info.INFOUPNUM }
+										<input type="hidden" name="infoupNum" value="${info.INFOUPNUM }"/>
 									</p>
+								</div>
+								<div>
+									<div class="infoFormSubFrame">인포메이션 제목</div>
+									<p class="infoForm1">
+										${info.INFOUPTITLE }
+									</p>
+								</div>
+								<div>
 								</div>
 								<div>
 									<div class="infoFormSubFrame">테마</div>
 									<p class="infoForm1">
-										<select id="" name="themaNum" class="mainThema">
-											<c:forEach items="${themaList2 }" var="t">
-												<option value="${t['THEMANUM'] }">${t['THEMANAME'] }</option>
-											</c:forEach>
-										</select> <select id="" name="themaSubNum">
-											<c:forEach items="${themaList }" var="t">
-												<option value="${t['THEMANUM'] }">${t['THEMANAME'] }</option>
-											</c:forEach>
-										</select>
+										${info.THEMANAME }
 									</p>
 								</div>
 
 								<div>
 									<div class="infoFormSubFrame">장소</div>
 									<p class="infoForm1">
-										<select id="" name="localNum" class="infoFormLocFrame">
-											<c:forEach items="${locationList }" var="l">
-												<option value="${l['LOCALNUM'] }">${l['LOCALNAME'] }</option>
-											</c:forEach>
-										</select>
-
+										${info.LOCALNAME }
 									</p>
 								</div>
-								<textarea id="summernote" name="content" required></textarea>
+								
+								<div>
+									<div class="infoFormSubFrame">제목</div>
+									<p class="infoForm1">
+										<input type="text" name="supupTitle" />
+									</p>
+								</div>
+								<textarea id="summernote" name="supupContent" required></textarea>
 							</div>
 
 						</div>
-
-
-
 					</div>
-					<!-- Blog post end -->
 				</div>
-				<!--/ Content col end -->
-
 			</div>
 		</div>
 
 
 		<div>
-			<button class="btn infoFormBtn" type="submit">INFO 작성</button>
-			<button class="btn infoFormBtn" type="reset">INFO 작성 취소</button>
+			<button class="btn infoFormBtn" type="submit">서포터즈 리뷰 작성</button>
+			<button class="btn infoFormBtn" type="reset">서포터즈 리뷰 작성 취소</button>
 		</div>
 	</form>
 
@@ -129,6 +127,11 @@
 			});
 
 		}
+		function (){
+			var htmlStr = $('#summernote').summernote('code');
+		}
 	</script>
+	
+	<input type="hidden" value=""/>
 </section>
 <jsp:include page="/WEB-INF/views/common/footer.jsp" />

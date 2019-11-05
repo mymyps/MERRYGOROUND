@@ -6,5 +6,5 @@ import lombok.Data;
 public class SupUploadImg {
 	private int supupNum;
 	private int supupImgNum;
-	private String fileRename;
+	private String fileReName;
 }

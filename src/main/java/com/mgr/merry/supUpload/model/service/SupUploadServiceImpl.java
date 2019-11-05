@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 
 import com.mgr.merry.supUpload.model.dao.SupUploadDao;
 import com.mgr.merry.supUpload.model.vo.SupUploadImg;
+import com.mgr.merry.supporters.model.vo.Supporters;
 
 @Service
 public class SupUploadServiceImpl implements SupUploadService {
@@ -17,7 +18,7 @@ public class SupUploadServiceImpl implements SupUploadService {
 	
 	@Autowired
 	SupUploadDao dao;
-
+	
 	@Override
 	public Map<String, String> selectSupUpload(int infoupNum) {
 		return dao.selectSupUpload(session, infoupNum);
@@ -26,6 +27,17 @@ public class SupUploadServiceImpl implements SupUploadService {
 	@Override
 	public SupUploadImg selectSupUploadImg(int infoupNum) {
 		return dao.selectSupUploadImg(session, infoupNum);
+	}
+
+	@Override
+	public int insertSupReview(Map<String, String> param) {
+		
+		return dao.insertSupUpload(session, param);
+	}
+
+	@Override
+	public Supporters selectSup(int memberNum) {
+		return dao.selectSup(session, memberNum);
 	}
 
 }

@@ -4,7 +4,7 @@
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 <c:set var="path" value="${pageContext.request.contextPath}"/>
 <jsp:include page="/WEB-INF/views/common/header.jsp">
-	<jsp:param name="pageTitle" value="INFOMATION"/>
+   <jsp:param name="pageTitle" value="INFOMATION"/>
 </jsp:include>
 <section id="content">
 
@@ -42,7 +42,7 @@
                             </div>
                             <div class="infocontent2">
                                 <p>${info.THEMANAME }</p>
-                                <p>${info.LOCALNAME }</p>
+                                <p>${info.INFOADDR }</p>
                                 <p>${info.INFOUPPAYMENT }</p>
                                 <p>${info.INFOUPPHONE }</p>
                                 <p>${info.INFOUPTIME }</p>
@@ -53,7 +53,7 @@
                             <form name="supReview" action="${pageContext.request.contextPath }/supUp/supReview?infoupNum=${info.INFOUPNUM}" method="post">
                                 <button class="btn supreviewBtn" type="submit">서포터즈 리뷰 바로가기</button> 
                             </form>
-                            <form name="supReviewForm" action="${pageContext.request.contextPath }/supUp/supReviewForm?infoupNum=${info.INFOUPNUM}" method="post">
+                            <form name="supReviewForm" action="${pageContext.request.contextPath }/supUp/supReviewForm.do?infoupNum=${info.INFOUPNUM}" method="post">
                                 <button class="btn supreviewBtn" type="submit">서포터즈 리뷰 작성하기</button> 
                             </form>
                             <br>
@@ -71,6 +71,7 @@
                         <div class="comments-form">
                             <h3>멤버 리뷰 등록하기</h3>
                             <form name="insertReview" action="${pageContext.request.contextPath }/infoReview/insertInfoReview?infoupNum=${info.INFOUPNUM}" method="post">
+                                <input type="text" value="${loginMember.memberNum}" name="memNum">
                                 <div class="form-group">
                                 평점 <input type="number" step="1" max="5" min="0" name="infoReviewPoint" /><br><br>
                                     <input type="text" name="infoReviewContent" class="form-control required-field" id="message" placeholder="" rows="4" required></textarea>
@@ -84,30 +85,32 @@
                         <div id="post-comments">
                             <ul class="comments-list">
                                 <li>
-                                	<c:if test="${not empty review }">
-	                                <c:forEach items="${review}" var="r" >
-		                                	<c:if test="${r['INFOREVIEWSTATUS']==1}">
-			                                    <div class="comment">
-			                                        <img class="comment-avatar pull-left" alt="" src="images/blog/avator1.png">
-			                                        
-			                                        <div class="comment-body">
-			                                            <h4 class="comment-author"><c:out value='${r["NAME"] }'/></h4>
-			                                            <div class="comment-date"><c:out value='${r["INFOREVIEWDATE"] }'/></div>
-			                                            <div class="reviewPoint">
-			                                                평점 <c:out value='${r["INFOREVIEWPOINT"] }'/> / 5
-			                                            </div>
-			                                            <hr>
-			                                            <p><c:out value='${r["INFOREVIEWCONTENT"] }'/></p>
-			                                            <form name="updateInfoReview" action="${pageContext.request.contextPath }/info/updateInfoReview?infoReviewNum=${r['INFOREVIEWNUM']}?infoupNum=${r['INFOUPNUM']}" method="post">
-							                                <button class="btn" type="submit">리뷰 수정</button> 
-							                            </form>
-							                            <br>
-							                            <form name="deleteInfoReview" action="${pageContext.request.contextPath }/info/status0InfoReview?infoReviewNum=${r['INFOREVIEWNUM']}" method="post">
-							                                <button class="btn" type="submit">리뷰 삭제</button> 
-							                            </form>
-			                                        </div>
-			                                    </div>
-		                                    </c:if>
+                                   <c:if test="${not empty review }">
+                                   <c:forEach items="${review}" var="r" >
+                                         <c:if test="${r['INFOREVIEWSTATUS']==1}">
+                                             <div class="comment">
+                                                 <img class="comment-avatar pull-left" alt="" src="images/blog/avator1.png">
+                                                 
+                                                 <div class="comment-body">
+                                                     <h4 class="comment-author"><c:out value='${r["NAME"] }'/></h4>
+                                                     <div class="comment-date"><c:out value='${r["INFOREVIEWDATE"] }'/></div>
+                                                     <div class="reviewPoint">
+                                                         평점 <c:out value='${r["INFOREVIEWPOINT"] }'/> / 5
+                                                     </div>
+                                                     <hr>
+                                                     <p><c:out value='${r["INFOREVIEWCONTENT"] }'/></p>
+                                                     <form name="updateInfoReview" action="${pageContext.request.contextPath }/info/updateInfoReview?infoReviewNum=${r['INFOREVIEWNUM']}?infoupNum=${r['INFOUPNUM']}" method="post">
+                                                     <button class="btn" type="submit">리뷰 수정</button> 
+                                                 </form>
+                                                 <br>
+                                                 <form name="deleteInfoReview" action="${pageContext.request.contextPath }/info/status0InfoReview" method="post">
+                                                    <input type="hidden" value="${r['INFOREVIEWNUM']}" name="infoReviewNum"/>
+                                                    <input type="hidden" value="${info.INFOUPNUM }" name="infoupNum"/>
+                                                     <button class="btn" type="submit">리뷰 삭제</button> 
+                                                 </form>
+                                                 </div>
+                                             </div>
+                                          </c:if>
                                     </c:forEach>
                                     </c:if>
                                 </li><!-- Comments-list li end -->

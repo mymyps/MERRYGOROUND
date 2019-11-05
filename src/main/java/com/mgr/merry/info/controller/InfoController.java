@@ -15,12 +15,16 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.mgr.merry.info.model.service.InfoService;
+import com.mgr.merry.info.model.vo.InfoUpload;
 import com.mgr.merry.info.model.vo.InfoUploadImg;
 import com.mgr.merry.infoReview.model.service.InfoReviewService;
-import com.mgr.merry.infoReview.model.vo.InfoReview;
 import com.mgr.merry.search.model.service.SearchService;
 import com.mgr.merry.search.model.vo.Location;
 import com.mgr.merry.search.model.vo.Thema;
+import com.mgr.merry.sign.model.service.SignService;
+import com.mgr.merry.sign.model.vo.Members;
+import com.mgr.merry.supUpload.model.service.SupUploadService;
+import com.mgr.merry.supporters.model.vo.Supporters;
 
 @Controller
 public class InfoController {
@@ -34,18 +38,38 @@ public class InfoController {
 	@Autowired
 	InfoReviewService rservice;
 	
+	@Autowired
+	SupUploadService supservice;
+	
+	@Autowired
+	SignService mservice;
+	
+	
 	// infoForm으로 들어가기
 	// 완료
 	@RequestMapping("/info/infoForm.do")
-	public ModelAndView infoForm() {
+	public ModelAndView infoForm(HttpServletRequest request, Members m) {
+		
+		String mNum=request.getParameter("mNum");
+		int memberNum=Integer.parseInt(mNum);
+		Members result = mservice.selectMember(m,memberNum);
+		
 		ModelAndView mv = new ModelAndView();
 		List<Thema> themaList = sservice.selectThemaList3();
 		List<Thema> themaList2 = sservice.selectThemaList4();
 		List<Location> locationList = sservice.selectLocationList();
 		
+		InfoUpload info = new InfoUpload();
+//		Members m = new Members();
+//		m.setMemberNum(memberNum);
+		
+		Supporters result2 = supservice.selectSup(memberNum);
+
+		mv.addObject("supporters",result2);
 		mv.addObject("themaList", themaList);
 		mv.addObject("themaList2", themaList2);
 		mv.addObject("locationList", locationList);
+		mv.addObject("info", info);
 		mv.setViewName("info/infoForm");
 		
 		

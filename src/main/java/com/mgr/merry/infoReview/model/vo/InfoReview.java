@@ -12,4 +12,5 @@ public class InfoReview {
 	private int infoReviewPoint;
 	private Date infoReviewDate;
 	private String infoReviewStatus;
+	private int memNum;
 }
