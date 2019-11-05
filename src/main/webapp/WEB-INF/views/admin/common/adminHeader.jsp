@@ -125,7 +125,7 @@
 							class="menu-icon fa fa-exclamation"></i>승인
 					</a></li>
 					<li><a href="${pageContext.request.contextPath }/admin/declaration"> <i
-							class="menu-icon fa fa-stethoscope"></i>신고
+							class="menu-icon fa fa-stethoscope"></i>공지 사항목록
 					</a></li>
 				</ul>
 			</div>
@@ -138,7 +138,8 @@
 		<header id="header" class="header">
 			<div class="top-left">
 				<div class="navbar-header">
-					<a id="menuToggle" class="menutoggle"><i class="fa fa-bars"></i></a>
+					<a id="menuToggle" class="menutoggle"><i class="fa fa-bars"></i></a>&nbsp;&nbsp;&nbsp;
+					<a href="${pageContext.request.contextPath }/">메인으로</a>
 				</div>
 			</div>
 		</header>

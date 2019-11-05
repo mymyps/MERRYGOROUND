@@ -2,6 +2,15 @@
 !function($) {
     "use strict";
 
+//    $('#calendar').fullCalendar({
+//        displayEventTime : false
+//   	});
+//    $('#calendar').fullCalendar({
+//        events: [              
+//        ],
+//        timeFormat: ' '
+//    });
+    
     var defaultEvents = [];
     // 실행시 데이터를 받아옴
     defaultEvents = testAr;
@@ -21,6 +30,7 @@
     /* on drop */
     CalendarApp.prototype.onDrop = function (eventObj, date) { 
         var $this = this;
+        console.log("onDrop");
             // retrieve the dropped element's stored Event Object
             var originalEventObject = eventObj.data('eventObject');
             var $categoryClass = eventObj.attr('data-class');
@@ -33,14 +43,17 @@
             // render the event on the calendar
             $this.$calendar.fullCalendar('renderEvent', copiedEventObject, true);
             // is the "remove after drop" checkbox checked?
+            
             if ($('#drop-remove').is(':checked')) {
+            	console.log("onDrop end");
                 // if so, remove the element from the "Draggable Events" list
                 eventObj.remove();
             }
     },
     /* on click on event */
     CalendarApp.prototype.onEventClick =  function (calEvent, jsEvent, view) {
-        var $this = this;
+//    	console.log("onEventClick");
+    	var $this = this;
             var form = $("<form></form>");
             form.append("<label>event 변경 내용</label>");
             form.append("<div class='input-group'><input class='form-control' type=text value='" + calEvent.title + "' /><span class='input-group-btn'><button type='submit' class='btn btn-success waves-effect waves-light'><i class='fa fa-check'></i> 저장</button></span></div>");
@@ -50,7 +63,9 @@
             $this.$modal.find('.delete-event').show().end().find('.save-event').hide().end().find('.modal-body').empty().prepend(form).end().find('.delete-event').unbind('click').click(function () {
             	// 이벤트 삭제
 //            	//console.log("remove event ->");
-            	//console.log(calEvent);
+            	console.log(calEvent);
+            	console.log(jsEvent);
+            	console.log(view);
             	var calTmp = {
 	        		title: calEvent.title,
 	        		start: typeof calEvent.start._i === "number"? calEvent.start._i:calEvent.start._i.getTime(),
@@ -110,6 +125,7 @@
     },
     /* on select */
     CalendarApp.prototype.onSelect = function (start, end, allDay) {
+//    	console.log(CalendarApp.prototype);
         var $this = this;
             $this.$modal.modal({
                 backdrop: 'static'
@@ -154,7 +170,7 @@
                 		end: new Date(ddd).getTime(),
                 		className: categoryClass
                 	};
-//                	console.log(calTmp);
+                	console.log(calTmp);
                 	
                 	$(document).ready(function(){
                 		 $.ajax({
@@ -195,27 +211,68 @@
             $this.$calendarObj.fullCalendar('unselect');
     },
     CalendarApp.prototype.enableDrag = function() {
-        //init events
-        $(this.$event).each(function () {
+    	//init events
+    	$(this.$event).each(function () {
             // create an Event Object (http://arshaw.com/fullcalendar/docs/event_data/Event_Object/)
             // it doesn't need to have a start or end
-        	
-            var eventObject = {
-                title: $.trim($(this).text()) // use the element's text as the event title
+            eventObject = {
+                title: $.trim($(this).text()), // use the element's text as the event title
+                stick: true
             };
             // store the Event Object in the DOM element so we can get to it later
             $(this).data('eventObject', eventObject);
+            
             // make the event draggable using jQuery UI
             $(this).draggable({
-                zIndex: 999,
+            	zIndex: 999,
                 revert: true,      // will cause the event to go back to its
-                revertDuration: 0  //  original position after the drag
+                revertDuration: 0  //  original position after the drag,
             });
+            
         });
+    },CalendarApp.prototype.onEventDrop = function(event, delta, revertFunc, jsEvent, ui, view) {
+    	//event, delta, revertFunc, jsEvent, ui, view
+    	//드래그이벤트 발생
+    	console.log(event);
+    	// 마지막 날짜 하
+    	var ddd = new Date(event.end);
+    	ddd.setDate(ddd.getDate() - 1 ); 
+//    	console.log(delta);
+//    	console.log(revertFunc);
+//    	console.log(jsEvent);
+//    	console.log(ui);
+//    	console.log(view);
+//    	console.log(view.end['_i']);
+
+    	//    	//------------------------- 수정중 -------
+    	var calTmp = {
+    			title: event.title,
+    			start: event.start['_d'].getTime(),
+    			end: ddd.getTime(),
+    			end: event.end['_d'].getTime(),
+    			className: event.className.toString()
+    	};
+//    	console.log(calTmp);
+
+    	$(document).ready(function(){
+    		 $.ajax({
+					url: ajaxPath + '/admin/calDropSave.do',
+					data: calTmp,
+					success: function (data) {
+						console.log("일정을 변경했습니다");
+					},
+                 error : function(e) {
+                 	console.log("calendar ajax error");
+                 }
+				});
+		});
+    	
     }
+    
     /* Initializing */
     CalendarApp.prototype.init = function() {
         this.enableDrag();
+
         /*  Initialize the calendar  */
         var date = new Date();
         var d = date.getDate();
@@ -241,13 +298,14 @@
 //            
 //            ];
 //        console.log("############");
-//        console.log(defaultEvents);
         
         var $this = this;
         $this.$calendarObj = $this.$calendar.fullCalendar({
-            slotDuration: '00:15:00', /* If we want to split day time each 15minutes */
-            minTime: '08:00:00',
-            maxTime: '19:00:00',  
+        	locale: "ko",
+        	startTime: '00:00:00',
+            slotDuration: '00:00:00', /* If we want to split day time each 15minutes */
+            minTime: '00:00:00',
+            maxTime: '00:00:00',  
             defaultView: 'month',  
             handleWindowResize: true,   
             height: $(window).height() - 200,   
@@ -261,9 +319,10 @@
             droppable: true, // this allows things to be dropped onto the calendar !!!
             eventLimit: true, // allow "more" link when too many events
             selectable: true,
-            drop: function(date) { $this.onDrop($(this), date); },
+            drop: function(date, jsEvent, ui, resourceId) { $this.onDrop($(this), date); },
             select: function (start, end, allDay) { $this.onSelect(start, end, allDay); },
-            eventClick: function(calEvent, jsEvent, view) { $this.onEventClick(calEvent, jsEvent, view); }
+            eventClick: function(calEvent, jsEvent, view) { $this.onEventClick(calEvent, jsEvent, view);},
+            eventDrop: function(event, delta, revertFunc, jsEvent, ui, view) { $this.onEventDrop(event, delta, revertFunc, jsEvent, ui, view); }
 
         });
 
@@ -277,6 +336,8 @@
             }
 
         });
+        
+    
     },
 
    //init CalendarApp

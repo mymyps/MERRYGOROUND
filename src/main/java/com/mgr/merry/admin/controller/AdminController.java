@@ -90,6 +90,15 @@ public class AdminController {
 		return mv;
 	}
 	
+	// calendar 드래그
+	@RequestMapping("/admin/calDropSave.do")
+	public void calDropSave(AdminCalendar calTmp, HttpServletResponse res) throws IOException {
+		
+		int result = service.calDropSave(calTmp);
+		
+		res.getWriter().print(true);
+	}
+	
 	// calendar 저장
 	@RequestMapping("/admin/calSave.do")
 	public void calSave(AdminCalendar calTmp, HttpServletResponse res) throws IOException {
