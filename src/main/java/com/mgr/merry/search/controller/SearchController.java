@@ -29,9 +29,12 @@ public class SearchController {
 	SearchService service;
 
 	@RequestMapping("/search/subThemaList")
-	public String subThemaList(@RequestParam("themaNum") int themaNum,
+	public String subThemaList(
+			@RequestParam("themaNum") int themaNum,
 			@RequestParam("themaNumRef") int themaNumRef, Model model) {
 
+		
+		
 		Map<String, Object> param = new HashMap<String, Object>();
 		param.put("themaNum", themaNum);
 		param.put("themaNumRef", themaNumRef);

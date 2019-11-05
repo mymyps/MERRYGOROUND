@@ -18,8 +18,6 @@
 							<br>
 							<h4 style="color:white;">매일, 매번 똑같은 영화-밥-카페 데이트코스에 질리셨나요? 식상한 데이트에 지치셨나요?
 							<br>메리고라운드와 함께 색다른 데이트를 경험해보세요:)</h4>
-							<a href="${pageContext.request.contextPath }/couple/coupleBoardList">임시연결 </a>	
-							<a href="${pageContext.request.contextPath }/couple/abc">abc </a>	
 						</div> <!-- .cd-full-width -->
 					</li>
 
