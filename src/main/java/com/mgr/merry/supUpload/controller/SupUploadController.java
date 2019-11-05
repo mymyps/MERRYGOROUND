@@ -1,11 +1,20 @@
 package com.mgr.merry.supUpload.controller;
 
+import java.io.File;
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Map;
+
+import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.mgr.merry.info.model.service.InfoService;
@@ -29,8 +38,11 @@ public class SupUploadController {
 	@Autowired
 	SupLvService lvservice;
 	
+	private static List<SupUploadImg> imgList = new ArrayList();
+	
 	@RequestMapping("/supUp/supReview")
 	public ModelAndView supReview(int infoupNum) {
+		imgList.clear();
 		ModelAndView mv = new ModelAndView();
 		
 		Map<String, String> supUpload= service.selectSupUpload(infoupNum);
@@ -76,5 +88,52 @@ public class SupUploadController {
 		mv.setViewName("common/msg");
 		return mv;
 	}
+	
+	
+	
+	
+	//summernote 이미지파일 저장후 게시판에 쏴주기
+		@RequestMapping(value = "summernote_supRv_imageUpload.do", method=RequestMethod.POST)
+		public void uploadSummernoteImage(MultipartFile image, HttpSession session, HttpServletResponse res) throws Exception{
+			String savename = image.getOriginalFilename();
+			
+			System.out.println(image.getOriginalFilename());
+			String path=session.getServletContext().getRealPath("/resources/upload/supLv/");
+			File f=new File(path);
+			if(!f.exists()) f.mkdirs();
+			
+			//파일명 생성(rename)
+			String oriFileName=image.getOriginalFilename();
+			String ext = oriFileName.substring(oriFileName.lastIndexOf("."));
+			//규칙설정
+			SimpleDateFormat sdf= new SimpleDateFormat("yyyyMMdd_HHMMssSSS");
+			int rdv = (int)(Math.random()*1000);
+			String reName = sdf.format(System.currentTimeMillis())+"_"+rdv+ext;
+			
+			// 파일 실제 저장하기
+	        try {
+	           image.transferTo(new File(path + "/" + reName));
+	     
+	        } catch (Exception e) { //IlligalStateException|IOException
+	        	e.printStackTrace();
+	        }
+	        
+	        
+	        res.getWriter().print("/merry/resources/upload/supLv/"+reName);
+	        
+	        //DB에 저장 board가 insert된후 boardnum을 가져온후 저장해야함 (따로 필요?).
+	        
+	        SupUploadImg img = new SupUploadImg();
+	        img.setFileReName(reName);
+	        
+	        System.out.println("업로드이미지 : "+img);
+	        
+	        System.out.println("imgList.size() : "+imgList.size());
+
+	        imgList.add(img);
+
+	        System.out.println("이미지 등록 완료시 :" +imgList);
+		}
+
 	
 }

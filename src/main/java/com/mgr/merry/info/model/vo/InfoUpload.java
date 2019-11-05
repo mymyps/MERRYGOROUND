@@ -1,4 +1,4 @@
-package com.mgr.merry.info.model.vo;
+ package com.mgr.merry.info.model.vo;
 
 import java.sql.Date;
 
@@ -29,5 +29,7 @@ public class InfoUpload {
 	private String themaNum;
 	private String themaNumRef;
 	private int level;
+	
+	private String localName;
    
 }

@@ -44,10 +44,21 @@ public class InfoReviewController {
 	
 	// 수정중
 	@RequestMapping("/info/status0InfoReview")
-	public String status0InfoReview(int infoReviewNum, int infoupNum) {
+	public ModelAndView status0InfoReview(int infoReviewNum, int infoupNum) {
 		int result = 0;
 		result = service.status0InfoReview(infoReviewNum);
-		return "/info/infoView?infoupNum"+infoupNum;
+		
+		String msg="";
+		if (result > 0) {
+			msg = "리뷰가 삭제됐습니다.";
+		} else {
+			msg = "리뷰 삭제 실패";
+		}
+		ModelAndView mv = new ModelAndView();
+		mv.addObject("msg", msg);
+		mv.setViewName("common/msg");
+		return mv;
+		
 	}
 	
 	//수정중

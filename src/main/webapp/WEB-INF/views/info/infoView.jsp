@@ -103,7 +103,9 @@
 							                                <button class="btn" type="submit">리뷰 수정</button> 
 							                            </form>
 							                            <br>
-							                            <form name="deleteInfoReview" action="${pageContext.request.contextPath }/info/status0InfoReview?infoReviewNum=${r['INFOREVIEWNUM']}" method="post">
+							                            <form name="deleteInfoReview" action="${pageContext.request.contextPath }/info/status0InfoReview" method="post">
+							                            	<input type="hidden" value="${r['INFOREVIEWNUM']}" name="infoReviewNum"/>
+							                            	<input type="hidden" value="${info.INFOUPNUM }" name="infoupNum"/>
 							                                <button class="btn" type="submit">리뷰 삭제</button> 
 							                            </form>
 			                                        </div>

@@ -19,7 +19,8 @@
 		action="${pageContext.request.contextPath }/info/infoFormEnd.do"
 		method="post" enctype="multipart/form-data">
 		<div class="container">
-		<input type="text" name="loginMemberNum" value="${loginMember.memberNum}">
+			<input type="hidden" name="loginMemberNum"
+				value="${loginMember.memberNum}">
 
 			<div class="row">
 				<!-- Blog start -->
@@ -35,39 +36,87 @@
 								<div>
 									<div class="infoFormSubFrame">인포메이션 번호</div>
 									<p class="infoForm1">
-										${info.INFOUPNUM }
-										<input type="hidden" name="infoupNum" value="${info.INFOUPNUM }"/>
+										${info.INFOUPNUM } <input type="hidden" name="infoupNum"
+											value="${info.INFOUPNUM }" />
 									</p>
 								</div>
 								<div>
 									<div class="infoFormSubFrame">인포메이션 제목</div>
-									<p class="infoForm1">
-										${info.INFOUPTITLE }
-									</p>
+									<p class="infoForm1">${info.INFOUPTITLE }</p>
 								</div>
-								<div>
-								</div>
+								<div></div>
 								<div>
 									<div class="infoFormSubFrame">테마</div>
-									<p class="infoForm1">
-										${info.THEMANAME }
-									</p>
+									<p class="infoForm1">${info.THEMANAME }</p>
 								</div>
 
 								<div>
-									<div class="infoFormSubFrame">장소</div>
-									<p class="infoForm1">
-										${info.LOCALNAME }
-									</p>
+									<div class="infoFormSubFrame">위치</div>
+									<p class="infoForm1">${info.INFOADDR }</p>
 								</div>
-								
+
 								<div>
 									<div class="infoFormSubFrame">제목</div>
 									<p class="infoForm1">
 										<input type="text" name="supupTitle" />
 									</p>
 								</div>
-								<textarea id="summernote" name="supupContent" required></textarea>
+								<textarea id="summernote" name="content" required></textarea>
+								<script>
+									$('#summernote')
+											.summernote(
+													{
+														placeholder : '내용',
+														tabsize : 4,
+														height : 600,
+														width : '100%',
+														maxHeight : 1200,
+														callbacks : {
+															onImageUpload : function(
+																	files,
+																	editor,
+																	welEditable) {
+																console
+																		.log("에디터 : "+editor);
+																console
+																		.log("파일들 : "+files);
+																for (var i = files.length - 1; i >= 0; i--) {
+																	sendFile(
+																			files[i],
+																			this);
+																}
+															}
+														}
+													});
+									function sendFile(file, edi, welEditable) {
+										var imgUrl = "resources/upload/supLv/"
+										console.log("이미지url :"+imgUrl);
+										//파일전송을 위한 폼생성
+										var form_data = new FormData();
+										form_data.append("image", file);
+										$
+												.ajax({
+													data : form_data,
+													type : "post",
+													url : "${path}/summernote_supRv_imageUpload.do",
+													cache : false,
+													contentType : false,
+													enctype : "multipart/form-data",
+													processData : false,
+													success : function(savename) {
+														//imgUrl = imgUrl + savename;
+														console.log("세이브네임 : "+savename);
+														console.log("edu : "+edi);
+														$(edi).summernote('editor.insertImage',savename);
+														alert("성공!" + savename);
+													},
+													error : function() {
+														alert("summernote 에러");
+													}
+												});
+
+									}
+								</script>
 							</div>
 
 						</div>
@@ -83,55 +132,7 @@
 		</div>
 	</form>
 
-	<script>
-		$('#summernote').summernote({
-			placeholder : '내용',
-			tabsize : 4,
-			height : 600,
-			width : '100%',
-			maxHeight : 1200,
-			callbacks : {
-				onImageUpload : function(files, editor, welEditable) {
-					console.log(editor);
-					console.log(files);
-					for (var i = files.length - 1; i >= 0; i--) {
-						sendFile(files[i], this);
-					}
-				}
-			}
-		});
-		function sendFile(file, edi, welEditable) {
-			var imgUrl = "resources/images/couple/"
-			console.log(imgUrl);
-			//파일전송을 위한 폼생성
-			var form_data = new FormData();
-			form_data.append("image", file);
-			$.ajax({
-				data : form_data,
-				type : "post",
-				url : "${path}/summernote_imageUpload.do",
-				cache : false,
-				contentType : false,
-				enctype : "multipart/form-data",
-				processData : false,
-				success : function(savename) {
-					//imgUrl = imgUrl + savename;
-					console.log(savename);
-					console.log(edi);
-					$(edi).summernote('editor.insertImage', savename);
-					alert("성공!" + savename);
-				},
-				error : function() {
-					alert("summernote 에러");
-				}
-			});
 
-		}
-		function (){
-			var htmlStr = $('#summernote').summernote('code');
-		}
-	</script>
-	
-	<input type="hidden" value=""/>
+	<input type="hidden" value="" />
 </section>
 <jsp:include page="/WEB-INF/views/common/footer.jsp" />
