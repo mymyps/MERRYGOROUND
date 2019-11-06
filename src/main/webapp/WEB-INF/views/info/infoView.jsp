@@ -51,7 +51,7 @@
                         <br><br>
                         <div>
                         	<c:if test="${not empty supUp}">
-	                            <form name="supReview" action="${pageContext.request.contextPath }/supUp/supReview?infoupNum=${info.INFOUPNUM}" method="post">
+	                            <form name="supReview" action="${pageContext.request.contextPath }/supUp/supReview?infoupNum=${info.INFOUPNUM}&id=${loginMember.id}" method="post">
 	                                <button class="btn supreviewBtn" type="submit">서포터즈 리뷰 바로가기</button> 
 	                            </form>
                             </c:if>

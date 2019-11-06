@@ -35,14 +35,18 @@ public class SupUploadController {
 	private static List<SupUploadImg> imgList = new ArrayList<SupUploadImg>();
 	
 	@RequestMapping("/supUp/supReview")
-	public ModelAndView supReview(int infoupNum) {
+	public ModelAndView supReview(int infoupNum, @RequestParam Map<String, String> param) {
 		imgList.clear();
 		ModelAndView mv = new ModelAndView();
 		
+		System.out.println("param :"+param);
+		
 		Map<String, String> supUpload= service.selectSupUpload(infoupNum);
+		Map<String, String> sup = iservice.selectSup(param);
 //		SupUploadImg supUploadImg = service.selectSupUploadImg(infoupNum);
 		
 		mv.addObject("supUpload", supUpload);
+		mv.addObject("sup", sup);
 //		mv.addObject("supUploadImg", supUploadImg);
 		
 		return mv;
