@@ -13,11 +13,12 @@
 <section id="content">
 	<!-- summernote 폼-->
 	<form name="infoForm"
-		action="${pageContext.request.contextPath }/info/infoFormEnd.do"
+		action="${pageContext.request.contextPath }/supUp/supReviewFormEnd.do"
 		method="post" enctype="multipart/form-data">
 		<div class="container">
 			<input type="hidden" name="loginMemberNum"
 				value="${loginMember.memberNum}">
+			<input type="hidden" name="id" value="${loginMember.id }"/>
 
 			<div class="row">
 				<!-- Blog start -->
@@ -58,7 +59,7 @@
 										<input type="text" name="supupTitle" />
 									</p>
 								</div>
-								<textarea id="summ" name="content" required></textarea>
+								<textarea id="summ" name="supupContent" required></textarea>
 								
 							</div>
 

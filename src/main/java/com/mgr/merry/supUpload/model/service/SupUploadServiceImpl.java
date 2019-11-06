@@ -74,4 +74,11 @@ public class SupUploadServiceImpl implements SupUploadService {
 		out.close();
 	}
 
+	@Override
+	public Supporters selectSupId(String id) {
+		return dao.selectSupId(session, id);
+	}
+
+
+
 }

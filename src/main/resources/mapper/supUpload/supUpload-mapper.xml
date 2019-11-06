@@ -15,4 +15,8 @@
 	<select id="selectSup" resultType="com.mgr.merry.supporters.model.vo.Supporters">
 		SELECT * FROM SUPPORTERS WHERE MEMBERNUM=#{memberNum}
 	</select>
+	
+	<select id="selectSupId" resultType="map" parameterType="_int">
+		SELECT * FROM SUPPORTERS WHERE MEMBERNUM=#{memberNum}
+	</select>
 </mapper>

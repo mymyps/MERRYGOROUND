@@ -31,5 +31,11 @@ public class SupUploadDaoImpl implements SupUploadDao {
 		return session.selectOne("supUp.selectSup", memberNum);
 	}
 
+	@Override
+	public Supporters selectSupId(SqlSessionTemplate session, String id) {
+		return session.selectOne("supUp.selectSupId", id);
+	}
+
+
 
 }

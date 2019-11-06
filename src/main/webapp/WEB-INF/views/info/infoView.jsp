@@ -57,7 +57,7 @@
                             </c:if>
                             <c:if test="${loginMember.memberNum eq sup.MEMBERNUM }">
 	                            <c:if test="${empty supUp }">
-		                            <form name="supReviewForm" action="${pageContext.request.contextPath }/supUp/supReviewForm.do?infoupNum=${info.INFOUPNUM}" method="post">
+		                            <form name="supReviewForm" action="${pageContext.request.contextPath }/supUp/supReviewForm.do?infoupNum=${info.INFOUPNUM}&id=${loginMember.id}" method="post">
 		                                <button class="btn supreviewBtn" type="submit">서포터즈 리뷰 작성하기</button> 
 		                            </form>
 	                            </c:if>
