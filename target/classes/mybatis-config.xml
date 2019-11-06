@@ -8,6 +8,11 @@
 		<typeAlias type="com.mgr.merry.supporters.model.vo.Supporters" alias="sup"/>
 	</typeAliases>
 	
+	<!-- long타입 가져오기 위한 핸들러  -->
+	<typeHandlers>
+        <typeHandler handler="com.mgr.merry.handler.CLOBHandler" javaType="String" jdbcType="LONGVARCHAR"/>
+    </typeHandlers>
+	
 </configuration>
 
 
