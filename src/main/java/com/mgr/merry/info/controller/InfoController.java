@@ -92,6 +92,7 @@ public class InfoController {
 		mv.addObject("info", info);
 		mv.addObject("infoImg", infoImg);
 		mv.addObject("review", review);
+		mv.addObject("sup", sup);
 		mv.addObject("supUp", supUp);
 		mv.setViewName("info/infoView");
 

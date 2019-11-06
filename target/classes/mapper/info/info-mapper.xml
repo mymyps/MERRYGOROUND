@@ -52,7 +52,7 @@
 	</update>
 	
 	<select id="selectSup" resultType="map" parameterType="_int">
-		SELECT * FROM SUPPORTERS s join members m on s.membernum=m.membernum WHERE m.id='${id}';
+		SELECT m.membernum FROM SUPPORTERS s join members m on s.membernum=m.membernum WHERE m.id='${id}'
 	</select>
 	
 	
