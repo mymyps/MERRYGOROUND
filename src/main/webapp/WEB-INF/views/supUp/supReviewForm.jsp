@@ -12,10 +12,7 @@
 	<script src="http://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.js"></script> 
 	<script src="http://netdna.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.js"></script>
 <!-- include summernote css/js -->
-	<link href="http://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.12/summernote.css" rel="stylesheet">
-	<script src="http://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.12/summernote.js"></script>
-	<!-- include summernote-ko-KR -->
-	<script src="${path }/resources/dist/lang/summernote-ko-KR.js"></script>
+<link href="http://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.12/summernote.css" rel="stylesheet">
 
 <section id="content">
 	<!-- summernote 폼-->
@@ -65,7 +62,7 @@
 										<input type="text" name="supupTitle" />
 									</p>
 								</div>
-								<textarea id="summernote" name="content" required></textarea>
+								<textarea id="summ" name="content" required></textarea>
 								
 							</div>
 
@@ -82,63 +79,72 @@
 		</div>
 	</form>
 
-<script>
-									$('#summernote')
-											.summernote(
-													{
-														placeholder : '내용',
-														tabsize : 4,
-														height : 600,
-														width : '100%',
-														maxHeight : 1200,
-														callbacks : {
-															onImageUpload : function(
-																	files,
-																	editor,
-																	welEditable) {
-																console
-																		.log(editor);
-																console
-																		.log(files);
-																for (var i = files.length - 1; i >= 0; i--) {
-																	sendFile(
-																			files[i],
-																			this);
-																}
-															}
-														}
-													});
-									function sendFile(file, edi, welEditable) {
-										var imgUrl = "resources/images/couple/"
-										console.log(imgUrl);
-										//파일전송을 위한 폼생성
-										var form_data = new FormData();
-										form_data.append("image", file);
-										$
-												.ajax({
-													data : form_data,
-													type : "post",
-													url : "${path}/summernote_imageUpload.do",
-													cache : false,
-													contentType : false,
-													enctype : "multipart/form-data",
-													processData : false,
-													success : function(savename) {
-														//imgUrl = imgUrl + savename;
-														console.log(savename);
-														console.log(edi);
-														$(edi).summernote(
-																		'editor.insertImage',
-																		savename);
-														alert("성공!" + savename);
-													},
-													error : function() {
-														alert("summernote 에러");
-													}
-												});
 
-									}
-								</script>
 	<input type="hidden" value="" />
+	
+	<script src="${path }/resources/dist/summernote.js"></script>
+	<!-- include summernote-ko-KR -->
+	<script src="${path }/resources/dist/lang/summernote-ko-KR.js"></script>
+	<script>
+	$('#summ').summernote(
+			{
+				placeholder : '내용',
+				tabsize : 4,
+				height : 600,
+				width : '100%',
+				maxHeight : 1200,
+				callbacks : {
+					onImageUpload : function(
+							files,
+							editor,
+							welEditable) {
+						console
+
+								.log(editor);
+						console
+								.log(files);
+						for (var i = files.length - 1; i >= 0; i--) {
+						console.log(this);
+							sendFile(
+									files[i],
+									this);
+						}
+					}
+				}
+			});
+	
+	function sendFile(file, edi, welEditable) {
+	var imgUrl = "resources/images/couple/"
+	//파일전송을 위한 폼생성
+	var form_data = new FormData();
+	form_data.append("image", file);
+	
+	$.ajax({
+				data : form_data,
+				type : "post",
+				url : "${path}/summernote_imageUpload.do",
+				cache : false,
+				contentType : false,
+				enctype : "multipart/form-data",
+				processData : false,
+				success : function(savename) {
+					//console.log(summernote);
+					//imgUrl = imgUrl + savename;
+					console.log(savename);
+					console.log(edi);
+					$(edi).summernote(
+									'editor.insertImage',
+									savename);
+					alert("성공!" + savename);
+				},
+				error : function() {
+					alert("summernote 에러");
+				}
+			});
+
+	}
+
+								
+</script>
 </section>
 <jsp:include page="/WEB-INF/views/common/footer.jsp" />

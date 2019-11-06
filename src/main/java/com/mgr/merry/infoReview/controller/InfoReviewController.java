@@ -63,17 +63,21 @@ public class InfoReviewController {
 	
 	//수정중
 	@RequestMapping("/info/updateInfoReview")
-	public ModelAndView updateReview(int infoReviewNum, int infoupNum) {
+	public ModelAndView updateReview(@RequestParam Map<String, String> param, int infoupNum) {
 		int result = 0;
-		result = service.updateReview(infoReviewNum);
-		System.out.println("업데이트 result :"+result);
-		if(result==0) {
-			
-		}
 		
+		result = service.updateReview(param);
+
 		ModelAndView mv = new ModelAndView();
-		mv.setViewName("info/infoView.do?infoupNum="+infoupNum);
 		
+		String msg="";
+		if (result > 0) {
+			msg = "리뷰가 수정됐습니다.";
+		} else {
+			msg = "리뷰 수정 실패";
+		}
+		mv.addObject("msg", msg);
+		mv.setViewName("common/msg");
 		return mv;
 	}
 }

@@ -106,14 +106,15 @@
 								                            function updateInfoReview${r['INFOREVIEWNUM']}(){
 							                            		var html="";
 							                            		html+="<form name='updateInfoReview' action='${pageContext.request.contextPath }/info/updateInfoReview?infoReviewNum=${r['INFOREVIEWNUM']}&infoupNum=${info.INFOUPNUM}' method='post'>";
+							                            		html+="<input type='hidden' name='infoReviewNum' value='${r['INFOREVIEWNUM']}'"
 							                                    html+="<div class='form-group'>";
-							                                    html+=" 평점 <input type='number' step='1' max='5' min='0' name='infoReviewPoint' /><br>";
+							                                    html+=" 평점 <input type='number' step='1' max='5' min='0' name='infoReviewPoint' />";
 																html+="<input type='text' name='infoReviewContent' class='form-control required-field' id='message' placeholder='' rows='4' required></textarea>";
 							                                    html+="</div>";
 							                                    html+="<button class='btn reviewBtn' type='submit'>수정 완료</button>";
 							                                    
 							                                    $("#review"+"${r['INFOREVIEWNUM']}").replaceWith(html);
-							                            	}
+						                            		}
 							                            </script>
 							                            <br>
 							                            <form name="deleteInfoReview" action="${pageContext.request.contextPath }/info/status0InfoReview" method="post">
