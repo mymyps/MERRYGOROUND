@@ -25,4 +25,8 @@ public interface CoupleBoardDao {
 	List<Attachment> selectAttachList(SqlSessionTemplate session, Map<String,String> param);
 	
 	int deleteAttachment2(SqlSessionTemplate session, String src);
+	
+	
+	int addComment(SqlSessionTemplate session, Map<String,String> param);
+	List<Map<String,String>> selectCommentList(SqlSessionTemplate session,int coupleNum);
 }

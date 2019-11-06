@@ -3,6 +3,7 @@ package com.mgr.merry.couple.controller;
 import java.io.File;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -11,16 +12,24 @@ import javax.servlet.http.HttpSession;
 
 import org.apache.catalina.servlet4preview.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.mgr.merry.common.PageBarFactory;
 import com.mgr.merry.couple.model.service.CoupleBoardService;
 import com.mgr.merry.couple.model.vo.Attachment;
+
+import net.sf.json.JSONArray;
+import net.sf.json.JSONObject;
 
 @Controller
 public class CoupleBoardController {
@@ -280,5 +289,74 @@ public class CoupleBoardController {
 		
 		return mv;
 	}
+	
+	
+	@RequestMapping(value="/couple/addComment")
+    @ResponseBody
+    public String ajax_addComment(@RequestParam Map<String,String> param, HttpServletRequest request) throws Exception{
+        
+//        HttpSession session = request.getSession();
+//        LoginVO loginVO = (LoginVO)session.getAttribute("loginVO");
+        
+		System.out.println("addComment의 param: "+param);
+        try{
+        
+//            boardVO.setWriter(loginVO.getUser_id());        
+            cservice.addComment(param);
+            
+        } catch (Exception e){
+            e.printStackTrace();
+        }
+        
+        return "success";
+    }
+    
+    /**
+     * 게시물 댓글 불러오기(Ajax)
+     * @param boardVO
+     * @param request
+     * @return
+     * @throws Exception
+     */
+    @RequestMapping(value="/couple/commentList", produces="application/json; charset=utf8")
+    @ResponseBody
+    public String ajax_commentList(@RequestParam String coupleNum, HttpServletRequest request) throws Exception{
+        
+    	System.out.println("commentList cNum: "+coupleNum);
+    	
+        HttpHeaders responseHeaders = new HttpHeaders();
+        ArrayList<HashMap> hmlist = new ArrayList<HashMap>();
+        
+        // 해당 게시물 댓글
+//        List<BoardVO> commentVO = boardServiceImpl.selectBoardCommentByCode(boardVO);
+        List<Map<String,String>> comments = cservice.selectCommentList(Integer.parseInt(coupleNum));
+        
+        System.out.println("불러온 comments : "+comments);
+        
+        if(comments.size() > 0){
+            for(int i=0; i<comments.size(); i++){
+                HashMap hm = new HashMap();
+//                hm.put("c_code", comments.get(i).getC_code());
+//                hm.put("comment", comments.get(i).getComment());
+//                hm.put("writer", comments.get(i).getWriter());
+                
+                hm.put("coupleNum", comments.get(i).get("COUPLENUM"));
+                hm.put("comment", comments.get(i).get("COUPLECOMMENT"));
+                hm.put("coupleDate", comments.get(i).get("COUPLEDATE"));
+//                hm.put("writer", comments.get(i).get("COUPLEWRITER"));
+                System.out.println("put하고 hm: "+hm);
+                
+                hmlist.add(hm);
+            }
+            
+        }
+         
+        ObjectMapper mapper=new ObjectMapper();
+        String data=mapper.writeValueAsString(hmlist);
+        return data;
+    }
+	
+	
+	
 	
 }

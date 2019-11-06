@@ -57,12 +57,12 @@
    </delete>
    
    
-   <insert id="insertComment" parameterType="map">
+   <insert id="addComment" parameterType="map">
       insert into c_upload_comment values(#{coupleNum},#{comment},default)
    </insert>
    
    <select id="selectCommentList" resultType="map">
-      select * from c_upload_comment where couplenum=#{no} order by coupledate
+      select * from c_upload_comment where couplenum=#{coupleNum} order by coupledate
    </select>
 
 </mapper>

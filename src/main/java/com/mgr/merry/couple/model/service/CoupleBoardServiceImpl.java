@@ -102,6 +102,16 @@ public class CoupleBoardServiceImpl implements CoupleBoardService {
 		if(result ==0) throw new RuntimeException();
 		
 		return result;
+	}
+
+	@Override
+	public int addComment(Map<String, String> param) {
+		return cdao.addComment(session,param);
+	}
+
+	@Override
+	public List<Map<String, String>> selectCommentList(int coupleNum) {
+		return cdao.selectCommentList(session,coupleNum);
 	}	
 	
 	

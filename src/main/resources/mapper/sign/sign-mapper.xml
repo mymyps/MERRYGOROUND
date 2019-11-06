@@ -1,61 +1,61 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="sign">
-	<insert id="insertMember" parameterType="members">
-		INSERT INTO MEMBERS VALUES(members_seq.nextval,#{id},#{pw},#{name},#{birth},#{gender},#{phone},#{email},default,default,default,#{proimg},default,default,default,default)
-	</insert>
-	<select id="selectMemberOne" resultType="members" parameterType="members"> 
-		SELECT * FROM MEMBERS WHERE id=#{id}
-	</select>
-	<select id="selectMember" resultType="members" parameterType="_int">
-		select * from members where membernum=#{memNo}
-	</select>
-	<update id="updateMember">
-		update members set id=#{id},name=#{name},birth=#{birth},phone=#{phone},email=#{email},proimg=#{proimg} where memberNum=#{memberNum}
-	</update>
-	<update id="updatePw">
-		update members set pw=#{pw} where memberNum=#{memberNum}
-	</update>
-<!-- 	<update id="updateCode">
-		update members set code=#{authNum} where email=#{email}
-	</update> -->
-	<update id="updateCode">
-		update members set code=#{code} where email=#{email}
-	</update>
-	<update id="updatecupemailcode" parameterType="map">
-		update members set cpid=#{m2.email},cpstatus='1' where email=#{m.email}
-	</update>
-	<update id="updatecupemailcode2" parameterType="map">
-		update members set cpid=#{email},cpstatus='1' where email=#{email2}
-	</update>
-	<select id="selectCp" resultType="members" parameterType="members">
-		select * from members where code=#{code}
-	</select>
-	<update id="pwUpdate">
-		update members set pw=#{pw} where id=#{id}
-	</update>
-	<update id="updatesuple">
-		update members set supstatus=1 where memberNum=#{num}
-	</update>
-	
-	<select id="selectSup" resultType="sup" parameterType="_int">
-		select * from SUPPORTERS where membernum=#{memNo}
-	</select>
-	<select id="selectSupt3" resultType="map" parameterType="_int">
-		select * from supporters 
-			inner join supporters_upload using(supNum)
-			inner join supporters_upload_img using(supupNum)
-			where supNum=#{supNum}
-	</select>
-	<select id="selectMemberOne2" resultType="_int" parameterType="members">
-		select count(*) from members where id=#{id}
-	</select>
-	
-	<update id="updatestatus" parameterType="map">
-		update members set supstatus=1 where memberNum=#{memberNum}
-	</update>
-	<select id="checkId" resultType="members" parameterType="members">
-		select * from members where id=#{id}
-	</select>
-	
+   <insert id="insertMember" parameterType="com.mgr.merry.sign.model.vo.Members">
+      INSERT INTO MEMBERS VALUES(members_seq.nextval,#{id},#{pw},#{name},#{birth},#{gender},#{phone},#{email},default,default,default,#{proimg},default,default,default,default)
+   </insert>
+   <select id="selectMemberOne" resultType="com.mgr.merry.sign.model.vo.Members" parameterType="com.mgr.merry.sign.model.vo.Members"> 
+      SELECT * FROM MEMBERS WHERE id=#{id}
+   </select>
+   <select id="selectMember" resultType="com.mgr.merry.sign.model.vo.Members" parameterType="_int">
+      select * from members where membernum=#{memNo}
+   </select>
+   <update id="updateMember">
+      update members set id=#{id},name=#{name},birth=#{birth},phone=#{phone},email=#{email},proimg=#{proimg} where memberNum=#{memberNum}
+   </update>
+   <update id="updatePw">
+      update members set pw=#{pw} where memberNum=#{memberNum}
+   </update>
+<!--    <update id="updateCode">
+      update members set code=#{authNum} where email=#{email}
+   </update> -->
+   <update id="updateCode">
+      update members set code=#{code} where email=#{email}
+   </update>
+   <update id="updatecupemailcode" parameterType="map">
+      update members set cpid=#{m2.email},cpstatus='1' where email=#{m.email}
+   </update>
+   <update id="updatecupemailcode2" parameterType="map">
+      update members set cpid=#{email},cpstatus='1' where email=#{email2}
+   </update>
+   <select id="selectCp" resultType="com.mgr.merry.sign.model.vo.Members" parameterType="com.mgr.merry.sign.model.vo.Members">
+      select * from members where code=#{code}
+   </select>
+   <update id="pwUpdate">
+      update members set pw=#{pw} where id=#{id}
+   </update>
+   <update id="updatesuple">
+      update members set supstatus=1 where memberNum=#{num}
+   </update>
+   
+   <select id="selectSup" resultType="sup" parameterType="_int">
+      select * from SUPPORTERS where membernum=#{memNo}
+   </select>
+   <select id="selectSupt3" resultType="map" parameterType="_int">
+      select * from supporters 
+         inner join supporters_upload using(supNum)
+         inner join supporters_upload_img using(supupNum)
+         where supNum=#{supNum}
+   </select>
+   <select id="selectMemberOne2" resultType="_int" parameterType="com.mgr.merry.sign.model.vo.Members">
+      select count(*) from members where id=#{id}
+   </select>
+   
+   <update id="updatestatus" parameterType="map">
+      update members set supstatus=1 where memberNum=#{memberNum}
+   </update>
+   <select id="checkId" resultType="com.mgr.merry.sign.model.vo.Members" parameterType="com.mgr.merry.sign.model.vo.Members">
+      select * from members where id=#{id}
+   </select>
+   
 </mapper>
