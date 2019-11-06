@@ -3,6 +3,7 @@ package com.mgr.merry.search.model.dao;
 import java.util.List;
 import java.util.Map;
 
+import org.apache.ibatis.session.RowBounds;
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.stereotype.Repository;
 
@@ -59,5 +60,9 @@ public class SearchDaoImpl implements SerchDao {
 		return session.selectList("search.mapSearch",param);
 	}
 
+
+
+
+	
 
 }

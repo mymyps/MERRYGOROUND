@@ -15,6 +15,9 @@ public interface SerchDao {
 	
 	List<InfoUpload> subThemaList(SqlSessionTemplate session, Map<String, Object> param);
 	
+	
+//	List<InfoUpload> subThemaList(SqlSessionTemplate session, int cPage, int numPerpage);
+	
 	List<InfoUpload> mainThemaList(SqlSessionTemplate session, int themaNumRef);
 	
 	List<InfoUpload> localList(SqlSessionTemplate session, int localNum);

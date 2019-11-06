@@ -7,7 +7,7 @@ import com.mgr.merry.infoReview.model.vo.InfoReview;
 
 public interface InfoReviewService {
 
-	int updateReview(int infoReviewNum);
+	int updateReview(Map<String, String> param);
 
 	List<InfoReview> selectReview(int infoupNum);
 

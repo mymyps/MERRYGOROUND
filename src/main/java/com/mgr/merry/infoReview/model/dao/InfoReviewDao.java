@@ -13,7 +13,7 @@ public interface InfoReviewDao {
 
 	int deleteReview(SqlSessionTemplate session, int infoReviewNum);
 
-	int updateReview(SqlSessionTemplate session, int infoReviewNum);
+	int updateReview(SqlSessionTemplate session, Map<String, String> param);
 
 	List<InfoReview> selectReview(SqlSessionTemplate session, int infoupNum);
 

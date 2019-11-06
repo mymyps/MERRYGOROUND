@@ -21,8 +21,8 @@ public class InfoReviewServiceImpl implements InfoReviewService {
 
 	// 수정중
 	@Override
-	public int updateReview(int infoReviewNum) {
-		return dao.updateReview(session, infoReviewNum);
+	public int updateReview(Map<String, String> param) {
+		return dao.updateReview(session, param);
 	}
 
 

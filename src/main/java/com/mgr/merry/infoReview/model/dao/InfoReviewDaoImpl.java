@@ -22,8 +22,8 @@ public class InfoReviewDaoImpl implements InfoReviewDao {
 	}
 
 	@Override
-	public int updateReview(SqlSessionTemplate session, int infoReviewNum) {
-		return session.update("review.updateReview", infoReviewNum);
+	public int updateReview(SqlSessionTemplate session, Map<String, String> param) {
+		return session.update("review.updateReview", param);
 	}
 
 	@Override

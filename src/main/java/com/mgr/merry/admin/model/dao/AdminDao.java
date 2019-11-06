@@ -37,6 +37,8 @@ public interface AdminDao {
 	int cletifyAdmin(SqlSessionTemplate session, int memberNum);
 	int calDropSave(SqlSessionTemplate session, AdminCalendar calTmp);
 	Map<String, String> adminNotice(SqlSessionTemplate session);
-	
+	int adminNoticeInsert(SqlSessionTemplate session, String str);
+	List<Map<String, String>> adminNoticeList(SqlSessionTemplate session);
+
 
 }

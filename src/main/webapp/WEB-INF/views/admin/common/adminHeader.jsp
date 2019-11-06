@@ -124,7 +124,7 @@
 					<li><a href="${pageContext.request.contextPath }/admin/celtify"> <i
 							class="menu-icon fa fa-exclamation"></i>승인
 					</a></li>
-					<li><a href="${pageContext.request.contextPath }/admin/declaration"> <i
+					<li><a href="${pageContext.request.contextPath }/admin/notice"> <i
 							class="menu-icon fa fa-stethoscope"></i>공지 사항목록
 					</a></li>
 				</ul>

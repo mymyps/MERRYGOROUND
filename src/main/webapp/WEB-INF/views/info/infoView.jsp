@@ -4,7 +4,7 @@
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 <c:set var="path" value="${pageContext.request.contextPath}"/>
 <jsp:include page="/WEB-INF/views/common/header.jsp">
-	<jsp:param name="pageTitle" value="INFOMATION"/>
+   <jsp:param name="pageTitle" value="INFOMATION"/>
 </jsp:include>
 <section id="content">
 
@@ -91,7 +91,7 @@
 			                                    <div class="comment">
 			                                        <img class="comment-avatar pull-left" alt="" src="images/blog/avator1.png">
 			                                        
-			                                        <div class="comment-body">
+			                                        <div class="comment-body" id="review${r['INFOREVIEWNUM'] }">
 			                                            <h4 class="comment-author"><c:out value='${r["NAME"] }'/></h4>
 			                                            <div class="comment-date"><c:out value='${r["INFOREVIEWDATE"] }'/></div>
 			                                            <div class="reviewPoint">
@@ -99,11 +99,27 @@
 			                                            </div>
 			                                            <hr>
 			                                            <p><c:out value='${r["INFOREVIEWCONTENT"] }'/></p>
-			                                            <form name="updateInfoReview" action="${pageContext.request.contextPath }/info/updateInfoReview?infoReviewNum=${r['INFOREVIEWNUM']}?infoupNum=${r['INFOUPNUM']}" method="post">
-							                                <button class="btn" type="submit">리뷰 수정</button> 
-							                            </form>
+			                                            <%-- <form name="updateInfoReview" action="${pageContext.request.contextPath }/info/updateInfoReview?infoReviewNum=${r['INFOREVIEWNUM']}?infoupNum=${r['INFOUPNUM']}" method="post"> --%>
+							                                <button class="btn" type="submit" onclick="updateInfoReview${r['INFOREVIEWNUM']}();">리뷰 수정</button> 
+							                            <!-- </form> -->
+							                            <script>
+								                            function updateInfoReview${r['INFOREVIEWNUM']}(){
+							                            		var html="";
+							                            		html+="<form name='updateInfoReview' action='${pageContext.request.contextPath }/info/updateInfoReview?infoReviewNum=${r['INFOREVIEWNUM']}&infoupNum=${info.INFOUPNUM}' method='post'>";
+							                            		html+="<input type='hidden' name='infoReviewNum' value='${r['INFOREVIEWNUM']}'"
+							                                    html+="<div class='form-group'>";
+							                                    html+=" 평점 <input type='number' step='1' max='5' min='0' name='infoReviewPoint' />";
+																html+="<input type='text' name='infoReviewContent' class='form-control required-field' id='message' placeholder='' rows='4' required></textarea>";
+							                                    html+="</div>";
+							                                    html+="<button class='btn reviewBtn' type='submit'>수정 완료</button>";
+							                                    
+							                                    $("#review"+"${r['INFOREVIEWNUM']}").replaceWith(html);
+						                            		}
+							                            </script>
 							                            <br>
-							                            <form name="deleteInfoReview" action="${pageContext.request.contextPath }/info/status0InfoReview?infoReviewNum=${r['INFOREVIEWNUM']}" method="post">
+							                            <form name="deleteInfoReview" action="${pageContext.request.contextPath }/info/status0InfoReview" method="post">
+							                            	<input type="hidden" value="${r['INFOREVIEWNUM']}" name="infoReviewNum"/>
+							                            	<input type="hidden" value="${info.INFOUPNUM }" name="infoupNum"/>
 							                                <button class="btn" type="submit">리뷰 삭제</button> 
 							                            </form>
 			                                        </div>

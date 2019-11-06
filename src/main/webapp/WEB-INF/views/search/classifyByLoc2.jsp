@@ -93,8 +93,9 @@ border: 1px lightgray !important;
 						<figure class="effect-oscar">
 							<img src="${path}/resources/images/beerparty.jpg" alt="">
 									<figcaption>
-<!-- 								<a class="link icon-pentagon" href="portfolio-item.html"><i class="fa fa-link"></i></a> -->
-<a class="view icon-pentagon" data-rel="prettyPhoto" href="images/portfolio/portfolio-bg1.jpg"><i class="fa fa-search"></i></a> 
+                               <a class="view icon-pentagon" data-rel="prettyPhoto" href="images/portfolio/portfolio-bg1.jpg"><i class="fa fa-search"></i></a> 
+                               
+                               <a href="${pageContext.request.contextPath }/info/infoView.do?infoupNum=${list.infoupNum }"><c:out value='${list.infoupTitle}'/></a>
 							</figcaption>			
 						</figure>
 						<div class="portfolio-static-desc">
@@ -115,7 +116,6 @@ border: 1px lightgray !important;
 						<figure class="effect-oscar">
 							<img src="${path}/resources/images/coex.jpg" alt="">
 									<figcaption>
-<!-- 								<a class="link icon-pentagon" href="portfolio-item.html"><i class="fa fa-link"></i></a> -->
 								<a class="view icon-pentagon" data-rel="prettyPhoto" href="images/portfolio/portfolio-bg1.jpg"><i class="fa fa-search"></i></a>            
 							</figcaption>			
 						</figure>
@@ -136,7 +136,6 @@ border: 1px lightgray !important;
 						<figure class="effect-oscar">
 							<img src="${path}/resources/images/banpo.JPG" alt="">
 									<figcaption>
-<!-- 								<a class="link icon-pentagon" href="portfolio-item.html"><i class="fa fa-link"></i></a> -->
 								<a class="view icon-pentagon" data-rel="prettyPhoto" href="images/portfolio/portfolio-bg1.jpg"><i class="fa fa-search"></i></a>            
 							</figcaption>			
 						</figure>
