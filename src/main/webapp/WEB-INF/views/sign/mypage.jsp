@@ -55,7 +55,7 @@
 					  	<li class="active">
 					  		<a class="animated fadeIn" href="#tab_a" data-toggle="tab">
 					  			<!-- <span class="tab-icon"><i class="fa fa-info"></i></span> -->
-								  <span class="tab-icon"><i class="fa fa-android"></i></span>
+								  <span class="tab-icon"><i class="fa fa-info"></i></span>
 								
 								  <div class="tab-info">
 						  			<h3>개인정보수정</h3>
@@ -65,7 +65,7 @@
 						  <c:if test="${!empty map}">
 						  <li>
 								<a class="animated fadeIn" href="#tab_c" data-toggle="tab">
-									<span class="tab-icon"><i class="fa fa-android"></i></span>
+									<span class="tab-icon"><i class="fa fa-pagelines"></i></span>
 									<div class="tab-info">
 										<h3>내 작성글 보기</h3>
 									</div>
@@ -75,7 +75,7 @@
 					  	<li>
 						  	<a class="animated fadeIn" href="#tab_b" data-toggle="tab">
 								  <!-- <span class="tab-icon"><i class="fa fa-briefcase"></i></span> -->
-								  <span class="tab-icon"><i class="fa fa-support"></i></span>
+								  <span class="tab-icon"><i class="fa fa-university"></i></span>
 					  			<div class="tab-info">
 						  			<h3>커플요청</h3>
 					  			</div>
@@ -84,7 +84,7 @@
 					 	<li>
 						  	<a class="animated fadeIn" href="#tab_g" data-toggle="tab">
 								  <!-- <span class="tab-icon"><i class="fa fa-briefcase"></i></span> -->
-								  <span class="tab-icon"><i class="fa fa-support"></i></span>
+								  <span class="tab-icon"><i class="fa fa-users"></i></span>
 					  			<div class="tab-info">
 						  			<h3>커플코드입력</h3>
 					  			</div>
@@ -92,7 +92,7 @@
 						</li>
 						<li>
 						  	<a class="animated fadeIn" href="#tab_d" data-toggle="tab">
-						  		<span class="tab-icon"><i class="fa fa-pagelines"></i></span>
+						  		<span class="tab-icon"><i class="fa fa-lock"></i></span>
 					  			<div class="tab-info">
 						  			<h3>비밀번호 변경</h3>
 					  			</div>
@@ -100,7 +100,7 @@
 						</li>
 						<li>
 						  	<a class="animated fadeIn" href="#tab_r" data-toggle="tab">
-						  		<span class="tab-icon"><i class="fa fa-pagelines"></i></span>
+						  		<span class="tab-icon"><i class="fa fa-trophy"></i></span>
 					  			<div class="tab-info">
 						  			<h3>서포터즈 신청하기</h3>
 					  			</div>
@@ -197,8 +197,9 @@
 										
 										<!-- <button class="login100-form-btn" type="submit">
 											수정하기
-										</button> -->
-										<input type="submit" class="btn btn-outline-success inbtn-10" value="가입" >
+										</button> --><div style="margin-left:200px;">
+										<input type="submit" style=" width:150px;" class="btn btn-primary solid cd-btn" value="가입" >
+										</div>
 									<!-- </div> 
 								</div>-->
 			
@@ -222,8 +223,9 @@
 									<!-- <button onclick="btn_auth2()">이메일요청</button> -->
 								</div>
 								<input class="input100" type="hidden" name="email2" value=${members.email }>
-								
-								<input type="submit" class="btn btn-outline-success inbtn-10" value="완료" >
+								<div style="margin-left:50px;">
+								<input type="submit" class="btn btn-primary solid cd-btn" value="요청" >
+								</div>
 							</form>	
 							</div>							 
 				        </div>
@@ -283,7 +285,9 @@
 										placeholder="인증번호"> <span class="focus-input100"
 										data-symbol="&#xf206;"></span>
 								</div>
-								<input type="submit" class="btn btn-outline-success inbtn-10" value="완료" >
+								<div style="margin-left:50px;">
+								<input type="submit" class="btn btn-primary solid cd-btn" value="완료" >
+								</div>
 							</form>	
 							</div>							 
 				        </div>
@@ -376,7 +380,7 @@
 								<input  type="file" class="custom-file-input" name="upFile" id="upFile">
 								<input  type="file" class="custom-file-input" name="upFile" id="upFile"> 
 								<input type ="text" class="custom-file-input" name="suplvContent" placeholder="asdasdadasd">
-								<input type="submit" class="btn btn-dark inbtn-10" value="신청하기" >
+								<input type="submit" class="btn btn-primary solid cd-btn" value="신청하기" >
 							</form>	
 							</div>							 
 				        </div>
@@ -401,7 +405,9 @@
 								class="input100" type="password" id="pw" name="pw" reauired>
 							<span class="focus-input100" data-symbol="&#xf190;"></span>
 						</div> -->
-						<input type="submit" class="btn btn-outline-success inbtn-10" value="변경" >
+						<div style="margin-left:50px;">
+						<input type="submit" class="btn btn-primary solid cd-btn" value="변경" >
+						</div>
 						</form>
 					</div>
 				        <div class="tab-pane animated fadeIn" id="tab_e">

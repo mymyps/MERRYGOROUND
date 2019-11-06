@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="sign">
-	<insert id="insertMember" parameterType="members">
+	<insert id="insertMember" parameterType="com.mgr.merry.sign.model.vo.Members">
 		INSERT INTO MEMBERS VALUES(members_seq.nextval,#{id},#{pw},#{name},#{birth},#{gender},#{phone},#{email},default,default,default,#{proimg},default,default,default,default)
 	</insert>
-	<select id="selectMemberOne" resultType="members" parameterType="members"> 
+	<select id="selectMemberOne" resultType="com.mgr.merry.sign.model.vo.Members" parameterType="com.mgr.merry.sign.model.vo.Members"> 
 		SELECT * FROM MEMBERS WHERE id=#{id}
 	</select>
-	<select id="selectMember" resultType="members" parameterType="_int">
+	<select id="selectMember" resultType="com.mgr.merry.sign.model.vo.Members" parameterType="_int">
 		select * from members where membernum=#{memNo}
 	</select>
 	<update id="updateMember">
@@ -28,7 +28,7 @@
 	<update id="updatecupemailcode2" parameterType="map">
 		update members set cpid=#{email},cpstatus='1' where email=#{email2}
 	</update>
-	<select id="selectCp" resultType="members" parameterType="members">
+	<select id="selectCp" resultType="com.mgr.merry.sign.model.vo.Members" parameterType="com.mgr.merry.sign.model.vo.Members">
 		select * from members where code=#{code}
 	</select>
 	<update id="pwUpdate">
@@ -47,14 +47,14 @@
 			inner join supporters_upload_img using(supupNum)
 			where supNum=#{supNum}
 	</select>
-	<select id="selectMemberOne2" resultType="_int" parameterType="members">
+	<select id="selectMemberOne2" resultType="_int" parameterType="com.mgr.merry.sign.model.vo.Members">
 		select count(*) from members where id=#{id}
 	</select>
 	
 	<update id="updatestatus" parameterType="map">
 		update members set supstatus=1 where memberNum=#{memberNum}
 	</update>
-	<select id="checkId" resultType="members" parameterType="members">
+	<select id="checkId" resultType="com.mgr.merry.sign.model.vo.Members" parameterType="com.mgr.merry.sign.model.vo.Members">
 		select * from members where id=#{id}
 	</select>
 	
