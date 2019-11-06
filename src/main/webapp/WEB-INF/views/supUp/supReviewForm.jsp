@@ -19,6 +19,7 @@
 			<input type="hidden" name="loginMemberNum"
 				value="${loginMember.memberNum}">
 			<input type="hidden" name="id" value="${loginMember.id }"/>
+			<input type="hidden" name="supNum" value="${sup.SUPNUM }"/>
 
 			<div class="row">
 				<!-- Blog start -->

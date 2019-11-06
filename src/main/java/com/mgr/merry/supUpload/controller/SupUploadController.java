@@ -54,7 +54,10 @@ public class SupUploadController {
 		Map<String, String> info = iservice.selectInfo(infoupNum);
 		Map<String, String> sup = iservice.selectSup(param);
 		
+		System.out.println("컨트롤러 sup : "+sup);
+		
 		mv.addObject("info", info);
+		mv.addObject("sup", sup);
 		mv.setViewName("supUp/supReviewForm");
 		
 		return mv;
