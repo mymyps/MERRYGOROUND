@@ -1,5 +1,6 @@
 package com.mgr.merry.info.model.dao;
 
+import java.util.List;
 import java.util.Map;
 
 import org.mybatis.spring.SqlSessionTemplate;
@@ -53,6 +54,11 @@ public class InfoDaoImpl implements InfoDao {
 	@Override
 	public int updateInfoStatus0(SqlSessionTemplate session, int infoupNum) {
 		return session.update("info.updateInfoStatus0", infoupNum);
+	}
+
+	@Override
+	public Map<String, String> selectSup(SqlSessionTemplate session, Map<String, String> param) {
+		return session.selectOne("info.selectSup", param);
 	}
 
 

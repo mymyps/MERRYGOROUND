@@ -1,5 +1,6 @@
 package com.mgr.merry.info.model.service;
 
+import java.util.List;
 import java.util.Map;
 
 
@@ -16,5 +17,7 @@ public interface InfoService {
 	int infoStatus0(int infoupNum);
 
 	int updateInfo(Map<String, String> param, InfoUploadImg infoimg, int infoupNum) throws Exception;
+
+	Map<String, String> selectSup(Map<String, String> param);
 
 }

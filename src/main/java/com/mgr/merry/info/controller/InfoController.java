@@ -18,12 +18,14 @@ import com.mgr.merry.info.model.service.InfoService;
 import com.mgr.merry.info.model.vo.InfoUpload;
 import com.mgr.merry.info.model.vo.InfoUploadImg;
 import com.mgr.merry.infoReview.model.service.InfoReviewService;
+import com.mgr.merry.infoReview.model.vo.InfoReview;
 import com.mgr.merry.search.model.service.SearchService;
 import com.mgr.merry.search.model.vo.Location;
 import com.mgr.merry.search.model.vo.Thema;
 import com.mgr.merry.sign.model.service.SignService;
 import com.mgr.merry.sign.model.vo.Members;
 import com.mgr.merry.supUpload.model.service.SupUploadService;
+import com.mgr.merry.supUpload.model.vo.SupUpload;
 import com.mgr.merry.supporters.model.vo.Supporters;
 
 @Controller
@@ -79,15 +81,18 @@ public class InfoController {
 	// infoView로 들어가기
 	// supUpload의 여부 확인 추가하기 ( 버튼 서포터즈 리뷰 작성하기 or 서포터즈 리뷰 가기 )
 	@RequestMapping("/info/infoView")
-	public ModelAndView infoView(int infoupNum) {
+	public ModelAndView infoView(int infoupNum, @RequestParam Map<String, String> param) {
 		ModelAndView mv = new ModelAndView();
 		Map<String, String> info = service.selectInfo(infoupNum);
 		InfoUploadImg infoImg = service.selectInfoImg(infoupNum);
-		List review = rservice.selectReview(infoupNum);
+		List<InfoReview> review = rservice.selectReview(infoupNum);
+		Map<String, String> sup = service.selectSup(param);
+		Map<String, String> supUp = supservice.selectSupUpload(infoupNum);
 		
 		mv.addObject("info", info);
 		mv.addObject("infoImg", infoImg);
 		mv.addObject("review", review);
+		mv.addObject("supUp", supUp);
 		mv.setViewName("info/infoView");
 
 		return mv;

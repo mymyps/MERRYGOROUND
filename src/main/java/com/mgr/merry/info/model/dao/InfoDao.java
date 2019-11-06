@@ -1,5 +1,6 @@
 package com.mgr.merry.info.model.dao;
 
+import java.util.List;
 import java.util.Map;
 
 import org.mybatis.spring.SqlSessionTemplate;
@@ -25,6 +26,8 @@ public interface InfoDao {
 	int updateInfo(SqlSessionTemplate session, Map<String, String> param);
 
 	int updateInfoStatus0(SqlSessionTemplate session, int infoupNum);
+
+	Map<String, String> selectSup(SqlSessionTemplate session, Map<String, String> param);
 
 
 
