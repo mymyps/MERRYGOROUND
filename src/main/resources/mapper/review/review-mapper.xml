@@ -10,4 +10,7 @@
 	<update id="status0InfoReview">
 		UPDATE INFO_REVIEW SET INFOREVIEWSTATUS=0 WHERE INFOREVIEWNUM=#{infoReviewNum}
 	</update>
+	<update id="updateReview">
+		UPDATE INFO_REVIEW SET INFOREVIEWCONTENT=#{infoReviewContent}, INFOREVIEWPOINT=#{infoReviewPoint}, INFOREVIEWDATE=default WHERE INFOREVIEWNUM=#{infoReviewNum}
+	</update>
 </mapper>

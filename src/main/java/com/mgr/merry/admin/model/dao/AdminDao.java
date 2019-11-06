@@ -40,4 +40,5 @@ public interface AdminDao {
 	int adminNoticeInsert(SqlSessionTemplate session, String str);
 	List<Map<String, String>> adminNoticeList(SqlSessionTemplate session);
 
+
 }

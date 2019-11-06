@@ -50,9 +50,9 @@ public class InfoController {
 	@RequestMapping("/info/infoForm.do")
 	public ModelAndView infoForm(HttpServletRequest request, Members m) {
 		
-		String mNum=request.getParameter("mNum");
+		String mNum=(String)request.getParameter("mNum");
+		System.out.println("인포컨트롤러 : "+mNum);
 		int memberNum=Integer.parseInt(mNum);
-		Members result = mservice.selectMember(m,memberNum);
 		
 		ModelAndView mv = new ModelAndView();
 		List<Thema> themaList = sservice.selectThemaList3();
