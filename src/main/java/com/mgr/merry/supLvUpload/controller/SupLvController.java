@@ -14,6 +14,7 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.mgr.merry.info.model.service.InfoService;
 import com.mgr.merry.supLvUpload.model.service.SupLvService;
 import com.mgr.merry.supLvUpload.model.vo.SupLvUploadImg;
 
@@ -23,9 +24,35 @@ public class SupLvController {
 	@Autowired
 	SupLvService service;
 	
+	@Autowired
+	InfoService iservice;
+	
 	@RequestMapping("/supLv/supLvForm.do")
-	public String supLvUpload() {
-		return "/supLv/supLvForm";
+	public ModelAndView supLvUpload(String id, @RequestParam Map<String, String> param) {
+		
+		
+		ModelAndView mv = new ModelAndView();
+		String msg="";
+		
+		Map<String, String> sup = iservice.selectSup(param);
+		System.out.println("서포터즈가 아닐시 sup :"+sup);
+		
+		if(id=="") {
+			msg="로그인  후 이용가능합니다.";
+			mv.addObject("msg", msg);
+			mv.setViewName("/common/msg");
+			
+		}else if (sup!=null) {
+			msg="이미 등록된 서포터즈입니다.";
+			mv.addObject("msg", msg);
+			mv.setViewName("/common/msg");
+		}
+		
+		else {
+			mv.setViewName("/supLv/supLvForm");
+		}
+		
+		return mv;
 	}
 	
 	

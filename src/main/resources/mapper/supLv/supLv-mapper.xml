@@ -3,7 +3,7 @@
 <mapper namespace="supLv">
 
 	<insert id="insertSupLv" parameterType="map">
-		INSERT INTO SUPPORTERS_LV_UPLOAD VALUES(SEQ_SUP_LV_NUM.NEXTVAL, 41, #{supLvContent}, default)
+		INSERT INTO SUPPORTERS_LV_UPLOAD VALUES(SEQ_SUP_LV_NUM.NEXTVAL, #{memberNum}, #{supLvContent}, default)
 	</insert>
 	
 	<insert id="insertSupLvImg" parameterType="com.mgr.merry.supLvUpload.model.vo.SupLvUploadImg">
