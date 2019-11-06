@@ -40,10 +40,10 @@ public class SupUploadController {
 		ModelAndView mv = new ModelAndView();
 		
 		Map<String, String> supUpload= service.selectSupUpload(infoupNum);
-		SupUploadImg supUploadImg = service.selectSupUploadImg(infoupNum);
+//		SupUploadImg supUploadImg = service.selectSupUploadImg(infoupNum);
 		
 		mv.addObject("supUpload", supUpload);
-		mv.addObject("supUploadImg", supUploadImg);
+//		mv.addObject("supUploadImg", supUploadImg);
 		
 		return mv;
 	}
