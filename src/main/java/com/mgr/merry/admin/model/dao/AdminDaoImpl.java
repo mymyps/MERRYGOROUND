@@ -151,5 +151,14 @@ public class AdminDaoImpl implements AdminDao{
 		return session.selectOne("admin.adminNotice");
 	}
 
+	@Override
+	public int adminNoticeInsert(SqlSessionTemplate session, String str) {
+		return session.insert("admin.adminNoticeInsert", str);
+	}
+	
+	@Override
+	public List<Map<String, String>> adminNoticeList(SqlSessionTemplate session) {
+		return session.selectList("admin.adminNoticeList");
+	}
 
 }

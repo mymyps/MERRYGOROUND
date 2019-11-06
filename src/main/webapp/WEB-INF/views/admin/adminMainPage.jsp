@@ -9,15 +9,7 @@
 
 <!-- 관리자 페이지 css -->
 <jsp:include page="/WEB-INF/views/admin/common/adminHeader.jsp" />
-<link href="https://cdn.jsdelivr.net/npm/chartist@0.11.0/dist/chartist.min.css" rel="stylesheet">
-<link href="https://cdn.jsdelivr.net/npm/jqvmap@1.5.1/dist/jqvmap.min.css" rel="stylesheet">
-<script src="https://cdn.jsdelivr.net/npm/jquery@2.2.4/dist/jquery.min.js"></script>
 
-<!-- 모리스 차트 -->
-<script src="http://cdnjs.cloudflare.com/ajax/libs/raphael/2.1.2/raphael-min.js"></script>
-<script src="${pageContext.request.contextPath }/resources/admin/assets/js/init/morris.js"></script>
-<script src="http://cdnjs.cloudflare.com/ajax/libs/morris.js/0.5.1/morris.min.js"></script>
-<link rel="stylesheet" href="${pageContext.request.contextPath }/resources/admin/assets/css/morris.css">
 <!-- 캘린더 시간만 감추기 -->
 <style>
 	.fc-time {
@@ -350,12 +342,12 @@
 								<div class="card-body bg-flat-color-4">
 									<div id="flotBarChart" class="float-chart ml-4 mr-4">
 										<p style="color:black">공지 사항</p>
-										<p style="color:white"><c:out value="${adminNotice['NOTICECONTENT'] }" /></p>
-										<p style="color:red"><fmt:formatDate value="${adminNotice['NOTICEDATE'] }" pattern="yyyy-MM-dd"/></p>
+										<p style="color:white" class="notiTi"><c:out value="${adminNotice['NOTICECONTENT'] }" /></p>
+										<p style="color:red" class="notiDa"><fmt:formatDate value="${adminNotice['NOTICEDATE'] }" pattern="yyyy-MM-dd"/></p>
 									</div>
 								</div>
 								<div id="cellPaiChart" class="float-chart">
-									<p>입력창 : &nbsp;<a style="color:olive;" href="#" class="noticeClick">공지사항 추가하기</a></p> 
+									<p>&lt;입력창&gt;   &nbsp;<a style="color:olive;" id="noticeClick">공지사항 추가하기</a></p> 
 									<textarea class="txAA" cols="5" style="resize:none; width:100%; height:100px; padding:8px"></textarea>
 									
 								</div>
@@ -414,7 +406,22 @@
 	</div>
 	<!-- /#right-panel -->
 	
-	<script>
+	
+    
+
+	
+</section>
+</div>
+</body>
+<script src="https://code.jquery.com/jquery-3.3.1.min.js" type="text/javascript"></script>
+<!-- 모리스 차트 -->
+<script src="http://cdnjs.cloudflare.com/ajax/libs/raphael/2.1.2/raphael-min.js"></script>
+<script src="${pageContext.request.contextPath }/resources/admin/assets/js/init/morris.js"></script>
+<script src="http://cdnjs.cloudflare.com/ajax/libs/morris.js/0.5.1/morris.min.js"></script>
+
+<script src="https://cdn.jsdelivr.net/npm/jquery@2.2.4/dist/jquery.min.js"></script>
+
+<script>
 	
 	var testAr = [];
 	var ajaxPath = '<c:out value="${path}"/>';
@@ -451,40 +458,55 @@
 	  	xLabelAngle: 60
 	});
 	
-	$('.noticeClick').click(function name() {
-		//alert('notice click');
-		//ajax
-		var ta = document.getElementsByClassName("txAA")[0].value;
-		console.log(ta);
+	$(document).ready(function(){
 		
-		$.ajax({
-			url: '${pageContext.request.contextPath }/admin/adminNotice.do',
-			data: ta,
-			success: function (data) {
-				console.log("공지사항 추가되었습니다");
-				return false;
-			},
-                  error : function(e) {
-                  	console.log("ajax error");
-                  }
+		$("#noticeClick").on('click', function (e) {
+			//alert('notice click');
+			var ta = {'strTmp' : document.getElementsByClassName("txAA")[0].value};
+			//var ta = $('.txAA').val();
+			//console.log(ta);
+			
+			e.preventDefault();
+		
+			$.ajax({
+				type: 'POST',
+				url: '${pageContext.request.contextPath }/admin/adminNoticeIn.do',
+				data: ta,
+				dataType:"JSON",
+				success: function (data) {
+					console.log("공지사항 추가되었습니다");
+					var d = new Date(data['NOTICEDATE']);
+					var d = d.getFullYear() +"-" + d.getMonth() +"-" + d.getDate();
+				
+					// notiTi, notiDa
+					$(".notiTi").text(data['NOTICECONTENT']);
+					$(".notiDa").text(d);
+					$('.txAA').val("");
+					
+				},error: function(e) {
+					console.log("ajax error");
+	            }
+			});
+			
+			
 		});
-		return false;
 	});
 	
+		
 	
     </script>
+<!-- Scripts -->
+<link href="https://cdn.jsdelivr.net/npm/chartist@0.11.0/dist/chartist.min.css" rel="stylesheet">
+<link href="https://cdn.jsdelivr.net/npm/jqvmap@1.5.1/dist/jqvmap.min.css" rel="stylesheet">
+<link rel="stylesheet" href="${pageContext.request.contextPath }/resources/admin/assets/css/morris.css">
 
-	<!-- Scripts -->
- 	<script src="https://cdn.jsdelivr.net/npm/popper.js@1.14.4/dist/umd/popper.min.js"></script>
-	<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.1.3/dist/js/bootstrap.min.js"></script>
-	<script src="https://cdn.jsdelivr.net/npm/jquery-match-height@0.7.2/dist/jquery.matchHeight.min.js"></script>
-	<script src="${pageContext.request.contextPath }/resources/admin/assets/js/main.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.14.4/dist/umd/popper.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.1.3/dist/js/bootstrap.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/jquery-match-height@0.7.2/dist/jquery.matchHeight.min.js"></script>
+<script src="${pageContext.request.contextPath }/resources/admin/assets/js/main.js"></script>
  
-	<script src="https://cdn.jsdelivr.net/npm/moment@2.22.2/moment.min.js"></script>
-	<script src="https://cdn.jsdelivr.net/npm/fullcalendar@3.9.0/dist/fullcalendar.min.js"></script>
-	<script src="${pageContext.request.contextPath}/resources/admin/assets/js/init/fullcalendar-init.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/moment@2.22.2/moment.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/fullcalendar@3.9.0/dist/fullcalendar.min.js"></script>
+<script src="${pageContext.request.contextPath}/resources/admin/assets/js/init/fullcalendar-init.js"></script>
 	
-</section>
-</div>
-</body>
 </html>

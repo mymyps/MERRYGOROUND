@@ -11,6 +11,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -291,16 +292,38 @@ public class AdminController {
 		
 	}
 	
-	@RequestMapping("/admin/adminNotice.do")
-	public void adminNoticeInsert(@RequestParam(value="ta") String ta, HttpServletResponse res) throws IOException{
-		log.debug(ta);
+	
+	@RequestMapping("/admin/adminNoticeIn.do")
+	@ResponseBody
+	public String adminNoticeInsert(@RequestParam(value="strTmp") String strTmp, HttpServletResponse res) throws JsonProcessingException {
+
+		ObjectMapper mapper = new ObjectMapper();
 		
 		//비지니스 로직처리(데이터 삽입)
+		Map<String, String> map = service.adminNoticeInsert(strTmp);
 		
-		res.getWriter().print(true);
+		return mapper.writeValueAsString(map);
+		
 	}
 	
+		//한글
+//		BoardService bService = new BoardServiceImpl();
+//		mapper.readValue(json값, vo클래스)
+//		List<Map<String, String>> list = bService.boardList(1, 5); 
+		
+//		return mapper.writeValueAsString(list);
 	
+	// notice view load
+	@RequestMapping("/admin/notice")
+	public ModelAndView adminNoticeList() {
+		
+		List<Map<String, String>> list = service.adminNoticeList();
+		
+		ModelAndView mv = new ModelAndView();
+		mv.addObject("list", list);
+		mv.setViewName("admin/adminNotice");
+		
+		return mv;
+	}
 	
-
 }

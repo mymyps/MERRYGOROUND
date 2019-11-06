@@ -233,6 +233,18 @@
 		where rnum = 1
 	</select>
 	
+	<insert id="adminNoticeInsert" parameterType="string">
+		insert into adminnotice values(SEQ_ADMINNOTICE_NOTICENUM.nextval, 9999, #{str}, sysdate, 1)
+	</insert>
+	
+	<select id="adminNoticeList" resultType="map">
+		select * from(
+    		select rownum as rnum, a.* from(
+       			select * from adminnotice
+            		where noticestatus = 1
+        	order by noticedate desc
+        ) a)
+	</select>
 	
 </mapper>
 
