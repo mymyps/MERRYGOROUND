@@ -52,12 +52,9 @@
 					</div>
 					
 					<div class="container-login100-form-btn">
-						<div class="wrap-login100-form-btn">
-							<div class="login100-form-bgbtn"></div>
-							<button class="login100-form-btn" type ="submit">
-								Login
+							<button class="btn btn-primary solid cd-btn" type ="submit">
+								비밀번호 찾기
 							</button>
-						</div>
 					</div>
 
 					<!-- <div class="txt1 text-center p-t-54 p-b-20" type="submit"> -->

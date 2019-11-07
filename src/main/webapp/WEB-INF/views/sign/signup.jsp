@@ -88,14 +88,14 @@
 					</div>
 					
 					<div class="container-login100-form-btn">
-						<div class="wrap-login100-form-btn">
+						<!-- <div class="wrap-login100-form-btn"> -->
 							<!-- <div class="login100-form-bgbtn"></div> -->
 							<!-- <button type ="submit" class="login100-form-btn">
 								Sign Up
 							</button>  -->
-								<input type="submit" class="btn btn-outline-success btn_checkId" value="가입" disabled="">&nbsp;
-								<input type="reset" class="btn btn-outline-success" value="취소">
-						</div>
+								<input type="submit" class="btn btn-primary solid cd-btn" value="가입" disabled="">&nbsp;
+								<input type="reset" class="btn btn-primary solid cd-btn" value="취소">
+						<!-- </div> -->
 					</div>
 
 					<div class="txt1 text-center p-t-54 p-b-20">
@@ -253,5 +253,4 @@
 
 
 
->>>>>>> origin/sik2
 <jsp:include page="/WEB-INF/views/common/footer.jsp"/>
