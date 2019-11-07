@@ -96,11 +96,7 @@
 							files,
 							editor,
 							welEditable) {
-						console
-
-								.log(editor);
-						console
-								.log(files);
+						
 						for (var i = files.length - 1; i >= 0; i--) {
 						console.log(this);
 							sendFile(
@@ -112,7 +108,7 @@
 			});
 	
 	function sendFile(file, edi, welEditable) {
-	var imgUrl = "resources/images/couple/"
+	var imgUrl = "${path}/resources/images/supRv/"
 	//파일전송을 위한 폼생성
 	var form_data = new FormData();
 	form_data.append("image", file);
@@ -120,7 +116,7 @@
 	$.ajax({
 				data : form_data,
 				type : "post",
-				url : "${path}/summernote_imageUpload.do",
+				url : "${path}/summernote_imageUpload_supLv.do",
 				cache : false,
 				contentType : false,
 				enctype : "multipart/form-data",

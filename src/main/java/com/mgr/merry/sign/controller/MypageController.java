@@ -26,6 +26,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.servlet.ModelAndView;
 
 import com.mgr.merry.common.SMTPTemplate;
 import com.mgr.merry.sign.model.service.SignService;
@@ -41,11 +42,12 @@ public class MypageController {
 	SignService service;
 
 	@RequestMapping("/sign/mypage.do")
-	public String signup(HttpServletRequest request, Members m, Model model) {
+	public String signup(HttpServletRequest request, Members m, Model model ,@RequestParam(value="cPage", required=false,defaultValue="0") int cPage) {
 		String mNo = request.getParameter("mNo");
 		int memNo = Integer.parseInt(mNo);
 		Members result = service.selectMember(m, memNo);
 		
+		int numPerPage=3;
 		
 		Supporters result2 = service.selectSup(memNo);
 		if(result2!=null) {
@@ -71,7 +73,7 @@ public class MypageController {
 		UUID uuid = UUID.randomUUID();
 		String saveName = uuid + "_" + upFile.getOriginalFilename();
 		System.out.println("saveName: {}" + saveName);
-		// 저장할 File 객체를 생성(껍데기 파일)ㄴ
+		// 저장할 File 객체를 생성(껍데기 파일)
 		String saveFile = request.getSession().getServletContext().getRealPath("/resources/images/member");
 		// 파일 실제 저장하기
 		try {

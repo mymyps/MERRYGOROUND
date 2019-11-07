@@ -1,5 +1,6 @@
 package com.mgr.merry.supUpload.model.service;
 
+import java.util.List;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
@@ -24,5 +25,7 @@ public interface SupUploadService {
 			throws Exception;
 
 	Supporters selectSupId(String id);
+
+	int insertSupUploadImg(Map<String, String> param, List<SupUploadImg> imgList);
 
 }

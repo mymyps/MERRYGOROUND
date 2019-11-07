@@ -19,4 +19,6 @@ public interface SupUploadDao {
 
 	Supporters selectSupId(SqlSessionTemplate session, String id);
 
+	int insertSupUploadImg(SqlSessionTemplate session, SupUploadImg supImg);
+
 }

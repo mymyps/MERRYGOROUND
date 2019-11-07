@@ -3468,6 +3468,19 @@ a.close-styler{
 
 /* info 상세뷰 joomi 추가 */
 
+.reviewContent{
+	width:100%;
+	overflow : scroll;
+}
+
+.reviewContent::-webkit-scrollbar { 
+    display: none; 
+}
+
+.reviewContent #text{
+	width:100%;
+}
+
 .infoimg{
 	width:100%;
 }
