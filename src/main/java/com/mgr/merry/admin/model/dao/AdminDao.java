@@ -39,6 +39,7 @@ public interface AdminDao {
 	Map<String, String> adminNotice(SqlSessionTemplate session);
 	int adminNoticeInsert(SqlSessionTemplate session, String str);
 	List<Map<String, String>> adminNoticeList(SqlSessionTemplate session);
-
+	int adminNotiDel(SqlSessionTemplate session, int noticeNum);
+	int adminNotiMod(SqlSessionTemplate session, Map<String, String> param);
 
 }

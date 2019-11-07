@@ -178,5 +178,15 @@ public class AdminServiceImpl implements AdminService{
 	public List<Map<String, String>> adminNoticeList() {
 		return dao.adminNoticeList(sqlSession);
 	}
+	
+	@Override
+	public int adminNotiDel(int noticeNum) {
+		return dao.adminNotiDel(sqlSession, noticeNum);
+	}
+	
+	@Override
+	public int adminNotiMod(Map<String, String> param) {
+		return dao.adminNotiMod(sqlSession, param);
+	}
 
 }

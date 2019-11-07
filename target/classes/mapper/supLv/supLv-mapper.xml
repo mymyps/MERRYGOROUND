@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="supLv">
+
+	<insert id="insertSupLv" parameterType="map">
+		INSERT INTO SUPPORTERS_LV_UPLOAD VALUES(SEQ_SUP_LV_NUM.NEXTVAL, 41, #{supLvContent}, default)
+	</insert>
+	
+	<insert id="insertSupLvImg" parameterType="com.mgr.merry.supLvUpload.model.vo.SupLvUploadImg">
+		INSERT INTO SUPPORTERS_LV_UPLOAD_IMG VALUES(SEQ_SUP_LV_NUM.CURRVAL, #{fileOrgName1}, #{fileOrgName2}, #{fileOrgName3}, #{fileOrgName4}, #{fileOrgName5})
+	</insert>
+	
+</mapper>

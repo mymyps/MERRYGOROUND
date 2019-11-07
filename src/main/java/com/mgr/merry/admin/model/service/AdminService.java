@@ -38,6 +38,8 @@ public interface AdminService {
 	Map<String, String> adminNotice();
 	Map<String, String> adminNoticeInsert(String str);
 	List<Map<String, String>> adminNoticeList();
+	int adminNotiDel(int noticeNum);
+	int adminNotiMod(Map<String, String> param);
 
 
 }

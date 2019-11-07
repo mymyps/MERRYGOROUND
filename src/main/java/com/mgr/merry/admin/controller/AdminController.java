@@ -326,4 +326,36 @@ public class AdminController {
 		return mv;
 	}
 	
+	@RequestMapping("/admin/adminNotiDel")
+	public void adminNotiDel(@RequestParam(value="noticenum") String noticeNum, HttpServletResponse res) throws IOException {
+		
+		log.debug("" + noticeNum);
+		//공지 하나 지우기
+		int result = service.adminNotiDel(Integer.parseInt(noticeNum));
+		
+		if(result > 0) {
+			res.getWriter().print(true);
+		}else {
+			res.getWriter().print(false);
+		}
+	}
+	
+	@RequestMapping("/admin/adminNotiMod")
+	public void adminNotiMod(@RequestParam Map<String,String> param, HttpServletResponse res) throws IOException {
+		
+		System.out.println("====================");
+		System.out.println("====================");
+		System.out.println(param);
+		
+		int result = service.adminNotiMod(param);
+		
+		if(result > 0) {
+			res.getWriter().print(true);
+		}else {
+			res.getWriter().print(false);
+		}
+		
+		
+	}
+	
 }

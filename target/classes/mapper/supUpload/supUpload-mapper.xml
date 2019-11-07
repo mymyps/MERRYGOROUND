@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="supUp">
+	<select id="selectSupUpload" resultType="map" parameterType="_int">
+		SELECT * FROM SUPPORTERS_UPLOAD WHERE INFOUPNUM=#{infoupNum}
+	</select>
+<!-- 	<select id=selectSupUploadImg" resultType="com.mgr.merry.supUpload.model.vo.SupUploadImg">
+	
+	</select> -->
+	
+	<insert id="insertSupUpload" parameterType="Map">
+		INSERT INTO VALUES(SEQ_SUP_UP_NUM.NEXTVAL, #{supupNum}, #{infoupNum}, #{supupTitle}, #{supupContent}, default, default)
+	</insert>
+	
+	<select id="selectSup" resultType="com.mgr.merry.supporters.model.vo.Supporters">
+		SELECT * FROM SUPPORTERS WHERE MEMBERNUM=#{memberNum}
+	</select>
+</mapper>

@@ -246,6 +246,15 @@
         ) a)
 	</select>
 	
+	<delete id="adminNotiDel" parameterType="_int">
+		delete from adminnotice where noticenum = #{noticeNum}
+	</delete>
+	
+	<update id="adminNotiMod" parameterType="map">
+		update adminnotice set noticecontent = #{noTxt}
+		where noticenum = #{noNum}
+	</update>
+	
 </mapper>
 
 
