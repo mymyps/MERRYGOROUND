@@ -1,5 +1,8 @@
 ﻿<%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+    <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 
 <jsp:include page="/WEB-INF/views/common/header.jsp"/>
 
@@ -376,25 +379,21 @@
 				<span class="title-icon pull-left"><i class="fa fa-clipboard"></i></span>
 				<h2 class="title" id="brownColor">공지사항
 					<span class="title-desc">
-						<p class="nanumSquare">공지사항을 간단히 브리핑해서 띄웁시당</p>
+						<p class="nanumSquare">메리고라운드 이용 시 공지사항을 꼭 확인해주세요:)</p>
 					</span>
 				</h2>
-				<div id="testimonial-carousel" class="owl-carousel owl-theme text-center testimonial-slide"
-					style="display: block; opacity: 1;">
+				
+				<div id="testimonial-carousel" class="owl-carousel owl-theme text-center testimonial-slide" style="display: block; opacity: 1;">
 					<div class="owl-wrapper-outer">
 						<div class="owl-wrapper"
 							style="display: block; width: 5820px; left: 0px; transition: all 0ms ease 0s; transform: translate3d(0px, 0px, 0px);">
 							<div class="owl-item" style="width: 970px;">
 								<div class="item">
 									<div class="testimonial-content">
-										<h3>서포터즈 상시모집</h3>
-										<p>
-											능력있는 서포터즈를 모집합니다 :)Lorem Ipsum as their default model text, and a search for
-											‘lorem ipsum’
-											will uncover many web sites still in their infancy. Various versions
-											have evolved over the years, sometimes by accident, sometimes on
-											purpose. Lorem Ipsum is that it as opposed to using.
-										</p>
+									<c:forEach items="${noticeList}" var="list">
+										<h3><c:out value='${list["NOTICECONTENT"]}'></c:out></h3>
+									
+                                     </c:forEach>
 									</div>
 								</div>
 							</div>

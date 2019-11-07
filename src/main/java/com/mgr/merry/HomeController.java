@@ -14,6 +14,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
+import com.mgr.merry.admin.model.service.NoticeService;
 import com.mgr.merry.search.model.service.SearchService;
 
 /**
@@ -25,6 +26,7 @@ public class HomeController {
 	private static final Logger logger = LoggerFactory.getLogger(HomeController.class);
 	@Autowired
 	SearchService service;
+	NoticeService noticeService;
 	/**
 	 * Simply selects the home view to render by returning its name.
 	 */
@@ -39,11 +41,14 @@ public class HomeController {
 		
 		model.addAttribute("serverTime", formattedDate );
 		
-		
 		List<Map<String,Object>> list=service.allList();
 	    model.addAttribute("list",list);
 	    
+	    List<Map<String,Object>> noticeList = noticeService.noticeList();
+	    model.addAttribute("noticeList",noticeList);
+	    
 	    logger.debug("homecontroller에서 list : "+list);
+	    logger.debug("homecontroller에서 noticeList : "+noticeList);
 			
 		
 		return "home";
