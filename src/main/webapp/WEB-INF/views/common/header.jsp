@@ -145,14 +145,15 @@
                               class="fa fa-angle-down"></i></a>
                         <div class="dropdown-menu">
                            <ul>
+                           		<li><a href="${pageContext.request.contextPath }/sign/mypage.do?mNo=${loginMember.memberNum}">마이페이지</a>
                               <li><a href="${pageContext.request.contextPath }/member/logout.do">로그아웃</a></li>
                            </ul>
                         </div>
                      </li>
                      </c:if>
                      <li class="dropdown">
-                        <a href="${pageContext.request.contextPath }/sign/mypage.do?mNo=${loginMember.memberNum}">Mypage <i
-                              class="fa fa-angle-down"></i></a>
+                        <%-- <a href="${pageContext.request.contextPath }/sign/mypage.do?mNo=${loginMember.memberNum}">Mypage <i
+                              class="fa fa-angle-down"></i></a> --%>
                         <c:if test="${loginMember==null }">
                            <div class="dropdown-menu">
                            <ul>

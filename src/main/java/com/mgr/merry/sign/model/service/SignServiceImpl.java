@@ -99,6 +99,14 @@ public class SignServiceImpl implements SignService {
 	public Members checkId(Members m) {
 		return dao.checkId(session,m);
 	}
+	@Override
+	public int selectBoardCount(int supNum) {
+		return dao.selectBoardCount(session,supNum);
+	}
+	@Override
+	public List<Map<String, String>> selectBoardList(int cPage, int numPerpage,int supNum) {
+		return dao.selectBoardList(session,cPage,numPerpage,supNum);
+	}
 	
 
 	

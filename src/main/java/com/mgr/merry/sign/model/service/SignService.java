@@ -25,4 +25,6 @@ public interface SignService {
 	int insertSupporterFile(Map<String, Object> data);
 	int updatestatus(Map<String, Object> data);
 	Members checkId(Members m);
+	int selectBoardCount(int supNum);
+	List<Map<String,String>> selectBoardList(int cPage,int numPerPage,int supNum);
 }

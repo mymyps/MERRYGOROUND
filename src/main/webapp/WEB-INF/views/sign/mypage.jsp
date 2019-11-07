@@ -124,7 +124,7 @@
 								<input class="input100" type="hidden" name="memberNum" value=${members.memberNum }>
 								
 								<div class="wrap-input100 validate-input m-b-23 idname" data-validate = "Username is reauired">
-									<span class="label-input100"></span>
+									<span class="label-input100">아이디 </span>
 									<input class="input100" type="text" name="id" value=${members.id }  readonly="readonly">
 									<span class="focus-input100" data-symbol="&#xf206;"></span>
 								</div>
@@ -233,21 +233,22 @@
 				            
 				            <h3>내 작성글 보기</h3> 
 				            <div class="row">
-				       			 <c:forEach items="${map }" var="up" varStatus="i">
+				       			 <c:forEach items="${list }" var="up" varStatus="i">
 									<div class="col-md-4 col-sm-4 wow fadeInDown" data-wow-delay=".5s">
 										<button onclick="detailView()">
 										<div class="service-content">
 											<span class="service-image">
-												<img class="img-supupload_img_f" src="${path}/resources/images/member/${up.FILERENAME }" width="180px" height="200px"/>
+												<img class="img-supupload_img_f" src='${path}/resources/images/member/${up["FILERENAME"] }' width="180px" height="200px"/>
 											</span>
 											
-											<h3>${up.SUPUPTITLE}</h3>
+											<h3>${up["SUPUPCONTENT"] }</h3>
 											
 										</div>
 										</button>
 									</div>
 				       		</c:forEach>
 							</div>
+						${pageBar }  
 				        </div>
 				        
 				        <div class="tab-pane animated fadeInLeft" id="tab_g">
@@ -275,7 +276,6 @@
 				        
 				        
 				        <div class="tab-pane animated fadeInLeft" id="tab_r">
-				            <h3>서포터즈 신청</h3> 
 							<div>
 							<div style="overflow:scroll; width:700px; height:400px; padding:10px; ">
 													제 1조 (목적 및 소개)
@@ -353,19 +353,81 @@
 <br>
 요금 등 서비스 이용으로 발생한 분쟁에 대해 소송이 제기될 경우 회사의 본사 소재지를 관할하는 법원을 전속 관할법원으로 합니다.
 							</div>
-								<form class="login100-form validate-form" action="${path}/member/requestsup.do" enctype="multipart/form-data" method="post">
-								<input class="input100" type="hidden" name="memberNum" value=${members.memberNum }>
-								<input  type="file" class="custom-file-input" name="upFile" id="upFile"> 
-								<input  type="file" class="custom-file-input" name="upFile" id="upFile">
-								<input  type="file" class="custom-file-input" name="upFile" id="upFile">
-								<input  type="file" class="custom-file-input" name="upFile" id="upFile">
-								<input  type="file" class="custom-file-input" name="upFile" id="upFile"> 
-								<input type ="text" class="custom-file-input" name="suplvContent" placeholder="asdasdadasd">
-								<input type="submit" class="btn btn-primary solid cd-btn" value="신청하기" >
-							</form>	
+			<div class="container">				
+			<form name="infoForm"
+			action="${pageContext.request.contextPath }/supLv/supLvFormEnd.do"
+			method="post" enctype="multipart/form-data">
+			<input type="hidden" value="${loginMember.id }" name="id" />
+			<input type="hidden" value="${loginMember.memberNum }" name="memberNum" />
+			<div class="row">
+				<!-- Blog start -->
+				<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+					<!-- Blog post start -->
+					<div class="post-content">
+						<h1 class="post-title text-center">
+						</h1>
+						<hr>
+						<div class="entry-content">
+							<div class="infoFormMainFrame">
+								<div class="infoFormSubFrame">이미지1</div>
+								<p class="infoForm1">
+									<input type="file" name="supLvImg1" />
+
+								</p>
+							</div>
+							<div>
+								<div class="infoFormSubFrame">이미지2</div>
+								<p class="infoForm1">
+									<input type="file" name="supLvImg2" />
+
+								</p>
+							</div>
+							<div>
+								<div class="infoFormSubFrame">이미지3</div>
+								<p class="infoForm1">
+									<input type="file" name="supLvImg3" />
+
+								</p>
+							</div>
+							<div>
+								<div class="infoFormSubFrame">이미지4</div>
+								<p class="infoForm1">
+									<input type="file" name="supLvImg4" />
+
+								</p>
+							</div>
+							<div>
+								<div class="infoFormSubFrame">이미지5</div>
+								<p class="infoForm1">
+									<input type="file" name="supLvImg5" />
+
+								</p>
+							</div>
+							<div>
+								<div class="infoFormSubFrame">내용</div>
+								<p class="infoForm1">
+									<input type="text" class="subLvHeight" name="supLvContent" />
+								</p>
+							</div>
+
+							<br> <br>
+							<div>
+								<button class="btn btn-primary solid cd-btn" type="submit">서포터즈 신청</button>
+								<button class="btn btn-primary solid cd-btn" type="reset">서포터즈 신청 취소</button>
+							</div>
+						</div>
+
+					</div>
+
+
+
+				</div>
+			</div>
+		</form>
+							
 							</div>							 
 				        </div>
-				        
+				   </div>     
 				        
 				    <div class="tab-pane animated fadeIn" id="tab_d">
 				            <h3>비밀번호 변경</h3>

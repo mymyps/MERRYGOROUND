@@ -28,4 +28,6 @@ public interface SignDao {
 	int insertSupporterFile(SqlSessionTemplate session, Map<String, Object> data);
 	int updatestatus(SqlSessionTemplate session, Map<String, Object> data);
 	Members checkId(SqlSessionTemplate session, Members m);
+	int selectBoardCount(SqlSessionTemplate session,int supNum);
+	List<Map<String,String>> selectBoardList(SqlSessionTemplate session,int cPage,int numPerPage,int supNum);
 }
