@@ -19,4 +19,11 @@
 	<select id="selectSupId" resultType="map" parameterType="_int">
 		SELECT * FROM SUPPORTERS WHERE MEMBERNUM=#{memberNum}
 	</select>
+	
+	<insert id="insertSupUploadImg" parameterType="com.mgr.merry.supUpload.model.vo.SupUploadImg">
+		<selectKey keyProperty="supUpNum" order="BEFORE">
+			select seq_sup_up_num.currval from dual
+		</selectKey>
+		INSERT INTO SUPPORTERS_UPLOAD_IMG VALUES(#{supUpNum}, SEQ_SUP_UP_IMG_NUM.NEXTVAL, FILERENAME)
+	</insert>
 </mapper>

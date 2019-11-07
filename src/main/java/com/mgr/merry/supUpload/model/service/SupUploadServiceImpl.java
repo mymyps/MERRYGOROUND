@@ -2,6 +2,7 @@ package com.mgr.merry.supUpload.model.service;
 
 import java.io.File;
 import java.io.PrintWriter;
+import java.util.List;
 import java.util.Map;
 import java.util.UUID;
 
@@ -13,6 +14,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
+import com.mgr.merry.couple.model.vo.Attachment;
 import com.mgr.merry.supUpload.model.dao.SupUploadDao;
 import com.mgr.merry.supUpload.model.vo.SupUploadImg;
 import com.mgr.merry.supporters.model.vo.Supporters;
@@ -77,6 +79,22 @@ public class SupUploadServiceImpl implements SupUploadService {
 	@Override
 	public Supporters selectSupId(String id) {
 		return dao.selectSupId(session, id);
+	}
+
+	@Override
+	public int insertSupUploadImg(Map<String, String> param, List<SupUploadImg> imgList) {
+		int result= 0;
+		
+		System.out.println("이미지리스트 : "+imgList);
+		
+		if(imgList.size()>0) {
+			for(SupUploadImg supImg : imgList) {
+				System.out.println("param.get('coupleNum'): "+param.get("coupleNum"));
+				result = dao.insertSupUploadImg(session, supImg);
+			}
+		}
+
+		return result;
 	}
 
 

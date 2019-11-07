@@ -1,15 +1,23 @@
 package com.mgr.merry.supUpload.controller;
 
+import java.io.File;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
+import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.mgr.merry.couple.model.vo.Attachment;
 import com.mgr.merry.info.model.service.InfoService;
 import com.mgr.merry.search.model.service.SearchService;
 import com.mgr.merry.supLvUpload.model.service.SupLvService;
@@ -74,6 +82,16 @@ public class SupUploadController {
 		System.out.println("섶리 파라미터값 : "+param);
 		
 		int result = 0;
+		int imgResult = 0;
+		
+		if(imgList.size()>0) {
+			try {
+				System.out.println("writeEnd안에서 param: "+param);
+				imgResult = service.insertSupUploadImg(param,imgList);
+			}catch(Exception e) {
+				e.printStackTrace();
+			}
+		}
 
 		result = service.insertSupReview(param);
 		
@@ -94,53 +112,74 @@ public class SupUploadController {
 	
 	
 	//summernote 이미지파일 저장후 게시판에 쏴주기
-//		@RequestMapping(value = "summernote_imageUpload.do", method=RequestMethod.POST)
-//		public void uploadSummernoteImage(MultipartFile image, HttpSession session, HttpServletResponse res) throws Exception{
-//			String savename = image.getOriginalFilename();
-//			
-//			System.out.println(image.getOriginalFilename());
-//			String path=session.getServletContext().getRealPath("/resources/images/couple");
-//			File f=new File(path);
-//			if(!f.exists()) f.mkdirs();
-//			
-//			//파일명 생성(rename)
-//			String oriFileName=image.getOriginalFilename();
-//			String ext = oriFileName.substring(oriFileName.lastIndexOf("."));
-//			//규칙설정
-//			SimpleDateFormat sdf= new SimpleDateFormat("yyyyMMdd_HHMMssSSS");
-//			int rdv = (int)(Math.random()*1000);
-//			String reName = sdf.format(System.currentTimeMillis())+"_"+rdv+ext;
-//			
-//			// 파일 실제 저장하기
-//	        try {
-//	           image.transferTo(new File(path + "/" + reName));
-//	     
-//	        } catch (Exception e) { //IlligalStateException|IOException
-//	        	e.printStackTrace();
-//	        }
-//	        
-//	        
-//	        res.getWriter().print("/merry/resources/images/couple/"+reName);
-//	        
-//	        //DB에 저장 board가 insert된후 boardnum을 가져온후 저장해야함 (따로 필요?)
-//	        Attachment att= new Attachment();
-//	        System.out.println("setFilerename에 들어갈 값 : "+path+"/"+reName);
-////	        att.setFileRename(path+"/"+reName);
-//	        att.setFileRename(reName);
-//	        
-//	        
-////	        System.out.println("attachList.size() : "+attachList.size());
-//	        
-//	        if(attachList.isEmpty()) {
-//	        	att.setFlag(1);
-//	        	attachList.add(att);
-//	        }
-//	        else if(attachList.size()>0) {
-//	        	att.setFlag(0);
-//	        	attachList.add(att);
-//	        }
-//	        System.out.println("이미지 등록 완료시 :" +attachList);
+	@RequestMapping(value = "summernote_imageUpload_supLv.do", method=RequestMethod.POST)
+	public void uploadSummernoteImage(MultipartFile image, HttpSession session, HttpServletResponse res) throws Exception{
+		String savename = image.getOriginalFilename();
+		
+		System.out.println(image.getOriginalFilename());
+		String path=session.getServletContext().getRealPath("/resources/images/supRv");
+		File f=new File(path);
+		if(!f.exists()) f.mkdirs();
+		
+		//파일명 생성(rename)
+		String oriFileName=image.getOriginalFilename();
+		String ext = oriFileName.substring(oriFileName.lastIndexOf("."));
+		//규칙설정
+		SimpleDateFormat sdf= new SimpleDateFormat("yyyyMMdd_HHMMssSSS");
+		int rdv = (int)(Math.random()*1000);
+		String reName = sdf.format(System.currentTimeMillis())+"_"+rdv+ext;
+		
+		// 파일 실제 저장하기
+        try {
+           image.transferTo(new File(path + "/" + reName));
+     
+        } catch (Exception e) { //IlligalStateException|IOException
+        	e.printStackTrace();
+        }
+        
+        
+        res.getWriter().print("/merry/resources/images/supRv/"+reName);
+        
+        //DB에 저장 board가 insert된후 boardnum을 가져온후 저장해야함 (따로 필요?)
+        SupUploadImg supupImg= new SupUploadImg();
+        System.out.println("setFilerename에 들어갈 값 : "+path+"/"+reName);
+//        att.setFileRename(path+"/"+reName);
+        supupImg.setFileReName(reName);
+        
+        
+//        System.out.println("attachList.size() : "+attachList.size());
+        
+        	imgList.add(supupImg);
+        System.out.println("이미지 등록 완료시 :" +imgList);
+	}
+	
+//	@RequestMapping(value = "summernote_imageDelete.do", method=RequestMethod.POST)
+//	public void deleteSummernoteImage(HttpSession session, HttpServletResponse res, String src) throws Exception{
+//		System.out.println("컨트롤러에서 src : "+src);
+//		int attResult =0 ;
+//		
+//		String path=session.getServletContext().getRealPath("/resources/images/couple");
+//		String totalPath = path + "/" + src;
+//		File f=new File(totalPath);
+//		if(f.exists()) {
+//			if(f.delete()) {
+//				//src로 select후 그 couplenum을 현재 게시물 번호로 받아오기
+////				List<Attchment> cc = cservice.selectAttachList2(src);
+//				//먼저 지울Attachment filename의 flag값을 받아와서 0이면 그냥 삭제
+//				
+//				attResult= cservice.deleteAttachment2(src);
+//				//만약 flag값이 1이면 삭제후 나머지 리스트들 중에서 첫번째값 1로 변경
+//				
+//				
+//				System.out.println("파일 삭제 성공!");
+//			}else {
+//				System.out.println("파일 삭제 실패!");
+//			}
+//		}else {
+//			System.out.println("파일이 존재하지 않습니다!");
 //		}
+//	
+//	}
 
 	
 }
