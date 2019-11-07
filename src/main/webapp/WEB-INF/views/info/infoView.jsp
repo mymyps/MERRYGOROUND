@@ -62,13 +62,15 @@
 		                            </form>
 	                            </c:if>
 	                            <br>
-	                            <form name="infoUpdate" action="${pageContext.request.contextPath }/info/infoUpdate?infoupNum=${info.INFOUPNUM}" method="post">
-	                                <button class="btn supreviewBtn" type="submit">INFOMATION 수정</button> 
-	                            </form>
-	                            <br>
-	                            <form name="infoDelete" action="${pageContext.request.contextPath }/info/infoStatus0?infoupNum=${info.INFOUPNUM }" method="post">
-	                                <button class="btn supreviewBtn" type="submit">INFOMATION 삭제</button> 
-	                            </form>
+	                            <c:if test="${not empty loginMember }">
+	                            	<form name="infoUpdate" action="${pageContext.request.contextPath }/info/infoUpdate?infoupNum=${info.INFOUPNUM}" method="post">
+		                                <button class="btn supreviewBtn" type="submit">INFOMATION 수정</button> 
+		                            </form>
+		                            <br>
+		                            <form name="infoDelete" action="${pageContext.request.contextPath }/info/infoStatus0?infoupNum=${info.INFOUPNUM }" method="post">
+		                                <button class="btn supreviewBtn" type="submit">INFOMATION 삭제</button> 
+		                            </form>
+	                            </c:if>
                             </c:if>
                         </div>
                         <!-- Author info end -->
