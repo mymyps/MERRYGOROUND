@@ -20,5 +20,7 @@ public interface CoupleBoardService {
 	int updateCoupleBoard(Map<String,String> param, List<Attachment> attachList);
 	int deleteAttachment2(String src);
 	
+	int addComment(Map<String,String> param);
+	List<Map<String,String>> selectCommentList(int coupleNum);
 
 }

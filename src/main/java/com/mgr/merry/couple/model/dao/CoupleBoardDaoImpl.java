@@ -67,6 +67,16 @@ public class CoupleBoardDaoImpl implements CoupleBoardDao {
 	public int deleteAttachment2(SqlSessionTemplate session, String src) {
 		return session.delete("couple.deleteAttachment2", src);
 	}
+
+	@Override
+	public int addComment(SqlSessionTemplate session, Map<String, String> param) {
+		return session.insert("couple.addComment", param);
+	}
+
+	@Override
+	public List<Map<String, String>> selectCommentList(SqlSessionTemplate session, int coupleNum) {
+		return session.selectList("couple.selectCommentList",coupleNum);
+	}
 	
 	
 	

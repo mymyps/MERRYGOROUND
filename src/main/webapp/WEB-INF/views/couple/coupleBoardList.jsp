@@ -83,8 +83,6 @@
 <!-- 					</ul> -->
 <!-- 				</div> -->
 
-
-
 			</div>
 			<!--/ Content col end -->
 

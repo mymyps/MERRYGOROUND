@@ -7,7 +7,7 @@
 <jsp:param name ="pageTitle" value=""/>
 </jsp:include>
 
-<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+<script src="http://code.jquery.com/jquery-3.3.1.slim.min.js"
    integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
    crossorigin="anonymous"></script>
 <style>
@@ -79,111 +79,137 @@
 						</script>
 						<button class="btn btn-primary pull-left" onclick='location.href="${path }/couple/updateCoupleBoard?no=${cboard["COUPLENUM"]}"'>글 수정</button>
 						<button class="btn btn-primary pull-right" onclick='location.href="${path }/couple/deleteCoupleBoard?no=${cboard["COUPLENUM"]}"'>글 삭제</button> 
-						<br><br><hr><hr><hr>
+						<br><hr>
 					
 
 						<div class="gap-30"></div>
+						
+<!-- 				--------------------------------------------------------- -->
 
-						<!-- Post comment start -->
-						<div id="post-comments">
-							<div class="comments-counter"><a href="#">댓글 07개</a></div>
-							<ul class="comments-list">
-								<li>
-									<div class="comment">
-										<img class="comment-avatar pull-left" alt="" src="images/blog/avator1.png">
-										<div class="comment-body">
-											<h4 class="comment-author">(댓글작성자)</h4>
-											<div class="comment-date">2019-09-18 오후 1시 25분</div>
-											<p>(댓글 내용)</p>
-											<div class="text-right weight-600">
-												<a class="comment-reply" href="#">
-												<i class="fa fa-mail-reply"></i> 답글</a>
-											</div>	
-										</div>
-									</div>
-									<ul class="comments-reply">
-										<li>
-											<div class="comment">
-												<img class="comment-avatar pull-left" alt="img" src="images/blog/avator2.jpg">
-												<div class="comment-body">
-													<h4 class="comment-author">(대댓글작성자)</h4>
-													<div class="comment-date">(작성날짜)</div>
-														<p>(대댓글 내용)</p>
-													<div class="text-right weight-600">
-														<a class="comment-reply" href="#">
-														<i class="fa fa-mail-reply"></i> 답글</a>
-													</div>	
-												</div>
-											</div>
-										</li>
-										<li>
-											<div class="comment">
-												<img class="comment-avatar pull-left" alt="" src="images/blog/avator1.png">
-												<div class="comment-body">	
-													<h4 class="comment-author">(대댓글작성자)</h4>
-													<div class="comment-date">(작성날짜)</div>
-													<p>(대댓글 내용))</p>
-													<div class="text-right weight-600">
-														<a class="comment-reply" href="#">
-														<i class="fa fa-mail-reply"></i> 답글</a>
-													</div>	
-												</div>
-											</div>
-										</li>
-									</ul><!-- comments-reply end -->
-									<div class="comment last">
-										<img class="comment-avatar pull-left" alt="" src="images/blog/author.jpg">
-										<div class="comment-body">
-											<h4 class="comment-author">Jack Ruler</h4>
-											<div class="comment-date">March 29, 2014 at 1:38 pm</div>
-											<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. In magna ligula, faucibus sed ligula ut, venenatis mattis diam. Proin feugiat mollis nibh.</p>
-											<div class="text-right weight-600">
-												<a class="comment-reply" href="#">
-												<i class="fa fa-mail-reply"></i> Reply</a>
-											</div>	
-										</div>
-									</div>
-								</li><!-- Comments-list li end -->
-							</ul><!-- Comments-list ul end -->
-						</div><!-- Post comment end -->
+			<div class="container">
+				<form id="commentListForm" name="commentListForm" method="post">
+					<div>
+						<span><strong>댓글</strong></span>
+						<span id="cCnt"></span>
+						<span><strong>개</strong></span>
+					</div><hr><br><br>
+					<div id="commentList"></div>
+				</form>
+			</div>
 
-						<div class="comments-form">
-							<h3>댓글 작성란</h3>
-							<form role="form">
-								<!-- <div class="row">
-									<div class="col-md-4">
-										<div class="form-group">
-											<label>Your Name</label>
-										<input class="form-control" name="name" id="name" placeholder="" type="text" required>
-										</div>
-									</div>
-									<div class="col-md-4">
-										<div class="form-group">
-											<label>Your Email</label>
-											<input class="form-control" name="email" id="email" placeholder="" type="email" required>
-										</div>
-									</div>
-									<div class="col-md-4">
-										<div class="form-group">
-											<label>Your Website</label>
-											<input class="form-control" placeholder="" type="text" required>
-										</div>
-									</div>
-								</div> -->
-								<div class="form-group">
-									<label>내용</label>
-									<textarea class="form-control required-field" id="message" placeholder="" rows="4" required></textarea>
-								</div>
-								<div><br>
-								<button class="btn btn-primary" type="submit">댓글 달기</button> 
-								</div>
-							</form>
-						</div><!-- Comments form end -->
-					</div><!-- Blog post end -->
-				</div><!--/ Content col end -->
-				
-				
-				</div>
+			<div class="container">
+				<form id="commentForm" name="commentForm" method="post">
+					<br>
+					<br>
+					<div>
+						
+						<div>
+							<table class="table">
+								<tr>
+									<td><textarea class="form-control required-field" rows="4" cols="30"
+											id="comment" name="comment" placeholder="댓글을 입력하세요"></textarea>
+										<br>
+										<div>
+											<a href='#' onClick="fn_comment('${result.code }')"
+												class="btn pull-right btn-primary btn-success">등록</a>
+										</div></td>
+								</tr>
+							</table>
+						</div>
+					</div>
+					<input type="hidden" id="coupleNum" name="coupleNum"
+						value='${cboard["COUPLENUM"]}' />
+				</form>
+			</div>
+			
+
+
+
+			<script>
+			/*
+			 * 댓글 등록하기(Ajax)
+			 */
+			function fn_comment(code){
+			    
+			    $.ajax({
+			        type:'POST',
+			        url : "<c:url value='/couple/addComment'/>",
+			        data:$("#commentForm").serialize(),
+			        success : function(data){
+			            if(data=="success")
+			            {
+			                getCommentList();
+			                $("#comment").val("");
+			            }
+			        },
+			        error:function(request,status,error){
+			            //alert("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
+			       }
+			        
+			    });
+			}
+			 
+			/**
+			 * 초기 페이지 로딩시 댓글 불러오기
+			 */
+			$(function(){
+// 			    var cNum=${cboard["COUPLENUM"]};
+// 			    console.log("콘솔cNUM!: "+cNum);
+			    
+			    getCommentList(coupleNum);
+			    
+			});
+			 
+			/**
+			 * 댓글 불러오기(Ajax)
+			 */
+			function getCommentList(coupleNum){
+			    
+			    $.ajax({
+			        type:'GET',
+			        url : "<c:url value='/couple/commentList'/>",
+			        dataType : "json",
+			        data:$("#commentForm").serialize(),
+			        contentType: "application/x-www-form-urlencoded; charset=UTF-8", 
+			        success : function(data){
+			            
+			            var html = "";
+			            var cCnt = data.length;
+			            
+			            if(data.length > 0){
+			                
+			                for(i=0; i<data.length; i++){
+			                    html += "<div>";
+// 			                    html += "<div><table class='table'><h6><strong>"+data[i].writer+"</strong></h6>";
+			                    html += "<div><table class='table'><h6><strong></strong></h6>";
+			                    html += "<tr><td>"+data[i].comment + "</td><td style='text-align: right;'>"+data[i].coupleDate+"</td></tr>";
+			                    html += "</table></div>";
+			                    html += "</div>";
+			                }
+			                
+			            } else {
+			                
+			                html += "<div>";
+			                html += "<div><table class='table'><p><strong>등록된 댓글이 없습니다.</strong></p>";
+			                html += "</table></div>";
+			                html += "</div>";
+			                
+			            }
+			            
+			            $("#cCnt").html(cCnt);
+			            $("#commentList").html(html);
+			            
+			        },
+			        error:function(request,status,error){
+			            
+			       }
+			        
+			    });
+			}
+			 
+			</script>
+
+
     		</div><!--/ row end -->
 		</div><!--/ container end -->
 	</section><!-- Blog details page end -->
