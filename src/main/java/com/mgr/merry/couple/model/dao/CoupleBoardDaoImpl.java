@@ -77,6 +77,16 @@ public class CoupleBoardDaoImpl implements CoupleBoardDao {
 	public List<Map<String, String>> selectCommentList(SqlSessionTemplate session, int coupleNum) {
 		return session.selectList("couple.selectCommentList",coupleNum);
 	}
+
+	@Override
+	public int deleteComment(SqlSessionTemplate session, int no) {
+		return session.delete("couple.deleteComment",no);
+	}
+
+	@Override
+	public int updateComment(SqlSessionTemplate session, Map<String, Object> param) {
+		return session.update("couple.updateComment",param);
+	}
 	
 	
 	
