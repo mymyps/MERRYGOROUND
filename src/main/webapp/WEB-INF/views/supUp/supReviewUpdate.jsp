@@ -13,7 +13,7 @@
 <section id="content">
 	<!-- summernote 폼-->
 	<form name="infoForm"
-		action="${pageContext.request.contextPath }/supUp/supReviewFormEnd.do"
+		action="${pageContext.request.contextPath }/supUp/supReviewUpadeEnd.do"
 		method="post" enctype="multipart/form-data">
 		<div class="container">
 			<input type="hidden" name="loginMemberNum"
@@ -27,7 +27,7 @@
 					<!-- Blog post start -->
 					<div class="post-content">
 						<h1 class="post-title text-center">
-							<a href="blog-item.html">서포터즈 리뷰 수정</a>
+							<a href="blog-item.html">서포터즈 리뷰 작성</a>
 						</h1>
 						<hr>
 						<div class="entry-content">
@@ -57,10 +57,10 @@
 								<div>
 									<div class="infoFormSubFrame">제목</div>
 									<p class="infoForm1">
-										<input type="text" name="supupTitle"/>
+										<input type="text" name="supupTitle" value="${supUpload.SUPUPTITLE }" />
 									</p>
 								</div>
-								<textarea id="summ" name="supupContent" required></textarea>
+								<textarea id="summ" name="supupContent" required><c:out value="${supUpload.SUPUPCONTENT }"/></textarea>
 								
 							</div>
 
@@ -72,8 +72,8 @@
 
 
 		<div>
-			<button class="btn infoFormBtn" type="submit">서포터즈 리뷰 작성</button>
-			<button class="btn infoFormBtn" type="reset">서포터즈 리뷰 작성 취소</button>
+			<button class="btn infoFormBtn" type="submit">서포터즈 리뷰 수정</button>
+			<button class="btn infoFormBtn" type="reset">서포터즈 리뷰 수정 취소</button>
 		</div>
 	</form>
 
@@ -116,7 +116,7 @@
 	$.ajax({
 				data : form_data,
 				type : "post",
-				url : "${path}/summernote_imageUpload_supRv.do",
+				url : "${path}/summernote_imageUpload_supRv_update.do",
 				cache : false,
 				contentType : false,
 				enctype : "multipart/form-data",

@@ -19,6 +19,8 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.mgr.merry.couple.model.vo.Attachment;
 import com.mgr.merry.info.model.service.InfoService;
+import com.mgr.merry.info.model.vo.InfoUploadImg;
+import com.mgr.merry.infoReview.model.vo.InfoReview;
 import com.mgr.merry.search.model.service.SearchService;
 import com.mgr.merry.supLvUpload.model.service.SupLvService;
 import com.mgr.merry.supUpload.model.service.SupUploadService;
@@ -112,7 +114,7 @@ public class SupUploadController {
 	
 	
 	//summernote 이미지파일 저장후 게시판에 쏴주기
-	@RequestMapping(value = "summernote_imageUpload_supLv.do", method=RequestMethod.POST)
+	@RequestMapping(value = "summernote_imageUpload_supRv.do", method=RequestMethod.POST)
 	public void uploadSummernoteImage(MultipartFile image, HttpSession session, HttpServletResponse res) throws Exception{
 		String savename = image.getOriginalFilename();
 		
@@ -180,6 +182,57 @@ public class SupUploadController {
 //		}
 //	
 //	}
+	
+	@RequestMapping("supUp/supReviewUpdate.do")
+	public ModelAndView supReviewUpdate(int infoupNum, @RequestParam Map<String, String> param) {
+		imgList.clear();
+		ModelAndView mv = new ModelAndView();
+		
+		System.out.println("param :"+param);
+		
+		Map<String, String> supUpload= service.selectSupUpload(infoupNum);
+		Map<String, String> sup = iservice.selectSup(param);
+		Map<String, String> info = iservice.selectInfo(infoupNum);
+		InfoUploadImg infoImg = iservice.selectInfoImg(infoupNum);
+//		SupUploadImg supUploadImg = service.selectSupUploadImg(infoupNum);
+		
+		mv.addObject("supUpload", supUpload);
+		mv.addObject("sup", sup);
+//		mv.addObject("supUploadImg", supUploadImg);
+		mv.addObject("info", info);
+		mv.addObject("infoImg", infoImg);
+		mv.setViewName("/supUp/supReviewUpdate");
+		
+		return mv;
+	}
+	
+	@RequestMapping("supUp/supReviewUpadeEnd.do")
+	public ModelAndView supReviewUpadeEnd(@RequestParam Map<String, String> param) {
+		ModelAndView mv = new ModelAndView();
+		
+		int result = 0;
+		int imgResult = 0;
+		
+		if(imgList.size()>0) {
+			try {
+				imgResult = service.insertSupUploadImg(param,imgList);
+			}catch(Exception e) {
+				e.printStackTrace();
+			}
+		}
 
+		result = service.insertSupReview(param);
+		
+		String msg = "";
+
+		if (result > 0) {
+			msg = "서포터즈 리뷰가 등록되었습니다.";
+		} else {
+			msg = "서포터즈 리뷰 등록 실패";
+		}
+		mv.addObject("msg", msg);
+		mv.setViewName("common/msg");
+		return mv;
+	}
 	
 }
