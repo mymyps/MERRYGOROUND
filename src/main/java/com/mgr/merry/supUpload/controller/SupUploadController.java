@@ -196,6 +196,7 @@ public class SupUploadController {
 		System.out.println("param :"+param);
 		
 		Map<String, String> supUpload= service.selectSupUpload(infoupNum);
+		
 		Map<String, String> sup = iservice.selectSup(param);
 		Map<String, String> info = iservice.selectInfo(infoupNum);
 		InfoUploadImg infoImg = iservice.selectInfoImg(infoupNum);
@@ -220,6 +221,8 @@ public class SupUploadController {
 		int result = 0;
 		int imgResult = 0;
 		
+		result = service.updateSupReview(param);
+		
 		if(imgList.size()>0) {
 			try {
 				imgResult = service.insertSupUploadImgNum(param,imgList);
@@ -228,7 +231,7 @@ public class SupUploadController {
 			}
 		}
 
-		result = service.updateSupReview(param);
+		
 		
 		String msg = "";
 
@@ -242,4 +245,11 @@ public class SupUploadController {
 		return mv;
 	}
 	
+	@RequestMapping("/supUp/supReviewStatus0")
+	public String infoStatus0(int infoupNum) {
+		int result = 0;
+		result = service.supRvStatus0(infoupNum);
+		
+		return "/"; // 나중에 경로 바꿀것
+	}
 }

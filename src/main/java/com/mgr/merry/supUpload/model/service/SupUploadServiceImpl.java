@@ -116,6 +116,11 @@ public class SupUploadServiceImpl implements SupUploadService {
 		return result;
 	}
 
+	@Override
+	public int supRvStatus0(int infoupNum) {
+		return dao.supRvStatus0(session, infoupNum);
+	}
+
 
 
 }

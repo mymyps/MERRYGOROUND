@@ -20,6 +20,7 @@
 				value="${loginMember.memberNum}">
 			<input type="hidden" name="id" value="${loginMember.id }"/>
 			<input type="hidden" name="supNum" value="${sup.SUPNUM }"/>
+			<input type="hidden" name="supupNum" value="${supUpload.SUPUPNUM}"/>
 
 			<div class="row">
 				<!-- Blog start -->
@@ -27,7 +28,7 @@
 					<!-- Blog post start -->
 					<div class="post-content">
 						<h1 class="post-title text-center">
-							<a href="blog-item.html">서포터즈 리뷰 작성</a>
+							<a href="blog-item.html">서포터즈 리뷰 수정</a>
 						</h1>
 						<hr>
 						<div class="entry-content">

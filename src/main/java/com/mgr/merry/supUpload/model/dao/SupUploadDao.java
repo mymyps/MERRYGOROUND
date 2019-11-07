@@ -25,4 +25,6 @@ public interface SupUploadDao {
 
 	int insertSupUploadImgNum(SqlSessionTemplate session, Map<String, String> param);
 
+	int supRvStatus0(SqlSessionTemplate session, int infoupNum);
+
 }
