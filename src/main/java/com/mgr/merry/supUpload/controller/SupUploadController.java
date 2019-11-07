@@ -117,7 +117,7 @@ public class SupUploadController {
 		String savename = image.getOriginalFilename();
 		
 		System.out.println(image.getOriginalFilename());
-		String path=session.getServletContext().getRealPath("/resources/images/supLv");
+		String path=session.getServletContext().getRealPath("/resources/images/supRv");
 		File f=new File(path);
 		if(!f.exists()) f.mkdirs();
 		
