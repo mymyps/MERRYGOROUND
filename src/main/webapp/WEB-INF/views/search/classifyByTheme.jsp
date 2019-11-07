@@ -28,7 +28,7 @@
 		<div class="row">
 			<div class="landing-tab clearfix">
 			 <ul class="nav nav-tabs nav-stacked col-md-3 col-sm-5">
-			              <li>
+			              <li <c:if test="${1 eq param.themaNumRef}">class="active"</c:if>>
 			                  <a class="animated fadeIn" data-toggle="tab">
 			                      <span class="tab-icon"><i class="fa fa-info"></i></span>
 			                      <div class="tab-info">
@@ -36,7 +36,7 @@
 			                    </div>
 			                  </a>
 			              </li>
-		               <li>
+		               <li <c:if test="${7 eq param.themaNumRef}">class="active"</c:if>>
                            <a class="animated fadeIn" data-toggle="tab">
 		                       <span class="tab-icon"><i class="fa fa-briefcase"></i></span>
 		                       <div class="tab-info">
@@ -44,7 +44,7 @@
 		                      </div>
 		                   </a>
 		              </li>
-			             <li>
+		              <li <c:if test="${13 eq param.themaNumRef}">class="active"</c:if>>
 		                  <a class="animated fadeIn" data-toggle="tab">
 		                      <span class="tab-icon"><i class="fa fa-android"></i></span>
 		                      <div class="tab-info">
@@ -110,8 +110,8 @@
                     		<div class="row" id="themarow2">
 						<div class="col-md-8 ts-padding2 themaContent">
 							<h3 style="margin-top: -2px;">
-<%-- 							<a href="${path}/info/infoView?infoupNum=${list.infoupNum}" id="themenameBrown">${list.infoUpTitle}</a> --%>
-                            <c:out value='${list.infoupTitle}'/>
+							<a href="${pageContext.request.contextPath}/info/infoView.do?infoupNum=${list.infoupNum}&id=${loginMember.id}" style="color:#5a554f !important;"><c:out value='${list.infoupTitle}'/></a>
+<%--                             <c:out value='${list.infoupTitle}'/> --%>
 							</h3>
 							<p>이용시간 : <c:out value='${list.infoupTime}'/> / 전화번호 : <c:out value='${list.infoupPhone}'/></p>
 							<hr style="height: 0.5px; background-color: rgb(214, 206, 194);" >

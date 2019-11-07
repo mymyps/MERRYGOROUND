@@ -73,7 +73,6 @@
 							Or Sign Up Using
 						</span>
 					</div>
-
 				</form>
 			</div>
 		</div>

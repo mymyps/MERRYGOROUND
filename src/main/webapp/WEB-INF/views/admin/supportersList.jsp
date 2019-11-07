@@ -55,7 +55,6 @@
                                                 <th>연락처</th>
                                                 <th>이메일</th>
                                                 <th>가입일</th>
-                                                
                                             </tr>
                                         </thead>
                                         <tbody>
@@ -94,12 +93,8 @@
             <footer class="site-footer">
                 
             </footer>
-        
         </div><!-- /#right-panel -->
-
-
-
-
+        
 
 
     </div>

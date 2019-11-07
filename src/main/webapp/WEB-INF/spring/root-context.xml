@@ -13,9 +13,6 @@
 
 	<!-- db연결에 필요한 데이터를 BasicDataSource객체에 넣음 -->
 
-
-
-
 	<bean destroy-method="close"
 		class="org.apache.commons.dbcp.BasicDataSource" id="realDataSource">
 		<property value="oracle.jdbc.driver.OracleDriver"
@@ -27,7 +24,6 @@
 	</bean>
 
 	<!-- 로그를 출력하기 위한 라이브러리 추가 -->
-
 
 	<bean class="net.sf.log4jdbc.Log4jdbcProxyDataSource"
 		id="dataSource">
@@ -41,7 +37,6 @@
 	</bean>
 
 	<!-- Mybatis에서 SqlSession객체를 생성하는 factoryBean을 springbean으로 등록 -->
-
 	<bean class="org.mybatis.spring.SqlSessionFactoryBean"
 		id="sqlSessionFactoryBean">
 		<property name="dataSource" ref="dataSource" />
@@ -52,7 +47,6 @@
 	</bean>
 
 	<!-- SessionTemplate를 이용한 springbean으로 등록하여 활용 -->
-
 	<bean class="org.mybatis.spring.SqlSessionTemplate"
 		id="sqlSessionTemplate">
 

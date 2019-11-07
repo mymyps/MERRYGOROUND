@@ -71,7 +71,7 @@ public class MypageController {
 		UUID uuid = UUID.randomUUID();
 		String saveName = uuid + "_" + upFile.getOriginalFilename();
 		System.out.println("saveName: {}" + saveName);
-		// 저장할 File 객체를 생성(껍데기 파일)ㄴ
+		// 저장할 File 객체를 생성(껍데기 파일)
 		String saveFile = request.getSession().getServletContext().getRealPath("/resources/images/member");
 		// 파일 실제 저장하기
 		try {

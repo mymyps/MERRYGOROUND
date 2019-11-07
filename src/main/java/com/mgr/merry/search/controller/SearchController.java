@@ -73,7 +73,7 @@ public class SearchController {
 		logger.debug("localNum : " + localNum);
 		logger.debug("컨트롤러에서 지역 리스트 : " + list);
 
-		return "search/classifyByLoc2";
+		return "search/classifyByLoc";
 
 	}
 
@@ -81,7 +81,7 @@ public class SearchController {
 
 	public String mapSerch() {
 
-		return "search/placeOnAMap3";
+		return "search/placeOnAMap";
 	}
 	
 	

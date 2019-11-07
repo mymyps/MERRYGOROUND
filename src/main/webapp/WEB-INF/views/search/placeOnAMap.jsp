@@ -1,328 +1,409 @@
-<%@ page language="java" contentType="text/html;charset=utf-8" pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html;charset=utf-8"
+	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
-<c:set var = "path" value="${pageContext.request.contextPath}"/>
+<c:set var="path" value="${pageContext.request.contextPath}" />
+<jsp:include page="/WEB-INF/views/common/header.jsp">
+	<jsp:param name="pageTitle" value="지도로 찾기" />
+</jsp:include>
 
-<!DOCTYPE html>
-<html lang="ko">
 
-<head>
-<meta charset="utf-8">
-<title>Merry-go-round</title>
-<meta name="description" content="">
-<meta name="author" content="">
+<style>
+.map_wrap, .map_wrap * {margin:0;padding:0;font-family:'Malgun Gothic',dotum,'돋움',sans-serif;font-size:12px;}
+.map_wrap a, .map_wrap a:hover, .map_wrap a:active{color:#000;text-decoration: none;}
+.map_wrap {position:relative;width:100%;height:500px;}
+#menu_wrap {position:absolute;top:0;left:0;bottom:0;width:250px;margin:10px 0 30px 10px;padding:5px;overflow-y:auto;background:rgba(255, 255, 255, 0.8);z-index: 1;font-size:12px;border-radius: 10px;}
+.bg_white {background:#fff;}
+#menu_wrap hr {display: block; height: 1px;border: 0; border-top: 2px solid lightgray;margin:3px 0; margin-top:10px;}
+#menu_wrap .option{text-align: center;}
+#menu_wrap .option p {margin:10px 0;}  
+#menu_wrap .option button {margin-left:5px;}
+#placesList li {list-style: none;}
+#placesList .item {position:relative;border-bottom:1px solid #888;overflow: hidden;cursor: pointer;min-height: 65px;}
+#placesList .item span {display: block;margin-top:4px;}
+#placesList .item h5, #placesList .item .info {text-overflow: ellipsis;overflow: hidden;white-space: nowrap;}
+#placesList .item .info{padding:10px 0 10px 55px;}
+#placesList .info .gray {color:#8a8a8a;}
+#placesList .info .jibun {padding-left:26px;background:url(http://t1.daumcdn.net/localimg/localimages/07/mapapidoc/places_jibun.png) no-repeat;}
+#placesList .info .tel {color:#009900;}
+#placesList .item .markerbg {float:left;position:absolute;width:36px; height:37px;margin:10px 0 0 10px;background:url(http://t1.daumcdn.net/localimg/localimages/07/mapapidoc/marker_number_blue.png) no-repeat;}
+#placesList .item .marker_1 {background-position: 0 -10px;}
+#placesList .item .marker_2 {background-position: 0 -56px;}
+#placesList .item .marker_3 {background-position: 0 -102px}
+#placesList .item .marker_4 {background-position: 0 -148px;}
+#placesList .item .marker_5 {background-position: 0 -194px;}
+#placesList .item .marker_6 {background-position: 0 -240px;}
+#placesList .item .marker_7 {background-position: 0 -286px;}
+#placesList .item .marker_8 {background-position: 0 -332px;}
+#placesList .item .marker_9 {background-position: 0 -378px;}
+#placesList .item .marker_10 {background-position: 0 -423px;}
+#placesList .item .marker_11 {background-position: 0 -470px;}
+#placesList .item .marker_12 {background-position: 0 -516px;}
+#placesList .item .marker_13 {background-position: 0 -562px;}
+#placesList .item .marker_14 {background-position: 0 -608px;}
+#placesList .item .marker_15 {background-position: 0 -654px;}
+#pagination {margin:10px auto;text-align: center;}
+#pagination a {display:inline-block;margin-right:10px;}
+#pagination .on {font-weight: bold; cursor: default;color:#777;}
+</style>
+<section style="padding: 0px 0;">
 
-    <!--Tmap API관련   -->
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-    <!--appKey = 어쩌구 -> Tmap사이트에서 받은 고유키 입니당-->
-    <script src="https://api2.sktelecom.com/tmap/js?version=1&format=javascript&appKey=9b9bcfec-7c62-4c75-8854-04b5c8e68f51"></script>
+<!--맵 div-->
+<!-- <div class="map_wrap"> -->
+
+
+<div id="map" style="width: 100%; height: 650px; position: relative; overflow: hidden;"></div>
+	<!--왼쪽에 키워드검색&검색결과 하얀 박스 -->
+	<div id="menu_wrap" class="bg_white">
+        <div class="option">
+        <h3>키워드 검색</h3>
+            <div style="margin-top:10px;">
+               <input type="text" value="" placeholder=" ex)강남역" id="keyword" size="20">
+	   		   <button id="submit" class="btn" style="background-color:#EB9579;color:white;height:29.5px;margin-left:-3px;">검색</button>
+            </div>
+        </div>
+        <hr>
+        <ul id="placesList"></ul>
+        <div id="pagination"></div>
+    </div><!--왼쪽에 키워드검색&검색결과 하얀 박스 끝 -->
+<!--     </div> -->
+<!--     map_wrap끝 -->
     
-    <script type="text/javascript">
-
- function initTmap(){
-     var map = new Tmap.Map({
-         div:'map_div',  // 결과 지도를 표시할 곳 입니당
-         width : "50%",  // 가로와 세로 사이즈는 픽셀로 적을 수도 있고
-         height : "50%", // 퍼센트로 적을 수도 있어용 (tmap홈페이지 예제는 픽셀로 되어 있음!!!!!)
-     });
-   
-     // 경로 탐색 출발지점과 도착 지점의 좌표
-     // 구글 지도에서 나오는 좌표의 x, y를 바꾸면 된다.
-     // 구글 지도와 x,y 좌표 반대로 적어야함..........ㅎ 
-     var startX = 127.104997;
-     var startY = 37.220800;
-     var endX = 127.028131;
-     var endY = 37.239072;
-     var passList = null;
-     var prtcl;
-     var headers = {};
-
-     headers["appKey"]="9b9bcfec-7c62-4c75-8854-04b5c8e68f51"; //Tmap홈페이지에서 받은 인증키!!
-   
-     $.ajax({
-         method:"POST",
-         headers : headers,
-         url:"https://api2.sktelecom.com/tmap/routes?version=1&format=xml",
-         async:false,
-         data:{
-             startX : startX,
-             startY : startY,
-             endX : endX,
-             endY : endY,
-             passList : passList,
-             reqCoordType : "WGS84GEO",
-             resCoordType : "EPSG3857",
-             angle : "172",
-             searchOption : "0",
-             trafficInfo : "Y" //교통정보 표출 옵션입니당!
-         },
-
-         success:function(response){ //API가 제대로 작동할 경우 실행될 코드
-             prtcl = response;
-
-             // 결과 출력 부분 - 여기는 잘 모르겠음.
-             var innerHtml ="";
-             var prtclString = new XMLSerializer().serializeToString(prtcl);//xml to String
-             xmlDoc = $.parseXML( prtclString ),
-             $xml = $( xmlDoc ),
-             $intRate = $xml.find("Document");
-
-             var tDistance = " 총 거리 : "+($intRate[0].getElementsByTagName("tmap:totalDistance")[0].childNodes[0].nodeValue/1000).toFixed(1)+"km,";
-             var tTime = " 총 시간 : "+($intRate[0].getElementsByTagName("tmap:totalTime")[0].childNodes[0].nodeValue/60).toFixed(0)+"분,";
-             var tFare = " 총 요금 : "+$intRate[0].getElementsByTagName("tmap:totalFare")[0].childNodes[0].nodeValue+"원,";
-             var taxiFare = " 예상 택시 요금 : "+$intRate[0].getElementsByTagName("tmap:taxiFare")[0].childNodes[0].nodeValue+"원";
-
-             $("#result").text(tDistance+tTime+tFare+taxiFare);
-
-             // 실시간 교통정보 추가
-             var trafficColors = {
-                 extractStyles:true,
-                 /* 실제 교통정보가 표출되면 아래와 같은 Color로 Line이 생성됩니다. */
-                 trafficDefaultColor:"#000000", //Default
-                 trafficType1Color:"#009900", //원활
-                 trafficType2Color:"#8E8111", //지체
-                 trafficType3Color:"#FF0000", //정체
-             };    
-             var kmlForm = new Tmap.Format.KML(trafficColors).readTraffic(prtcl);
-             routeLayer = new Tmap.Layer.Vector("vectorLayerID"); //백터 레이어 생성
-             routeLayer.addFeatures(kmlForm); //교통정보를 백터 레이어에 추가   
-
-             map.addLayer(routeLayer); // 지도에 백터 레이어 추가
-
-             // 경로탐색 결과 반경만큼 지도 레벨 조정
-             map.zoomToExtent(routeLayer.getDataExtent());
-         },
-         error:function(request,status,error){ // API가 제대로 작동하지 않을 경우
-         console.log("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
-         }
-     });
- }
- </script>
- 
-  <script type="text/javascript">
-			function initTmap(){
-				var map = new Tmapv2.Map("map_div",  
-				{
-					center: new Tmapv2.LatLng(37.566481622437934,126.98502302169841), // 지도 초기 좌표
-					width: "890px", 
-					height: "400px",
-					zoom: 15
-				});
-			} 
-		</script>
 
 
 
-	<!-- Mobile Specific Metas
-	================================================== -->
-	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<p><em>지도를 클릭해주세요!</em></p> 
+<div id="clickLatlng"></div>
+<p id="result"></p>
+<p id="result1"></p>
+<p id="result2"></p>
 
-	<!-- Favicons
-	================================================== -->
-	<script defer src="https://use.fontawesome.com/releases/v5.0.8/js/solid.js" integrity="sha384-+Ga2s7YBbhOD6nie0DzrZpJes+b2K1xkpKxTFFcx59QmVPaSA8c7pycsNaFwUK6l" crossorigin="anonymous"></script>
-    <script defer src="https://use.fontawesome.com/releases/v5.0.8/js/fontawesome.js" integrity="sha384-7ox8Q2yzO/uWircfojVuCQOZl+ZZBg2D2J5nkpLqzH1HY0C1dHlTKIbpRz/LG23c" crossorigin="anonymous"></script>
+<script type="text/javascript" src="http://dapi.kakao.com/v2/maps/sdk.js?appkey=a70d9f47dd92a2c810ce5d8c69f6b406"></script>
+<script>
+
+/* 지도~*/
+	var markers = [];
+	var mapContainer = document.getElementById('map'), // 지도를 표시할 div 
+	mapOption = {
+		center : new kakao.maps.LatLng(37.566826, 126.9786567), // 지도의 중심좌표
+		level : 3 // 지도의 확대 레벨
+	};
 	
-	<link rel="icon" href="${pageContext.request.contextPath }/resources/img/favicon/favicon-32x32.png" type="image/x-icon" />
-	<link rel="apple-touch-icon-precomposed" sizes="144x144" href="${pageContext.request.contextPath }/resources/img/favicon/favicon-144x144.png">
-	<link rel="apple-touch-icon-precomposed" sizes="72x72" href="${pageContext.request.contextPath }/resources/img/favicon/favicon-72x72.png">
-	<link rel="apple-touch-icon-precomposed" href="${pageContext.request.contextPath }/resources/img/favicon/favicon-54x54.png">
+	// 지도를 생성합니다    
+	var map = new kakao.maps.Map(mapContainer, mapOption);
 
+	//지도 확대 축소를 제어할 수 있는  줌 컨트롤을 생성합니다
+	var zoomControl = new kakao.maps.ZoomControl();
+	map.addControl(zoomControl, kakao.maps.ControlPosition.RIGHT);
 	
-<!-- 	<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" -->
-<!-- 	integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" -->
-<!-- 	crossorigin="anonymous"></script> -->
-	
-	<!-- Javascript Files ================================================== -->
 
-	<!-- initialize jQuery Library -->
-	<script type="text/javascript" src="${pageContext.request.contextPath }/resources/js/jquery.js"></script>
-	<!-- Bootstrap jQuery -->
-	<script type="text/javascript" src="${pageContext.request.contextPath }/resources/js/bootstrap.min.js"></script>
-	<!-- Style Switcher -->
-	<script type="text/javascript" src="${pageContext.request.contextPath }/resources/js/style-switcher.js"></script>
-	<!-- Owl Carousel -->
-	<script type="text/javascript" src="${pageContext.request.contextPath }/resources/js/owl.carousel.js"></script>
-	<!-- PrettyPhoto -->
-	<script type="text/javascript" src="${pageContext.request.contextPath }/resources/js/jquery.prettyPhoto.js"></script>
-	<!-- Bxslider -->
-	<script type="text/javascript" src="${pageContext.request.contextPath }/resources/js/jquery.flexslider.js"></script>
-	<!-- CD Hero slider -->
-	<script type="text/javascript" src="${pageContext.request.contextPath }/resources/js/cd-hero.js"></script>
-	<!-- Isotope -->
-	<script type="text/javascript" src="${pageContext.request.contextPath }/resources/js/isotope.js"></script>
-	<script type="text/javascript" src="${pageContext.request.contextPath }/resources/js/ini.isotope.js"></script>
-	<!-- Wow Animation -->
-	<script type="text/javascript" src="${pageContext.request.contextPath }/resources/js/wow.min.js"></script>
-	<!-- SmoothScroll -->
-	<script type="text/javascript" src="${pageContext.request.contextPath }/resources/js/smoothscroll.js"></script>
-	<!-- Eeasing -->
-	<script type="text/javascript" src="${pageContext.request.contextPath }/resources/js/jquery.easing.1.3.js"></script>
-	<!-- Counter -->
-	<script type="text/javascript" src="${pageContext.request.contextPath }/resources/js/jquery.counterup.min.js"></script>
-	<!-- Waypoints -->
-	<script type="text/javascript" src="${pageContext.request.contextPath }/resources/js/waypoints.min.js"></script>
-	<!-- Template custom -->
-	<script type="text/javascript" src="${pageContext.request.contextPath }/resources/js/custom.js"></script>
-	
-	
-	<!-- Body inner end 요기 div 쪼끔 문제있음 -->
-	
-	<!-- CSS
-	================================================== -->
+	// 지도를 클릭한 위치에 표출할 마커입니다
+	var marker = new kakao.maps.Marker({ 
+	    // 지도 중심좌표에 마커를 생성합니다 
+	    position: map.getCenter() 
+	}); 
+	// 지도에 마커를 표시합니다
+	marker.setMap(map);
 
-	<!-- Bootstrap -->
-	<link rel="stylesheet" href="${pageContext.request.contextPath }/resources/css/bootstrap.min.css">
-	<!-- Template styles-->
-	<link rel="stylesheet" href="${pageContext.request.contextPath }/resources/css/style.css">
-	<!-- Responsive styles-->
-	<link rel="stylesheet" href="${pageContext.request.contextPath }/resources/css/responsive.css">
-	<!-- FontAwesome -->
-	<link rel="stylesheet" href="${pageContext.request.contextPath }/resources/css/font-awesome.min.css">
-	<link rel="stylesheet" href="${pageContext.request.contextPath }/resources/css/font-awesome.css">
-	<!-- Animation -->
-	<link rel="stylesheet" href="${pageContext.request.contextPath }/resources/css/animate.css">
-	<!-- Prettyphoto -->
-	<link rel="stylesheet" href="${pageContext.request.contextPath }/resources/css/prettyPhoto.css">
-	<!-- Owl Carousel -->
-	<link rel="stylesheet" href="${pageContext.request.contextPath }/resources/css/owl.carousel.css">
-	<link rel="stylesheet" href="${pageContext.request.contextPath }/resources/css/owl.theme.css">
-	<!-- Flexslider -->
-	<link rel="stylesheet" href="${pageContext.request.contextPath }/resources/css/flexslider.css">
-	<!-- Flexslider -->
-	<link rel="stylesheet" href="${pageContext.request.contextPath }/resources/css/cd-hero.css">
-	<!-- Style Swicther -->
-	<link id="style-switch" href="${pageContext.request.contextPath }/resources/css/presets/preset3.css" media="screen" rel="stylesheet" type="text/css">
-</head>
+	// 지도에 클릭 이벤트를 등록합니다
+	// 지도를 클릭하면 마지막 파라미터로 넘어온 함수를 호출합니다
+	kakao.maps.event.addListener(map, 'click', function(mouseEvent) {        
+	    
+	    // 클릭한 위도, 경도 정보를 가져옵니다 
+	    var latlng = mouseEvent.latLng; 
+	    
+	    // 마커 위치를 클릭한 위치로 옮깁니다
+	    marker.setPosition(latlng);
+	    
+	    var message = '클릭한 위치의 위도는 ' + latlng.getLat() + ' 이고, ';
+	    message += '경도는 ' + latlng.getLng() + ' 입니다';
+	    
+	    var resultDiv = document.getElementById('clickLatlng'); 
+	    resultDiv.innerHTML = message;
+	    
+	});
 
-<body onload="initTmap()">
-	<div class="body-inner">
-		<!-- Header start -->
-		<header id="header" class="navbar-fixed-top header" role="banner">
-			<div class="container">
-				<div class="row">
-					<!-- Logo start -->
-					<div class="navbar-header">
-						<button type="button" class="navbar-toggle" data-toggle="collapse"
-							data-target=".navbar-collapse">
-							<span class="sr-only">Toggle navigation</span>
-							<span class="icon-bar"></span>
-							<span class="icon-bar"></span>
-							<span class="icon-bar"></span>
-						</button>
-						<!-- 로고 이미지 들어갈 자리  -->
-						<div class="navbar-brand navbar-bg">
-							<a href="${pageContext.request.contextPath }">
-								<img class=" img-responsive" src="${pageContext.request.contextPath }/resources/images/logo.png" alt="logo">
-							</a>
-						</div>
-					</div>
-					<!--/ Logo end -->
-					
-					<nav class="collapse navbar-collapse clearfix" role="navigation">
-						<ul class="nav navbar-nav navbar-right">
-							
+/* 접속위치를 받아오기 */
+// HTML5의 geolocation으로 사용할 수 있는지 확인합니다 
+if (navigator.geolocation) {
 
-							<!-- 마이페이지(로그인 후 이용가능) -->
-							<li class="dropdown active">
-								<a href="${pageContext.request.contextPath }" class="dropdown-toggle" data-toggle="dropdown">Login <i
-										class="fa fa-angle-down"></i></a>
-								<div class="dropdown-menu">
-									<ul>
-										<li><a href="${pageContext.request.contextPath }">로그인</a></li>
-										<li><a href="${pageContext.request.contextPath }">회원가입</a></li>
-										<li><a href="${pageContext.request.contextPath }">아이디찾기</a></li>
-										<li><a href="${pageContext.request.contextPath }">비밀번호찾기</a></li>
-									</ul>
-								</div>
-							</li>
-							<li class="dropdown">
-								<a href="${pageContext.request.contextPath }" class="dropdown-toggle" data-toggle="dropdown">Mypage <i
-										class="fa fa-angle-down"></i></a>
-								<div class="dropdown-menu">
-									<ul>
-										<li><a href="portfolio-classic.html">Portfolio Classic</a></li>
-										<li><a href="portfolio-static.html">Portfolio Static</a></li>
-										<li><a href="portfolio-item.html">Portfolio Single</a></li>
-									</ul>
-								</div>
-							</li>
-							<li class="dropdown">
-								<a href="#" class="dropdown-toggle" data-toggle="dropdown">Admin <i
-										class="fa fa-angle-down"></i></a>
-								<div class="dropdown-menu">
-									<ul>
-										<li><a href="team.html">Our Team</a></li>
-										<li><a href="about2.html">About Us - 2</a></li>
-										<li><a href="service2.html">Services - 2</a></li>
-										<li><a href="service-single.html">Services Single</a></li>
-										<li><a href="pricing.html">Pricing Table</a></li>
-										<li><a href="404.html">404 Page</a></li>
-									</ul>
-								</div>
-							</li>
-							<li class="dropdown">
-								<a href="#" class="dropdown-toggle" data-toggle="dropdown">Supporters <i
-										class="fa fa-angle-down"></i></a>
-								<div class="dropdown-menu">
-									<ul>
-										<li><a href="blog-rightside.html">Blog with Sidebar</a></li>
-										<li><a href="blog-item.html">Blog Single</a></li>
-									</ul>
-								</div>
-							</li>
-							<li class="dropdown">
-								<a href="#" class="dropdown-toggle" data-toggle="dropdown">CouplePage <i
-										class="fa fa-angle-down"></i></a>
-								<div class="dropdown-menu">
-									<ul>
-										<li><a href="typography.html">Typography</a></li>
-										<li><a href="elements.html">Elements</a></li>
-									</ul>
-								</div>
-							</li>
-							<li><a href="${pageContext.request.contextPath}">Contact</a></li>
-						</ul>
-					</nav>
-					<!--/ Navigation end -->
-				</div>
-				<!--/ Row end -->
-			</div>
-			<!--/ Container end -->
-		</header>
-		<!--헤더 끝!!!!!!!!!!!!! -->
+	// GeoLocation을 이용해서 접속 위치를 얻어옵니다
+	navigator.geolocation.getCurrentPosition(function(position) {
 
-       
-        <!--공통 배너  -->
-        <div id="ban" class="ban">
-		<div id="banner-area">
-			<img src="${pageContext.request.contextPath }/resources/images/banner/banner4.jpg" />
-			<div class="parallax-overlay"></div>
+		var lat = position.coords.latitude, // 위도
+		lon = position.coords.longitude; // 경도
+
+		var locPosition = new kakao.maps.LatLng(lat, lon), // 마커가 표시될 위치를 geolocation으로 얻어온 좌표로 생성합니다
+		message = '<div style="padding:5px;">너의위치는 여기란다</div>'; // 인포윈도우에 표시될 내용입니다
 		
-				<div class="banner-title-content">
-					<div class="text-center">
-						<h2>${param.pageTitle }</h2>
-						
-					  </div>
-				  </div>
-		</div>
-	</div>
-	</div>
+		var resultDiv1 = document.getElementById('result1');
+		var resultDiv2 = document.getElementById('result2');
+		
+		resultDiv1.innerHTML = lat;
+		resultDiv2.innerHTML = lon;
+
+		// 마커와 인포윈도우를 표시합니다
+		displayMarker(locPosition, message);
+
+	});
+
+} else { // HTML5의 GeoLocation을 사용할 수 없을때 마커 표시 위치와 인포윈도우 내용을 설정합니다
+
+	var locPosition = new kakao.maps.LatLng(33.450701, 126.570667), message = 'geolocation을 사용할수 없어요..'
+
+	displayMarker(locPosition, message);
+}
+//지도에 마커와 인포윈도우를 표시하는 함수입니다
+function displayMarker(locPosition, message) {
+
+	// 마커를 생성합니다
+	var marker = new kakao.maps.Marker({
+		map : map,
+		position : locPosition
+	});
+
+	var iwContent = message, // 인포윈도우에 표시할 내용
+	iwRemoveable = true;
+
+	// 인포윈도우를 생성합니다
+	var infowindow = new kakao.maps.InfoWindow({
+		content : iwContent,
+		removable : iwRemoveable
+	});
+
+	// 인포윈도우를 마커위에 표시합니다 
+	infowindow.open(map, marker);
+
+	// 지도 중심좌표를 접속위치로 변경합니다
+	markers.push(marker);
+	map.setCenter(locPosition);
+}
+
+/* 이동된 위치 중심좌표 반환하기 */
+// 마우스 드래그로 지도 이동이 완료되었을 때 마지막 파라미터로 넘어온 함수를 호출하도록 이벤트를 등록합니다
+kakao.maps.event.addListener(map, 'dragend', function() {
+
+	// 지도 중심좌표를 얻어옵니다 
+	var latlng = map.getCenter();
+
+	var y = latlng.getLat();
+	var x = latlng.getLng();
+
+	/* var message = '변경된 지도 중심좌표는 ' + latlng.getLat() + ' 이고, ';
+	message += '경도는 ' + latlng.getLng() + ' 입니다'; */
 	
- 
- <section>
- 
- <div id="map_div">
- 
- 
- </div>
- 
- <p id="result">요기는 Tmap조회 결과 들어갈 공간이에요!!!</p>
- 
- </section>
+	var resultDiv1 = document.getElementById('result1');
+	var resultDiv2 = document.getElementById('result2');
+
+	resultDiv1.innerHTML = y;
+	resultDiv2.innerHTML = x;
+});
 
 
+// 지도 위에 표시되고 있는 마커를 모두 제거합니다
+function removeMarker() {
+	for (var i = 0; i < markers.length; i++) {
+		markers[i].setMap(null);
+	}
+	markers = [];
+}
+
+// 검색 결과 목록이나 마커를 클릭했을 때 장소명을 표출할 인포윈도우를 생성합니다
+var infowindow = new kakao.maps.InfoWindow({
+	zIndex : 1
+});
+
+/* 검색 버튼 클릭시!! 로직*/
+$('#submit').click(function(){
+	
+	var keyword=$('#keyword').val();
+	var y=$('#result1').html();
+	console.log(y);
+	var x=$('#result2').html();
+	
+	$.ajax({
+		url:"<%=request.getContextPath()%>/search/mapSearch",
+		type : "post",
+		data : {
+			keyword : keyword,
+			y : y,
+			x : x
+		},
+		dataType : "JSON",
+		success : function(data) {
+			
+			removeMarker();
+
+			var positions = data;
+			var pagination=Math.ceil(positions.length/5+positions.length%5*0.01);
+			var cPage=1;
+			if(positions.length==0){
+				alert('반경 70km 이내에 검색결과가 없습니다.');
+			}else{
+				displayPlaces(data,cPage,pagination);
+				
+				displayPagination(data,cPage,pagination);
+			}
+			
+		},
+
+		error : function(data) {
+		}
+
+	})
+})
+function displayPlaces(places,cPage,pagination){
+	
+	var listEl = document.getElementById('placesList'), 
+    menuEl = document.getElementById('menu_wrap'),
+    fragment = document.createDocumentFragment(), 
+    bounds = new kakao.maps.LatLngBounds(), 
+    listStr = '';
+	
+	// 검색 결과 목록에 추가된 항목들을 제거합니다
+    removeAllChildNods(listEl);
+
+    // 지도에 표시되고 있는 마커를 제거합니다
+    removeMarker();
+    
+    
+    for ( var i=0; i<places.length; i++ ) {
+    	console.log('여기 들어오니?');
+
+        // 마커를 생성하고 지도에 표시합니다
+        var placePosition = new kakao.maps.LatLng(places[i].loc_y, places[i].loc_x);
+        var startNo=(cPage-1)*5+1;
+        var endNo=startNo+4;
+         if(i>=startNo-1 && i<=endNo-1){
+        	 var itemEl=getListItem(i, places[i]);
+        } 
+          // 검색 결과 항목 Element를 생성합니다
+
+         /*    var coords = new kakao.maps.LatLng(places[0].loc_y,
+            		places[0].loc_x);  */
+					
+		    var marker = new kakao.maps.Marker({
+		        map: map, // 마커를 표시할 지도
+		        position: placePosition // 마커를 표시할 위치
+		    });
+		    marker.setMap(map);
+		    markers.push(marker); 
+		    
+		 // 검색된 장소 위치를 기준으로 지도 범위를 재설정하기위해
+	        // LatLngBounds 객체에 좌표를 추가합니다
+	        bounds.extend(placePosition);
+		    
+		   (function(marker,title,addr,tel,pCode,placePosition){
+			   kakao.maps.event.addListener(marker, 'click',
+						function() {
+				   var content = '<div style="padding:5px;z-index:1; width:300px;height:100px;">'
+						   +'<p>'+title+'</p>'
+						   +'<p>'+addr+'</p>'
+						   +'<p>'+tel+'</p>'
+						   +'<a href="<%=request.getContextPath()%>/search/detailView?pCode='+pCode+'&from=2019-19-24&to=2019-19-25"><button>예매하러가기</button></a>'
+							+ '</div>';
+					
+
+			infowindow.setContent(content);
+			infowindow.open(map, marker);
+			map.setCenter(placePosition);
+						});
+			   if(i>=startNo-1 && i<=endNo-1){
+			   itemEl.onclick =function() {
+				   var content = '<div style="padding:5px;z-index:1; width:300px;height:100px;">'
+					   +'<p>'+title+'</p>'
+					   +'<p>'+addr+'</p>'
+					   +'<p>'+tel+'</p>'
+					   +'<a href="<%=request.getContextPath()%>/search/detailView?pCode='+pCode+'"><button>예매하러가기</button></a>'
+						+ '</div>';
+				
+
+				infowindow.setContent(content);
+				infowindow.open(map, marker);
+				map.setCenter(placePosition);
+				
+	            };
+			   }
+		   })(marker,places[i].pName,places[i].pAddr,places[i].pTel,places[i].pCode,placePosition);
+		    
+/* 				    map.setCenter(coords); */
+		if(i>=startNo-1 && i<=endNo-1){
+        fragment.appendChild(itemEl);
+		}
+    }
+
+    // 검색결과 항목들을 검색결과 목록 Elemnet에 추가합니다
+    listEl.appendChild(fragment);
+    menuEl.scrollTop = 0;
+
+    // 검색된 장소 위치를 기준으로 지도 범위를 재설정합니다
+    map.setBounds(bounds);
+}
 
 
+// 검색결과 항목을 Element로 반환하는 함수입니다
+function getListItem(index, places) {
 
-<jsp:include page="/WEB-INF/views/common/footer.jsp"/>
+    var el = document.createElement('li'),
+    itemStr = '<span class="markerbg marker_' + (index+1) + '"></span>' +
+                '<div class="info">' +
+                '   <h5>' + places.pName + '</h5>';
+
+    
+        itemStr += '    <span>' +  places.pAddr  + '</span>'; 
+
+                 
+      itemStr += '  <span class="tel">' + places.pTel  + '</span>' +
+                '</div>';           
+
+    el.innerHTML = itemStr;
+    el.className = 'item';
+
+    return el;
+}
+
+	// 검색결과 목록 하단에 페이지번호를 표시는 함수입니다
+function displayPagination(places,cPage,pagination) {
+    var paginationEl = document.getElementById('pagination'),
+        fragment = document.createDocumentFragment(),
+        i; 
+
+    // 기존에 추가된 페이지번호를 삭제합니다
+    while (paginationEl.hasChildNodes()) {
+        paginationEl.removeChild (paginationEl.lastChild);
+    }
+
+    for (i=1; i<=pagination; i++) {
+        var el = document.createElement('a');
+        el.href = "#";
+        el.innerHTML = i;
+
+        if (i===cPage) {
+            el.className = 'on';
+        } else {
+            el.onclick = (function(i) {
+                return function() {
+                	cPage=i;
+                	displayPlaces(places,cPage,pagination);
+                	displayPagination(places,cPage,pagination)
+                }
+            })(i);
+        }
+
+        fragment.appendChild(el);
+    }
+    paginationEl.appendChild(fragment);
+} 
+
+// 검색결과 목록의 자식 Element를 제거하는 함수입니다
+function removeAllChildNods(el) {   
+    while (el.hasChildNodes()) {
+        el.removeChild (el.lastChild);
+    }
+}
+</script>
+
+</section>
+
+<jsp:include page="/WEB-INF/views/common/footer.jsp" />

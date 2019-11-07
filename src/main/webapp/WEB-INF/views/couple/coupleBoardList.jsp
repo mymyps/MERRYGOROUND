@@ -59,7 +59,9 @@
 					<div class="post postmb">
 						<!-- post image start -->
 						<div class="post-image-wrapper">
-							<a href='${path }/couple/coupleBoardView?no=${c["COUPLENUM"]}'> <img src='${path}/resources/images/couple/${c["FILERENAME"]}'	class="img" alt="" />
+							<a href='${path }/couple/coupleBoardView?no=${c["COUPLENUM"]}'> 
+<%-- 							<img src='${path}/resources/images/couple/${c["FILERENAME"]}'	class="img" alt="" /> --%>
+<img src="${path}/resources/images/banpo.JPG"  class="img" alt="이미지준비중" />
 																	 <!-- 마지막 파일명만 따로 불러오든, 전체경로를 다 받아오든  -->
 								<p class="img-content"><c:out value='${c["COUPLETITLE"] }'></c:out></p>
 								<span class="blog-date"> <fmt:formatDate value='${c["COUPLEDATE"] }'/></span>
