@@ -52,7 +52,8 @@ public class MypageController {
 		Supporters result2 = service.selectSup(memNo);
 		if(result2!=null) {
 			int supNum = result2.getSupNum();
-			Map<String, Object> map = service.selectSupt3(supNum);
+//			Map<String, Object> map = service.selectSupt3(supNum);
+			List<Object> map = service.selectSupt3(supNum);
 			model.addAttribute("map", map);
 		}
 		

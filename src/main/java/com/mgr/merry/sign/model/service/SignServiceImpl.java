@@ -1,5 +1,6 @@
 package com.mgr.merry.sign.model.service;
 
+import java.util.List;
 import java.util.Map;
 
 import org.mybatis.spring.SqlSessionTemplate;
@@ -68,14 +69,19 @@ public class SignServiceImpl implements SignService {
 	public Supporters selectSup(int memNo) {
 		return dao.selectSup(session, memNo);
 	}
+//	@Override
+//	public Map<String, Object> selectSupt3(int supNum) {
+//		return dao.selectSupt3(session,supNum);
+//	}
 	@Override
-	public Map<String, Object> selectSupt3(int supNum) {
-		return dao.selectSupt3(session,supNum);
+	public List<Object> selectSupt3(int supNum) {
+		return dao.selectSupt3(session, supNum);
 	}
 	@Override
 	public int selectMemberOne2(Members m) {
 		return dao.selectMemberOne2(session,m);
 	}
+	
 	
 	@Override
 	public int insertSupporter(Map<String, Object> data) {

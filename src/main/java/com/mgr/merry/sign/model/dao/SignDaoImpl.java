@@ -1,5 +1,6 @@
 package com.mgr.merry.sign.model.dao;
 
+import java.util.List;
 import java.util.Map;
 
 import org.mybatis.spring.SqlSessionTemplate;
@@ -13,7 +14,6 @@ public class SignDaoImpl implements SignDao {
 
 	@Override
 	public int insertMember(SqlSessionTemplate session, Members m) {
-		System.out.println("@@@@@@@@@@@@@@@@@@" + m);
 		return session.insert("sign.insertMember", m);
 	}
 
@@ -85,15 +85,20 @@ public class SignDaoImpl implements SignDao {
 		return session.selectOne("sign.selectSup", memNo);
 	}
 
+//	@Override
+//	public Map<String, Object> selectSupt3(SqlSessionTemplate session, int supNum) {
+//		return session.selectList("sign.selectSupt3", supNum);
+//	}
 	@Override
-	public Map<String, Object> selectSupt3(SqlSessionTemplate session, int supNum) {
-		return session.selectOne("sign.selectSupt3", supNum);
+	public List<Object> selectSupt3(SqlSessionTemplate session, int supNum) {
+		return session.selectList("sign.selectSupt3",supNum);
 	}
-
 	@Override
 	public int selectMemberOne2(SqlSessionTemplate session, Members m) {
 		return session.selectOne("sign.selectMemberOne2", m);
 	}
+
+	
 
 	@Override
 	public int inserSupporter(SqlSessionTemplate session, Map<String, Object> data) {

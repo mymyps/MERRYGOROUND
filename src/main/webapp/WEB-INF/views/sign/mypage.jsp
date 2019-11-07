@@ -62,7 +62,7 @@
 					  			</div>
 					  		</a>
 						  </li>
-						  <c:if test="${!empty map}">
+						   <c:if test="${!empty map}">
 						  <li>
 								<a class="animated fadeIn" href="#tab_c" data-toggle="tab">
 									<span class="tab-icon"><i class="fa fa-pagelines"></i></span>
@@ -71,7 +71,7 @@
 									</div>
 								</a>
 						  </li>
-						  </c:if>
+						</c:if>
 					  	<li>
 						  	<a class="animated fadeIn" href="#tab_b" data-toggle="tab">
 								  <!-- <span class="tab-icon"><i class="fa fa-briefcase"></i></span> -->
@@ -233,39 +233,20 @@
 				            
 				            <h3>내 작성글 보기</h3> 
 				            <div class="row">
+				       			 <c:forEach items="${map }" var="up" varStatus="i">
 									<div class="col-md-4 col-sm-4 wow fadeInDown" data-wow-delay=".5s">
 										<button onclick="detailView()">
 										<div class="service-content">
 											<span class="service-image">
-												<img class="img-supupload_img_f" src="${path}/resources/images/member/${map['FILERENAME'] }" width="180px" height="200px"/>
+												<img class="img-supupload_img_f" src="${path}/resources/images/member/${up.FILERENAME }" width="180px" height="200px"/>
 											</span>
 											
-											<h3>${map['SUPUPTITLE'] }</h3>
+											<h3>${up.SUPUPTITLE}</h3>
 											
 										</div>
 										</button>
-									</div><!--/ End first service -->
-					
-									<div class="col-md-4 col-sm-4 wow fadeInDown" data-wow-delay=".8s" >
-											<button onclick="detailView()">
-										<div class="service-content">
-											<span class="service-image"><img class="img-responsive" src="images/pages/service-1.jpg" alt="" /></span>
-											<h3>넣을Parallax Section</h3>
-											
-										</div>
-										</button>
-									</div><!--/ End Second features -->
-									<div class="col-md-4 col-sm-4 wow fadeInDown" data-wow-delay="1.1s">
-										<button onclick="detailView()">
-										<div class="service-content">
-											<span class="service-image"><img class="img-responsive" src="images/pages/service-1.jpg" alt="" /></span>
-											<h3>거임Light wight Performance</h3>
-											
-										</div>
-									</button>
 									</div>
-									<!--/ End Third features -->
-					
+				       		</c:forEach>
 							</div>
 				        </div>
 				        
