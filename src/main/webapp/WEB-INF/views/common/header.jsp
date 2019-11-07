@@ -204,8 +204,7 @@
                               class="fa fa-angle-down"></i></a>
                         <div class="dropdown-menu">
                            <ul>
-                              <li><a href="typography.html">Typography</a></li>
-                              <li><a href="elements.html">Elements</a></li>
+                              <li><a href="${pageContext.request.contextPath }/couple/coupleBoardList">커플게시판</a></li>
                            </ul>
                         </div>
                      </li>
