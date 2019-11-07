@@ -43,8 +43,9 @@ public class MypageController {
 	@RequestMapping("/sign/mypage.do")
 	public ModelAndView signup(HttpServletRequest request, Members m, Model model ,@RequestParam(value="cPage", required=false,defaultValue="0") int cPage) {
 		ModelAndView mv = new ModelAndView();
-		String mNo = request.getParameter("mNo");
-		int memNo = Integer.parseInt(mNo);
+//		String mNo = request.getParameter("mNo");
+		int memNo = Integer.parseInt(request.getParameter("mNo"));
+//		int memNo = mNo;
 		Members result = service.selectMember(m, memNo);
 		
 		
@@ -57,11 +58,13 @@ public class MypageController {
 			int totalCount=service.selectBoardCount(supNum);
 			List<Map<String,String>> list = service.selectBoardList(cPage,numPerPage,supNum);
 			List<Object> map = service.selectSupt3(supNum);
-			mv.addObject("map", map);
-			mv.addObject("pageBar",PageBarFactory.getPageBar(totalCount, cPage, numPerPage, "/merry/sign/mypage.do"));
+//			mv.addObject("map", map);
+			mv.addObject("pageBar",PageBarFactory.getPageBar(totalCount, cPage, numPerPage, "/merry/sign/mypage.do?mNo="+memNo));
+			mv.addObject("mNo",memNo);
 			mv.addObject("count",totalCount);
 			mv.addObject("list",list);
 			System.out.println("list : "+ list.toString());
+			System.out.println("list.size"+list.size());
 		}
 		
 		

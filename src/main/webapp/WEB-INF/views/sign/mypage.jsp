@@ -62,7 +62,7 @@
 					  			</div>
 					  		</a>
 						  </li>
-						   <c:if test="${!empty map}">
+						   <c:if test="${!empty list}">
 						  <li>
 								<a class="animated fadeIn" href="#tab_c" data-toggle="tab">
 									<span class="tab-icon"><i class="fa fa-pagelines"></i></span>
