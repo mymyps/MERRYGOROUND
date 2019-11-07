@@ -117,7 +117,7 @@ public class SupUploadController {
 	
 	//summernote 이미지파일 저장후 게시판에 쏴주기
 	@RequestMapping(value = "summernote_imageUpload_supRv.do", method=RequestMethod.POST)
-	public void uploadSummernoteImage(MultipartFile image, HttpSession session, HttpServletResponse res) throws Exception{
+	public void uploadSummernoteImage(MultipartFile image, HttpSession session, HttpServletResponse res, int supupNum) throws Exception{
 		String savename = image.getOriginalFilename();
 		
 		System.out.println(image.getOriginalFilename());
@@ -148,6 +148,9 @@ public class SupUploadController {
         SupUploadImg supupImg= new SupUploadImg();
         System.out.println("setFilerename에 들어갈 값 : "+path+"/"+reName);
 //        att.setFileRename(path+"/"+reName);
+        
+//        supupNum을 받아와야..하는뎅뎅
+        supupImg.setSupupNum(supupNum);
         supupImg.setFileReName(reName);
         
         
@@ -225,7 +228,7 @@ public class SupUploadController {
 		
 		if(imgList.size()>0) {
 			try {
-				imgResult = service.insertSupUploadImgNum(param,imgList);
+				imgResult = service.insertSupUploadImg(param,imgList);
 			}catch(Exception e) {
 				e.printStackTrace();
 			}

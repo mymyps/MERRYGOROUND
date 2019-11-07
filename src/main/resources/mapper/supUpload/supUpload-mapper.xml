@@ -21,9 +21,6 @@
 	</select>
 	
 	<insert id="insertSupUploadImg" parameterType="com.mgr.merry.supUpload.model.vo.SupUploadImg">
-		<selectKey keyProperty="supupNum" order="BEFORE" resultType="_int">
-			select seq_sup_up_num.currval from dual
-		</selectKey>
 		INSERT INTO SUPPORTERS_UPLOAD_IMG VALUES(#{supupNum}, SEQ_SUP_UP_IMG_NUM.NEXTVAL, #{fileReName})
 	</insert>
 	
@@ -31,7 +28,7 @@
 		UPDATE SUPPORTERS_UPLOAD SET SUPUPTITLE=#{supupTitle}, SUPUPCONTENT=#{supupContent} where INFOUPNUM=#{infoupNum}
 	</update>
 	
-	<insert id="insertSupUploadImgNum" parameterType="com.mgr.merry.supUpload.model.vo.SupUploadImg">
+	<insert id="insertSupUploadImgNum" parameterType="map">
 		INSERT INTO SUPPORTERS_UPLOAD_IMG VALUES(#{supupNum}, SEQ_SUP_UP_IMG_NUM.NEXTVAL, #{fileReName})
 	</insert>
 	

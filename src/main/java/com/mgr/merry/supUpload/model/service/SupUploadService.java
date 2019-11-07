@@ -30,8 +30,6 @@ public interface SupUploadService {
 
 	int updateSupReview(Map<String, String> param);
 
-	int insertSupUploadImgNum(Map<String, String> param, List<SupUploadImg> imgList);
-
 	int supRvStatus0(int infoupNum);
 
 }

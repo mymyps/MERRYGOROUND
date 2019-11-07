@@ -47,11 +47,6 @@ public class SupUploadDaoImpl implements SupUploadDao {
 	}
 
 	@Override
-	public int insertSupUploadImgNum(SqlSessionTemplate session, Map<String, String> param) {
-		return session.insert("supUp.insertSupUploadImgNum", param);
-	}
-
-	@Override
 	public int supRvStatus0(SqlSessionTemplate session, int infoupNum) {
 		return session.update("supUp.updateSupRvState0", infoupNum);
 	}
