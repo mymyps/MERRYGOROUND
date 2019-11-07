@@ -116,7 +116,7 @@
 	$.ajax({
 				data : form_data,
 				type : "post",
-				url : "${path}/summernote_imageUpload_supRv_update.do",
+				url : "${path}/summernote_imageUpload_supRv.do",
 				cache : false,
 				contentType : false,
 				enctype : "multipart/form-data",

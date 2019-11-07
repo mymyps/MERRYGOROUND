@@ -28,4 +28,8 @@ public interface SupUploadService {
 
 	int insertSupUploadImg(Map<String, String> param, List<SupUploadImg> imgList);
 
+	int updateSupReview(Map<String, String> param);
+
+	int insertSupUploadImgNum(Map<String, String> param, List<SupUploadImg> imgList);
+
 }

@@ -86,6 +86,8 @@ public class SupUploadController {
 		int result = 0;
 		int imgResult = 0;
 		
+		result = service.insertSupReview(param);
+		
 		if(imgList.size()>0) {
 			try {
 				System.out.println("writeEnd안에서 param: "+param);
@@ -95,7 +97,7 @@ public class SupUploadController {
 			}
 		}
 
-		result = service.insertSupReview(param);
+		
 		
 		
 		String msg = "";
@@ -155,6 +157,9 @@ public class SupUploadController {
         System.out.println("이미지 등록 완료시 :" +imgList);
 	}
 	
+	
+	
+	
 //	@RequestMapping(value = "summernote_imageDelete.do", method=RequestMethod.POST)
 //	public void deleteSummernoteImage(HttpSession session, HttpServletResponse res, String src) throws Exception{
 //		System.out.println("컨트롤러에서 src : "+src);
@@ -210,18 +215,20 @@ public class SupUploadController {
 	public ModelAndView supReviewUpadeEnd(@RequestParam Map<String, String> param) {
 		ModelAndView mv = new ModelAndView();
 		
+		System.out.println("파라미더 : "+param);
+		
 		int result = 0;
 		int imgResult = 0;
 		
 		if(imgList.size()>0) {
 			try {
-				imgResult = service.insertSupUploadImg(param,imgList);
+				imgResult = service.insertSupUploadImgNum(param,imgList);
 			}catch(Exception e) {
 				e.printStackTrace();
 			}
 		}
 
-		result = service.insertSupReview(param);
+		result = service.updateSupReview(param);
 		
 		String msg = "";
 
