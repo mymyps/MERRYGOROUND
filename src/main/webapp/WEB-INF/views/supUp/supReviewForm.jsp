@@ -7,21 +7,19 @@
 <jsp:param name ="pageTitle" value=""/>	
 </jsp:include>
 
-<!-- include libraries(jQuery, bootstrap) -->
-	<link href="http://netdna.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.css" rel="stylesheet">
-	<script src="http://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.js"></script> 
-	<script src="http://netdna.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.js"></script>
-<!-- include summernote css/js -->
-<link href="http://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.12/summernote.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.12/summernote-bs4.css" rel="stylesheet">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.12/summernote-bs4.js"></script>
 
 <section id="content">
 	<!-- summernote 폼-->
 	<form name="infoForm"
-		action="${pageContext.request.contextPath }/info/infoFormEnd.do"
+		action="${pageContext.request.contextPath }/supUp/supReviewFormEnd.do"
 		method="post" enctype="multipart/form-data">
 		<div class="container">
 			<input type="hidden" name="loginMemberNum"
 				value="${loginMember.memberNum}">
+			<input type="hidden" name="id" value="${loginMember.id }"/>
+			<input type="hidden" name="supNum" value="${sup.SUPNUM }"/>
 
 			<div class="row">
 				<!-- Blog start -->
@@ -62,7 +60,7 @@
 										<input type="text" name="supupTitle" />
 									</p>
 								</div>
-								<textarea id="summ" name="content" required></textarea>
+								<textarea id="summ" name="supupContent" required></textarea>
 								
 							</div>
 

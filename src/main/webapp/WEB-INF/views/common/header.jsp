@@ -191,10 +191,11 @@
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown">Supporters <i
                               class="fa fa-angle-down"></i></a>
                         <div class="dropdown-menu">
+                        
                            <ul>
-                              <li><a href="${pageContext.request.contextPath }/info/infoForm.do?mNum=${loginMember.memberNum}">infoForm 임의연결</a></li>
-                        <li><a href="${pageContext.request.contextPath }/info/infoView.do">infoView 임의연결</a></li>
-                              <input type="hidden" value="${loginMember.memberNum}" name="mNum"/>
+                           		<li><a href="${pageContext.request.contextPath }/supLv/supLvForm.do?id=${loginMember.id}">서포터즈 신청</a>
+								<li><a href="${pageContext.request.contextPath }/info/infoForm.do?mNum=${loginMember.memberNum}">infoForm 임의연결</a></li>
+								<li><a href="${pageContext.request.contextPath }/info/infoView.do">infoView 임의연결</a></li>
                            </ul>
                         </div>
                      </li>
@@ -203,7 +204,8 @@
                               class="fa fa-angle-down"></i></a>
                         <div class="dropdown-menu">
                            <ul>
-                              <li><a href="${pageContext.request.contextPath }/couple/coupleBoardList">커플게시판</a></li>
+                              <li><a href="typography.html">Typography</a></li>
+                              <li><a href="elements.html">Elements</a></li>
                            </ul>
                         </div>
                      </li>

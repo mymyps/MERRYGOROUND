@@ -23,4 +23,6 @@ public interface SupUploadService {
 	void profileUpload(String email, MultipartFile file, HttpServletRequest request, HttpServletResponse response)
 			throws Exception;
 
+	Supporters selectSupId(String id);
+
 }

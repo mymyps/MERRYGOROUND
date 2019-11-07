@@ -9,10 +9,14 @@
 	</select> -->
 	
 	<insert id="insertSupUpload" parameterType="Map">
-		INSERT INTO VALUES(SEQ_SUP_UP_NUM.NEXTVAL, #{supupNum}, #{infoupNum}, #{supupTitle}, #{supupContent}, default, default)
+		INSERT INTO SUPPORTERS_UPLOAD VALUES(SEQ_SUP_UP_NUM.NEXTVAL, #{supNum}, #{infoupNum}, #{supupTitle}, #{supupContent}, default, default)
 	</insert>
 	
 	<select id="selectSup" resultType="com.mgr.merry.supporters.model.vo.Supporters">
+		SELECT * FROM SUPPORTERS WHERE MEMBERNUM=#{memberNum}
+	</select>
+	
+	<select id="selectSupId" resultType="map" parameterType="_int">
 		SELECT * FROM SUPPORTERS WHERE MEMBERNUM=#{memberNum}
 	</select>
 </mapper>

@@ -1,28 +1,21 @@
 package com.mgr.merry.supUpload.controller;
 
-import java.io.File;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
-import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
-import com.mgr.merry.couple.model.vo.Attachment;
 import com.mgr.merry.info.model.service.InfoService;
 import com.mgr.merry.search.model.service.SearchService;
 import com.mgr.merry.supLvUpload.model.service.SupLvService;
 import com.mgr.merry.supUpload.model.service.SupUploadService;
 import com.mgr.merry.supUpload.model.vo.SupUploadImg;
+import com.mgr.merry.supporters.model.vo.Supporters;
 
 @Controller
 public class SupUploadController {
@@ -39,43 +32,50 @@ public class SupUploadController {
 	@Autowired
 	SupLvService lvservice;
 	
-	private static List<SupUploadImg> imgList = new ArrayList();
+	private static List<SupUploadImg> imgList = new ArrayList<SupUploadImg>();
 	
 	@RequestMapping("/supUp/supReview")
-	public ModelAndView supReview(int infoupNum) {
+	public ModelAndView supReview(int infoupNum, @RequestParam Map<String, String> param) {
 		imgList.clear();
 		ModelAndView mv = new ModelAndView();
 		
+		System.out.println("param :"+param);
+		
 		Map<String, String> supUpload= service.selectSupUpload(infoupNum);
-		SupUploadImg supUploadImg = service.selectSupUploadImg(infoupNum);
+		Map<String, String> sup = iservice.selectSup(param);
+//		SupUploadImg supUploadImg = service.selectSupUploadImg(infoupNum);
 		
 		mv.addObject("supUpload", supUpload);
-		mv.addObject("supUploadImg", supUploadImg);
+		mv.addObject("sup", sup);
+//		mv.addObject("supUploadImg", supUploadImg);
 		
 		return mv;
 	}
 	
 	@RequestMapping("/supUp/supReviewForm.do")
-	public ModelAndView supReviewForm(int infoupNum) {
+	public ModelAndView supReviewForm(int infoupNum, @RequestParam Map<String, String> param) {
 		ModelAndView mv = new ModelAndView();
 		Map<String, String> info = iservice.selectInfo(infoupNum);
+		Map<String, String> sup = iservice.selectSup(param);
 		
+		System.out.println("컨트롤러 sup : "+sup);
 		
 		mv.addObject("info", info);
+		mv.addObject("sup", sup);
 		mv.setViewName("supUp/supReviewForm");
 		
 		return mv;
 	}
 	
-	@RequestMapping("/supUp/supReviewFormEnd")
-	public ModelAndView supReviewFormEnd(@RequestParam Map<String, String> param, int memberNum) {
+	@RequestMapping("/supUp/supReviewFormEnd.do")
+	public ModelAndView supReviewFormEnd(@RequestParam Map<String, String> param) {
 		ModelAndView mv = new ModelAndView();
+
+		System.out.println("섶리 파라미터값 : "+param);
 		
 		int result = 0;
-		int result2 = 0;
 
 		result = service.insertSupReview(param);
-//		result2 = service.selectSup(memberNum);
 		
 		
 		String msg = "";
@@ -93,7 +93,7 @@ public class SupUploadController {
 	
 	
 	
-//	//summernote 이미지파일 저장후 게시판에 쏴주기
+	//summernote 이미지파일 저장후 게시판에 쏴주기
 //		@RequestMapping(value = "summernote_imageUpload.do", method=RequestMethod.POST)
 //		public void uploadSummernoteImage(MultipartFile image, HttpSession session, HttpServletResponse res) throws Exception{
 //			String savename = image.getOriginalFilename();

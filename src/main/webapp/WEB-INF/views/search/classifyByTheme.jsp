@@ -111,8 +111,12 @@
                     		<div class="row" id="themarow2">
 						<div class="col-md-8 ts-padding2 themaContent">
 							<h3 style="margin-top: -2px;">
-							<a href="${pageContext.request.contextPath }/info/infoView.do?infoupNum=${list.infoupNum }" style="color: #5a554f !important;"><c:out value='${list.infoupTitle}'/></a>
-<%--                             <c:out value='${list.infoupTitle}'/> --%>
+							<c:if test="${not empty loginMember }">
+								<a href="${pageContext.request.contextPath }/info/infoView.do?infoupNum=${list.infoupNum }&id=${loginMember.id}"><c:out value='${list.infoupTitle}'/></a>
+							</c:if>
+							<c:if test="${empty loginMember }">
+								<a href="${pageContext.request.contextPath }/info/infoView.do?infoupNum=${list.infoupNum }&id=0"><c:out value='${list.infoupTitle}'/></a>
+							</c:if>
 							</h3>
 							<p>이용시간 : <c:out value='${list.infoupTime}'/> / 전화번호 : <c:out value='${list.infoupPhone}'/></p>
 							<hr style="height: 0.5px; background-color: rgb(214, 206, 194);" >

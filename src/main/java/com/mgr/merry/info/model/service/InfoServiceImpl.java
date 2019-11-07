@@ -94,5 +94,11 @@ public class InfoServiceImpl implements InfoService {
 		return result;
 	}
 
+	@Override
+	public Map<String, String> selectSup(Map<String, String> param) {
+		return dao.selectSup(session, param);
+	}
+
+
 
 }
