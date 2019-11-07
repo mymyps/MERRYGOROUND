@@ -105,7 +105,7 @@ public class InfoController {
 	public ModelAndView insertInfo(@RequestParam Map<String, String> param,
 			@RequestParam(value = "infoupFile", required = false) MultipartFile[] infoupFile,
 			HttpServletRequest request) {
-
+		
 		String saveDir = request.getSession().getServletContext().getRealPath("/resources/upload/info");
 		InfoUploadImg infoimg = new InfoUploadImg();
 		for (MultipartFile f : infoupFile) {
@@ -127,6 +127,7 @@ public class InfoController {
 		int result = 0;
 
 		try {
+			
 			result = service.insertInfo(param, infoimg);
 		} catch (Exception e) {
 			e.printStackTrace();

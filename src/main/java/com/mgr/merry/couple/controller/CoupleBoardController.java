@@ -98,7 +98,7 @@ public class CoupleBoardController {
 		String savename = image.getOriginalFilename();
 		
 		System.out.println(image.getOriginalFilename());
-		String path=session.getServletContext().getRealPath("/resources/images/couple");
+		String path=session.getServletContext().getRealPath("/resources/images/supRv");
 		File f=new File(path);
 		if(!f.exists()) f.mkdirs();
 		

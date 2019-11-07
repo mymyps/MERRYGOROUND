@@ -49,11 +49,14 @@
 										<select id="" name="themaNum" class="mainThema">
 											<c:forEach items="${themaList2 }" var="t">
 												<option value="${t['THEMANUM'] }">${t['THEMANAME'] }</option>
+												<c:set var="tNum" value="${t['THEMANUM'] }"/>
 											</c:forEach>
 										</select>
-										<select id="" name="themaSubNum">
+										<c:out value="${tNum }"/>
+										<select id="subThema" name="themaSubNum">
 											<c:forEach items="${themaList }" var="t">
-												<option value="${t['THEMANUM'] }">${t['THEMANAME'] }</option>
+													<option value="${t['THEMANUM'] }">${t['THEMANAME'] }</option>
+												
 											</c:forEach>
 										</select>
 									</p>
@@ -73,7 +76,7 @@
 								<div>
 									<div class="infoFormSubFrame">가격</div>
 									<p class="infoForm1">
-										<input type="number" step="1000" name="infoupPayment" />
+										<input type="number" step="1000" min="0" name="infoupPayment" />
 									</p>
 								</div>
 								<div>
