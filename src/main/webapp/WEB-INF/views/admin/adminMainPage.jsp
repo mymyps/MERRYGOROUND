@@ -28,7 +28,7 @@
 					<div class="col-lg-3 col-md-6">
 						<div class="card">
 							<div class="card-body">
-								<div class="stat-widget-five">
+								<div class="stat-widget-five link01">
 									<div class="stat-icon dib flat-color-1">
 										<i class="pe-7s-browser"></i>
 										<!-- <i class="pe-7s-cash"></i> -->
@@ -36,7 +36,7 @@
 									<div class="stat-content">
 										<div class="text-left dib">
 											<div class="stat-text">
-												$<span class="count"><c:out value="${topResult }"/></span>
+												<span class="count"><c:out value="${topResult }"/></span>
 											</div>
 											<div class="stat-heading">게시글수</div>
 										</div>
@@ -49,7 +49,7 @@
 					<div class="col-lg-3 col-md-6">
 						<div class="card">
 							<div class="card-body">
-								<div class="stat-widget-five">
+								<div class="stat-widget-five link02">
 									<div class="stat-icon dib flat-color-2">
 										<i class="fa fa-users"></i>
 										<!-- <i class="pe-7s-cart"></i> -->
@@ -70,7 +70,7 @@
 					<div class="col-lg-3 col-md-6">
 						<div class="card">
 							<div class="card-body">
-								<div class="stat-widget-five">
+								<div class="stat-widget-five link03">
 									<div class="stat-icon dib flat-color-3">
 										<i class="pe-7s-users"></i>
 									</div>
@@ -90,7 +90,7 @@
 					<div class="col-lg-3 col-md-6">
 						<div class="card">
 							<div class="card-body">
-								<div class="stat-widget-five">
+								<div class="stat-widget-five link04">
 									<div class="stat-icon dib flat-color-4">
 										<i class="ti-link"></i>
 									</div>
@@ -341,13 +341,13 @@
 							<div class="card ov-h">
 								<div class="card-body bg-flat-color-4">
 									<div id="flotBarChart" class="float-chart ml-4 mr-4">
-										<p style="color:black">공지 사항</p>
+										<p style="color:black">&lt;공지 사항&gt;</p>
 										<p style="color:white" class="notiTi"><c:out value="${adminNotice['NOTICECONTENT'] }" /></p>
 										<p style="color:red" class="notiDa"><fmt:formatDate value="${adminNotice['NOTICEDATE'] }" pattern="yyyy-MM-dd"/></p>
 									</div>
 								</div>
 								<div id="cellPaiChart" class="float-chart">
-									<p>&lt;입력창&gt;   &nbsp;<a style="color:olive;" id="noticeClick">공지사항 추가하기</a></p> 
+									<p>&lt;입력창&gt;   &nbsp;<a style="color:#EB9579;" id="noticeClick">공지사항 추가하기</a></p> 
 									<textarea class="txAA" cols="5" style="resize:none; width:100%; height:100px; padding:8px"></textarea>
 									
 								</div>
@@ -492,6 +492,24 @@
 		});
 	});
 	
+	$(function () {
+		
+		$(".link01").on("click", function () {
+			location.href = "${path}/admin/board";
+		});
+		
+		$(".link02").on("click", function () {
+			location.href = "${path}/admin/supportersList";
+		});
+		
+		$(".link03").on("click", function () {
+			location.href = "${path}/admin/celtify";
+		});
+		
+		$(".link04").on("click", function () {
+			location.href = "${path}/admin/users";
+		});
+	});
 		
 	
     </script>

@@ -135,12 +135,19 @@
 	<!-- /#left-panel -->
 	<div id="right-panel" class="right-panel">
 		<!-- Header-->
-		<header id="header" class="header">
+		<header id="header" class="header" style="background-color:#EB9579; height:66px;">
 			<div class="top-left">
-				<div class="navbar-header">
-					<a id="menuToggle" class="menutoggle"><i class="fa fa-bars"></i></a>&nbsp;&nbsp;&nbsp;
-					<a href="${pageContext.request.contextPath }/">메인으로</a>
+				<div class="navbar-header" style="background-color:#EB9579;">
+					<div class="navbar-brand navbar-bg" style="width:130px;">
+                     <a href="${pageContext.request.contextPath }">
+                        <img class=" img-responsive" style="max-width:161; padding-top:3px" 
+                        src="${pageContext.request.contextPath }/resources/images/logo.png" alt="logo">
+                     </a>
+                  	
+					</div>
+					<a id="menuToggle" class="menutoggle"><i class="fa fa-bars"></i></a>
 				</div>
 			</div>
+					<p style="text-align: right; color:antiquewhite; padding-top:16px; font-size:27px">ADMINISTRATOR</p>
 		</header>
 		<!-- /#header -->
