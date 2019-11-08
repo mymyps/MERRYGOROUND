@@ -78,8 +78,10 @@
 							});
 						</script>
 						<button class="btn btn-primary pull-left" onclick='location.href="${path }/couple/coupleBoardList"'>목록</button>
-						<button class="btn btn-primary pull-right" onclick='location.href="${path }/couple/deleteCoupleBoard?no=${cboard["COUPLENUM"]}"'>삭제</button> 
-						<button class="btn btn-primary pull-right" onclick='location.href="${path }/couple/updateCoupleBoard?no=${cboard["COUPLENUM"]}"'>수정</button>
+<%-- 						<button class="btn btn-primary pull-right" id="deleteCB" onclick='location.href="${path }/couple/deleteCoupleBoard?no=${cboard["COUPLENUM"]}"'>삭제</button>  --%>
+<%-- 						<button class="btn btn-primary pull-right" id="updateCB" onclick='location.href="${path }/couple/updateCoupleBoard?no=${cboard["COUPLENUM"]}"'>수정</button> --%>
+						<button class="btn btn-primary pull-right" id="deleteCB" onclick='deleteCB();'>삭제</button>
+						<button class="btn btn-primary pull-right" id="updateCB" onclick='updateCB();'>수정</button>
 						<br><hr>
 					
 
@@ -307,29 +309,34 @@
 			}
 		
 			function fn_editReply(commentNo, writer, content){
-				var htmls = "";
-				htmls += '<div class="media text-muted pt-3" id="commentNo' + commentNo + '">';
-// 				htmls += '<svg class="bd-placeholder-img mr-2 rounded" width="32" height="32" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice" focusable="false" role="img" aria-label="Placeholder:32x32">';
-// 				htmls += '<title>Placeholder</title>';
-// 				htmls += '<rect width="100%" height="100%" fill="#007bff"></rect>';
-// 				htmls += '<text x="50%" fill="#007bff" dy=".3em">32x32</text>';
-// 				htmls += '</svg>';
-				htmls += '<p class="media-body pb-3 mb-0 small lh-125 border-bottom horder-gray">';
-				htmls += '<span class="d-block">';
-				htmls += '<strong class="text-gray-dark">' + writer + '</strong>';
-				htmls += '<span style="padding-left: 7px; font-size: 9pt">';
-				htmls += '<a href="javascript:void(0)" onclick="fn_updateReply(' + commentNo + ', \'' + writer + '\')" style="padding-right:5px">저장</a>';
-				htmls += '<a href="javascript:void(0)" onClick="getCommentList()">취소<a>';
-				htmls += '</span>';
-				htmls += '</span>';		
-				htmls += '<textarea name="editContent" id="editContent" class="form-control" rows="3">';
-				htmls += content;
-				htmls += '</textarea>';
-				htmls += '</p>';
-				htmls += '</div>';
-				
-				$('#commentNo' + commentNo).replaceWith(htmls);
-				$('#commentNo' + commentNo + ' #editContent').focus();
+				if(confirm("댓글을 수정하시겠습니까?")){
+					var htmls = "";
+					htmls += '<div class="media text-muted pt-3" id="commentNo' + commentNo + '">';
+	// 				htmls += '<svg class="bd-placeholder-img mr-2 rounded" width="32" height="32" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice" focusable="false" role="img" aria-label="Placeholder:32x32">';
+	// 				htmls += '<title>Placeholder</title>';
+	// 				htmls += '<rect width="100%" height="100%" fill="#007bff"></rect>';
+	// 				htmls += '<text x="50%" fill="#007bff" dy=".3em">32x32</text>';
+	// 				htmls += '</svg>';
+					htmls += '<p class="media-body pb-3 mb-0 small lh-125 border-bottom horder-gray">';
+					htmls += '<span class="d-block">';
+					htmls += '<strong class="text-gray-dark">' + writer + '</strong>';
+					htmls += '<span style="padding-left: 7px; font-size: 9pt">';
+					htmls += '<a href="javascript:void(0)" onclick="fn_updateReply(' + commentNo + ', \'' + writer + '\')" style="padding-right:5px">저장</a>';
+					htmls += '<a href="javascript:void(0)" onClick="getCommentList()">취소<a>';
+					htmls += '</span>';
+					htmls += '</span>';		
+					htmls += '<textarea name="editContent" id="editContent" class="form-control" rows="3">';
+					htmls += content;
+					htmls += '</textarea>';
+					htmls += '</p>';
+					htmls += '</div>';
+					
+					$('#commentNo' + commentNo).replaceWith(htmls);
+					$('#commentNo' + commentNo + ' #editContent').focus();
+				}
+				else{
+					return false;
+				}
 			}
 			
 			//내가 임의로 만든 updateComment
@@ -356,36 +363,37 @@
 // 			    });
 // 			}
 			
-			//수정후 저장버튼을 눌렀을때!
+			//수정후 저장버튼을 눌렀을때!  사용안할듯
 			$(document).on('click', '#btnReplySave', function(){
-				var replyContent = $('#content').val();
-				var replyReg_id = $('#reg_id').val();
-
-				var paramData = JSON.stringify({"content": replyContent
-						, "reg_id": replyReg_id
-						, "bid":'${boardContent.bid}'
-				});
-				var headers = {"Content-Type" : "application/json"
-						, "X-HTTP-Method-Override" : "POST"};
-				$.ajax({
-					url: "${saveReplyURL}"
-					, headers : headers
-					, data : paramData
-					, type : 'POST'
-					, dataType : 'text'
-					, success: function(result){
-						showReplyList();
-
-						$('#content').val('');
-						$('#reg_id').val('');
-					}
-					, error: function(error){
-						console.log("에러 : " + error);
-					}
-				});
+					var replyContent = $('#content').val();
+					var replyReg_id = $('#reg_id').val();
+	
+					var paramData = JSON.stringify({"content": replyContent
+							, "reg_id": replyReg_id
+							, "bid":'${boardContent.bid}'
+					});
+					var headers = {"Content-Type" : "application/json"
+							, "X-HTTP-Method-Override" : "POST"};
+					$.ajax({
+						url: "${saveReplyURL}"
+						, headers : headers
+						, data : paramData
+						, type : 'POST'
+						, dataType : 'text'
+						, success: function(result){
+							showReplyList();
+	
+							$('#content').val('');
+							$('#reg_id').val('');
+						}
+						, error: function(error){
+							console.log("에러 : " + error);
+						}
+					});
 			});
 			
 			function fn_updateReply(commentNo, writer){
+				if(confirm("댓글 수정을 완료하시겠습니가?")){
 				var replyEditContent = $('#editContent').val();
 				var paramData = JSON.stringify({"comment": replyEditContent, "commentNo": commentNo});
 // 				var paramData = {"content":replyEditContent, "commentNo":commentNo};
@@ -408,9 +416,24 @@
 						console.log("에러 : " + error);
 					}
 				});
-
+				
+				}else{return false;}
 			}
 		
+			
+			function updateCB(){
+				if(confirm("글을 수정하시겠습니까?")){
+					location.href="${path }/couple/updateCoupleBoard?no=${cboard['COUPLENUM']}";
+				}
+				else{return false;}
+			}
+			function deleteCB(){
+				if(confirm("글을 삭제하시겠습니까?")){
+					location.href="${path }/couple/deleteCoupleBoard?no=${cboard['COUPLENUM']}";
+				}
+				else{return false;}
+			}
+			
 			</script>
 
 
