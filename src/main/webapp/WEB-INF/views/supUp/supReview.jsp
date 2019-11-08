@@ -22,19 +22,19 @@
 						<br><br>
 						<c:if test="${loginMember.memberNum eq sup.MEMBERNUM }">
 							<form name="infoUpdate"
-								action="${pageContext.request.contextPath }/info/infoUpdate?infoupNum=${info.INFOUPNUM}"
+								action="${pageContext.request.contextPath }/info/infoView.do?infoupNum=${supUpload.INFOUPNUM}"
 								method="post">
 								<button class="btn supreviewBtn" type="submit">돌아가기</button>
 							</form>
 							<br>
 							<form name="infoUpdate"
-								action="${pageContext.request.contextPath }/info/infoUpdate?infoupNum=${info.INFOUPNUM}"
+								action="${pageContext.request.contextPath }/supUp/supReviewUpdate.do?infoupNum=${supUpload.INFOUPNUM}&id=${loginMember.id}"
 								method="post">
 								<button class="btn supreviewBtn" type="submit">서포터즈 리뷰 수정</button>
 							</form>
 							<br>
 							<form name="infoDelete"
-								action="${pageContext.request.contextPath }/info/infoStatus0?infoupNum=${info.INFOUPNUM }"
+								action="${pageContext.request.contextPath }/supUp/supReviewStatus0?infoupNum=${supUpload.INFOUPNUM }"
 								method="post">
 								<button class="btn supreviewBtn" type="submit">서포터즈 리뷰 삭제</button>
 							</form>
