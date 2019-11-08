@@ -78,7 +78,7 @@ public class SupUploadController {
 	}
 	
 	@RequestMapping("/supUp/supReviewFormEnd.do")
-	public ModelAndView supReviewFormEnd(@RequestParam Map<String, String> param) {
+	public ModelAndView supReviewFormEnd(@RequestParam Map<String, String> param, int infoupNum, String id) {
 		ModelAndView mv = new ModelAndView();
 
 		System.out.println("섶리 파라미터값 : "+param);
@@ -97,17 +97,17 @@ public class SupUploadController {
 			}
 		}
 
-		
-		
-		
 		String msg = "";
-
+		String loc ="";
+		
 		if (result > 0) {
 			msg = "서포터즈 리뷰가 등록되었습니다.";
+			loc = "/supUp/supReview?infoupNum="+infoupNum+"&id="+id;
 		} else {
 			msg = "서포터즈 리뷰 등록 실패";
 		}
 		mv.addObject("msg", msg);
+		mv.addObject("loc", loc);
 		mv.setViewName("common/msg");
 		return mv;
 	}
@@ -160,37 +160,6 @@ public class SupUploadController {
         System.out.println("이미지 등록 완료시 :" +imgList);
 	}
 	
-	
-	
-	
-//	@RequestMapping(value = "summernote_imageDelete.do", method=RequestMethod.POST)
-//	public void deleteSummernoteImage(HttpSession session, HttpServletResponse res, String src) throws Exception{
-//		System.out.println("컨트롤러에서 src : "+src);
-//		int attResult =0 ;
-//		
-//		String path=session.getServletContext().getRealPath("/resources/images/couple");
-//		String totalPath = path + "/" + src;
-//		File f=new File(totalPath);
-//		if(f.exists()) {
-//			if(f.delete()) {
-//				//src로 select후 그 couplenum을 현재 게시물 번호로 받아오기
-////				List<Attchment> cc = cservice.selectAttachList2(src);
-//				//먼저 지울Attachment filename의 flag값을 받아와서 0이면 그냥 삭제
-//				
-//				attResult= cservice.deleteAttachment2(src);
-//				//만약 flag값이 1이면 삭제후 나머지 리스트들 중에서 첫번째값 1로 변경
-//				
-//				
-//				System.out.println("파일 삭제 성공!");
-//			}else {
-//				System.out.println("파일 삭제 실패!");
-//			}
-//		}else {
-//			System.out.println("파일이 존재하지 않습니다!");
-//		}
-//	
-//	}
-	
 	@RequestMapping("supUp/supReviewUpdate.do")
 	public ModelAndView supReviewUpdate(int infoupNum, @RequestParam Map<String, String> param) {
 		imgList.clear();
@@ -239,8 +208,10 @@ public class SupUploadController {
 			loc = "/supUp/supReview?infoupNum="+infoupNum+"&id="+id;
 		} else {
 			msg = "서포터즈 리뷰 수정 실패";
+			loc = "/supUp/supReviewUpdate.do?infoupNum="+infoupNum+"&id="+id;
 		}
 		mv.addObject("msg", msg);
+		mv.addObject("loc", loc);
 		mv.setViewName("common/msg");
 		return mv;
 	}
@@ -258,7 +229,7 @@ public class SupUploadController {
 			loc="/info/infoView.do?infoupNum="+infoupNum+"&id="+id;
 		} else {
 			msg="리뷰 삭제가 실패했습니다.";
-			loc="/supUp/supReviewStatus0?infoupNum="+infoupNum+"&id="+id;
+			loc="/supUp/supReview?infoupNum="+infoupNum+"&id="+id;
 		}
 		mv.addObject("msg", msg);
 		mv.addObject("loc", loc);
