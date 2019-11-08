@@ -32,4 +32,6 @@ public interface SupUploadService {
 
 	int supRvStatus0(int infoupNum);
 
+	int insertSupUploadImgNum(Map<String, String> param, List<SupUploadImg> imgList);
+
 }

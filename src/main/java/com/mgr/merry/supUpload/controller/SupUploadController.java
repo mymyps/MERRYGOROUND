@@ -91,7 +91,7 @@ public class SupUploadController {
 		if(imgList.size()>0) {
 			try {
 				System.out.println("writeEnd안에서 param: "+param);
-				imgResult = service.insertSupUploadImg(param,imgList);
+				imgResult = service.insertSupUploadImgNum(param,imgList);
 			}catch(Exception e) {
 				e.printStackTrace();
 			}
@@ -111,6 +111,49 @@ public class SupUploadController {
 		mv.setViewName("common/msg");
 		return mv;
 	}
+	
+	//summernote 이미지파일 저장후 게시판에 쏴주기
+		@RequestMapping(value = "summernote_imageUpload_supRv2.do", method=RequestMethod.POST)
+		public void uploadSummernoteImage2(MultipartFile image, HttpSession session, HttpServletResponse res) throws Exception{
+			String savename = image.getOriginalFilename();
+			
+			System.out.println(image.getOriginalFilename());
+			String path=session.getServletContext().getRealPath("/resources/images/supRv");
+			File f=new File(path);
+			if(!f.exists()) f.mkdirs();
+			
+			//파일명 생성(rename)
+			String oriFileName=image.getOriginalFilename();
+			String ext = oriFileName.substring(oriFileName.lastIndexOf("."));
+			//규칙설정
+			SimpleDateFormat sdf= new SimpleDateFormat("yyyyMMdd_HHMMssSSS");
+			int rdv = (int)(Math.random()*1000);
+			String reName = sdf.format(System.currentTimeMillis())+"_"+rdv+ext;
+			
+			// 파일 실제 저장하기
+	        try {
+	           image.transferTo(new File(path + "/" + reName));
+	     
+	        } catch (Exception e) { //IlligalStateException|IOException
+	        	e.printStackTrace();
+	        }
+	        
+	        
+	        res.getWriter().print("/merry/resources/images/supRv/"+reName);
+	        
+	        //DB에 저장 board가 insert된후 boardnum을 가져온후 저장해야함 (따로 필요?)
+	        SupUploadImg supupImg= new SupUploadImg();
+	        System.out.println("setFilerename에 들어갈 값 : "+path+"/"+reName);
+//	        att.setFileRename(path+"/"+reName);
+	        
+	        supupImg.setFileReName(reName);
+	        
+	        
+//	        System.out.println("attachList.size() : "+attachList.size());
+	        
+	        	imgList.add(supupImg);
+	        System.out.println("이미지 등록 완료시 :" +imgList);
+		}
 	
 	
 	
