@@ -13,7 +13,7 @@
 <section id="content">
 	<!-- summernote 폼-->
 	<form name="infoForm"
-		action="${pageContext.request.contextPath }/supUp/supReviewFormEnd.do"
+		action="${pageContext.request.contextPath }/supUp/supReviewFormEnd.do?infoupNum=${info.INFOUPNUM}&id=${loginMember.id}"
 		method="post" enctype="multipart/form-data">
 		<div class="container">
 			<input type="hidden" name="loginMemberNum"

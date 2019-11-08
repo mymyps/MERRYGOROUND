@@ -34,7 +34,7 @@
 							</form>
 							<br>
 							<form name="infoDelete"
-								action="${pageContext.request.contextPath }/supUp/supReviewStatus0?infoupNum=${supUpload.INFOUPNUM }"
+								action="${pageContext.request.contextPath }/supUp/supReviewStatus0?infoupNum=${supUpload.INFOUPNUM }&id=${loginMember.id}"
 								method="post">
 								<button class="btn supreviewBtn" type="submit">서포터즈 리뷰 삭제</button>
 							</form>

@@ -216,11 +216,9 @@ public class SupUploadController {
 	}
 	
 	@RequestMapping("supUp/supReviewUpadeEnd.do")
-	public ModelAndView supReviewUpadeEnd(@RequestParam Map<String, String> param) {
+	public ModelAndView supReviewUpadeEnd(@RequestParam Map<String, String> param, int infoupNum, String id) {
 		ModelAndView mv = new ModelAndView();
-		
-		System.out.println("파라미더 : "+param);
-		
+
 		int result = 0;
 		int imgResult = 0;
 		
@@ -234,14 +232,13 @@ public class SupUploadController {
 			}
 		}
 
-		
-		
 		String msg = "";
-
+		String loc = "";
 		if (result > 0) {
-			msg = "서포터즈 리뷰가 등록되었습니다.";
+			msg = "서포터즈 리뷰가 수정됐습니다.";
+			loc = "/supUp/supReview?infoupNum="+infoupNum+"&id="+id;
 		} else {
-			msg = "서포터즈 리뷰 등록 실패";
+			msg = "서포터즈 리뷰 수정 실패";
 		}
 		mv.addObject("msg", msg);
 		mv.setViewName("common/msg");
@@ -249,10 +246,24 @@ public class SupUploadController {
 	}
 	
 	@RequestMapping("/supUp/supReviewStatus0")
-	public String infoStatus0(int infoupNum) {
+	public ModelAndView infoStatus0(int infoupNum, String id) {
 		int result = 0;
 		result = service.supRvStatus0(infoupNum);
+		String msg = "";
+		String loc = "";
 		
-		return "/"; // 나중에 경로 바꿀것
+		ModelAndView mv = new ModelAndView();
+		if(result>0) {
+			msg="리뷰가 삭제됐습니다.";
+			loc="/info/infoView.do?infoupNum="+infoupNum+"&id="+id;
+		} else {
+			msg="리뷰 삭제가 실패했습니다.";
+			loc="/supUp/supReviewStatus0?infoupNum="+infoupNum+"&id="+id;
+		}
+		mv.addObject("msg", msg);
+		mv.addObject("loc", loc);
+		mv.setViewName("common/msg");
+		
+		return mv;
 	}
 }
