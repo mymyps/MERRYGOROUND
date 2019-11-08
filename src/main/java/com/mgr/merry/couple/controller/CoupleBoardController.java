@@ -13,9 +13,8 @@ import javax.servlet.http.HttpSession;
 import org.apache.catalina.servlet4preview.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -27,9 +26,6 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.mgr.merry.common.PageBarFactory;
 import com.mgr.merry.couple.model.service.CoupleBoardService;
 import com.mgr.merry.couple.model.vo.Attachment;
-
-import net.sf.json.JSONArray;
-import net.sf.json.JSONObject;
 
 @Controller
 public class CoupleBoardController {
@@ -109,6 +105,7 @@ public class CoupleBoardController {
 		
 		System.out.println(image.getOriginalFilename());
 		String path=session.getServletContext().getRealPath("/resources/images/couple");
+		System.out.println("path: "+path);
 		File f=new File(path);
 		if(!f.exists()) f.mkdirs();
 		
@@ -129,7 +126,9 @@ public class CoupleBoardController {
         }
         
         
+//        res.getWriter().print("/19AM_MERRYGOROUND_final/resources/images/couple/"+reName);
         res.getWriter().print("/merry/resources/images/couple/"+reName);
+//        res.getWriter().print(path+"\\"+reName);
         
         //DB에 저장 board가 insert된후 boardnum을 가져온후 저장해야함 (따로 필요?)
         Attachment att= new Attachment();
@@ -158,6 +157,7 @@ public class CoupleBoardController {
 		
 		String path=session.getServletContext().getRealPath("/resources/images/couple");
 		String totalPath = path + "/" + src;
+		System.out.println("totalPath: "+totalPath);
 		File f=new File(totalPath);
 		if(f.exists()) {
 			if(f.delete()) {
@@ -226,8 +226,12 @@ public class CoupleBoardController {
 	public String deleteCoupleBoard(@RequestParam("no") int no) {
 		int result =0;
 		int result2 =0;
-		result = cservice.deleteCoupleBoard(no);
+		int result3 =0;
+		
+		result3 = cservice.deleteComment(no);
 		result2 = cservice.deleteAttachment(no);
+		//c_upload테이블을 참조하는 img테이블 레코드부터 삭제
+		result = cservice.deleteCoupleBoard(no);
 		
 		return "redirect:/";
 	}
@@ -238,7 +242,7 @@ public class CoupleBoardController {
 		Map<String, String> cboard = cservice.selectCoupleBoard(no);
 		
 		mv.addObject("cboard",cboard);
-		mv.addObject("couple/updateCoupleBoard");
+		mv.addObject("couple/updateCoupleBoard");//?????
 		
 		return mv;
 	}
@@ -343,7 +347,9 @@ public class CoupleBoardController {
                 hm.put("coupleNum", comments.get(i).get("COUPLENUM"));
                 hm.put("comment", comments.get(i).get("COUPLECOMMENT"));
                 hm.put("coupleDate", comments.get(i).get("COUPLEDATE"));
-//                hm.put("writer", comments.get(i).get("COUPLEWRITER"));
+                hm.put("membernum", comments.get(i).get("MEMBERNUM"));
+                hm.put("writer", comments.get(i).get("ID"));  //작성자 ID나 NAME으로 불러오기
+                hm.put("commentNo", comments.get(i).get("COMMENTNO"));
                 System.out.println("put하고 hm: "+hm);
                 
                 hmlist.add(hm);
@@ -355,8 +361,72 @@ public class CoupleBoardController {
         String data=mapper.writeValueAsString(hmlist);
         return data;
     }
+    
+    
+    //댓글 리스트2    사용안할듯
+    @RequestMapping(value = "/couple/getReqlyList", method = RequestMethod.POST)
+	public List<Map<String,String>> getReplyList(@RequestParam("coupleNum") int coupleNum) throws Exception {
+    	System.out.println("getReqlyList: "+coupleNum);
+		return cservice.selectCommentList(coupleNum);
+
+	}
 	
-	
+    //댓글 삭제
+    @RequestMapping(value="/couple/deleteComment")
+    @ResponseBody
+    public String deleteComment(@RequestParam("commentNo") String commentNo, HttpServletRequest request) throws Exception{
+        int result=0;
+//        HttpSession session = request.getSession();
+//        LoginVO loginVO = (LoginVO)session.getAttribute("loginVO");
+        
+		System.out.println("deleteComment의 commentNo: "+commentNo);
+        try{
+        
+//            boardVO.setWriter(loginVO.getUser_id());        
+            result= cservice.deleteComment(Integer.parseInt(commentNo));
+            System.out.println("deleteComment result: "+result);
+        } catch (Exception e){
+            e.printStackTrace();
+        }
+        
+        return "success";
+    }
+    
+    
+//    @RequestMapping(value = "/saveReqly", method = RequestMethod.POST)
+//	public Map<String, Object> saveReply(@RequestParam Map<String,String> param) throws Exception {
+//		Map<String, Object> result = new HashMap<>();
+//		try {
+//			cservice.updateComment(param);
+//			result.put("status", "OK");
+//		} catch (Exception e) {
+//			e.printStackTrace();
+//			result.put("status", "False");
+//		}
+//
+//		return result;
+//	}
+    
+    
+    //댓글 수정
+    @RequestMapping(value="/couple/updateComment")
+    @ResponseBody
+    public String updateComment(@RequestBody Map<String,Object> param, HttpServletRequest request) throws Exception{
+        int result=0;
+//        HttpSession session = request.getSession();
+//        LoginVO loginVO = (LoginVO)session.getAttribute("loginVO");
+        
+		System.out.println("updateComment의 파라미터: "+param);
+        try{
+        
+//            boardVO.setWriter(loginVO.getUser_id());        
+        	result= cservice.updateComment(param);
+//            System.out.println("updateComment result: "+result);
+        } catch (Exception e){
+            e.printStackTrace();
+        }
+        return "success";
+    }
 	
 	
 }

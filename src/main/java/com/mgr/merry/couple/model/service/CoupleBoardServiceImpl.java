@@ -112,6 +112,21 @@ public class CoupleBoardServiceImpl implements CoupleBoardService {
 	@Override
 	public List<Map<String, String>> selectCommentList(int coupleNum) {
 		return cdao.selectCommentList(session,coupleNum);
+	}
+
+	@Override
+	public int deleteComment(int no) {
+		int result=0;
+		result =  cdao.deleteComment(session, no);
+//		if(result ==0) throw new RuntimeException();
+		
+		return result;
+	}
+
+	@Override
+	public int updateComment(Map<String, Object> param) {
+		// TODO Auto-generated method stub
+		return cdao.updateComment(session, param);
 	}	
 	
 	

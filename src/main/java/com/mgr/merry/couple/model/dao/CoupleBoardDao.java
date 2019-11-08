@@ -29,4 +29,7 @@ public interface CoupleBoardDao {
 	
 	int addComment(SqlSessionTemplate session, Map<String,String> param);
 	List<Map<String,String>> selectCommentList(SqlSessionTemplate session,int coupleNum);
+	
+	int deleteComment(SqlSessionTemplate session, int no);
+	int updateComment(SqlSessionTemplate session, Map<String,Object> param);
 }
