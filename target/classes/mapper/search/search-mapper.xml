@@ -20,6 +20,7 @@
 	 ON i.THEMANUM=t.THEMANUM
 	 INNER JOIN LOCATION lo
 	 ON i.LOCALNUM=lo.LOCALNUM
+	 WHERE AND i.INFOUPSTATUS=1 
 	
 	 </select>
 	  
@@ -32,9 +33,7 @@
 	 ON i.THEMANUM=t.THEMANUM
 	 INNER JOIN LOCATION lo
 	 ON i.LOCALNUM=lo.LOCALNUM
-	 WHERE i.THEMANUM=#{themaNum} AND t.THEMANUMREF=#{themaNumRef}
-
-
+	 WHERE i.THEMANUM=#{themaNum} AND t.THEMANUMREF=#{themaNumRef} AND i.INFOUPSTATUS=1
 	 
 	</select>
 	  
@@ -46,7 +45,7 @@
 	 ON i.THEMANUM=t.THEMANUM
 	 INNER JOIN LOCATION lo
 	 ON i.LOCALNUM=lo.LOCALNUM
-	 WHERE t.THEMANUMREF=#{themaNumRef}
+	 WHERE t.THEMANUMREF=#{themaNumRef} AND i.INFOUPSTATUS=1
 	  </select>
 	  
 	   <!--지역별조회 -->
@@ -66,7 +65,7 @@
 	 ON I.THEMANUM=T.THEMANUM
 	 INNER JOIN LOCATION lo
 	 ON i.LOCALNUM=lo.LOCALNUM
-	 WHERE lo.LOCALNUM=#{localNum}
+	 WHERE lo.LOCALNUM=#{localNum} AND i.INFOUPSTATUS=1
 	    </select>
 	    
 	   

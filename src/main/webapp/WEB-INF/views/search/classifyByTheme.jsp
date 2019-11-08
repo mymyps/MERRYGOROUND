@@ -28,15 +28,15 @@
 		<div class="row">
 			<div class="landing-tab clearfix">
 			 <ul class="nav nav-tabs nav-stacked col-md-3 col-sm-5">
-			              <li <c:if test="${1 eq param.themaNumRef}">class="active"</c:if>>
+			              <li <c:if test="${1 eq param.themaNumRef}">class="active" style="color: #5a554f !important;"</c:if>>
 			                  <a class="animated fadeIn" data-toggle="tab">
-			                      <span class="tab-icon"><i class="fa fa-info"></i></span>
+			                      <span class="tab-icon"><i class="fa fa-trophy"></i></span>
 			                      <div class="tab-info">
 			                         <h3><a href="${path}/search/mainThemaList?themaNumRef=1" id="themenameBrown">먹거리</a></h3>
 			                    </div>
 			                  </a>
 			              </li>
-		               <li <c:if test="${7 eq param.themaNumRef}">class="active"</c:if>>
+		               <li <c:if test="${7 eq param.themaNumRef}">class="active" style="color: #5a554f !important;"</c:if>>
                            <a class="animated fadeIn" data-toggle="tab">
 		                       <span class="tab-icon"><i class="fa fa-briefcase"></i></span>
 		                       <div class="tab-info">
@@ -44,9 +44,9 @@
 		                      </div>
 		                   </a>
 		              </li>
-		              <li <c:if test="${13 eq param.themaNumRef}">class="active"</c:if>>
+		              <li <c:if test="${13 eq param.themaNumRef}">class="active" style="color: #5a554f !important;"</c:if>>
 		                  <a class="animated fadeIn" data-toggle="tab">
-		                      <span class="tab-icon"><i class="fa fa-android"></i></span>
+		                      <span class="tab-icon"><i class="fa fa-users"></i></span>
 		                      <div class="tab-info">
 		                       <h3><a href="${path}/search/mainThemaList?themaNumRef=13" id="themenameBrown">카페/술</a></h3>
 		                      </div>
@@ -66,11 +66,11 @@
              	<div class="row text-center"> 
 						<div class="isotope-nav" data-isotope-nav="isotope">
 							<ul id="subThemaUl">
-								<li><a href="${path}/search/mainThemaList?&themaNumRef=1" class="active">전체보기</a></li>
-								<li><a href="${path}/search/subThemaList?themaNum=2&themaNumRef=1">한식</a></li>
-								<li><a href="${path}/search/subThemaList?themaNum=3&themaNumRef=1">일식</a></li>
-								<li><a href="${path}/search/subThemaList?themaNum=4&themaNumRef=1">양식</a></li>
-								<li><a href="${path}/search/subThemaList?themaNum=5&themaNumRef=1">아시안푸드</a></li>
+								<li><a href="${path}/search/mainThemaList?&themaNumRef=1" <c:if test="${param.themaNum==null}">class="active"</c:if>>전체보기</a></li>
+								<li><a href="${path}/search/subThemaList?themaNum=2&themaNumRef=1" <c:if test="${2 eq param.themaNum}">class="active"</c:if>>한식</a></li>
+								<li><a href="${path}/search/subThemaList?themaNum=3&themaNumRef=1" <c:if test="${3 eq param.themaNum}">class="active"</c:if>>일식</a></li>
+								<li><a href="${path}/search/subThemaList?themaNum=4&themaNumRef=1" <c:if test="${4 eq param.themaNum}">class="active"</c:if>>양식</a></li>
+								<li><a href="${path}/search/subThemaList?themaNum=5&themaNumRef=1" <c:if test="${5 eq param.themaNum}">class="active"</c:if>>아시안푸드</a></li>
 							
 							</ul>
 						</div>
@@ -80,12 +80,12 @@
 				<div class="row text-center">
 					<div class="isotope-nav" data-isotope-nav="isotope">
 						<ul id="subThemaUl">
-							<li><a href="${path}/search/mainThemaList?themaNumRef=7" class="active">전체보기</a></li>
-							<li><a href="${path}/search/subThemaList?themaNum=8&themaNumRef=7">실내데이트</a></li>
-							<li><a href="${path}/search/subThemaList?themaNum=9&themaNumRef=7">야외데이트</a></li>
-							<li><a href="${path}/search/subThemaList?themaNum=10&themaNumRef=7">산책코스</a></li>
-							<li><a href="${path}/search/subThemaList?themaNum=11&themaNumRef=7">연극/공연</a></li>
-							<li><a href="${path}/search/subThemaList?themaNum=12&themaNumRef=7">마사지</a></li>
+							<li><a href="${path}/search/mainThemaList?themaNumRef=7" <c:if test="${param.themaNum==null}">class="active"</c:if>>전체보기</a></li>
+							<li><a href="${path}/search/subThemaList?themaNum=8&themaNumRef=7" <c:if test="${8 eq param.themaNum}">class="active"</c:if>>실내데이트</a></li>
+							<li><a href="${path}/search/subThemaList?themaNum=9&themaNumRef=7" <c:if test="${9 eq param.themaNum}">class="active"</c:if>>야외데이트</a></li>
+							<li><a href="${path}/search/subThemaList?themaNum=10&themaNumRef=7" <c:if test="${10 eq param.themaNum}">class="active"</c:if>>산책코스</a></li>
+							<li><a href="${path}/search/subThemaList?themaNum=11&themaNumRef=7" <c:if test="${11 eq param.themaNum}">class="active"</c:if>>연극/공연</a></li>
+							<li><a href="${path}/search/subThemaList?themaNum=12&themaNumRef=7" <c:if test="${12 eq param.themaNum}">class="active"</c:if>>마사지</a></li>
 						</ul>
 					</div>
 				</div>
@@ -94,11 +94,11 @@
 					<div class="row text-center">
 						<div class="isotope-nav" data-isotope-nav="isotope">
 							<ul id="subThemaUl">
-								<li><a href="${path}/search/mainThemaList?themaNumRef=13" class="active">전체보기</a></li>
-								<li><a href="${path}/search/subThemaList?themaNum=14&themaNumRef=13">칵테일/펍</a></li>
-								<li><a href="${path}/search/subThemaList?themaNum=15&themaNumRef=13">달다구리</a></li>
-								<li><a href="${path}/search/subThemaList?themaNum=16&themaNumRef=13">포토존</a></li>
-								<li><a href="${path}/search/subThemaList?themaNum=17&themaNumRef=13">공부존</a></li>
+								<li><a href="${path}/search/mainThemaList?themaNumRef=13" <c:if test="${param.themaNum==null}">class="active"</c:if>>전체보기</a></li>
+								<li><a href="${path}/search/subThemaList?themaNum=14&themaNumRef=13" <c:if test="${14 eq param.themaNum}">class="active"</c:if>>칵테일/펍</a></li>
+								<li><a href="${path}/search/subThemaList?themaNum=15&themaNumRef=13" <c:if test="${15 eq param.themaNum}">class="active"</c:if>>달다구리</a></li>
+								<li><a href="${path}/search/subThemaList?themaNum=16&themaNumRef=13" <c:if test="${16 eq param.themaNum}">class="active"</c:if>>포토존</a></li>
+								<li><a href="${path}/search/subThemaList?themaNum=17&themaNumRef=13" <c:if test="${17 eq param.themaNum}">class="active"</c:if>>공부존</a></li>
 							</ul>
 						</div>
 					  </div>
@@ -110,7 +110,7 @@
                     		<div class="row" id="themarow2">
 						<div class="col-md-8 ts-padding2 themaContent">
 							<h3 style="margin-top: -2px;">
-							<a href="${pageContext.request.contextPath}/info/infoView.do?infoupNum=${list.infoupNum}&id=${loginMember.id}" style="color:#5a554f !important;"><c:out value='${list.infoupTitle}'/></a>
+							<a href="${pageContext.request.contextPath}/info/infoView.do?infoupNum=${list.infoupNum}&id=${loginMember.id}" style="color: #5a554f !important;"><c:out value='${list.infoupTitle}'/></a>
 <%--                             <c:out value='${list.infoupTitle}'/> --%>
 							</h3>
 							<p>이용시간 : <c:out value='${list.infoupTime}'/> / 전화번호 : <c:out value='${list.infoupPhone}'/></p>

@@ -132,7 +132,6 @@
                            <ul>
                               <li><a href="${pageContext.request.contextPath }/member/login.do">로그인</a></li>
                               <li><a href="${pageContext.request.contextPath }/member/signup.do">회원가입</a></li>
-                              <%-- <li><a href="${pageContext.request.contextPath }">dd</a></li> --%>
                               <li><a href="${pageContext.request.contextPath }/member/searchpw.do">비밀번호찾기</a></li>
                               
                            </ul>
@@ -206,7 +205,6 @@
                            </ul>
                         </div>
                      </li>
-                     <li><a href="${pageContext.request.contextPath}">Contact</a></li>
                   </ul>
                </nav>
                <!--/ Navigation end -->
