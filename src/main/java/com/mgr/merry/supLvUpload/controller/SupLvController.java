@@ -63,7 +63,7 @@ public class SupLvController {
 			@RequestParam(value = "supLvImg3", required = false) MultipartFile[] supLvUploadImg3,
 			@RequestParam(value = "supLvImg4", required = false) MultipartFile[] supLvUploadImg4,
 			@RequestParam(value = "supLvImg5", required = false) MultipartFile[] supLvUploadImg5,
-			HttpServletRequest request) {
+			HttpServletRequest request, String id) {
 
 		String saveDir = request.getSession().getServletContext().getRealPath("/resources/upload/supLv");
 		SupLvUploadImg supLvImg= new SupLvUploadImg();
@@ -125,12 +125,11 @@ public class SupLvController {
 		}
 		
 		int result = 0;
-		
-		System.out.println("섶렙 컨트롤러 이미지 : "+supLvImg);
+		int result2 = 0;
 		
 		try {
 			result = service.insertSupLv(param, supLvImg);
-			
+			result2 = service.updateSupStatus(id);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

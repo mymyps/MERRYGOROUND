@@ -20,4 +20,9 @@ public class SupLvDaoImpl implements SupLvDao {
 		return session.insert("supLv.insertSupLvImg", supLvImg);
 	}
 
+	@Override
+	public int updateSupStatus(SqlSessionTemplate session, String id) {
+		return session.update("supLv.updateSupStatus", id);
+	}
+
 }

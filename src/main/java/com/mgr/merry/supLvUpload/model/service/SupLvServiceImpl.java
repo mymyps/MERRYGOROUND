@@ -34,6 +34,11 @@ public class SupLvServiceImpl implements SupLvService {
 		return result;
 	}
 
+	@Override
+	public int updateSupStatus(String id) {
+		return dao.updateSupStatus(session, id);
+	}
+
 	
 
 }

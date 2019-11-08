@@ -9,5 +9,8 @@
 	<insert id="insertSupLvImg" parameterType="com.mgr.merry.supLvUpload.model.vo.SupLvUploadImg">
 		INSERT INTO SUPPORTERS_LV_UPLOAD_IMG VALUES(SEQ_SUP_LV_NUM.CURRVAL, #{fileOrgName1}, #{fileOrgName2}, #{fileOrgName3}, #{fileOrgName4}, #{fileOrgName5})
 	</insert>
+	<update id="updateMamberSupStatus1">
+		UPDATE MEMBERS SET SUPSTATUS=1 WHERE ID=${id}
+	</update>
 	
 </mapper>
