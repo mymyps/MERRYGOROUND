@@ -1,5 +1,6 @@
 package com.mgr.merry.sign.model.dao;
 
+import java.util.List;
 import java.util.Map;
 
 import org.mybatis.spring.SqlSessionTemplate;
@@ -20,10 +21,13 @@ public interface SignDao {
 	int pwUpdate(SqlSessionTemplate session,Members m);
 	int updatesuple(SqlSessionTemplate session,int num);
 	Supporters selectSup(SqlSessionTemplate session,int memNo);
-	Map<String,Object> selectSupt3(SqlSessionTemplate session,int supNum);
+//	Map<String,Object> selectSupt3(SqlSessionTemplate session,int supNum);
+	List<Object> selectSupt3(SqlSessionTemplate session,int supNum);
 	int selectMemberOne2(SqlSessionTemplate session,Members m);
 	int inserSupporter(SqlSessionTemplate session, Map<String, Object> data);
 	int insertSupporterFile(SqlSessionTemplate session, Map<String, Object> data);
 	int updatestatus(SqlSessionTemplate session, Map<String, Object> data);
 	Members checkId(SqlSessionTemplate session, Members m);
+	int selectBoardCount(SqlSessionTemplate session,int supNum);
+	List<Map<String,String>> selectBoardList(SqlSessionTemplate session,int cPage,int numPerPage,int supNum);
 }

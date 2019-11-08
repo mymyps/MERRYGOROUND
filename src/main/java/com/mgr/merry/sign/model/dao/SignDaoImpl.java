@@ -1,7 +1,10 @@
 package com.mgr.merry.sign.model.dao;
 
+import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
+import org.apache.ibatis.session.RowBounds;
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.stereotype.Repository;
 
@@ -13,7 +16,6 @@ public class SignDaoImpl implements SignDao {
 
 	@Override
 	public int insertMember(SqlSessionTemplate session, Members m) {
-		System.out.println("@@@@@@@@@@@@@@@@@@" + m);
 		return session.insert("sign.insertMember", m);
 	}
 
@@ -85,15 +87,20 @@ public class SignDaoImpl implements SignDao {
 		return session.selectOne("sign.selectSup", memNo);
 	}
 
+//	@Override
+//	public Map<String, Object> selectSupt3(SqlSessionTemplate session, int supNum) {
+//		return session.selectList("sign.selectSupt3", supNum);
+//	}
 	@Override
-	public Map<String, Object> selectSupt3(SqlSessionTemplate session, int supNum) {
-		return session.selectOne("sign.selectSupt3", supNum);
+	public List<Object> selectSupt3(SqlSessionTemplate session, int supNum) {
+		return session.selectList("sign.selectSupt3",supNum);
 	}
-
 	@Override
 	public int selectMemberOne2(SqlSessionTemplate session, Members m) {
 		return session.selectOne("sign.selectMemberOne2", m);
 	}
+
+	
 
 	@Override
 	public int inserSupporter(SqlSessionTemplate session, Map<String, Object> data) {
@@ -114,6 +121,20 @@ public class SignDaoImpl implements SignDao {
 	@Override
 	public Members checkId(SqlSessionTemplate session, Members m) {
 		return session.selectOne("sign.checkId",m);
+	}
+
+	@Override
+	public int selectBoardCount(SqlSessionTemplate session,int supNum) {
+		return session.selectOne("sign.selectBoardCount",supNum);
+	}
+
+	@Override
+	public List<Map<String, String>> selectBoardList(SqlSessionTemplate session, int cPage, int numPerPage,int supNum) {
+		RowBounds rows= new RowBounds((cPage-1)*numPerPage,numPerPage);
+		Map<String,Object> map = new HashMap();
+		map.put("rows", rows);
+		map.put("supNum",supNum);
+		return session.selectList("sign.selectBoardList",supNum,rows);
 	}
 	
 

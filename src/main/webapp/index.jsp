@@ -422,7 +422,7 @@
 			url: '${pageContext.request.contextPath }/admin/noticeIndexLoad',
 			dataType:"JSON",
 			success: function (data) {
-				console.log(data);
+				//console.log(data);
 				$(".nanumSquare").text(data['NOTICECONTENT']).css({"color":"orange"});
 				
 			},error: function(e) {

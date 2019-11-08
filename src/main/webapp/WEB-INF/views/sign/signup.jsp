@@ -93,7 +93,7 @@
 							<!-- <button type ="submit" class="login100-form-btn">
 								Sign Up
 							</button>  -->
-								<input type="submit" class="btn btn-primary solid cd-btn" value="가입" disabled="">&nbsp;
+								<input type="submit" class="btn btn-primary solid cd-btn btn_check" value="가입" disabled="">&nbsp;
 								<input type="reset" class="btn btn-primary solid cd-btn" value="취소">
 						<!-- </div> -->
 					</div>
@@ -132,10 +132,10 @@
 			success:function(data){
 				if(data=="true"){
 				alert("가입가능");
-				$btn_checkId = $('.btn_checkId').attr('disabled', false);
+				$btn_checkId = $('.btn_check').attr('disabled', false);
 				}else{
 					alert("아이디존재");
-				$btn_checkId = $('.btn_checkId').attr('disabled', true);
+				$btn_checkId = $('.btn_check').attr('disabled', true);
 				}
 			}, error : function(e) {
             	console.log("error");

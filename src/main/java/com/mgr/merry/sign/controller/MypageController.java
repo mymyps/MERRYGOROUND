@@ -1,8 +1,6 @@
 package com.mgr.merry.sign.controller;
 
 import java.io.File;
-import java.text.SimpleDateFormat;
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -28,6 +26,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.mgr.merry.common.PageBarFactory;
 import com.mgr.merry.common.SMTPTemplate;
 import com.mgr.merry.sign.model.service.SignService;
 import com.mgr.merry.sign.model.vo.Members;
@@ -42,24 +41,37 @@ public class MypageController {
 	SignService service;
 
 	@RequestMapping("/sign/mypage.do")
-	public String signup(HttpServletRequest request, Members m, Model model ,@RequestParam(value="cPage", required=false,defaultValue="0") int cPage) {
-		String mNo = request.getParameter("mNo");
-		int memNo = Integer.parseInt(mNo);
+	public ModelAndView signup(HttpServletRequest request, Members m, Model model ,@RequestParam(value="cPage", required=false,defaultValue="0") int cPage) {
+		ModelAndView mv = new ModelAndView();
+//		String mNo = request.getParameter("mNo");
+		int memNo = Integer.parseInt(request.getParameter("mNo"));
+//		int memNo = mNo;
 		Members result = service.selectMember(m, memNo);
 		
+		
 		int numPerPage=3;
+		
 		
 		Supporters result2 = service.selectSup(memNo);
 		if(result2!=null) {
 			int supNum = result2.getSupNum();
-			Map<String, Object> map = service.selectSupt3(supNum);
-			model.addAttribute("map", map);
+			int totalCount=service.selectBoardCount(supNum);
+			List<Map<String,String>> list = service.selectBoardList(cPage,numPerPage,supNum);
+			List<Object> map = service.selectSupt3(supNum);
+//			mv.addObject("map", map);
+			mv.addObject("pageBar",PageBarFactory.getPageBar(totalCount, cPage, numPerPage, "/merry/sign/mypage.do?mNo="+memNo));
+			mv.addObject("mNo",memNo);
+			mv.addObject("count",totalCount);
+			mv.addObject("list",list);
+			System.out.println("list : "+ list.toString());
+			System.out.println("list.size"+list.size());
 		}
 		
-
-		model.addAttribute("members", result);
-		model.addAttribute("supup", result);
-		return "sign/mypage";
+		
+		mv.addObject("members", result);
+		mv.addObject("supup", result);
+		mv.setViewName("sign/mypage");
+		return mv;
 	}
 
 	@RequestMapping("/member/update.do")
