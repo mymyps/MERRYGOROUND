@@ -52,7 +52,16 @@
 			<div class="row">
 				<div class="landing-tab clearfix">
 					<ul class="nav nav-tabs nav-stacked col-md-3 col-sm-5">
-					  	
+					  	<li>
+					  		<a class="animated fadeIn" href="#tab_a" data-toggle="tab">
+					  			<!-- <span class="tab-icon"><i class="fa fa-info"></i></span> -->
+								  <span class="tab-icon"><i class="fa fa-info"></i></span>
+								
+								  <div class="tab-info">
+						  			<h3>개인정보수정</h3>
+					  			</div>
+					  		</a>
+						  </li>
 						   <c:if test="${!empty list}">
 						  <li class="active">
 								<a class="animated fadeIn" href="#tab_c" data-toggle="tab">
@@ -63,16 +72,6 @@
 								</a>
 						  </li>
 						</c:if>
-						<li>
-					  		<a class="animated fadeIn" href="#tab_a" data-toggle="tab">
-					  			<!-- <span class="tab-icon"><i class="fa fa-info"></i></span> -->
-								  <span class="tab-icon"><i class="fa fa-info"></i></span>
-								
-								  <div class="tab-info">
-						  			<h3>개인정보수정</h3>
-					  			</div>
-					  		</a>
-						  </li>
 					  	<li>
 						  	<a class="animated fadeIn" href="#tab_b" data-toggle="tab">
 								  <!-- <span class="tab-icon"><i class="fa fa-briefcase"></i></span> -->
@@ -82,7 +81,6 @@
 					  			</div>
 						  	</a>
 						</li>
-						
 					 	<li>
 						  	<a class="animated fadeIn" href="#tab_g" data-toggle="tab">
 								  <!-- <span class="tab-icon"><i class="fa fa-briefcase"></i></span> -->
@@ -118,13 +116,7 @@
 						</li> -->
 					</ul>
 					<div class="tab-content col-md-9 col-sm-7">
-					<c:if test="${empty list}">
-				        <div class="tab-pane active animated fadeIn" id="tab_a">
-				    </c:if>
-				    <c:if test="${!empty list}">
-				        <div class="tab-pane animated fadeIn" id="tab_a">
-				    </c:if>
-				    
+				        <div class="tab-pane active animated fadeInRight" id="tab_a">
 				        	<!-- <i class="fa fa-trophy big"></i> -->
 				            <h3>개인정보수정</h3> 
 				            <form class="login100-form validate-form" method="post" action="${path}/member/update.do" onsubmit="return checkKey();" enctype="multipart/form-data">
@@ -237,12 +229,8 @@
 							</form>	
 							</div>							 
 				        </div>
-				        <c:if test="${!empty list}">
-				        	<div class="tab-pane active animated fadeInRight" id="tab_c">    
-				        </c:if>
-				        <c:if test="${empty list}">
-				        <div class="tab-pane animated fadeInRight" id="tab_c">    
-				        </c:if>
+				        <div class="tab-pane animated fadeIn" id="tab_c">
+				            
 				            <h3>내 작성글 보기</h3> 
 				            <div class="row">
 				       			 <c:forEach items="${list }" var="up" varStatus="i">
