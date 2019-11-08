@@ -58,11 +58,20 @@
    
    
    <insert id="addComment" parameterType="map">
-      insert into c_upload_comment values(#{coupleNum},#{comment},default)
+      insert into c_upload_comment values(#{coupleNum},#{comment},default,#{memberNum},seq_c_upload_com.nextval)
    </insert>
    
    <select id="selectCommentList" resultType="map">
-      select * from c_upload_comment where couplenum=#{coupleNum} order by coupledate
+      select * from c_upload_comment cc,members m where cc.membernum=m.membernum and couplenum=#{coupleNum} order by coupledate
    </select>
+   
+   
+   <delete id="deleteComment">
+      delete from c_upload_comment where commentNo=#{no}
+   </delete>
+   
+   <update id="updateComment" parameterType="map">
+   	update c_upload_comment set couplecomment=#{comment} where commentno=#{commentNo}
+   </update>
 
 </mapper>

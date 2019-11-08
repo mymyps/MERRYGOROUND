@@ -57,5 +57,16 @@
    <select id="checkId" resultType="com.mgr.merry.sign.model.vo.Members" parameterType="com.mgr.merry.sign.model.vo.Members">
       select * from members where id=#{id}
    </select>
-   
+   <select id="selectBoardCount" resultType="_int">
+		select count(*) from supporters 
+         inner join supporters_upload using(supNum)
+         inner join supporters_upload_img using(supupNum)
+         where supNum=#{supNum}
+	</select>
+	<select id="selectBoardList" resultType="map" parameterType="map">
+  		select * from supporters 
+         inner join supporters_upload using(supNum)
+         inner join supporters_upload_img using(supupNum)
+         where supNum=#{supNum}
+  	</select>
 </mapper>

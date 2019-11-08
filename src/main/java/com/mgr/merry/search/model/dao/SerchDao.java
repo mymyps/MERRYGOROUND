@@ -30,5 +30,6 @@ public interface SerchDao {
 
 	List<Location> selectLocationList(SqlSessionTemplate session);
 
+	Map<String, String> noticeIndexLoad(SqlSessionTemplate session);
 
 }

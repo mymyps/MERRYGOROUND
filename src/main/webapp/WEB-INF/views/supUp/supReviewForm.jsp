@@ -27,7 +27,7 @@
 					<!-- Blog post start -->
 					<div class="post-content">
 						<h1 class="post-title text-center">
-							<a href="blog-item.html">서포터즈 리뷰 작성</a>
+							<a href="blog-item.html">서포터즈 리뷰 수정</a>
 						</h1>
 						<hr>
 						<div class="entry-content">
@@ -57,7 +57,7 @@
 								<div>
 									<div class="infoFormSubFrame">제목</div>
 									<p class="infoForm1">
-										<input type="text" name="supupTitle" />
+										<input type="text" name="supupTitle"/>
 									</p>
 								</div>
 								<textarea id="summ" name="supupContent" required></textarea>
@@ -116,7 +116,7 @@
 	$.ajax({
 				data : form_data,
 				type : "post",
-				url : "${path}/summernote_imageUpload_supLv.do",
+				url : "${path}/summernote_imageUpload_supRv.do",
 				cache : false,
 				contentType : false,
 				enctype : "multipart/form-data",

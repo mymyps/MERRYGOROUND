@@ -23,4 +23,6 @@ public interface CoupleBoardService {
 	int addComment(Map<String,String> param);
 	List<Map<String,String>> selectCommentList(int coupleNum);
 
+	int deleteComment(int no);
+	int updateComment(Map<String, Object> param);
 }

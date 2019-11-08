@@ -31,7 +31,7 @@
 	
 	<!-- summernote 폼-->
 <!-- 	인포업로드에서 번호를 받아와서 그번호 DB작성 -->
-	<form action="${path }/couple/coupleBoardWriteEnd" method="post">
+	<form action="${path }/couple/coupleBoardWriteEnd" id="writeFrm" method="post">
 		<h2 style="text-align: center;">게시글 작성</h2>
 		<input type="text" name="title" style="width: 40%;" placeholder="제목" class="form-control" required/>
 			<br>
@@ -39,7 +39,7 @@
 			<br>
 			<textarea id="summernote" name="content" required></textarea>
 		<div><br>
-			<button class="btn btn-primary pull-right" type="submit">게시글 작성</button> 
+			<button class="btn btn-primary pull-right" id="write" type="submit">게시글 작성</button> 
 		</div>
 	</form>
 
@@ -86,6 +86,19 @@
 		});
 
 	}
+	
+	
+	
+	$('#write').click(function(){
+		if(confirm('정말로 등록하시겠습니까?')){
+			var frm=$('#writeFrm');
+			var url="${path }/couple/coupleBoardWriteEnd";
+			frm.attr("action", url);
+			frm.submit();
+		}else{
+			return false;
+		}
+	})
 	</script>
 		</div>
 	</div>

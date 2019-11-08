@@ -16,7 +16,11 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.servlet.ModelAndView;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.mgr.merry.info.model.vo.InfoUpload;
 import com.mgr.merry.search.model.service.SearchService;
 
@@ -118,5 +122,23 @@ public class SearchController {
 //        }
 		
 	}
+	
+	// 공시사항 인덱스 출력메소드
+	@RequestMapping(value="/admin/noticeIndexLoad",produces="application/json;charset=UTF-8")
+	@ResponseBody
+	public String adminNoticeInsert() throws JsonProcessingException {
+
+		//비지니스 로직처리(데이터 삽입)
+		Map<String, String> list = service.noticeIndexLoad();
+		logger.debug(list.toString());
+		
+		ObjectMapper mapper = new ObjectMapper();
+		String strData = mapper.writeValueAsString(list);
+		
+		return strData;
+		
+	}
+	
+	
 
 }

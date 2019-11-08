@@ -212,7 +212,7 @@
 	</select>
 	
 	<update id="cletifyAdmin" parameterType="_int" >
-		update members set MEMBERLEVEL = 2 
+		update members set MEMBERLEVEL = 2 , SUPSTATUS = 0 
 		where MEMBERNUM = #{memberNum}
 	</update>
 	

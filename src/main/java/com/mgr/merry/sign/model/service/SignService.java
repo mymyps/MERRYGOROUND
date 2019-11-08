@@ -1,5 +1,6 @@
 package com.mgr.merry.sign.model.service;
 
+import java.util.List;
 import java.util.Map;
 
 import com.mgr.merry.sign.model.vo.Members;
@@ -17,10 +18,13 @@ public interface SignService {
 	Members selectCp(Members m);
 	int pwUpdate(Members m);
 	Supporters selectSup(int memNo);
-	Map<String,Object> selectSupt3(int supNum);
+//	Map<String,Object> selectSupt3(int supNum);
+	List<Object> selectSupt3(int supNum);
 	int selectMemberOne2(Members m);
 	int insertSupporter(Map<String, Object> data);
 	int insertSupporterFile(Map<String, Object> data);
 	int updatestatus(Map<String, Object> data);
 	Members checkId(Members m);
+	int selectBoardCount(int supNum);
+	List<Map<String,String>> selectBoardList(int cPage,int numPerPage,int supNum);
 }

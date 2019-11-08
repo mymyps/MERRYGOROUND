@@ -89,12 +89,21 @@ public class SupUploadServiceImpl implements SupUploadService {
 		
 		if(imgList.size()>0) {
 			for(SupUploadImg supImg : imgList) {
-				System.out.println("param.get('coupleNum'): "+param.get("coupleNum"));
 				result = dao.insertSupUploadImg(session, supImg);
 			}
 		}
 
 		return result;
+	}
+
+	@Override
+	public int updateSupReview(Map<String, String> param) {
+		return dao.updateSupReview(session, param);
+	}
+
+	@Override
+	public int supRvStatus0(int infoupNum) {
+		return dao.supRvStatus0(session, infoupNum);
 	}
 
 

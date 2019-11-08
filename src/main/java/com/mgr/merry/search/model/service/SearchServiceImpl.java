@@ -68,6 +68,9 @@ public class SearchServiceImpl implements SearchService {
 		return dao.selectLocationList(session);
 	}
 
-	
+	@Override
+	public Map<String, String> noticeIndexLoad() {
+		return dao.noticeIndexLoad(session);
+	}
 
 }
