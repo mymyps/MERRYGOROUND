@@ -13,10 +13,10 @@
 					<strong>404</strong>
 				</div>
 				<div class="error-message">
-					<h3>이런....!페이지를 찾을 수 없다귯....!</h3>
+					<h3>페이지를 찾을 수 없습니다.</h3>
 				</div>
 				<div class="error-body">
-					404개짱난당<br/>
+					고객센터에 문의하세요.<br/>
 					<a href="index.html" class="btn btn-primary solid blank"><i class="fa fa-arrow-circle-left">&nbsp;</i> Go to Home</a>
 				</div>
 			</div>
