@@ -106,7 +106,6 @@ public class SearchController {
 		
 		logger.debug(""+resultList);
 		
-		//타입을 json으로 바꿔줘야됨
 		response.setContentType("application/x-json; charset=UTF-8");
 		
 		//DTO 타입의 어레이리스트를 json 형태로 바꿔주는 구문(라이브러리 필수, zip->jar 확장자명 꼭 확인)

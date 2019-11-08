@@ -15,7 +15,7 @@
 .map_wrap {position:relative;width:100%;height:500px;}
 #menu_wrap {position:absolute;top:0;left:0;bottom:0;width:250px;margin:10px 0 30px 10px;padding:5px;overflow-y:auto;background:rgba(255, 255, 255, 0.8);z-index: 1;font-size:12px;border-radius: 10px;}
 .bg_white {background:#fff;}
-#menu_wrap hr {display: block; height: 1px;border: 0; border-top: 2px solid lightgray;margin:3px 0; margin-top:10px;}
+#menu_wrap hr {display: block; height: 1px;border: 0; border-top: 2px solid lightgray;margin:3px 0; margin-top:20px;}
 #menu_wrap .option{text-align: center;}
 #menu_wrap .option p {margin:10px 0;}  
 #menu_wrap .option button {margin-left:5px;}
@@ -46,83 +46,78 @@
 #pagination {margin:10px auto;text-align: center;}
 #pagination a {display:inline-block;margin-right:10px;}
 #pagination .on {font-weight: bold; cursor: default;color:#777;}
+#submit {
+background-color:#EB9579;
+color:white;
+position: relative;
+right:10px;
+height:30px;
+}
 </style>
 <section style="padding: 0px 0;">
-
-<!--맵 div-->
-<!-- <div class="map_wrap"> -->
-
-
 <div id="map" style="width: 100%; height: 650px; position: relative; overflow: hidden;"></div>
-	<!--왼쪽에 키워드검색&검색결과 하얀 박스 -->
-	<div id="menu_wrap" class="bg_white">
+			 <div id="menu_wrap" class="bg_white">
         <div class="option">
-        <h3>키워드 검색</h3>
-            <div style="margin-top:10px;">
-               <input type="text" value="" placeholder=" ex)강남역" id="keyword" size="20">
-	   		   <button id="submit" class="btn" style="background-color:#EB9579;color:white;height:29.5px;margin-left:-3px;">검색</button>
-            </div>
+               <div>
+               <h3>키워드검색</h3>
+					<input type="text" value="" placeholder=" ex) 테헤란로" id="keyword" size="25">
+					<button id="submit" class="btn">검색</button>
+				</div>
         </div>
         <hr>
         <ul id="placesList"></ul>
         <div id="pagination"></div>
-    </div><!--왼쪽에 키워드검색&검색결과 하얀 박스 끝 -->
-<!--     </div> -->
-<!--     map_wrap끝 -->
-    
-
-
-
+    </div>
 <p><em>지도를 클릭해주세요!</em></p> 
 <div id="clickLatlng"></div>
 <p id="result"></p>
 <p id="result1"></p>
 <p id="result2"></p>
 
-<script type="text/javascript" src="http://dapi.kakao.com/v2/maps/sdk.js?appkey=a70d9f47dd92a2c810ce5d8c69f6b406"></script>
+<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=a70d9f47dd92a2c810ce5d8c69f6b406"></script>
 <script>
 
-/* 지도~*/
-	var markers = [];
-	var mapContainer = document.getElementById('map'), // 지도를 표시할 div 
-	mapOption = {
-		center : new kakao.maps.LatLng(37.566826, 126.9786567), // 지도의 중심좌표
-		level : 3 // 지도의 확대 레벨
-	};
-	
-	// 지도를 생성합니다    
-	var map = new kakao.maps.Map(mapContainer, mapOption);
+var markers = [];
+var mapContainer = document.getElementById('map'), // 지도를 표시할 div 
+mapOption = {
+	center : new kakao.maps.LatLng(37.566826, 126.9786567), // 지도의 중심좌표
+	level : 3
+// 지도의 확대 레벨
+};
 
-	//지도 확대 축소를 제어할 수 있는  줌 컨트롤을 생성합니다
-	var zoomControl = new kakao.maps.ZoomControl();
-	map.addControl(zoomControl, kakao.maps.ControlPosition.RIGHT);
-	
+// 지도를 생성합니다    
+var map = new kakao.maps.Map(mapContainer, mapOption);
 
-	// 지도를 클릭한 위치에 표출할 마커입니다
-	var marker = new kakao.maps.Marker({ 
-	    // 지도 중심좌표에 마커를 생성합니다 
-	    position: map.getCenter() 
-	}); 
-	// 지도에 마커를 표시합니다
-	marker.setMap(map);
 
-	// 지도에 클릭 이벤트를 등록합니다
-	// 지도를 클릭하면 마지막 파라미터로 넘어온 함수를 호출합니다
-	kakao.maps.event.addListener(map, 'click', function(mouseEvent) {        
-	    
-	    // 클릭한 위도, 경도 정보를 가져옵니다 
-	    var latlng = mouseEvent.latLng; 
-	    
-	    // 마커 위치를 클릭한 위치로 옮깁니다
-	    marker.setPosition(latlng);
-	    
-	    var message = '클릭한 위치의 위도는 ' + latlng.getLat() + ' 이고, ';
-	    message += '경도는 ' + latlng.getLng() + ' 입니다';
-	    
-	    var resultDiv = document.getElementById('clickLatlng'); 
-	    resultDiv.innerHTML = message;
-	    
-	});
+//지도 확대 축소를 제어할 수 있는  줌 컨트롤을 생성합니다
+var zoomControl = new kakao.maps.ZoomControl();
+map.addControl(zoomControl, kakao.maps.ControlPosition.RIGHT);
+
+//지도를 클릭한 위치에 표출할 마커입니다
+var marker = new kakao.maps.Marker({ 
+  // 지도 중심좌표에 마커를 생성합니다 
+  position: map.getCenter() 
+}); 
+//지도에 마커를 표시합니다
+marker.setMap(map);
+
+//지도에 클릭 이벤트를 등록합니다
+//지도를 클릭하면 마지막 파라미터로 넘어온 함수를 호출합니다
+kakao.maps.event.addListener(map, 'click', function(mouseEvent) {        
+  
+  // 클릭한 위도, 경도 정보를 가져옵니다 
+  var latlng = mouseEvent.latLng; 
+  
+  // 마커 위치를 클릭한 위치로 옮깁니다
+  marker.setPosition(latlng);
+  
+  var message = '클릭한 위치의 위도는 ' + latlng.getLat() + ' 이고, ';
+  message += '경도는 ' + latlng.getLng() + ' 입니다';
+  
+  var resultDiv = document.getElementById('clickLatlng'); 
+  resultDiv.innerHTML = message;
+  
+});
 
 /* 접속위치를 받아오기 */
 // HTML5의 geolocation으로 사용할 수 있는지 확인합니다 
@@ -133,9 +128,10 @@ if (navigator.geolocation) {
 
 		var lat = position.coords.latitude, // 위도
 		lon = position.coords.longitude; // 경도
+		
 
 		var locPosition = new kakao.maps.LatLng(lat, lon), // 마커가 표시될 위치를 geolocation으로 얻어온 좌표로 생성합니다
-		message = '<div style="padding:5px;">너의위치는 여기란다</div>'; // 인포윈도우에 표시될 내용입니다
+		message = '<div style="padding:5px;"><h4>너의 위치는...</h4></div>'; // 인포윈도우에 표시될 내용입니다
 		
 		var resultDiv1 = document.getElementById('result1');
 		var resultDiv2 = document.getElementById('result2');
@@ -201,6 +197,7 @@ kakao.maps.event.addListener(map, 'dragend', function() {
 });
 
 
+
 // 지도 위에 표시되고 있는 마커를 모두 제거합니다
 function removeMarker() {
 	for (var i = 0; i < markers.length; i++) {
@@ -223,7 +220,7 @@ $('#submit').click(function(){
 	var x=$('#result2').html();
 	
 	$.ajax({
-		url:"<%=request.getContextPath()%>/search/mapSearch",
+		url:"${path}/search/mapSearchEnd",
 		type : "post",
 		data : {
 			keyword : keyword,
@@ -251,8 +248,8 @@ $('#submit').click(function(){
 		error : function(data) {
 		}
 
-	})
-})
+	});
+});
 function displayPlaces(places,cPage,pagination){
 	
 	var listEl = document.getElementById('placesList'), 

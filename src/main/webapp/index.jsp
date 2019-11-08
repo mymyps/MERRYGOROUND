@@ -379,7 +379,7 @@
 				<span class="title-icon pull-left"><i class="fa fa-clipboard"></i></span>
 				<h2 class="title" id="brownColor">공지사항
 					<span class="title-desc">
-						<p class="nanumSquare">메리고라운드 이용 시 공지사항을 꼭 확인해주세요:)</p>
+						<p class="nanumSquare1">메리고라운드 이용 시 공지사항을 꼭 확인해주세요:)</p>
 					</span>
 				</h2>
 				
