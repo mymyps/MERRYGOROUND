@@ -13,7 +13,7 @@
 <section id="content">
 	<div class="container">
 		<form name="infoForm"
-			action="${pageContext.request.contextPath }/info/infoFormEnd.do"
+			action="${pageContext.request.contextPath }/info/infoFormEnd.do?infoupNum=${info.infoupNum}&id=${loginMember.id}"
 			method="post"
 			enctype="multipart/form-data">
 			<input type="hidden" value="${supporters.supNum }" name="supNum">

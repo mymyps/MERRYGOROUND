@@ -50,11 +50,7 @@ public class InfoController {
 	// infoForm으로 들어가기
 	// 완료
 	@RequestMapping("/info/infoForm.do")
-	public ModelAndView infoForm(HttpServletRequest request, Members m) {
-		
-		String mNum=(String)request.getParameter("mNum");
-		System.out.println("인포컨트롤러 : "+mNum);
-		int memberNum=Integer.parseInt(mNum);
+	public ModelAndView infoForm(HttpServletRequest request, int mNum) {
 		
 		ModelAndView mv = new ModelAndView();
 		List<Thema> themaList = sservice.selectThemaList3();
@@ -65,7 +61,7 @@ public class InfoController {
 //		Members m = new Members();
 //		m.setMemberNum(memberNum);
 		
-		Supporters result2 = supservice.selectSup(memberNum);
+		Supporters result2 = supservice.selectSup(mNum);
 
 		mv.addObject("supporters",result2);
 		mv.addObject("themaList", themaList);
@@ -104,7 +100,7 @@ public class InfoController {
 	@RequestMapping("/info/infoFormEnd.do")
 	public ModelAndView insertInfo(@RequestParam Map<String, String> param,
 			@RequestParam(value = "infoupFile", required = false) MultipartFile[] infoupFile,
-			HttpServletRequest request) {
+			HttpServletRequest request, int infoupNum, String id) {
 		
 		String saveDir = request.getSession().getServletContext().getRealPath("/resources/upload/info");
 		InfoUploadImg infoimg = new InfoUploadImg();
@@ -133,14 +129,17 @@ public class InfoController {
 			e.printStackTrace();
 		}
 		String msg = "";
-
+		String loc = "";
 		if (result > 0) {
 			msg = "INFO가 등록되었습니다.";
+			loc ="/info/infoView.do?infoupNum="+infoupNum+"&id="+id;
 		} else {
 			msg = "INFO 등록 실패";
+//			loc ="/info/infoForm.do"
 		}
 		ModelAndView mv = new ModelAndView();
 		mv.addObject("msg", msg);
+		mv.addObject("loc", loc);
 		mv.setViewName("common/msg");
 		return mv;
 	}
