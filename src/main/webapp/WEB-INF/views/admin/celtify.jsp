@@ -112,8 +112,8 @@
 	                                                <td><c:out value="${b['PHONE'] }"/></td>
 	                                                <td><c:out value="${b['EMAIL'] }"/></td>
 	                                                <td>
-                                                        <span class="badge badge-complete celti" id="fy${i.count }" >승 인</span>
-                                                        <span class="badge badge-complete celti2" style="display:none">승 인</span>
+                                                        <span class="badge badge-complete celti" id="fy${i.count }" >확 인</span>
+                                                        <span class="badge badge-complete celti2" style="display:none">완 료</span>
                                                     </td>
 	                                            </tr>
 	                                            </c:forEach>
@@ -149,10 +149,98 @@
     <!-- modal view -->
     <div id="myModal" class="modal">
     	<div class="modal-content">
+    	
+    	<section id="gallery" style="text-align: center;">
+    	
+    		
+    	
+    	<div id="carouselExampleControls" class="carousel slide" data-ride="carousel">
+		  <div class="carousel-inner">
+		    <div class="carousel-item active">
+		      <img src="${path }/resources/upload/supLv/default.png" alt="" style="height:404px;">
+		    </div>
+		    <div class="carousel-item">
+		      <img src="${path }/resources/upload/supLv/default.png" alt="" style="height:404px;">
+		    </div>
+		    <div class="carousel-item">
+		      <img src="${path }/resources/upload/supLv/default.png" alt="" style="height:404px;">
+		    </div>
+		  </div>
+		  <a class="carousel-control-prev" href="#carouselExampleControls" role="button" data-slide="prev">
+		    <span class="carousel-control-prev-icon" aria-hidden="true" style="background-color:#ff0000d1;"></span>
+		    <span class="sr-only">Previous</span>
+		  </a>
+		  <a class="carousel-control-next" href="#carouselExampleControls" role="button" data-slide="next">
+		    <span class="carousel-control-next-icon" aria-hidden="true" style="background-color:#ff0000d1;"></span>
+		    <span class="sr-only">Next</span>
+		  </a>
+		</div>
+		<br/>
+		<div>
+			<!-- 컨텐츠 내용 -->
+			<span class="subCont"></span>
+		</div>
+		<br/>
+    	
+    	
+    	
+      	
+    	<%-- 
     		<span class="close">&times;</span>
-    		<p>sjdflaksjdflkagfahsdfjklsfjsfasflkasdhfkjas</p>
+    		<!-- 디자인 작업 -->
+    		<div class="row no-gutters">
+
+	          <div class="col-lg-4 col-md-6">
+	            <div class="gallery-item wow fadeInUp" style="visibility: visible; animation-name: fadeInUp;">
+	              <a href="${path }/resources/upload/supLv/default.png" class="gallery-popup">
+	                <img src="${path }/resources/upload/supLv/default.png" alt="">
+	              </a>
+	            </div>
+	          </div>
+
+	          <div class="col-lg-4 col-md-6">
+	            <div class="gallery-item wow fadeInUp" style="visibility: visible; animation-name: fadeInUp;">
+	              <a href="${path }/resources/upload/supLv/default.png" class="gallery-popup">
+	                <img src="${path }/resources/upload/supLv/default.png" alt="">
+	              </a>
+	            </div>
+	          </div>
+	          <div class="col-lg-4 col-md-6">
+	            <div class="gallery-item wow fadeInUp" style="visibility: visible; animation-name: fadeInUp;">
+	              <a href="${path }/resources/upload/supLv/default.png" class="gallery-popup">
+	                <img src="${path }/resources/upload/supLv/default.png" alt="">
+	              </a>
+	            </div>
+	          </div>
+
+	          <div class="col-lg-4 col-md-6">
+	            <div class="gallery-item wow fadeInUp" style="visibility: visible; animation-name: fadeInUp;">
+	              <a href="${path }/resources/upload/supLv/default.png" class="gallery-popup">
+	                <img src="${path }/resources/upload/supLv/default.png" alt="">
+	              </a>
+	            </div>
+	          </div>
+	          <div class="col-lg-4 col-md-6">
+	            <div class="gallery-item wow fadeInUp" style="visibility: visible; animation-name: fadeInUp;">
+	              <a href="${path }/resources/upload/supLv/default.png" class="gallery-popup">
+	                <img src="${path }/resources/upload/supLv/default.png" alt="">
+	              </a>
+	            </div>
+	          </div>
+          </div>
+    		 --%>
+    		
+    		
+    		
+    		
+    		</section>
+    		
+    		
+    		
+    		
+    		
     		<button class="btn btn-danger" type="button" onclick="celClick();">승 인</button>
-    		<button class="btn btn-success" onclick="celClose();">닫 기</button>
+    		<button class="btn btn-success" onclick="celClose();">승인 취소</button>
     	</div>
     
     </div>
@@ -176,6 +264,7 @@
 							console.log("승인했습니다.");
 							$(".celti").hide();
 							$(".celti2").css('background-color', 'black').show();
+							celClose();
 						}else{
 							alert("승인이 불가합니다");
 						}
@@ -198,9 +287,14 @@
 	        	$.ajax({
 	        		url: '${path}/admin/celtify.do',
 	        		data: {'memberNum': memberNum},
+	        		dataType:"JSON",
+	        		//contentType: "application/x-www-form-urlencoded; charset=UTF-8",
 	        		success: function (data) {
 						console.log("승인관련 데이터조회 완료");
+						$(".subCont").text(data['SUBLVCONTENT']);
 						console.log(data);
+						//모달뷰에 데이터를 출력
+						
 						modal.style.display = "block"; // 성공시 모달뷰 로드
 					},
 					error : function (e) {

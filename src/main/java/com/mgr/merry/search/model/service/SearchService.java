@@ -28,4 +28,6 @@ List<Map<String,Object>> allList();
 
 	List<Location> selectLocationList();
 	
+	Map<String, String> noticeIndexLoad();
+	
 }

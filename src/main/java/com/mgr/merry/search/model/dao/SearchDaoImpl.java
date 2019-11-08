@@ -20,16 +20,16 @@ public class SearchDaoImpl implements SerchDao {
 		return session.selectList("search.allList");
 	}
 
-	
+
 	@Override
 	public List<InfoUpload> subThemaList(SqlSessionTemplate session, Map<String, Object> param) {
 
 		return session.selectList("search.subThemaList", param);
 	}
-	
+
 	@Override
 	public List<InfoUpload> mainThemaList(SqlSessionTemplate session, int themaNumRef) {
-	
+
 		return session.selectList("search.mainThemaList",themaNumRef);
 	}
 
@@ -56,13 +56,16 @@ public class SearchDaoImpl implements SerchDao {
 
 	@Override
 	public List<Map<String, Object>> mapSearch(SqlSessionTemplate session, Map<String, Object> param) {
-		
+
 		return session.selectList("search.mapSearch",param);
+	}
+
+	@Override
+	public Map<String, String> noticeIndexLoad(SqlSessionTemplate session) {
+		return session.selectOne("search.noticeIndexLoad");
 	}
 
 
 
-
-	
 
 }

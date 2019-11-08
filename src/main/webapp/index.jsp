@@ -414,10 +414,23 @@
 	  $("#ban").hide();  
 	
   });
- 
-	
+  
+  /* 메인페이지 공지사항 출력 */
+  $(document).ready(function(){
+		
+	  $.ajax({
+			url: '${pageContext.request.contextPath }/admin/noticeIndexLoad',
+			dataType:"JSON",
+			success: function (data) {
+				console.log(data);
+				$(".nanumSquare").text(data['NOTICECONTENT']).css({"color":"orange"});
+				
+			},error: function(e) {
+				console.log("ajax error");
+            }
+		});
+	});
+ 	
  </script>
-
-
 
 <jsp:include page="/WEB-INF/views/common/footer.jsp"/>

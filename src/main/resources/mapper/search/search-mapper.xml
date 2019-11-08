@@ -91,5 +91,15 @@
 	<select id="locationList" resultType="map">
 		SELECT * FROM LOCATION
 	</select>
+	
+	<select id="noticeIndexLoad" resultType="map">
+		select * from(
+    		select rownum as rnum, a.* from(
+       			select * from adminnotice
+            		where noticestatus = 1
+        	order by noticedate desc
+        ) a)
+		where rnum = 1
+	</select>
 
 </mapper>
