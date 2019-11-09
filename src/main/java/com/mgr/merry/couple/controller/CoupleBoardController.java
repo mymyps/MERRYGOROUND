@@ -59,7 +59,7 @@ public class CoupleBoardController {
 		int totalCount = cservice.selectCoupleBoardCount(param);
 		System.out.println(list);
 		
-		mv.addObject("pageBar",PageBarFactory.getPageBar(totalCount, cPage,numPerPage,"/merry/couple/coupleBoardList"));
+		mv.addObject("pageBar",PageBarFactory.getPageBar(totalCount, cPage,numPerPage,"/merry/couple/coupleBoardList?mNum="+mNum));
 		mv.addObject("count",totalCount);
 		mv.addObject("list",list);
 		mv.addObject("mNum",mNum);
@@ -71,6 +71,15 @@ public class CoupleBoardController {
 	@RequestMapping("/couple/coupleBoardWrite")
 	public String coupleBoardWrite() {
 		attachList.clear();
+		return "couple/coupleBoardWrite";
+	}
+	
+	@RequestMapping("/couple/coupleBoardWrite2")
+	public String coupleBoardWrite2(int infoupNum) {
+		attachList.clear();
+		
+//		ModelAndView mv = new ModelAndView();
+		
 		return "couple/coupleBoardWrite";
 	}
 	

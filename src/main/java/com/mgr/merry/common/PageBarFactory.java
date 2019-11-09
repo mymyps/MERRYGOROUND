@@ -52,15 +52,17 @@ public class PageBarFactory {
       pageBar += "<script>";
       pageBar += "function fn_paging(cPage){";
 
-      if (url.split("\\?")[0].equals("/19AM_MERRYGOROUND_final/sign/mypage.do")) {
-         pageBar += "location.href='" + url + "&cPage='+cPage";
-      } else {
-         pageBar += "location.href='" + url + "?cPage='+cPage";
-      }
-//      pageBar+="location.href='"+url+"?cPage='+cPage";
-      pageBar += "}";
-      pageBar += "</script>";
-      return pageBar;
-   }
+		if (url.split("\\?")[0].equals("/19AM_MERRYGOROUND_final/sign/mypage.do")) {
+			pageBar += "location.href='" + url + "&cPage='+cPage";
+		}else if(url.split("\\?")[0].equals("/merry/couple/coupleBoardList")) {
+			pageBar += "location.href='" + url + "&cPage='+cPage";
+		}else {
+			pageBar += "location.href='" + url + "?cPage='+cPage";
+		}
+//		pageBar+="location.href='"+url+"?cPage='+cPage";
+		pageBar += "}";
+		pageBar += "</script>";
+		return pageBar;
+	}
 
 }
