@@ -142,7 +142,7 @@ public class SupLvController {
 		if (result > 0) {
 			msg = "서포터즈 신청이 등록되었습니다.";
 		} else {
-			msg = "서포터즈 신청시에는 5개 이미지를 모두 등록해야 합니다.";
+			msg = "서포터즈 신청에 실패했습니다.";
 		}
 		ModelAndView mv = new ModelAndView();
 		mv.addObject("msg", msg);
