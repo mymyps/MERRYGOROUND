@@ -394,6 +394,14 @@
 										<h3><c:out value='${list["NOTICECONTENT"]}'></c:out></h3>
 									
                                      </c:forEach>
+                                     <h3>서포터즈 상시모집</h3>
+										<p>
+											능력있는 서포터즈를 모집합니다 :)Lorem Ipsum as their default model text, and a search for
+											‘lorem ipsum’
+											will uncover many web sites still in their infancy. Various versions
+											have evolved over the years, sometimes by accident, sometimes on
+											purpose. Lorem Ipsum is that it as opposed to using.
+										</p>
 									</div>
 								</div>
 							</div>
@@ -423,7 +431,7 @@
 			dataType:"JSON",
 			success: function (data) {
 				//console.log(data);
-				$(".nanumSquare").text(data['NOTICECONTENT']).css({"color":"orange"});
+				$(".nanumSquare1").text(data['NOTICECONTENT']).css({"color":"orange"});
 				
 			},error: function(e) {
 				console.log("ajax error");

@@ -4,7 +4,9 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 <c:set var="path" value="${pageContext.request.contextPath}"/>
-<jsp:include page="/WEB-INF/views/common/header.jsp"/>
+<jsp:include page="/WEB-INF/views/common/header.jsp">
+	<jsp:param name="pageTitle" value="비밀번호찾기"/>
+</jsp:include>
 	<!-- hs boot -->
 	 <meta name="viewport" content="width=device-width, initial-scale=1">
 	<!--===============================================================================================-->	
@@ -21,9 +23,9 @@
 		<div class="container-login100" style="background-image: url('images/bg-01.jpg');">
 			<div class="wrap-login100 p-l-55 p-r-55 p-t-65 p-b-54">
 				<form class="login100-form validate-form" action="${pageContext.request.contextPath}/member/searchpwend.do" method="post" onsubmit="return checkKey();">
-					<span class="login100-form-title p-b-49">
-						비밀번호찾기
-					</span>
+<!-- 					<span class="login100-form-title p-b-49"> -->
+<!-- 						<h3>비밀번호찾기</h3> -->
+<!-- 					</span> -->
 					
 					<div class="wrap-input100 validate-input m-b-23" data-validate = "Username is reauired">
 						<span class="label-input100">ID</span>

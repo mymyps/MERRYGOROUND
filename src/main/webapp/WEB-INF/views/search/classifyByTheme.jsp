@@ -112,10 +112,10 @@
 						<div class="col-md-8 ts-padding2 themaContent">
 							<h3 style="margin-top: -2px;">
 							<c:if test="${not empty loginMember }">
-								<a href="${pageContext.request.contextPath }/info/infoView.do?infoupNum=${list.infoupNum }&id=${loginMember.id}"><c:out value='${list.infoupTitle}'/></a>
+								<a href="${pageContext.request.contextPath }/info/infoView.do?infoupNum=${list.infoupNum }&id=${loginMember.id}" style="color: #5a554f !important;"><c:out value='${list.infoupTitle}'/></a>
 							</c:if>
 							<c:if test="${empty loginMember }">
-								<a href="${pageContext.request.contextPath }/info/infoView.do?infoupNum=${list.infoupNum }&id=0"><c:out value='${list.infoupTitle}'/></a>
+								<a href="${pageContext.request.contextPath }/info/infoView.do?infoupNum=${list.infoupNum }&id=0" style="color: #5a554f !important;"><c:out value='${list.infoupTitle}'/></a>
 							</c:if>
 
 							</h3>
