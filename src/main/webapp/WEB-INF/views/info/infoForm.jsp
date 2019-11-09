@@ -91,8 +91,6 @@
 										<input type="text" placeholder="INFO TIME" name="infoupTime" />
 									</p>
 								</div>
-								<div class="row">
-								</div>
 								<label for="address"  class="infoFormSubFrame">출발지 주소</label>
 								<div class="infoForm1">
 									<div class="input-group mb-1">

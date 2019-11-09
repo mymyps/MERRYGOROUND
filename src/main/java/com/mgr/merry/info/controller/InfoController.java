@@ -158,6 +158,8 @@ public class InfoController {
 			@RequestParam(value = "infoupFile", required = false) MultipartFile[] infoupFile,
 			HttpServletRequest request) {
 		
+		System.out.println("인포업데이트 파라미터 :"+param);
+		
 		ModelAndView mv = new ModelAndView();
 		
 		List<Thema> themaList = sservice.selectThemaList3();

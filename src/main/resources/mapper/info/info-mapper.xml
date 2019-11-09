@@ -11,7 +11,7 @@
 	</insert>
 	
 	<insert id="insertInfoImg" parameterType="com.mgr.merry.info.model.vo.InfoUploadImg">
-		INSERT INTO INFO_UPLOAD_IMG VALUES(SEQ_INFO_UPLOAD_NUM.CURRVAL, SEQ_INFO_UPLOAD_IMG_NUM.NEXTVAL, #{fileReName})
+		INSERT INTO INFO_UPLOAD_IMG VALUES(#{infoupNum}, SEQ_INFO_UPLOAD_IMG_NUM.NEXTVAL, #{fileReName})
 		<selectKey keyProperty="infoupNum" resultType="_int" order="BEFORE">
 			select seq_info_upload_num.currval from dual
 		</selectKey>
@@ -36,14 +36,14 @@
 	<update id="updateInfo" parameterType="map">
 		UPDATE INFO_UPLOAD
 		SET
-		INFOUPNUM=#{infoupNum},
 		LOCALNUM=#{localNum},
 		THEMANUM=#{themaSubNum},
 		INFOUPTITLE=#{infoupTitle},
 		INFOUPDATE=default,
 		INFOUPPAYMENT=#{infoupPayment},
 		INFOUPPHONE=#{infoupPhone},
-		INFOUPTIME=#{infoupTime}
+		INFOUPTIME=#{infoupTime},
+		INFOADDR=#{infoAddr}
 		where INFOUPNUM=#{infoupNum}
 	</update>
 	
