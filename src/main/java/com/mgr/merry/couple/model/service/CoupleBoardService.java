@@ -7,7 +7,7 @@ import com.mgr.merry.couple.model.vo.Attachment;
 
 public interface CoupleBoardService {
 	int selectCoupleBoardCount();
-	List<Map<String,String>> selectCoupleBoardList(int cPage, int numPerPage);
+	List<Map<String,String>> selectCoupleBoardList(int mNum,int cPage, int numPerPage);
 	
 	Map<String,String> selectCoupleBoard(int no);
 	

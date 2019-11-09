@@ -30,16 +30,20 @@
 		<div class="row">
 	
 	<!-- summernote 폼-->
-	<form action="${path }/couple/updateCoupleBoardEnd" method="post">
+	<form action="${path }/couple/updateCoupleBoardEnd" id="updateFrm" method="post">
 		<h2 style="text-align: center;">게시글 수정</h2>
+		<label for="title">제목</label>
 		<input type="hidden" name="couplenum" value='${cboard["COUPLENUM"] }'/>
 		<input type="text" name="title" value='${cboard["COUPLETITLE"] }' style="width: 40%;" placeholder="제목" class="form-control" required/>
 			<br>
-			<input type="text" name="writer" value="1000" style="width: 20%;" placeholder="작성자" class="form-control" required/>
+			<label for="writer">작성자ID</label>
+			<input type="hidden" id="writerNumDB" name="writerNumDB" value='${cboard["MEMBERNUM"]}'/>
+			<input type="hidden" id="writerNum" name="writerNum" value='${loginMember.memberNum }'/>
+			<input type="text" id="writerID" name="writerID" value="${loginMember.id}" style="width: 20%;" placeholder="작성자" class="form-control" disabled/>
 			<br>
 			<textarea id="summernote" name="content" required>${cboard["COUPLECONTENT"]}</textarea>
 		<div><br>
-			<button class="btn btn-primary pull-right" type="submit">게시글 수정</button>
+			<button class="btn btn-primary pull-right" id="update" type="submit">게시글 수정</button>
 		</div>
 	</form>
 
@@ -107,6 +111,27 @@
 			});
 
 		}
+		
+		$(function(){
+			console.log("DB값: "+$('#writerNumDB').val());
+			console.log("프론트: "+$('#writerNum').val());
+		})
+		
+		
+		$('#update').click(function(){
+			if(confirm('정말로 등록하시겠습니까?')){
+				var frm=$('#updateFrm');
+				var url="${path }/couple/updateCoupleBoardEnd";
+				
+				if($('#writerNumDB') == $('#writerNum')){
+					console.log("성공!");
+					frm.attr("action", url);
+					frm.submit();
+				}
+			}else{
+				return false;
+			}
+		})
 	</script>
 		</div>
 	</div>

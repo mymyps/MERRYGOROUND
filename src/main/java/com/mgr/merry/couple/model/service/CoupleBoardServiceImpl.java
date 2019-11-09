@@ -23,8 +23,8 @@ public class CoupleBoardServiceImpl implements CoupleBoardService {
 	}
 
 	@Override
-	public List<Map<String, String>> selectCoupleBoardList(int cPage, int numPerPage) {
-		return cdao.selectCoupleBoardList(session,cPage,numPerPage);
+	public List<Map<String, String>> selectCoupleBoardList(int mNum,int cPage, int numPerPage) {
+		return cdao.selectCoupleBoardList(session,mNum,cPage,numPerPage);
 	}
 
 	@Override

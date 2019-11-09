@@ -18,9 +18,9 @@ public class CoupleBoardDaoImpl implements CoupleBoardDao {
 	}
 
 	@Override
-	public List<Map<String, String>> selectCoupleBoardList(SqlSessionTemplate session, int cPage, int numPerPage) {
+	public List<Map<String, String>> selectCoupleBoardList(SqlSessionTemplate session,int mNum, int cPage, int numPerPage) {
 		RowBounds rows=new RowBounds((cPage-1)*numPerPage,numPerPage);
-		return session.selectList("couple.selectCoupleBoardList",null,rows);
+		return session.selectList("couple.selectCoupleBoardList",mNum,rows);
 	}
 
 	@Override
