@@ -198,6 +198,7 @@ public class InfoController {
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
+				infoimg.setInfoupNum(infoupNum);
 				infoimg.setFileReName(reName);
 			}
 		}

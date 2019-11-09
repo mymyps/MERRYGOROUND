@@ -17,6 +17,10 @@
 		</selectKey>
 	</insert>
 	
+	<insert id="insertInfoImg2" parameterType="com.mgr.merry.info.model.vo.InfoUploadImg">
+		INSERT INTO INFO_UPLOAD_IMG VALUES(#{infoupNum}, SEQ_INFO_UPLOAD_IMG_NUM.NEXTVAL, #{fileReName})
+	</insert>
+	
 	<select id="selectInfo" resultType="map" parameterType="_int">
 		select * from info_upload i join thema t on i.themanum=t.themanum join location l on i.localnum=l.localnum where infoupNum=#{infoNum}
 	</select>

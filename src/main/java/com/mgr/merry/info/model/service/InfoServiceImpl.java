@@ -86,7 +86,7 @@ public class InfoServiceImpl implements InfoService {
 		if(result==0) throw new RuntimeException(); 
 		if(result>0) {
 			result2 = dao.deleteInfoImg(session, infoupNum);
-			result3 = dao.insertInfoImg(session, infoimg);
+			result3 = dao.insertInfoImg2(session, infoimg);
 			if(result3==0) throw new Exception();
 		}
 		

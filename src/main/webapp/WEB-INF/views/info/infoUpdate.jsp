@@ -2,7 +2,9 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
-<c:set var="path" value="${pageContext.request.contextPath}"/>
+<c:set var="path" value="${pageContext.request.contextPath}" />
+<script src="https://ssl.daumcdn.net/dmaps/map_js_init/postcode.v2.js"></script>
+<script src="<%=request.getContextPath()%>/js/post.js" charset="utf-8"></script>
 <jsp:include page="/WEB-INF/views/common/header.jsp">
 	<jsp:param name="pageTitle" value="demo"/>
 </jsp:include>
@@ -98,14 +100,14 @@
 										<input type="text" placeholder="INFO TIME" name="infoupTime" value="${info.INFOUPTIME }"/>
 									</p>
 								</div>
-								<label for="address"  class="infoFormSubFrame">출발지 주소</label>
+								<label for="address"  class="infoFormSubFrame">주소</label>
 								<div class="infoForm1">
 									<div class="input-group mb-1">
  										<!-- <input type="text" class="form-control start-postcode"
 											name="post-number" placeholder="우 편 번 호"
 											style="text-align: center" id="st-addr-post" readonly> -->
 										<input type="text" class="form-control start-addr" name="infoAddr"
-											placeholder="주소를 검색해주세요" onkeydown="JavaScript:Enter_Check(1);" value="${info.INFOADDR }"
+											placeholder="주소를 검색해주세요" onkeydown="JavaScript:Enter_Check(1);"
 											id="st-addr" readonly>
 										<div class="input-group-append">
 											<button class="btn btn-outline-secondary start-btn" type="button"
