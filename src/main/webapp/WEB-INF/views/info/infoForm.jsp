@@ -15,7 +15,7 @@
 		<form name="infoForm"
 			action="${pageContext.request.contextPath }/info/infoFormEnd.do?infoupNum=${info.infoupNum}&id=${loginMember.id}"
 			method="post"
-			enctype="multipart/form-data">
+			enctype="multipart/form-data" onsubmit="return checkNull();">
 			<input type="hidden" value="${supporters.supNum }" name="supNum">
 			<div class="row">
 				<!-- Blog start -->
@@ -31,7 +31,7 @@
 								<div>
 									<div class="infoFormSubFrame">이미지</div>
 									<p class="infoForm1">
-										<input type="file" name="infoupFile"/>
+										<input type="file" name="infoupFile" id="infoupFile"/>
 
 									</p>
 								</div>
@@ -39,7 +39,7 @@
 								<div>
 									<div class="infoFormSubFrame">제목</div>
 									<p class="infoForm1">
-										<input type="text" placeholder="INFO TITLE" name="infoupTitle" />
+										<input type="text" placeholder="INFO TITLE" name="infoupTitle" id="infoupTitle"/>
 									</p>
 								</div>
 								
@@ -76,19 +76,19 @@
 								<div>
 									<div class="infoFormSubFrame">가격</div>
 									<p class="infoForm1">
-										<input type="number" step="1000" min="0" name="infoupPayment" />
+										<input type="number" step="1000" min="0" name="infoupPayment" id="infoupPayment" />
 									</p>
 								</div>
 								<div>
 									<div class="infoFormSubFrame">번호</div>
 									<p class="infoForm1">
-										<input type="text" placeholder="INFO PHONE" name="infoupPhone" />
+										<input type="text" placeholder="INFO PHONE" name="infoupPhone" id="infoupPhone" />
 									</p>
 								</div>
 								<div>
 									<div class="infoFormSubFrame">시간</div>
 									<p class="infoForm1">
-										<input type="text" placeholder="INFO TIME" name="infoupTime" />
+										<input type="text" placeholder="INFO TIME" name="infoupTime" id="infoupTime" />
 									</p>
 								</div>
 								<label for="address"  class="infoFormSubFrame">주소</label>
@@ -132,6 +132,55 @@
 	<!--/ container end -->
 	
 	<script>
+	
+	function checkNull(){
+		var infoupFile=$('#infoupFile');
+		var infoupTitle=$('#infoupTitle');
+		var infoupPayment=$('#infoupPayment');
+		var infoupPhone=$('#infoupPhone');
+		var infoupTime=$('#infoupTime');
+		var addr=$('#st-addr');
+		var buttonAddr=$('#button-addon1');
+		
+		if(infoupFile.val()==""){
+           alert('이미지를 등록해주세요.');
+           infoupFile.focus();
+           return false;
+		}
+		
+		if(infoupTitle.val()==""){
+			alert('제목을 입력해주세요.');
+			
+			infoupTitle.focus();
+			return false;
+		}
+		if(infoupPayment.val()==""){
+			alert('가격을 입력해주세요.');
+			
+			infoupPayment.focus();
+			return false;
+		}
+		if(infoupPhone.val()==""){
+			alert('번호를 입력해주세요.');
+			
+			infoupPhone.focus();
+			return false;
+		}
+		if(infoupTime.val()==""){
+			alert('시간을 입력해주세요.');
+			
+			infoupTime.focus();
+			return false;
+		}
+		if(addr.val()==""){
+			alert('주소를 입력해주세요.');
+			
+			buttonAddr.focus();
+			return false;
+		}
+		
+	}
+	
 	function Enter_Check(pocode){
 	    if(event.keyCode == 13){
 	    	execDaumPostcode(pocode); 
