@@ -66,10 +66,8 @@
    <script type="text/javascript" src="${pageContext.request.contextPath }/resources/js/waypoints.min.js"></script>
    <!-- Template custom -->
    <script type="text/javascript" src="${pageContext.request.contextPath }/resources/js/custom.js"></script>
-   </div><!-- Body inner end -->
    
-   <!-- CSS
-   ================================================== -->
+   <!-- CSS  ================================================== -->
 
    <!-- Bootstrap -->
    <link rel="stylesheet" href="${pageContext.request.contextPath }/resources/css/bootstrap.min.css">
@@ -121,8 +119,6 @@
                
                <nav class="collapse navbar-collapse clearfix" role="navigation">
                   <ul class="nav navbar-nav navbar-right">
-                     
-
                      <!-- 마이페이지(로그인 후 이용가능) -->
                      <c:if test="${empty loginMember}">
                      <li class="dropdown active">
@@ -132,84 +128,84 @@
                            <ul>
                               <li><a href="${pageContext.request.contextPath }/member/login.do">로그인</a></li>
                               <li><a href="${pageContext.request.contextPath }/member/signup.do">회원가입</a></li>
-                              <%-- <li><a href="${pageContext.request.contextPath }">dd</a></li> --%>
                               <li><a href="${pageContext.request.contextPath }/member/searchpw.do">비밀번호찾기</a></li>
-                              
                            </ul>
                         </div>
                      </li>
                      </c:if>
-                     <c:if test="${not empty loginMember }">
+                     
+                     <c:if test="${not empty loginMember}">
                         <li class="dropdown active">
-                        <a href="${pageContext.request.contextPath }" class="dropdown-toggle" data-toggle="dropdown">${loginMember.id} 님 ㅎㅇ <i
+                        <a href="${pageContext.request.contextPath }" class="dropdown-toggle" data-toggle="dropdown">${loginMember.id}님 반가워요:) <i
                               class="fa fa-angle-down"></i></a>
                         <div class="dropdown-menu">
                            <ul>
-                           		<li><a href="${pageContext.request.contextPath }/sign/mypage.do?mNo=${loginMember.memberNum}">마이페이지</a>
+                                 <li><a href="${pageContext.request.contextPath }/sign/mypage.do?mNo=${loginMember.memberNum}">마이페이지</a>
                               <li><a href="${pageContext.request.contextPath }/member/logout.do">로그아웃</a></li>
                            </ul>
                         </div>
                      </li>
                      </c:if>
-                     <li class="dropdown">
-                        <%-- <a href="${pageContext.request.contextPath }/sign/mypage.do?mNo=${loginMember.memberNum}">Mypage <i
-                              class="fa fa-angle-down"></i></a> --%>
-                        <c:if test="${loginMember==null }">
-                           <div class="dropdown-menu">
-                           <ul>
-                              <li><a href="portfolio-static.html">로그인후 이용가능</a></li>
-                           </ul>
-                        </div>
-                        </c:if>
-                        <%-- <c:if test="${loginMember!=null }">
-                        <div class="dropdown-menu">
-                           <ul>
-                              <li><a href="${pageContext.request.contextPath }/sign/mypage.do?mNo=${loginMember.memberNum}">개인정보수정</a></li>
-                              <li><a href="${pageContext.request.contextPath }/sign/mypage.do?mNo=${loginMember.memberNum}">내 작성글 보기</a></li>
-                              <li><a href="${pageContext.request.contextPath }/sign/mypage.do?mNo=${loginMember.memberNum}">커플요청</a></li>
-                              <li><a href="${pageContext.request.contextPath }/sign/mypage.do?mNo=${loginMember.memberNum}">비밀번호 변경</a></li>
-                           </ul>
-                        </div>
-                        </c:if> --%>
-                     </li>
+                     
+                     <c:if test="${loginMember==null }">
+	                     <li class="dropdown">
+	                        <%-- <a href="${pageContext.request.contextPath }/sign/mypage.do?mNo=${loginMember.memberNum}">Mypage <i
+	                              class="fa fa-angle-down"></i></a> --%>
+	                           <div class="dropdown-menu">
+	                           <ul>
+	                              <li><a href="portfolio-static.html">로그인후 이용가능</a></li>
+	                           </ul>
+	                        </div>
+                     	</li>
+                     </c:if>
+                  
+                     <c:if test="${loginMember.id eq 'admin'}">
                      <li class="dropdown">
                      <li>
                         <a href="${pageContext.request.contextPath }/admin/adminMain">Admin</a>
-                        <%-- <a href="${pageContext.request.contextPath }/admin/adminMain" class="dropdown-toggle" data-toggle="dropdown">Admin <i
-                              class="fa fa-angle-down"></i></a>
-                        <div class="dropdown-menu">
-                           <ul>
-                              <li><a href="team.html">Our Team</a></li>
-                              <li><a href="about2.html">About Us - 2</a></li>
-                              <li><a href="service2.html">Services - 2</a></li>
-                              <li><a href="service-single.html">Services Single</a></li>
-                              <li><a href="pricing.html">Pricing Table</a></li>
-                              <li><a href="404.html">404 Page</a></li>
-                           </ul>
-                        </div> --%>
                      </li>
+                     </c:if>
+                     
+                    
+                    
                      <li class="dropdown">
-                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">Supporters <i
-                              class="fa fa-angle-down"></i></a>
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">Supporters <i class="fa fa-angle-down"></i></a>
+                        <c:if test="${loginMember.memberLevel eq 2}">
                         <div class="dropdown-menu">
-                        
                            <ul>
-                           		<li><a href="${pageContext.request.contextPath }/supLv/supLvForm.do?id=${loginMember.id}">서포터즈 신청</a>
-								<li><a href="${pageContext.request.contextPath }/info/infoForm.do?mNum=${loginMember.memberNum}">infoForm 임의연결</a></li>
-								<li><a href="${pageContext.request.contextPath }/info/infoView.do">infoView 임의연결</a></li>
+                        <li><a href="${pageContext.request.contextPath }/supLv/supLvForm.do?id=${loginMember.id}">서포터즈 신청</a>
+                        <li><a href="${pageContext.request.contextPath }/info/infoForm.do?mNum=${loginMember.memberNum}">infoForm 임의연결</a></li>
+                        <li><a href="${pageContext.request.contextPath }/info/infoView.do">infoView 임의연결</a></li>
                            </ul>
                         </div>
-                     </li>
-                     <li class="dropdown">
-                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">CouplePage <i
-                              class="fa fa-angle-down"></i></a>
+                         </c:if>
+                          <c:if test="${loginMember.memberLevel !=2}">
                         <div class="dropdown-menu">
                            <ul>
-                              <li><a href="${pageContext.request.contextPath }/couple/coupleBoardList">커플게시판</a></li>
+                        <li><a href="${pageContext.request.contextPath }/supLv/supLvForm.do?id=${loginMember.id}">서포터즈 신청</a>
+                   
                            </ul>
                         </div>
-                     </li>
-                     <li><a href="${pageContext.request.contextPath}">Contact</a></li>
+                         </c:if>
+                         </li>
+                     
+                      <li class="dropdown">
+                           <a href="#" class="dropdown-toggle" data-toggle="dropdown">CouplePage <i class="fa fa-angle-down"></i></a>
+                           <div class="dropdown-menu">
+                              <c:if test='${empty loginMember}'>
+                                 <ul>
+                                    <li><a>로그인 후 커플을 신청하세요!</a></li>
+                                 </ul>
+                              </c:if>
+                            <c:if test='${not empty loginMember and fn:trim(loginMember.cpstatus) == 1}'>
+                              <ul>
+                                 <li><a href="${pageContext.request.contextPath }/couple/coupleBoardList?mNum=${loginMember.memberNum}">커플게시판</a></li>
+                              </ul>
+                           </c:if>
+                           </div>
+                        </li>
+                 
+                 
                   </ul>
                </nav>
                <!--/ Navigation end -->
@@ -219,7 +215,6 @@
          <!--/ Container end -->
       </header>
       <!--헤더 끝!!!!!!!!!!!!! -->
-
        
         <!--공통 배너  -->
         <div id="ban" class="ban">
@@ -230,8 +225,9 @@
             <div class="banner-title-content">
                <div class="text-center">
                   <h2>${param.pageTitle }</h2>
-                  
                  </div>
               </div>
       </div>
    </div>
+   </div>
+   
