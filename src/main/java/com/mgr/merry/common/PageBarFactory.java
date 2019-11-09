@@ -54,7 +54,9 @@ public class PageBarFactory {
 
 		if (url.split("\\?")[0].equals("/merry/sign/mypage.do")) {
 			pageBar += "location.href='" + url + "&cPage='+cPage";
-		} else {
+		}else if(url.split("\\?")[0].equals("/merry/couple/coupleBoardList")) {
+			pageBar += "location.href='" + url + "&cPage='+cPage";
+		}else {
 			pageBar += "location.href='" + url + "?cPage='+cPage";
 		}
 //		pageBar+="location.href='"+url+"?cPage='+cPage";

@@ -71,6 +71,6 @@
   	</select>
   	
   	<select id="selectMemberbyMnum" resultType="com.mgr.merry.sign.model.vo.Members" parameterType="_int">
-  		select * from members where id=(select cpid from members where membernum=#{memNo})
+  		select * from members where email=(select cpid from members where membernum=#{memNo})
   	</select>
 </mapper>
