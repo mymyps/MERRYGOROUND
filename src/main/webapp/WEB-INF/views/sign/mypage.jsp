@@ -154,12 +154,15 @@
                            <span class="focus-input100" data-symbol="&#xf206;"></span>
                         </div> --%>
                      <div class="wrap-input100 validate-input m-b-23 idname" reauired>
-                        <span class="label-input100">이메일</span> <input class="input100"
+                        <span class="label-input100">이메일</span> 
+                        <div class="input-group subscribe">
+                        <input class="input100"
                            type="email" name="email" placeholder="이메일" value=${members.email }> <span
                            class="focus-input100" data-symbol="&#xf206;"></span>
-                        <%-- <a href="${pageContext.request.contextPath }/emailAuth.do?email="+'$("input[name=email]").val()'>이메일인증</a> --%>
-                        <!-- <button type="button" onclick="connectEmailAuth();" name="btn_auth">이메일인증</button> -->
-                        <button type="button" onclick="btn_auth()">이메일인증</button>
+                           <span class="input-group-addon">
+                        <button class="btn btn-primary solid cd-btn" type="button" onclick="btn_auth()">인증번호발송</button>
+                        </span>
+                        </div>
                      </div>
                      <div class="wrap-input100 validate-input m-b-23 idname" reauired>
                         <span class="label-input100">인증번호</span> <input class="input100"
@@ -202,6 +205,7 @@
          
                      </form>
                     </div>
+                    <c:if test="${loginMember.cpid eq null}">
                     <div class="tab-pane animated fadeInLeft" id="tab_b">
                        
                         <h3>커플요청하기</h3> 
@@ -222,6 +226,18 @@
                      </form>   
                      </div>                      
                     </div>
+                    </c:if>
+                    <!--  -->
+                    <c:if test="${loginMember.cpid != null}">
+                    <div class="tab-pane animated fadeInLeft" id="tab_b">
+                       
+                        <h3>${loginMember.cpid }   님과 이미 커플 입니다.</h3> 
+                     <div>
+                     
+                  </div>                      
+                    </div>
+                    </c:if>
+                    <!--  -->
                     <c:if test="${!empty list}">
                        <div class="tab-pane active animated fadeInRight" id="tab_c">    
                     </c:if>
@@ -247,7 +263,7 @@
                      </div>
                   ${pageBar }  
                     </div>
-                    
+                    <c:if test="${loginMember.cpid eq null }">
                     <div class="tab-pane animated fadeInLeft" id="tab_g">
                        
                         <h3>인증번호 입력</h3> 
@@ -270,8 +286,16 @@
                      </form>   
                      </div>                      
                     </div>
-                    
-                    
+                    </c:if>
+                    <c:if test="${loginMember.cpid != null}">
+                    <div class="tab-pane animated fadeInLeft" id="tab_g">
+                       
+                        <h3>${loginMember.cpid }   님과 이미 커플 입니다.</h3> 
+                     <div>
+                     
+                  </div>                      
+                    </div>
+                    </c:if>
                     <div class="tab-pane animated fadeInLeft" id="tab_r">
                      <div>
                      <div style="overflow:scroll; width:700px; height:400px; padding:10px; ">

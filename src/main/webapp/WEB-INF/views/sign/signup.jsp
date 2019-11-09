@@ -25,8 +25,12 @@
 
                <div class="wrap-input100 validate-input m-b-23 idname" reauired>
                   <span class="label-input100">ID</span>
-                  <input class="input100" type="text" id="id" name="id" placeholder="아이디">
-                  <button type="button" id="check_id" >아이디 중복확인 클릭</button>
+                  <div class="input-group subscribe">
+                     <input class="input100 form-control" type="text" id="id" name="id" placeholder="아이디">
+                     <span class="input-group-addon">
+                     <button class ="btn btn-primary solid" type="button" id="check_id" >아이디 중복확인</button>
+                     </span>
+                  </div>
                   <span class="focus-input100" data-symbol="&#xf206;"></span>
                </div>
 
@@ -58,14 +62,18 @@
                   <input class="input100" type="tel" name="phone" placeholder="핸드폰">
                   <span class="focus-input100" data-symbol="&#xf206;"></span>
                </div>
+               
                <div class="wrap-input100 validate-input m-b-23 idname" reauired>
                   <span class="label-input100">이메일</span>
-                  <input class="input100" type="email" name="email" placeholder="이메일">
+                  <div class="input-group subscribe">
+                  <input class="input100 form-control" type="email" name="email" placeholder="이메일">
+                  <span class="input-group-addon">
+                  <button class="btn btn-primary solid" type="button" id="btn_auth">이메일인증</button>
+                  </span>
                   <span class="focus-input100" data-symbol="&#xf206;"></span>
-                  <%-- <a href="${pageContext.request.contextPath }/emailAuth.do?email="+'$("input[name=email]").val()'>이메일인증</a> --%>
-                  <!-- <button type="button" onclick="connectEmailAuth();" name="btn_auth">이메일인증</button> -->
-                  <button type="button" id="btn_auth">이메일인증</button>
+                  </div>
                </div>
+               
                <div class="wrap-input100 validate-input m-b-23 idname" reauired>
                   <span class="label-input100">인증번호</span>
                   <input class="input100" type="number" name="authkey" placeholder="인증번호">

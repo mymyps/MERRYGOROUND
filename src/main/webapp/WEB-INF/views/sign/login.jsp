@@ -51,7 +51,7 @@
                </div>
                
                <div class="text-right p-t-8 p-b-31">
-                  <a href="#">
+                  <a href="${pageContext.request.contextPath }/member/searchpw.do">
                      Forgot password?
                   </a>
                </div>
