@@ -13,7 +13,7 @@
 		<form name="infoForm"
 			action="${pageContext.request.contextPath }/info/infoUpdateEnd.do?infoupNum=${info.INFOUPNUM}"
 			method="post"
-			enctype="multipart/form-data">
+			enctype="multipart/form-data" onsubmit="return checkNull();">
 			<div class="row">
 				<!-- Blog start -->
 				<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
@@ -28,7 +28,7 @@
 								<div>
 									<div class="infoFormSubFrame">이미지</div>
 									<p class="infoForm1">
-										<input type="file" name="infoupFile"/>
+										<input type="file" name="infoupFile" id="infoupFile"/>
 										<img src="${path }/resources/upload/info/${infoImg.fileReName }" class="infoimg	"/>
 									</p>
 								</div>
@@ -36,7 +36,7 @@
 								<div>
 									<div class="infoFormSubFrame">제목</div>
 									<p class="infoForm1">
-										<input type="text" placeholder="INFO TITLE" name="infoupTitle" value="${info.INFOUPTITLE }"/>
+										<input type="text" placeholder="INFO TITLE" name="infoupTitle" value="${info.INFOUPTITLE }" id="infoupTitle"/>
 									</p>
 								</div>
 								
@@ -57,7 +57,7 @@
 												</c:if>
 											</c:forEach>
 										</select>
-										<select id="" name="themaSubNum">
+										<select id="subThema" name="themaSubNum">
 											<option value="${info.THEMANUM }" selected>${info.THEMANAME }</option>
 											<c:forEach items="${themaList }" var="t">
 												<c:if test="${info.THEMANUM != t['THEMANUM']}">
@@ -85,19 +85,19 @@
 								<div>
 									<div class="infoFormSubFrame">가격</div>
 									<p class="infoForm1">
-										<input type="number" step="1000" name="infoupPayment" value="${info.INFOUPPAYMENT }"/>
+										<input type="number" step="1000" name="infoupPayment" value="${info.INFOUPPAYMENT }" id="infoupPayment"/>
 									</p>
 								</div>
 								<div>
 									<div class="infoFormSubFrame">번호</div>
 									<p class="infoForm1">
-										<input type="text" placeholder="INFO PHONE" name="infoupPhone" value="${info.INFOUPPHONE }"/>
+										<input type="text" placeholder="INFO PHONE" name="infoupPhone" value="${info.INFOUPPHONE }" id="infoupPhone"/>
 									</p>
 								</div>
 								<div>
 									<div class="infoFormSubFrame">시간</div>
 									<p class="infoForm1">
-										<input type="text" placeholder="INFO TIME" name="infoupTime" value="${info.INFOUPTIME }"/>
+										<input type="text" placeholder="INFO TIME" name="infoupTime" value="${info.INFOUPTIME }" id="infoupTime"/>
 									</p>
 								</div>
 								<label for="address"  class="infoFormSubFrame">주소</label>
@@ -137,6 +137,55 @@
 		</form>
 	</div>
 <script>
+
+function checkNull(){
+	var infoupFile=$('#infoupFile');
+	var infoupTitle=$('#infoupTitle');
+	var infoupPayment=$('#infoupPayment');
+	var infoupPhone=$('#infoupPhone');
+	var infoupTime=$('#infoupTime');
+	var addr=$('#st-addr');
+	var buttonAddr=$('#button-addon1');
+	
+	if(infoupFile.val()==""){
+       alert('이미지를 등록해주세요.');
+       infoupFile.focus();
+       return false;
+	}
+	
+	if(infoupTitle.val()==""){
+		alert('제목을 입력해주세요.');
+		
+		infoupTitle.focus();
+		return false;
+	}
+	
+	if(infoupPayment.val()==""){
+		alert('가격을 입력해주세요.');
+		
+		infoupPayment.focus();
+		return false;
+	}
+	if(infoupPhone.val()==""){
+		alert('번호를 입력해주세요.');
+		infoupPhone.focus();
+		return false;
+	}
+	if(infoupTime.val()==""){
+		alert('시간을 입력해주세요.');
+		
+		infoupTime.focus();
+		return false;
+	}
+	if(addr.val()==""){
+		alert('주소를 입력해주세요.');
+		
+		buttonAddr.focus();
+		return false;
+	}
+	
+}
+
 	function Enter_Check(pocode){
 	    if(event.keyCode == 13){
 	    	execDaumPostcode(pocode); 

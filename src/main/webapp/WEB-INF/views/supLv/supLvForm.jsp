@@ -5,7 +5,7 @@
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 <c:set var="path" value="${pageContext.request.contextPath}" />
 <jsp:include page="/WEB-INF/views/common/header.jsp">
-	<jsp:param name="pageTitle" value="서포터즈 신청" />
+	<jsp:param name="pageTitle" value="서포터즈" />
 </jsp:include>
 <section id="content">
 	<div class="container">
@@ -20,7 +20,7 @@
 					<!-- Blog post start -->
 					<div class="post-content">
 						<h1 class="post-title text-center">
-							<a href="blog-item.html">작성하기</a>
+							<a href="blog-item.html">신청</a>
 						</h1>
 						
 						<div style="overflow:scroll; width:700px; height:400px; padding:10px;margin-left: 225px; ">
