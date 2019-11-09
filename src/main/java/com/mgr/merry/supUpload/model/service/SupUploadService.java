@@ -26,12 +26,12 @@ public interface SupUploadService {
 
 	Supporters selectSupId(String id);
 
-	int insertSupUploadImg(Map<String, String> param, List<SupUploadImg> imgList);
+	int insertSupUploadImg(Map<String, String> param, List<SupUploadImg> imgList) throws Exception;
 
 	int updateSupReview(Map<String, String> param);
 
 	int supRvStatus0(int infoupNum);
 
-	int insertSupUploadImgNum(Map<String, String> param, List<SupUploadImg> imgList);
+	int insertSupUploadImgNum(Map<String, String> param, List<SupUploadImg> imgList) throws Exception;
 
 }

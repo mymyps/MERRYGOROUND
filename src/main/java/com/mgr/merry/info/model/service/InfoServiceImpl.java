@@ -31,7 +31,7 @@ public class InfoServiceImpl implements InfoService {
 		if(result==0) throw new RuntimeException(); 
 		if(result>0) {
 			result2=dao.insertInfoImg(session, infoimg); // info_upload_img 
-			if(result2==0) throw new Exception();
+			if(result2==0) throw new RuntimeException(); 
 		}
 		
 		return result;
@@ -73,6 +73,7 @@ public class InfoServiceImpl implements InfoService {
 	}
 
 	@Override
+	@Transactional(rollbackFor = Exception.class)
 	public int updateInfo(Map<String, String> param, InfoUploadImg infoimg, int infoupNum) throws Exception {
 		int result=0; // info update
 		int result2=0; // img 삭제
@@ -85,7 +86,8 @@ public class InfoServiceImpl implements InfoService {
 		if(result>0) {
 			result2 = dao.deleteInfoImg(session, infoupNum);
 			result3 = dao.insertInfoImg2(session, infoimg);
-			if(result3==0) throw new Exception();
+			if(result2==0) throw new RuntimeException(); 
+			if(result3==0) throw new RuntimeException(); 
 		}
 		
 		
