@@ -107,6 +107,10 @@ public class SignServiceImpl implements SignService {
 	public List<Map<String, String>> selectBoardList(int cPage, int numPerpage,int supNum) {
 		return dao.selectBoardList(session,cPage,numPerpage,supNum);
 	}
+	@Override
+	public Members selectMemberbyMnum(int memNo) {
+		return dao.selectMemberbyMnum(session,memNo);
+	}
 	
 
 	

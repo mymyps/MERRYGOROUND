@@ -7,9 +7,9 @@
 <jsp:param name ="pageTitle" value=""/>
 </jsp:include>
 
-<script src="http://code.jquery.com/jquery-3.3.1.slim.min.js"
-   integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
-   crossorigin="anonymous"></script>
+<!-- <script src="http://code.jquery.com/jquery-3.3.1.slim.min.js" -->
+<!--    integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" -->
+<!--    crossorigin="anonymous"></script> -->
 <style>
 		.img{
 			position: relative;
@@ -128,10 +128,10 @@
 							</table>
 						</div>
 					</div>
-					<input type="hidden" id="coupleNum" name="coupleNum"
-						value='${cboard["COUPLENUM"]}' />
-					<input type="hidden" id="memberNum" name="memberNum"
-						value='1'/>
+					<input type="hidden" id="coupleNum" name="coupleNum" value='${cboard["COUPLENUM"]}' />
+					<input type="hidden" id="memberNum" name="memberNum" value='${loginMember.memberNum }'/>
+					<input type="hidden" id="writerNumDB" name="writerNumDB" value='${cboard["MEMBERNUM"]}'/>
+<%-- 					<input type="hidden" id="writerNum" name="writerNum" value='${loginMember.memberNum }'/> --%>
 				</form>
 			</div>
 			
@@ -235,10 +235,10 @@
 
 			            var htmls = "";
 			            var cCnt = data.length;
-			            console.log(data);
 			            if(data.length > 0){
 			                
 			                for(i=0; i<data.length; i++){
+			           		 console.log(data[i]);
 // 			                    html += "<div>";
 // 			                    html += "<div><table class='table'><h6><strong>"+data[i].writer+"</strong></h6>";
 // 			                    html += "<tr><td>"+data[i].comment + "</td><td style='text-align: right;'>"+data[i].coupleDate+"</td></tr>";
@@ -257,6 +257,7 @@
 			                     htmls += '<span style="padding-left: 7px; font-size: 9pt">';
 			                     htmls += '<a href="javascript:void(0)" onclick="fn_editReply(' + data[i].commentNo + ', \'' + data[i].writer + '\', \'' + data[i].comment + '\' )" style="padding-right:5px">수정</a>';
 			                     htmls += '<a href="javascript:void(0)" onclick="fn_deleteReply(' + data[i].commentNo + ')" >삭제</a>';
+			                     htmls += '&nbsp&nbsp&nbsp&nbsp'+data[i].coupleDate;
 			                     htmls += '</span>';
 			                     htmls += '</span>';
 			                     htmls += '</p>';
@@ -309,7 +310,7 @@
 			}
 		
 			function fn_editReply(commentNo, writer, content){
-				if(confirm("댓글을 수정하시겠습니까?")){
+				if(writer== "${loginMember.id}"){
 					var htmls = "";
 					htmls += '<div class="media text-muted pt-3" id="commentNo' + commentNo + '">';
 	// 				htmls += '<svg class="bd-placeholder-img mr-2 rounded" width="32" height="32" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice" focusable="false" role="img" aria-label="Placeholder:32x32">';
@@ -321,8 +322,10 @@
 					htmls += '<span class="d-block">';
 					htmls += '<strong class="text-gray-dark">' + writer + '</strong>';
 					htmls += '<span style="padding-left: 7px; font-size: 9pt">';
+					htmls += '<c:if test="${empty loginMember}">'
 					htmls += '<a href="javascript:void(0)" onclick="fn_updateReply(' + commentNo + ', \'' + writer + '\')" style="padding-right:5px">저장</a>';
 					htmls += '<a href="javascript:void(0)" onClick="getCommentList()">취소<a>';
+					htmls += '</c:if>'
 					htmls += '</span>';
 					htmls += '</span>';		
 					htmls += '<textarea name="editContent" id="editContent" class="form-control" rows="3">';
@@ -335,7 +338,7 @@
 					$('#commentNo' + commentNo + ' #editContent').focus();
 				}
 				else{
-					return false;
+					alert("등록한 작성자 본인이 아닙니다");
 				}
 			}
 			

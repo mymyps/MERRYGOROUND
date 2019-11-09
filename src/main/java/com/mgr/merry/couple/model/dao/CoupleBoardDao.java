@@ -8,8 +8,8 @@ import org.mybatis.spring.SqlSessionTemplate;
 import com.mgr.merry.couple.model.vo.Attachment;
 
 public interface CoupleBoardDao {
-	int selectCoupleBoardCount(SqlSessionTemplate session);
-	List<Map<String,String>> selectCoupleBoardList(SqlSessionTemplate session,int mNum,int cPage, int numPerPage);
+	int selectCoupleBoardCount(SqlSessionTemplate session,Map<String,Object> param);
+	List<Map<String,String>> selectCoupleBoardList(SqlSessionTemplate session,Map<String,Object> param,int cPage, int numPerPage);
 	
 	Map<String,String> selectCoupleBoard(SqlSessionTemplate session, int no);
 	
