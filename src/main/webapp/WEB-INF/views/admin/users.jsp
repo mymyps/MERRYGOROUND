@@ -66,6 +66,8 @@
                                                 <td><c:out value="${b['GENDER'] }"/></td>
                                                 <td><c:out value="${b['PHONE'] }"/></td>
                                                 <td><c:out value="${b['EMAIL'] }"/></td>
+                                                <%-- <td><c:if test="${b['CPSTATUS'] == 1}"><p>d</p></c:if></td> --%>
+                                                
                                                 <td><c:out value="${b['CPSTATUS'] }"/></td>
                                                 <td><fmt:formatDate value="${b['ENROLLDATE'] }" pattern="yyyy.MM.dd"/></td>
                                             </tr>

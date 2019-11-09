@@ -104,7 +104,7 @@
 	                                            	<td class="fy${i.count }"><c:out value="${b['MEMBERNUM'] }"/></td>
 	                                            	<td class="avatar">
 	                                                    <div class="round-img">
-	                                                        <a href="#"><img class="rounded-circle" src="${path }images/avatar/<c:out value="${b['PROIMG'] }"/>" alt=""></a>
+	                                                        <a href="#"><img class="rounded-circle" src="${path }/resources/images/member/<c:out value="${b['PROIMG'] }"/>" alt=""></a>
 	                                                    </div>
                                                     </td>
 	                                                <td><span class="name"><c:out value="${b['ID'] }"/></span></td>
@@ -139,11 +139,6 @@
         
         </div><!-- /#right-panel -->
 
-
-
-
-
-
     </div>
     
     <!-- modal view -->
@@ -155,18 +150,7 @@
 			<div id="carouselExampleControls" class="carousel slide"
 				data-ride="carousel">
 				<div class="carousel-inner">
-					<div class="carousel-item active">
-						<img src="${path }/resources/upload/supLv/default.png" alt=""
-							style="height: 364px;">
-					</div>
-					<div class="carousel-item">
-						<img src="${path }/resources/upload/supLv/default.png" alt=""
-							style="height: 364px;">
-					</div>
-					<div class="carousel-item">
-						<img src="${path }/resources/upload/supLv/default.png" alt=""
-							style="height: 364px;">
-					</div>
+					<!-- 데이터 삽입부분 -->
 				</div>
 				<a class="carousel-control-prev" href="#carouselExampleControls"
 					role="button" data-slide="prev"> <span
@@ -238,6 +222,54 @@
 	        		//contentType: "application/x-www-form-urlencoded; charset=UTF-8",
 	        		success: function (data) {
 						//console.log("승인관련 데이터조회 완료");
+						
+						var imgDiv = $('<div>').attr({
+							'class' : "carousel-item active",
+						});
+						var imgList = $('<img>').attr({
+							'src' : "${path }/resources/upload/supLv/"+ data['FILEORGNAME1']
+						}).css({'height' : "363px"});
+						imgDiv.append(imgList);
+						
+						var imgDiv2 = $('<div>').attr({
+							'class' : "carousel-item",
+						});
+						var imgList2 = $('<img>').attr({
+							'src' : "${path }/resources/upload/supLv/"+ data['FILEORGNAME2']
+						}).css({'height' : "363px"});
+						imgDiv2.append(imgList2);
+						
+						var imgDiv3 = $('<div>').attr({
+							'class' : "carousel-item",
+						});
+						var imgList3 = $('<img>').attr({
+							'src' : "${path }/resources/upload/supLv/"+ data['FILEORGNAME3']
+						}).css({'height' : "363px"});
+						imgDiv3.append(imgList3);
+						
+						var imgDiv4 = $('<div>').attr({
+							'class' : "carousel-item",
+						});
+						var imgList4 = $('<img>').attr({
+							'src' : "${path }/resources/upload/supLv/"+ data['FILEORGNAME4']
+						}).css({'height' : "363px"});
+						imgDiv4.append(imgList4);
+					
+						var imgDiv5 = $('<div>').attr({
+							'class' : "carousel-item",
+						});
+						var imgList5 = $('<img>').attr({
+							'src' : "${path }/resources/upload/supLv/"+ data['FILEORGNAME5']
+						}).css({'height' : "363px"});
+						imgDiv5.append(imgList5);
+						
+						
+						$('.carousel-inner').append(imgDiv);
+						$('.carousel-inner').append(imgDiv2);
+						$('.carousel-inner').append(imgDiv3);
+						$('.carousel-inner').append(imgDiv4);
+						$('.carousel-inner').append(imgDiv5);
+						
 						$(".subCont").text(data['SUBLVCONTENT']);
 						//console.log(data);
 						//모달뷰에 데이터를 출력

@@ -203,12 +203,17 @@
 	
 	<!-- 서포터즈 승인전 데이터 -->
 	<select id="celtifyData" parameterType="_int" resultType="map">
-		select membernum, id, name, phone, email, enrolldate, proimg, sublvcontent, suplvenrolldate
-			,fileorgname1, fileorgname2, fileorgname3, fileorgname4, fileorgname5
-		from members
-			join supporters_lv_upload using(membernum)
-			join supporters_lv_upload_img using(suplvnum)
-		where membernum = #{memberNum} and supstatus = 1
+		select * from(
+    		select rownum as rnum, a.* from(
+				select membernum, id, name, phone, email, enrolldate, proimg, sublvcontent, suplvenrolldate
+					,fileorgname1, fileorgname2, fileorgname3, fileorgname4, fileorgname5
+				from members
+				join supporters_lv_upload using(membernum)
+				join supporters_lv_upload_img using(suplvnum)
+			where membernum = 3 and supstatus = 1
+        	order by suplvenrolldate desc
+        	) a)
+		where rnum = 1
 	</select>
 	
 	<update id="cletifyAdmin" parameterType="_int" >

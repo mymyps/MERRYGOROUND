@@ -63,7 +63,7 @@
                                                 <td><c:out value="${b['RNUM'] }"/></td>
                                                 <td class="avatar">
 	                                                <div class="round-img">
-	                                                    <a href="#"><img class="rounded-circle" src="${path }resources/images/<c:out value="${b['PROIMG'] }"/>" alt=""></a>
+	                                                    <a href="#"><img class="rounded-circle" src="${path }/resources/images/member/<c:out value="${b['PROIMG'] }"/>" alt=""></a>
 	                                                </div>
                                                 </td>
                                                 <td><c:out value="${b['SUPNUM'] }"/></td>

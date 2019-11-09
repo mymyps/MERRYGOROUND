@@ -266,7 +266,7 @@
 												<td class="avatar">
 														<div class="round-img">
 															<a href="#"><img class="rounded-circle" 
-															src="${path }resources/images/${sl['PROIMG']}" alt=""></a>
+															src="${path }/resources/images/member/${sl['PROIMG']}" alt=""></a>
 														</div>
 													</td>
 												<td class="serial"><c:out value="${sl['ID'] }"/></td>
