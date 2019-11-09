@@ -74,17 +74,6 @@ public class CoupleBoardController {
 		return "couple/coupleBoardWrite";
 	}
 	
-	@RequestMapping("/couple/coupleBoardWrite2")
-	public String coupleBoardWrite2(int infoupNum) {
-		attachList.clear();
-		
-//		ModelAndView mv = new ModelAndView();
-		
-		return "couple/coupleBoardWrite";
-	}
-	
-	
-	
 	
 	@RequestMapping("/couple/coupleBoardWriteEnd")
 	public ModelAndView insertCoupleBoard(@RequestParam Map<String,String> param 
