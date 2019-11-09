@@ -72,7 +72,6 @@ border: 1px lightgray !important;
         
          
         <div class="row text-center" style="margin-top:-60px;">
-       
             <div class="isotope-nav" data-isotope-nav="isotope">
                 <ul>
                     <li><a href="#" class="active" data-filter="*">All</a></li>
@@ -91,10 +90,9 @@ border: 1px lightgray !important;
 			    <div class="col-sm-3 portfolio-static-item food isotope-item" style="margin-bottom:20px;">
 					<div class="grid">
 						<figure class="effect-oscar">
-							<img src="${path}/resources/images/beerparty.jpg" alt="">
+<%-- 							<img src="${path}/resources/upload/info/${list.fileReName}" style="width:295px; height: 243px;"> --%>
+							<img src="${path}/resources/images/banpo.JPG" style="width:295px; height: 243px;">
 							<figcaption>
-<!--                        <a class="view icon-pentagon" data-rel="prettyPhoto" href="images/portfolio/portfolio-bg1.jpg"><i class="fa fa-search"></i></a>  -->
-				            <h3>${list.infoupTitle}</h3>
 							<a href="${pageContext.request.contextPath}/info/infoView.do?infoupNum=${list.infoupNum }" class="btn btn-primary white cd-btn">보러가기</a>
 							</figcaption>			
 						</figure>
@@ -114,10 +112,10 @@ border: 1px lightgray !important;
 				<div class="col-sm-3 portfolio-static-item play isotope-item" style="margin-bottom:20px;">
 					<div class="grid">
 						<figure class="effect-oscar">
-							<img src="${path}/resources/images/coex.jpg" alt="">
+<%-- 							<img src="${path}/resources/upload/info/${list.fileReName}" style="width:295px; height: 243px;"> --%>
+							<img src="${path}/resources/images/map1.jpg" style="width:295px; height: 243px;">
 							<figcaption>
-							<h3>${list.infoupTitle}</h3>
-							<a href="${pageContext.request.contextPath}/info/infoView.do?infoupNum=${list.infoupNum }" class="btn btn-primary white cd-btn">보러가기</a>
+							<a href="${pageContext.request.contextPath}/info/infoView.do?infoupNum=${list.infoupNum}" class="btn btn-primary white cd-btn">보러가기</a>
 							</figcaption>			
 						</figure>
 						<div class="portfolio-static-desc">
@@ -132,12 +130,12 @@ border: 1px lightgray !important;
                 
                 <!-- 카페/술 -->
 				  <c:if test="${13 eq list.themaNumRef}">
-				<div class="col-sm-3 portfolio-static-item cafe isotope-item" style="margin-bottom:20px;" >
+				<div class="col-sm-3 portfolio-static-item cafe isotope-item">
 					<div class="grid">
 						<figure class="effect-oscar">
-							<img src="${path}/resources/images/banpo.JPG" alt="">
+<%-- 							<img src="${path}/resources/upload/info/${list.fileReName}" style="width:295px; height: 243px;"> --%>
+								<img src="${path}/resources/images/merry2.jpg" style="width:295px; height: 243px;">
 								<figcaption>
-						        <h3>${list.infoupTitle}</h3>
 								<a href="${pageContext.request.contextPath}/info/infoView.do?infoupNum=${list.infoupNum }" class="btn btn-primary white cd-btn">보러가기</a>
 							</figcaption>			
 						</figure>
@@ -152,18 +150,7 @@ border: 1px lightgray !important;
 				</c:if>
 				</c:forEach>
 		
-		
-<!-- 			<div class="paging2"> -->
-<!-- 						<ul class="pagination"> -->
-<!-- 							<li><a href="#"><i class="fa fa-angle-left"></i></a></li> -->
-<!-- 							<li class="active"><a href="#">1</a></li> -->
-<!-- 							<li><a href="#">2</a></li> -->
-<!-- 							<li><a href="#">3</a></li> -->
-<!-- 							<li><a href="#">4</a></li> -->
-<!-- 							<li><a href="#">5</a></li> -->
-<!-- 							<li><a href="#"><i class="fa fa-angle-right"></i></a></li> -->
-<!-- 						</ul> -->
-<!-- 					</div> -->
+	
 			</div><!-- Content row end -->
 		</div><!-- Container end -->
 		</div>

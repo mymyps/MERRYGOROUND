@@ -36,8 +36,6 @@ public class SearchController {
 	public String subThemaList(
 			@RequestParam("themaNum") int themaNum,
 			@RequestParam("themaNumRef") int themaNumRef, Model model) {
-
-		
 		
 		Map<String, Object> param = new HashMap<String, Object>();
 		param.put("themaNum", themaNum);
