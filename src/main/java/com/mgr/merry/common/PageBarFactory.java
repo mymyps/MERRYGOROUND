@@ -55,7 +55,7 @@ public class PageBarFactory {
       if (url.split("\\?")[0].equals("/19AM_MERRYGOROUND_final/sign/mypage.do")) {
          pageBar += "location.href='" + url + "&cPage='+cPage";
       } else {
-         pageBar += "location.href='" + url + "?cPage='+cPage";
+         pageBar += "location.href='" + url + "&cPage='+cPage";
       }
 //      pageBar+="location.href='"+url+"?cPage='+cPage";
       pageBar += "}";

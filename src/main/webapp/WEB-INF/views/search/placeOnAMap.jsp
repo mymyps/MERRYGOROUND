@@ -282,14 +282,14 @@
 			        // LatLngBounds 객체에 좌표를 추가합니다
 			        bounds.extend(placePosition);
 				    
-				   (function(marker,title,addr,tel,infonum,placePosition){
+				   (function(marker,title,addr,tel,infoupNum,placePosition){
 					   kakao.maps.event.addListener(marker, 'click',
 								function() {
 						   var content = '<div style="padding:5px;z-index:1; width:300px;height:100px;">'
 								   +'<p>'+title+'</p>'
 								   +'<p>'+addr+'</p>'
 								   +'<p>'+tel+'</p>'
-								   +'<a href="${pageContext.request.contextPath}/info/infoView.do?infoupNum='+infonum+'&id=0" class="btn btn-primary white cd-btn">보러가기</a>'
+								   +'<a href="${pageContext.request.contextPath}/info/infoView.do?infoupNum='+infoupNum+'&id=0" class="btn btn-primary white cd-btn">보러가기</a>'
 									+ '</div>';
 							
 		
@@ -303,7 +303,7 @@
 							   +'<p>'+title+'</p>'
 							   +'<p>'+addr+'</p>'
 							   +'<p>'+tel+'</p>'
-							   +'<a href="<%=request.getContextPath()%>/search/detailView?pCode='+pCode+'"><button>예매하러가기</button></a>'
+							   +'<a href="${pageContext.request.contextPath}/info/infoView.do?infoupNum='+infoupNum+'&id=0" class="btn btn-primary white cd-btn">보러가기</a>'
 								+ '</div>';
 						
 		
@@ -329,20 +329,19 @@
 		    map.setBounds(bounds);
 		}
 		
-		
 		// 검색결과 항목을 Element로 반환하는 함수입니다
 		function getListItem(index, places) {
 		
 		    var el = document.createElement('li'),
 		    itemStr = '<span class="markerbg marker_' + (index+1) + '"></span>' +
 		                '<div class="info">' +
-		                '   <h5>' + places.pName + '</h5>';
+		                '   <h5>' + places.infoupTitle + '</h5>';
 		
 		    
-		        itemStr += '    <span>' +  places.pAddr  + '</span>'; 
+		        itemStr += '    <span>' +  places.localCity  + '</span>'; 
 		
 		                 
-		      itemStr += '  <span class="tel">' + places.pTel  + '</span>' +
+		      itemStr += '  <span class="tel">' + places.tel  + '</span>' +
 		                '</div>';           
 		
 		    el.innerHTML = itemStr;

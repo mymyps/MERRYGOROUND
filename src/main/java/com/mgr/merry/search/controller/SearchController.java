@@ -21,6 +21,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.mgr.merry.common.PageBarFactory;
 import com.mgr.merry.info.model.vo.InfoUpload;
 import com.mgr.merry.search.model.service.SearchService;
 
@@ -35,31 +36,44 @@ public class SearchController {
 	@RequestMapping("/search/subThemaList")
 	public String subThemaList(
 			@RequestParam("themaNum") int themaNum,
-			@RequestParam("themaNumRef") int themaNumRef, Model model) {
+			@RequestParam("themaNumRef") int themaNumRef, Model model
+			,@RequestParam(value="cPage",required=false,defaultValue="0") int cPage) {
+		
+		int numPerPage=4;
 		
 		Map<String, Object> param = new HashMap<String, Object>();
 		param.put("themaNum", themaNum);
 		param.put("themaNumRef", themaNumRef);
 
-		List<InfoUpload> list = service.subThemaList(param);
+		List<InfoUpload> list = service.subThemaList(param,cPage,numPerPage);
 		model.addAttribute("list", list);
 
 		logger.debug("" + param);
 		logger.debug("컨트롤러에서 서브테마 리스트 : " + list);
+		
+        int totalCount = service.subThemaCount(param);
+		
+		model.addAttribute("pageBar",PageBarFactory.getPageBar(totalCount, cPage, numPerPage, "/merry/search/subThemaList?themaNum="+param.get("themaNum")+"&themaNumRef="+param.get("themaNumRef")));
 
 		return "search/classifyByTheme";
 
 	}
 
 	@RequestMapping("/search/mainThemaList")
-	public String mainThemaList(@RequestParam("themaNumRef") int themaNumRef, Model model) {
+	public String mainThemaList(@RequestParam("themaNumRef") int themaNumRef, Model model
+			,@RequestParam(value="cPage",required=false,defaultValue="0") int cPage) {
 
-		List<InfoUpload> list = service.mainThemaList(themaNumRef);
+		int numPerPage=4;
+		List<InfoUpload> list = service.mainThemaList(themaNumRef,cPage,numPerPage);
 		model.addAttribute("themaNumRef", themaNumRef);
 		model.addAttribute("list", list);
 
 		logger.debug("themaNumRef : " + themaNumRef);
 		logger.debug("컨트롤러에서 메인테마 리스트 : " + list);
+		
+		int totalCount = service.mainThemaCount(themaNumRef);
+		
+		model.addAttribute("pageBar",PageBarFactory.getPageBar(totalCount, cPage, numPerPage, "/merry/search/mainThemaList?themaNumRef="+themaNumRef));
 
 		return "search/classifyByTheme";
 
@@ -67,16 +81,23 @@ public class SearchController {
 
 	@RequestMapping("/search/locList")
 
-	public String localList(@RequestParam("localNum") int localNum, Model model) {
-
-		List<InfoUpload> list = service.localList(localNum);
+	public String localList(@RequestParam("localNum") int localNum, Model model
+							,@RequestParam(value="cPage",required=false,defaultValue="0") int cPage) {
+		
+		int numPerPage=6;
+		List<InfoUpload> list = service.localList(localNum,cPage,numPerPage);
 		model.addAttribute("locList", list);
 
 		logger.debug("localNum : " + localNum);
 		logger.debug("컨트롤러에서 지역 리스트 : " + list);
 
+		int totalCount = service.localCount(localNum);
+		
+		model.addAttribute("pageBar",PageBarFactory.getPageBar(totalCount, cPage, numPerPage, "/merry/search/locList?localNum="+localNum));
+//		model.addAttribute("count",totalCount);
+		model.addAttribute("localNum",localNum);		
+		
 		return "search/classifyByLoc";
-
 	}
 
 	@RequestMapping("/search/mapSearch")
