@@ -1,14 +1,11 @@
 package com.mgr.merry.info.model.service;
 
-import java.net.URLEncoder;
-import java.util.List;
 import java.util.Map;
 
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.servlet.ModelAndView;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.mgr.merry.info.model.dao.InfoDao;
 import com.mgr.merry.info.model.vo.InfoUploadImg;
@@ -24,6 +21,7 @@ public class InfoServiceImpl implements InfoService {
 	
 	// 수정중
 	@Override
+	@Transactional(rollbackFor = Exception.class)
 	public int insertInfo(Map<String, String> param, InfoUploadImg infoimg) throws Exception {
 		int result=0;
 		int result2=0;

@@ -191,6 +191,27 @@
 			}
 		}).open();
 	}
+	
+	
+    $(document).on("change","input[name='infoupFile']",function(event) {
+        var ext = $(this).val().split('.').pop().toLowerCase();
+        var fileSize = (this).files[0].size;
+        var maxSize = 1024*1024*1024;
+        
+        if($.inArray(ext, ['gif','png','jpg','jpeg']) == -1) {
+           alert("등록할 수 없는 확장자입니다.");
+           $(this).val("");
+           return;
+        } 
+        
+        if(fileSize > maxSize) {
+           alert("첨부파일 크기는 1GB 이내로 등록 가능합니다.");
+           $(this).val("");
+           return;
+        }
+     });
+
+    
 	</script>
 </section>
 

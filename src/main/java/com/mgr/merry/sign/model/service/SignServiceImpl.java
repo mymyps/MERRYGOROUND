@@ -111,6 +111,10 @@ public class SignServiceImpl implements SignService {
 	public Map<String, String> selectMemberId(String id) {
 		return dao.selectMemberId(session, id);
 	}
+	@Override
+	public List selectMemberId2(String id) {
+		return dao.selectMemberid2(session, id);
+	}
 	
 
 	

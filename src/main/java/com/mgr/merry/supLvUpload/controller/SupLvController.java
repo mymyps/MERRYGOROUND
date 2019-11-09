@@ -1,6 +1,7 @@
 package com.mgr.merry.supLvUpload.controller;
 
 import java.io.File;
+import java.util.List;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
@@ -37,7 +38,7 @@ public class SupLvController {
 		String msg="";
 		
 		Map<String, String> sup = iservice.selectSup(param);
-		Map<String, String> mem = mservice.selectMemberId(id);
+		List mem = mservice.selectMemberId2(id);
 		System.out.println("서포터즈가 아닐시 sup :"+sup);
 		
 		if(id=="") {
