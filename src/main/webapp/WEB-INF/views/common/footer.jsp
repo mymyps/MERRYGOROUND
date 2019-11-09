@@ -25,7 +25,6 @@ pageEncoding="UTF-8"%>
 		</div><!-- Container end -->
 	</footer><!-- Footer1 end -->
 
-
 	<!-- Footer2 start -->
 	<section id="copyright" class="copyright angle">
 		<div class="container">
@@ -45,38 +44,6 @@ pageEncoding="UTF-8"%>
 		<!--/ Container end -->
 	</section>
 	<!--/ Footer end -->
-
-	<!-- Javascript Files ================================================== -->
-
-<%-- 	<!-- initialize jQuery Library -->
-	<script type="text/javascript" src="${pageContext.request.contextPath }/resources/js/jquery.js"></script>
-	<!-- Bootstrap jQuery -->
-	<script type="text/javascript" src="${pageContext.request.contextPath }/resources/js/bootstrap.min.js"></script>
-	<!-- Style Switcher -->
-	<script type="text/javascript" src="${pageContext.request.contextPath }/resources/js/style-switcher.js"></script>
-	<!-- Owl Carousel -->
-	<script type="text/javascript" src="${pageContext.request.contextPath }/resources/js/owl.carousel.js"></script>
-	<!-- PrettyPhoto -->
-	<script type="text/javascript" src="${pageContext.request.contextPath }/resources/js/jquery.prettyPhoto.js"></script>
-	<!-- Bxslider -->
-	<script type="text/javascript" src="${pageContext.request.contextPath }/resources/js/jquery.flexslider.js"></script>
-	<!-- CD Hero slider -->
-	<script type="text/javascript" src="${pageContext.request.contextPath }/resources/js/cd-hero.js"></script>
-	<!-- Isotope -->
-	<script type="text/javascript" src="${pageContext.request.contextPath }/resources/js/isotope.js"></script>
-	<script type="text/javascript" src="${pageContext.request.contextPath }/resources/js/ini.isotope.js"></script>
-	<!-- Wow Animation -->
-	<script type="text/javascript" src="${pageContext.request.contextPath }/resources/js/wow.min.js"></script>
-	<!-- SmoothScroll -->
-	<script type="text/javascript" src="${pageContext.request.contextPath }/resources/js/smoothscroll.js"></script>
-	<!-- Eeasing -->
-	<script type="text/javascript" src="${pageContext.request.contextPath }/resources/js/jquery.easing.1.3.js"></script>
-	<!-- Counter -->
-	<script type="text/javascript" src="${pageContext.request.contextPath }/resources/js/jquery.counterup.min.js"></script>
-	<!-- Waypoints -->
-	<script type="text/javascript" src="${pageContext.request.contextPath }/resources/js/waypoints.min.js"></script>
-	<!-- Template custom -->
-	<script type="text/javascript" src="${pageContext.request.contextPath }/resources/js/custom.js"></script> --%>
 	</div><!-- Body inner end -->
 </body>
 

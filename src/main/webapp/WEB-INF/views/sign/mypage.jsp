@@ -4,7 +4,11 @@
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 <c:set var="path" value="${pageContext.request.contextPath}"/>
 <jsp:include page="/WEB-INF/views/common/header.jsp">
+<<<<<<< HEAD
    <jsp:param name="pageTitle" value=""/>
+=======
+	<jsp:param name="pageTitle" value="마이페이지"/>
+>>>>>>> origin/lovewoney2
 </jsp:include>
 <style>
 .inbtn-10{
