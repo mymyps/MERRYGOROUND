@@ -14,7 +14,7 @@
 	<!-- summernote 폼-->
 	<form name="infoForm"
 		action="${pageContext.request.contextPath }/supUp/supReviewUpadeEnd.do"
-		method="post" enctype="multipart/form-data">
+		method="post" enctype="multipart/form-data" onsubmit="return checkNull();">
 		<div class="container">
 			<input type="hidden" name="loginMemberNum"
 				value="${loginMember.memberNum}">
@@ -58,10 +58,10 @@
 								<div>
 									<div class="infoFormSubFrame">제목</div>
 									<p class="infoForm1">
-										<input type="text" name="supupTitle" value="${supUpload.SUPUPTITLE }" />
+										<input type="text" name="supupTitle" value="${supUpload.SUPUPTITLE }" id="supupTitle"/>
 									</p>
 								</div>
-								<textarea id="summ" name="supupContent" required><c:out value="${supUpload.SUPUPCONTENT }"/></textarea>
+								<textarea id="summ" name="supupContent"><c:out value="${supUpload.SUPUPCONTENT }"/></textarea>
 								
 							</div>
 
@@ -78,6 +78,28 @@
 		</div>
 	</form>
 
+	<script>
+		function checkNull(){
+			var supupTitle=$('#supupTitle');
+			var summ=$('#summ')
+			
+			if(supupTitle.val()==""){
+		    	alert('제목을 입력해주세요.');
+		    	supupTitle.focus();
+		    	return false;
+			}
+			if(summ.val()==""){
+		    	alert('내용을 입력해주세요.');
+		    	summ.focus();
+		    	return false;
+			}
+			if(summ.val()=="<p><br><p>"){
+		    	alert('내용을 입력해주세요.');
+		    	summ.focus();
+		    	return false;
+			}
+		}
+	</script>
 
 	<input type="hidden" value="" />
 	
