@@ -28,21 +28,26 @@ public class SearchServiceImpl implements SearchService {
 	}
 
 	@Override
-	public List<InfoUpload> subThemaList(Map<String, Object> param) {
+	public List<InfoUpload> subThemaList(Map<String, Object> param,int cPage, int numPerPage) {
 
-		return dao.subThemaList(session, param);
+		return dao.subThemaList(session, param,cPage,numPerPage);
 	}
 
 	@Override
-	public List<InfoUpload> localList(int localNum) {
+	public List<InfoUpload> localList(int localNum,int cPage, int numPerPage) {
 
-		return dao.localList(session, localNum);
+		return dao.localList(session, localNum,cPage,numPerPage);
 	}
 
 	@Override
-	public List<InfoUpload> mainThemaList(int themaNumRef) {
+	public int localCount(int localNum) {
+		return dao.localCount(session, localNum);
+	}
+
+	@Override
+	public List<InfoUpload> mainThemaList(int themaNumRef,int cPage, int numPerPage) {
 		
-		return dao.mainThemaList(session, themaNumRef);
+		return dao.mainThemaList(session, themaNumRef,cPage,numPerPage);
 	}
 
 	@Override
@@ -71,6 +76,16 @@ public class SearchServiceImpl implements SearchService {
 	@Override
 	public Map<String, String> noticeIndexLoad() {
 		return dao.noticeIndexLoad(session);
+	}
+
+	@Override
+	public int mainThemaCount(int themaNumRef) {
+		return dao.mainThemaCount(session, themaNumRef);
+	}
+
+	@Override
+	public int subThemaCount(Map<String, Object> param) {
+		return dao.subThemaCount(session, param);
 	}
 
 }

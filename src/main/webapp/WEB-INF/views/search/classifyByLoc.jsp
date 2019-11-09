@@ -107,7 +107,6 @@ border: 1px lightgray !important;
 				</c:if>
 
                 <!-- 놀거리 -->
-				
 			     <c:if test="${7 eq list.themaNumRef}">
 				<div class="col-sm-3 portfolio-static-item play isotope-item" style="margin-bottom:20px;">
 					<div class="grid">
@@ -150,10 +149,12 @@ border: 1px lightgray !important;
 				</c:if>
 				</c:forEach>
 		
-	
 			</div><!-- Content row end -->
 		</div><!-- Container end -->
 		</div>
+		       <div style="margin-left:880px;">
+				${pageBar }
+				</div>
 	</section><!-- Portfolio end -->
 
 	<div class="gap-40"></div>

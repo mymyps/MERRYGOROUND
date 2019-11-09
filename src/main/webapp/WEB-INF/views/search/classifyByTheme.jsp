@@ -132,15 +132,7 @@
 	 	<!-- list 출력 끝 -->
 		<!-- 테마별 리스트 DIV 끝 -->
     				<div class="paging2">
-						<ul class="pagination">
-							<li><a href="#"><i class="fa fa-angle-left"></i></a></li>
-							<li class="active"><a href="#">1</a></li>
-							<li><a href="#">2</a></li>
-							<li><a href="#">3</a></li>
-							<li><a href="#">4</a></li>
-							<li><a href="#">5</a></li>
-							<li><a href="#"><i class="fa fa-angle-right"></i></a></li>
-						</ul>
+						${pageBar}
 					</div>
 				</div>
 				<!-- tab content -->

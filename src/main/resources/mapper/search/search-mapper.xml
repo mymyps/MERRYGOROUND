@@ -56,7 +56,46 @@
 		 WHERE lo.LOCALNUM=#{localNum} AND i.INFOUPSTATUS=1
 		 ORDER BY INFOUPDATE DESC
 	 </select>
+	 
+	 <select id="localCount" resultType="_int">
+	    SELECT COUNT(*)
+		 FROM INFO_UPLOAD i
+		 INNER JOIN THEMA t
+		 ON i.THEMANUM=t.THEMANUM
+		 INNER JOIN INFO_UPLOAD_IMG img
+		 ON i.INFOUPNUM=img.INFOUPNUM
+		 INNER JOIN LOCATION lo
+		 ON i.LOCALNUM=lo.LOCALNUM
+		 WHERE lo.LOCALNUM=#{localNum} AND i.INFOUPSTATUS=1
+		 ORDER BY INFOUPDATE DESC
+	 </select>
+	 
+	 	 <select id="mainThemaCount" resultType="_int">
+	   SELECT COUNT(*)
+		 FROM INFO_UPLOAD i
+		 INNER JOIN THEMA t
+		 ON i.THEMANUM=t.THEMANUM
+		 INNER JOIN INFO_UPLOAD_IMG img
+		 ON i.INFOUPNUM=img.INFOUPNUM
+		 INNER JOIN LOCATION lo
+		 ON i.LOCALNUM=lo.LOCALNUM
+		 WHERE t.THEMANUMREF=#{themaNumRef} AND i.INFOUPSTATUS=1
+		 ORDER BY INFOUPDATE DESC
+	 </select>
 	    
+	    <select id="subThemaCount" resultType="_int">
+	    
+	     SELECT COUNT(*)
+		 FROM INFO_UPLOAD i
+		 INNER JOIN THEMA t
+		 ON i.THEMANUM=t.THEMANUM
+		 INNER JOIN INFO_UPLOAD_IMG img
+		 ON i.INFOUPNUM=img.INFOUPNUM
+		 INNER JOIN LOCATION lo
+		 ON i.LOCALNUM=lo.LOCALNUM
+		 WHERE i.THEMANUM=#{themaNum} AND t.THEMANUMREF=#{themaNumRef} AND i.INFOUPSTATUS=1
+		 ORDER BY INFOUPDATE DESC
+	</select>
 	   
 	    <select id="mapSearch" resultType="map" parameterType="map">
 	    
