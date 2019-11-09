@@ -5,9 +5,7 @@
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 
 <jsp:include page="/WEB-INF/views/common/header.jsp"/>
-
 		
-<!-- Slider start -->
 		<section id="home" class="no-padding">
 			<div id="main-slide" class="cd-hero">
 				<ul class="cd-hero-slider">
@@ -29,9 +27,6 @@
 			</div>
 			<!--/ Main slider end -->
 		</section>
-		<!--/ Slider end -->
-
-
 
 		<!-- 지역별로 검색하기  -->
 		<section id="mapHref" class="service angle">
@@ -45,7 +40,7 @@
 				</h2>
 			</div>
 			<!-- 지도 이미지 -->
-	<div class="container" id="mapcontainer">
+	    <div class="container" id="mapcontainer">
 		<img src="${pageContext.request.contextPath}/resources/images/mapsearch.png" usemap="#mapSearch">
 		<map id="mapSearch" name="mapSearch">
 			<area shape="rect" title="은평서대문" coords="771,69,827,165" href="${pageContext.request.contextPath}/search/locList?localNum=1" target="_self" onfocus=this.blur() />
@@ -117,7 +112,6 @@
 								<img src="${pageContext.request.contextPath}/resources/images/portfolio/korean.jpg" alt="" class="img-thumbnail">
 								<figcaption>
 									<h2><a href="${pageContext.request.contextPath}/search/subThemaList?themaNum=2&themaNumRef=1" >한식</a></h2>
-								
 							    </figcaption>
 							</figure>
 						</div>
@@ -155,18 +149,18 @@
 										</figure>
 									</div>
 								</div>
-								<!-- 중식 -->
-								<div class="col-sm-3 web-design isotope-item">
-										<div class="grid">
-											<figure class="effect-oscar">
-												<img src="${pageContext.request.contextPath}/resources/images/portfolio/china.jpg" alt="" class="img-thumbnail">
-												<figcaption>
-														<h2><a href="${pageContext.request.contextPath}/search/subThemaList?themaNum=6&themaNumRef=1">중식</a></h2>
-													</figcaption>
-											</figure>
-										</div>
+							<!-- 중식 -->
+							<div class="col-sm-3 web-design isotope-item">
+									<div class="grid">
+										<figure class="effect-oscar">
+											<img src="${pageContext.request.contextPath}/resources/images/portfolio/china.jpg" alt="" class="img-thumbnail">
+											<figcaption>
+													<h2><a href="${pageContext.request.contextPath}/search/subThemaList?themaNum=6&themaNumRef=1">중식</a></h2>
+												</figcaption>
+										</figure>
 									</div>
-									<!-- 먹거리 끝 -->
+								</div>
+							    <!-- 먹거리 끝 -->
 					
 					<!-- 놀거리 -->
 					<!-- 실내데이트 -->
@@ -214,7 +208,7 @@
 							</div>
 						</div>
 						<!-- 마사지 -->
-					<div class="col-sm-3 development isotope-item">
+				     	<div class="col-sm-3 development isotope-item">
 							<div class="grid">
 								<figure class="effect-oscar">
 									<img src="${pageContext.request.contextPath}/resources/images/portfolio/ma.jpg" alt="" class="img-thumbnail">
@@ -274,7 +268,6 @@
 			</div><!-- Content row end -->
 		</div><!-- Container end -->
 	</section><!-- 테마별 검색 끝 -->
-	
 	
 		<!-- 추천 데이트 -->
 		<section id="team" class="team">
@@ -354,7 +347,6 @@
 		</section>
 		<!--추천 데이트코스 끝 -->
 
-
 		<!--현위치 기반 검색 - 지도API와 연결될 link-->
 		<section class="parallax parallax1">
 			<div class="parallax-overlay"></div>
@@ -364,7 +356,7 @@
 						<h2>주변 데이트 장소가 궁금하세요?</h2>
 						<h3>위치를 기반으로 데이트 장소를 보여줍니다:)</h3>
 						<p>
-							<a href="${pageContext.request.contextPath}/search/mapSearch" class="btn btn-primary white">내 주변 데이트장소 검색</a>
+						  <a href="${pageContext.request.contextPath}/search/mapSearch" class="btn btn-primary white">내 주변 데이트장소 검색</a>
 						</p>
 					</div>
 				</div>
@@ -392,7 +384,6 @@
 									<div class="testimonial-content">
 									<c:forEach items="${noticeList}" var="list">
 										<h3><c:out value='${list["NOTICECONTENT"]}'></c:out></h3>
-									
                                      </c:forEach>
                                      <h3>서포터즈 상시모집</h3>
 										<p>
@@ -411,9 +402,8 @@
 				<!--/ Testimonial carousel end-->
 			</div>
 			<!--/ Row end-->
-	</div>
+	   </div>
 	<!--/  Container end-->
-	
 	</section>
 	
    <script>
@@ -439,10 +429,6 @@
 		});
 	});
   
-
-  
-  
- 	
  </script>
 
 <jsp:include page="/WEB-INF/views/common/footer.jsp"/>
