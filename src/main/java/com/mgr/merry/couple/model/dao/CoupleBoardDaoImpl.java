@@ -13,14 +13,14 @@ import com.mgr.merry.couple.model.vo.Attachment;
 public class CoupleBoardDaoImpl implements CoupleBoardDao {
 
 	@Override
-	public int selectCoupleBoardCount(SqlSessionTemplate session) {
-		return session.selectOne("couple.selectCoupleBoardCount");
+	public int selectCoupleBoardCount(SqlSessionTemplate session,Map<String,Object> param) {
+		return session.selectOne("couple.selectCoupleBoardCount",param);
 	}
 
 	@Override
-	public List<Map<String, String>> selectCoupleBoardList(SqlSessionTemplate session, int cPage, int numPerPage) {
+	public List<Map<String, String>> selectCoupleBoardList(SqlSessionTemplate session,Map<String,Object> param, int cPage, int numPerPage) {
 		RowBounds rows=new RowBounds((cPage-1)*numPerPage,numPerPage);
-		return session.selectList("couple.selectCoupleBoardList",null,rows);
+		return session.selectList("couple.selectCoupleBoardList",param,rows);
 	}
 
 	@Override

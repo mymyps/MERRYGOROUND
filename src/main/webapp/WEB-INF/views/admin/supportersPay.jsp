@@ -64,7 +64,7 @@
                                                 <td><c:out value="${b['RNUM'] }"/></td>
                                                 <td class="avatar">
 	                                                <div class="round-img">
-	                                                    <a href="#"><img class="rounded-circle" src="${path }resources/images/<c:out value="${b['PROIMG'] }"/>" alt=""></a>
+	                                                    <a href="#"><img class="rounded-circle" src="${path }/resources/images/member/<c:out value="${b['PROIMG'] }"/>" alt=""></a>
 	                                                </div>
                                                 </td>
                                                 <td><c:out value="${b['ID'] }"/></td>
@@ -72,7 +72,7 @@
                                                 <td><c:out value="${b['SUPLEVEL'] }"/></td>
                                                 <td><c:out value="${b['SUM'] }"/></td>
                                                 <td><c:out value="${b['PHONE'] }"/></td>
-                                                <td><fmt:formatDate value="${b['SUPENROLLDATE'] }" pattern="yyyy.MM.dd"/></td>
+                                                <td><fmt:formatDate value="${b['ENROLLDATE'] }" pattern="yyyy.MM.dd"/></td>
                                             </tr>
                                             </c:forEach>
                                         </tbody>

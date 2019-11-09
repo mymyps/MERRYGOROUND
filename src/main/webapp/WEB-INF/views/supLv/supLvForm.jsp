@@ -5,13 +5,13 @@
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 <c:set var="path" value="${pageContext.request.contextPath}" />
 <jsp:include page="/WEB-INF/views/common/header.jsp">
-	<jsp:param name="pageTitle" value="demo" />
+	<jsp:param name="pageTitle" value="서포터즈" />
 </jsp:include>
 <section id="content">
 	<div class="container">
 		<form name="infoForm"
-			action="${pageContext.request.contextPath }/supLv/supLvFormEnd.do"
-			method="post" enctype="multipart/form-data">
+			action="${pageContext.request.contextPath }/supLv/supLvFormEnd.do?id=${loginMember.id}"
+			method="post" enctype="multipart/form-data"  onsubmit="return checkNull();">
 			<input type="hidden" value="${loginMember.id }" name="id" />
 			<input type="hidden" value="${loginMember.memberNum }" name="memberNum" />
 			<div class="row">
@@ -20,7 +20,7 @@
 					<!-- Blog post start -->
 					<div class="post-content">
 						<h1 class="post-title text-center">
-							<a href="blog-item.html">서포터즈 신청 작성</a>
+							<a href="blog-item.html">신청</a>
 						</h1>
 						
 						<div style="overflow:scroll; width:700px; height:400px; padding:10px;margin-left: 225px; ">
@@ -100,47 +100,50 @@
 요금 등 서비스 이용으로 발생한 분쟁에 대해 소송이 제기될 경우 회사의 본사 소재지를 관할하는 법원을 전속 관할법원으로 합니다.
 						</div>
 						
+						<input type="checkbox" id='check' name="check"/> 약관을 동의하십니까? (필수)
+						
+						
 						<hr>
 						<div class="entry-content">
 							<div class="infoFormMainFrame">
 								<div class="infoFormSubFrame">이미지1</div>
 								<p class="infoForm1">
-									<input type="file" name="supLvImg1" />
+									<input type="file" name="supLvImg1" id="supLvImg1" />
 
 								</p>
 							</div>
 							<div>
 								<div class="infoFormSubFrame">이미지2</div>
 								<p class="infoForm1">
-									<input type="file" name="supLvImg2" />
+									<input type="file" name="supLvImg2"  id="supLvImg2"/>
 
 								</p>
 							</div>
 							<div>
 								<div class="infoFormSubFrame">이미지3</div>
 								<p class="infoForm1">
-									<input type="file" name="supLvImg3" />
+									<input type="file" name="supLvImg3"  id="supLvImg3"/>
 
 								</p>
 							</div>
 							<div>
 								<div class="infoFormSubFrame">이미지4</div>
 								<p class="infoForm1">
-									<input type="file" name="supLvImg4" />
+									<input type="file" name="supLvImg4"  id="supLvImg4"/>
 
 								</p>
 							</div>
 							<div>
 								<div class="infoFormSubFrame">이미지5</div>
 								<p class="infoForm1">
-									<input type="file" name="supLvImg5" />
+									<input type="file" name="supLvImg5"  id="supLvImg5"/>
 
 								</p>
 							</div>
 							<div>
 								<div class="infoFormSubFrame">내용</div>
 								<p class="infoForm1">
-									<input type="text" class="subLvHeight" name="supLvContent" />
+									<input type="text" class="subLvHeight" name="supLvContent" id="supLvContent"/>
 								</p>
 							</div>
 
@@ -159,6 +162,151 @@
 			</div>
 		</form>
 	</div>
+	
+	<script>
+	
+	function checkNull(){
+		var check=$('#check');
+		var supLvImg1=$('#supLvImg1');
+		var supLvImg2=$('#supLvImg2');
+		var supLvImg3=$('#supLvImg3');
+		var supLvImg4=$('#supLvImg4');
+		var supLvImg5=$('#supLvImg5');
+		var supLvContent=$('#supLvContent');
+		
+		if(check.is(':checked')==false){
+        	alert('이용약관에 동의해주세요.');
+        	return false;
+        }
+		
+		if(supLvImg1.val()==""){
+           alert('이미지1 등록해주세요.');
+           supLvImg1.focus();
+           return false;
+		}
+		
+		if(supLvImg2.val()==""){
+	           alert('이미지2 등록해주세요.');
+	           supLvImg2.focus();
+	           return false;
+			}
+		
+		if(supLvImg3.val()==""){
+	           alert('이미지3 등록해주세요.');
+	           supLvImg3.focus();
+	           return false;
+			}
+		
+		if(supLvImg4.val()==""){
+	           alert('이미지4 등록해주세요.');
+	           supLvImg4.focus();
+	           return false;
+			}
+		
+		if(supLvImg5.val()==""){
+	           alert('이미지5 등록해주세요.');
+	           supLvImg5.focus();
+	           return false;
+			}
+		
+		if(supLvContent.val()==""){
+	         alert('내용을 입력해주세요.');
+	         
+	         supLvContent.focus();
+	         return false;
+	      }
+
+	}
+	
+	$(document).on("change","input[name='supLvImg1']",function(event) {
+        var ext = $(this).val().split('.').pop().toLowerCase();
+        var fileSize = (this).files[0].size;
+        var maxSize = 1024*1024*1024;
+        
+        if($.inArray(ext, ['gif','png','jpg','jpeg']) == -1) {
+           alert("등록할 수 없는 확장자입니다.");
+           $(this).val("");
+           return;
+        } 
+        
+        if(fileSize > maxSize) {
+           alert("첨부파일 크기는 1GB 이내로 등록 가능합니다.");
+           $(this).val("");
+           return;
+        }
+     });
+
+	$(document).on("change","input[name='supLvImg2']",function(event) {
+        var ext = $(this).val().split('.').pop().toLowerCase();
+        var fileSize = (this).files[0].size;
+        var maxSize = 1024*1024*1024;
+        
+        if($.inArray(ext, ['gif','png','jpg','jpeg']) == -1) {
+           alert("등록할 수 없는 확장자입니다.");
+           $(this).val("");
+           return;
+        } 
+        
+        if(fileSize > maxSize) {
+           alert("첨부파일 크기는 1GB 이내로 등록 가능합니다.");
+           $(this).val("");
+           return;
+        }
+     });
+	
+	$(document).on("change","input[name='supLvImg3']",function(event) {
+        var ext = $(this).val().split('.').pop().toLowerCase();
+        var fileSize = (this).files[0].size;
+        var maxSize = 1024*1024*1024;
+        
+        if($.inArray(ext, ['gif','png','jpg','jpeg']) == -1) {
+           alert("등록할 수 없는 확장자입니다.");
+           $(this).val("");
+           return;
+        } 
+        
+        if(fileSize > maxSize) {
+           alert("첨부파일 크기는 1GB 이내로 등록 가능합니다.");
+           $(this).val("");
+           return;
+        }
+     });
+	$(document).on("change","input[name='supLvImg4']",function(event) {
+        var ext = $(this).val().split('.').pop().toLowerCase();
+        var fileSize = (this).files[0].size;
+        var maxSize = 1024*1024*1024;
+        
+        if($.inArray(ext, ['gif','png','jpg','jpeg']) == -1) {
+           alert("등록할 수 없는 확장자입니다.");
+           $(this).val("");
+           return;
+        } 
+        
+        if(fileSize > maxSize) {
+           alert("첨부파일 크기는 1GB 이내로 등록 가능합니다.");
+           $(this).val("");
+           return;
+        }
+     });
+	$(document).on("change","input[name='supLvImg5']",function(event) {
+        var ext = $(this).val().split('.').pop().toLowerCase();
+        var fileSize = (this).files[0].size;
+        var maxSize = 1024*1024*1024;
+        
+        if($.inArray(ext, ['gif','png','jpg','jpeg']) == -1) {
+           alert("등록할 수 없는 확장자입니다.");
+           $(this).val("");
+           return;
+        } 
+        
+        if(fileSize > maxSize) {
+           alert("첨부파일 크기는 1GB 이내로 등록 가능합니다.");
+           $(this).val("");
+           return;
+        }
+     });
+	
+	</script>
 
 
 </section>

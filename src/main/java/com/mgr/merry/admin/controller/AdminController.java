@@ -261,7 +261,7 @@ public class AdminController {
 		res.getWriter().print(true);
 	}
 	
-	@RequestMapping(value="/admin/celtify.do")
+	@RequestMapping(value="/admin/celtify.do",  produces="application/json;charset=UTF-8")
 	@ResponseBody
 	public String cletifyAdmin(@RequestParam(value="memberNum") int memberNum) throws JsonProcessingException{
 		//json(return type)

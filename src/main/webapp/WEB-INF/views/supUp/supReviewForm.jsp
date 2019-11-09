@@ -4,7 +4,7 @@
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 <c:set var = "path" value="${pageContext.request.contextPath}"/>
 <jsp:include page ="/WEB-INF/views/common/header.jsp">
-<jsp:param name ="pageTitle" value=""/>	
+<jsp:param name ="pageTitle" value="서포터즈"/>	
 </jsp:include>
 
     <link href="https://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.12/summernote-bs4.css" rel="stylesheet">
@@ -13,8 +13,8 @@
 <section id="content">
 	<!-- summernote 폼-->
 	<form name="infoForm"
-		action="${pageContext.request.contextPath }/supUp/supReviewFormEnd.do"
-		method="post" enctype="multipart/form-data">
+		action="${pageContext.request.contextPath }/supUp/supReviewFormEnd.do?infoupNum=${info.INFOUPNUM}&id=${loginMember.id}"
+		method="post" enctype="multipart/form-data" onsubmit="return checkNull();">
 		<div class="container">
 			<input type="hidden" name="loginMemberNum"
 				value="${loginMember.memberNum}">
@@ -27,7 +27,7 @@
 					<!-- Blog post start -->
 					<div class="post-content">
 						<h1 class="post-title text-center">
-							<a href="blog-item.html">서포터즈 리뷰 수정</a>
+							<a href="blog-item.html">리뷰 작성</a>
 						</h1>
 						<hr>
 						<div class="entry-content">
@@ -36,7 +36,7 @@
 									<div class="infoFormSubFrame">인포메이션 번호</div>
 									<p class="infoForm1">
 										${info.INFOUPNUM } <input type="hidden" name="infoupNum"
-											value="${info.INFOUPNUM }" />
+											value="${info.INFOUPNUM }" id="infoupNum"/>
 									</p>
 								</div>
 								<div>
@@ -57,10 +57,10 @@
 								<div>
 									<div class="infoFormSubFrame">제목</div>
 									<p class="infoForm1">
-										<input type="text" name="supupTitle"/>
+										<input type="text" name="supupTitle" id="supupTitle"/>
 									</p>
 								</div>
-								<textarea id="summ" name="supupContent" required></textarea>
+								<textarea id="summ" name="supupContent"></textarea>
 								
 							</div>
 
@@ -77,6 +77,23 @@
 		</div>
 	</form>
 
+	<script>
+		function checkNull(){
+			var supupTitle=$('#supupTitle');
+			var summ=$('#summ')
+			
+			if(supupTitle.val()==""){
+		    	alert('제목을 입력해주세요.');
+		    	supupTitle.focus();
+		    	return false;
+			}
+			if(summ.val()==""){
+		    	alert('내용을 입력해주세요.');
+		    	summ.focus();
+		    	return false;
+			}
+		}
+	</script>
 
 	<input type="hidden" value="" />
 	
@@ -116,7 +133,7 @@
 	$.ajax({
 				data : form_data,
 				type : "post",
-				url : "${path}/summernote_imageUpload_supRv.do",
+				url : "${path}/summernote_imageUpload_supRv2.do",
 				cache : false,
 				contentType : false,
 				enctype : "multipart/form-data",

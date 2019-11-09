@@ -13,9 +13,9 @@
 <section id="content">
 	<div class="container">
 		<form name="infoForm"
-			action="${pageContext.request.contextPath }/info/infoFormEnd.do"
+			action="${pageContext.request.contextPath }/info/infoFormEnd.do?infoupNum=${info.infoupNum}&id=${loginMember.id}"
 			method="post"
-			enctype="multipart/form-data">
+			enctype="multipart/form-data" onsubmit="return checkNull();">
 			<input type="hidden" value="${supporters.supNum }" name="supNum">
 			<div class="row">
 				<!-- Blog start -->
@@ -31,15 +31,16 @@
 								<div>
 									<div class="infoFormSubFrame">이미지</div>
 									<p class="infoForm1">
-										<input type="file" name="infoupFile"/>
+										<input type="file" name="infoupFile" id="infoupFile"/>
 
 									</p>
+									<div id="imageInfo">
 								</div>
 
 								<div>
 									<div class="infoFormSubFrame">제목</div>
 									<p class="infoForm1">
-										<input type="text" placeholder="INFO TITLE" name="infoupTitle" />
+										<input type="text" placeholder="INFO TITLE" name="infoupTitle" id="infoupTitle"/>
 									</p>
 								</div>
 								
@@ -49,10 +50,8 @@
 										<select id="" name="themaNum" class="mainThema">
 											<c:forEach items="${themaList2 }" var="t">
 												<option value="${t['THEMANUM'] }">${t['THEMANAME'] }</option>
-												<c:set var="tNum" value="${t['THEMANUM'] }"/>
 											</c:forEach>
 										</select>
-										<c:out value="${tNum }"/>
 										<select id="subThema" name="themaSubNum">
 											<c:forEach items="${themaList }" var="t">
 													<option value="${t['THEMANUM'] }">${t['THEMANAME'] }</option>
@@ -76,24 +75,22 @@
 								<div>
 									<div class="infoFormSubFrame">가격</div>
 									<p class="infoForm1">
-										<input type="number" step="1000" min="0" name="infoupPayment" />
+										<input type="number" step="1000" min="0" name="infoupPayment" id="infoupPayment" />
 									</p>
 								</div>
 								<div>
 									<div class="infoFormSubFrame">번호</div>
 									<p class="infoForm1">
-										<input type="text" placeholder="INFO PHONE" name="infoupPhone" />
+										<input type="text" placeholder="INFO PHONE" name="infoupPhone" id="infoupPhone" />
 									</p>
 								</div>
 								<div>
 									<div class="infoFormSubFrame">시간</div>
 									<p class="infoForm1">
-										<input type="text" placeholder="INFO TIME" name="infoupTime" />
+										<input type="text" placeholder="INFO TIME" name="infoupTime" id="infoupTime" />
 									</p>
 								</div>
-								<div class="row">
-								</div>
-								<label for="address"  class="infoFormSubFrame">출발지 주소</label>
+								<label for="address"  class="infoFormSubFrame">주소</label>
 								<div class="infoForm1">
 									<div class="input-group mb-1">
  										<!-- <input type="text" class="form-control start-postcode"
@@ -134,6 +131,62 @@
 	<!--/ container end -->
 	
 	<script>
+	
+	function checkNull(){
+		var infoupFile=$('#infoupFile');
+		var infoupTitle=$('#infoupTitle');
+		var infoupPayment=$('#infoupPayment');
+		var infoupPhone=$('#infoupPhone');
+		var infoupTime=$('#infoupTime');
+		var addr=$('#st-addr');
+		var buttonAddr=$('#button-addon1');
+		var subThema=('#subThema');
+		
+		if(infoupFile.val()==""){
+           alert('이미지를 등록해주세요.');
+           infoupFile.focus();
+           return false;
+		}
+		
+		if(infoupTitle.val()==""){
+			alert('제목을 입력해주세요.');
+			
+			infoupTitle.focus();
+			return false;
+		}
+		
+		if(subThema.val()==""){
+			alert('테마를 선택해주세요.');
+			subThema.focus();
+			return false;
+		}
+		
+		if(infoupPayment.val()==""){
+			alert('가격을 입력해주세요.');
+			
+			infoupPayment.focus();
+			return false;
+		}
+		if(infoupPhone.val()==""){
+			alert('번호를 입력해주세요.');
+			infoupPhone.focus();
+			return false;
+		}
+		if(infoupTime.val()==""){
+			alert('시간을 입력해주세요.');
+			
+			infoupTime.focus();
+			return false;
+		}
+		if(addr.val()==""){
+			alert('주소를 입력해주세요.');
+			
+			buttonAddr.focus();
+			return false;
+		}
+		
+	}
+	
 	function Enter_Check(pocode){
 	    if(event.keyCode == 13){
 	    	execDaumPostcode(pocode); 
@@ -193,6 +246,36 @@
 			}
 		}).open();
 	}
+	
+	
+    $(document).on("change","input[name='infoupFile']",function(event) {
+        var ext = $(this).val().split('.').pop().toLowerCase();
+        var fileSize = (this).files[0].size;
+        var maxSize = 1024*1024*1024;
+        
+        if($.inArray(ext, ['gif','png','jpg','jpeg']) == -1) {
+           alert("등록할 수 없는 확장자입니다.");
+           $(this).val("");
+           return;
+        } 
+        
+        if(fileSize > maxSize) {
+           alert("첨부파일 크기는 1GB 이내로 등록 가능합니다.");
+           $(this).val("");
+           return;
+        }
+     });
+
+	//div 이미지 출력하기
+    $('[name=infoupFile]').change(function () {
+        var reader = new FileReader();
+        reader.onload = function (e) {
+            var img = $('<img>').attr('src', e.target.result).css({'width':"100px", 'height':"100px"});
+            $('#imageInfo').append(img);
+        }
+        
+     	reader.readAsDataURL($(this)[0].files[0]); // 파일경로를 바꿈/=result
+    });
 	</script>
 </section>
 

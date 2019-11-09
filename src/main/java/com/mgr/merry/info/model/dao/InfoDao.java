@@ -29,6 +29,8 @@ public interface InfoDao {
 
 	Map<String, String> selectSup(SqlSessionTemplate session, Map<String, String> param);
 
+	int insertInfoImg2(SqlSessionTemplate session, InfoUploadImg infoimg);
+
 
 
 }

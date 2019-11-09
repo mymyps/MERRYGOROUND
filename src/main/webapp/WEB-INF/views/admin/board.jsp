@@ -67,7 +67,7 @@
                                                 <td><c:out value="${b['RNUM'] }"/></td>
                                                 <td><c:out value="${b['INFOUPTITLE'] }"/></td>
                                                 <td><c:out value="${b['THEMANAME'] }"/></td>
-                                                <td><c:out value="${b['LOCALNAME'] }"/></td>
+                                                <td><c:out value="${b['LOCALCITY'] }"/></td>
                                                 <td><c:out value="${b['INFOUPPAYMENT'] }"/></td>
                                                 <td><c:out value="${b['INFOUPPHONE'] }"/></td>
                                                 <td><c:out value="${b['INFOUPTIME'] }"/></td>

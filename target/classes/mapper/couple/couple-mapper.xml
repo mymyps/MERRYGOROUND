@@ -5,15 +5,15 @@
       <result property="COUPLECONTENT" column="COUPLECONTENT" jdbcType="CLOB" javaType="java.lang.String"/>
    </resultMap>
    
-   <select id="selectCoupleBoardCount" resultType="_int">
-      select count(*) from c_upload
+   <select id="selectCoupleBoardCount" parameterType="map" resultType="_int">
+      select count(*) from c_upload c join c_upload_img ci on c.couplenum=ci.couplenum where (membernum=#{mNum} or membernum=#{cpmNum}) and flag=1
    </select>
    
 <!--    <select id="selectCoupleBoardList" resultType="map" resultMap="clobBoard"> -->
 <!--       select * from c_upload order by coupledate desc  -->
 <!--    </select> -->
-   <select id="selectCoupleBoardList" resultType="map" resultMap="clobBoard">
-      select * from c_upload c join c_upload_img ci on c.couplenum=ci.couplenum where flag=1 order by coupledate desc
+   <select id="selectCoupleBoardList" parameterType="map" resultType="map" resultMap="clobBoard">
+      select * from c_upload c join c_upload_img ci on c.couplenum=ci.couplenum where (membernum=#{mNum} or membernum=#{cpmNum}) and flag=1 order by coupledate desc
    </select>
    
    <insert id="insertCoupleBoard" parameterType="map">

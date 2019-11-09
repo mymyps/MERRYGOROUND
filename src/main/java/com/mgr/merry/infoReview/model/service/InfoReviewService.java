@@ -11,7 +11,7 @@ public interface InfoReviewService {
 
 	List<InfoReview> selectReview(int infoupNum);
 
-	int insertReview(Map<String, String> param);
+	int insertReview(Map<String, String> param) throws Exception;
 
 	int status0InfoReview(int infoReviewNum);
 

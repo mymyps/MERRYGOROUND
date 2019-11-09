@@ -56,7 +56,7 @@
                         <div class="col-sm-4">
                             <div class="page-header float-left">
                                 <div class="page-title">
-                                    <h1>서포터즈 리뷰 목록</h1>
+                                    <h1>서포터즈 승인 목록</h1>
                                 </div>
                             </div>
                         </div>
@@ -104,7 +104,7 @@
 	                                            	<td class="fy${i.count }"><c:out value="${b['MEMBERNUM'] }"/></td>
 	                                            	<td class="avatar">
 	                                                    <div class="round-img">
-	                                                        <a href="#"><img class="rounded-circle" src="${path }images/avatar/<c:out value="${b['PROIMG'] }"/>" alt=""></a>
+	                                                        <a href="#"><img class="rounded-circle" src="${path }/resources/images/member/<c:out value="${b['PROIMG'] }"/>" alt=""></a>
 	                                                    </div>
                                                     </td>
 	                                                <td><span class="name"><c:out value="${b['ID'] }"/></span></td>
@@ -139,111 +139,42 @@
         
         </div><!-- /#right-panel -->
 
-
-
-
-
-
     </div>
     
     <!-- modal view -->
     <div id="myModal" class="modal">
-    	<div class="modal-content">
-    	
-    	<section id="gallery" style="text-align: center;">
-    	
-    		
-    	
-    	<div id="carouselExampleControls" class="carousel slide" data-ride="carousel">
-		  <div class="carousel-inner">
-		    <div class="carousel-item active">
-		      <img src="${path }/resources/upload/supLv/default.png" alt="" style="height:404px;">
-		    </div>
-		    <div class="carousel-item">
-		      <img src="${path }/resources/upload/supLv/default.png" alt="" style="height:404px;">
-		    </div>
-		    <div class="carousel-item">
-		      <img src="${path }/resources/upload/supLv/default.png" alt="" style="height:404px;">
-		    </div>
-		  </div>
-		  <a class="carousel-control-prev" href="#carouselExampleControls" role="button" data-slide="prev">
-		    <span class="carousel-control-prev-icon" aria-hidden="true" style="background-color:#ff0000d1;"></span>
-		    <span class="sr-only">Previous</span>
-		  </a>
-		  <a class="carousel-control-next" href="#carouselExampleControls" role="button" data-slide="next">
-		    <span class="carousel-control-next-icon" aria-hidden="true" style="background-color:#ff0000d1;"></span>
-		    <span class="sr-only">Next</span>
-		  </a>
-		</div>
-		<br/>
-		<div>
-			<!-- 컨텐츠 내용 -->
-			<span class="subCont"></span>
-		</div>
-		<br/>
-    	
-    	
-    	
-      	
-    	<%-- 
-    		<span class="close">&times;</span>
-    		<!-- 디자인 작업 -->
-    		<div class="row no-gutters">
+	<div class="modal-content">
 
-	          <div class="col-lg-4 col-md-6">
-	            <div class="gallery-item wow fadeInUp" style="visibility: visible; animation-name: fadeInUp;">
-	              <a href="${path }/resources/upload/supLv/default.png" class="gallery-popup">
-	                <img src="${path }/resources/upload/supLv/default.png" alt="">
-	              </a>
-	            </div>
-	          </div>
+		<section id="gallery" style="text-align: center;">
 
-	          <div class="col-lg-4 col-md-6">
-	            <div class="gallery-item wow fadeInUp" style="visibility: visible; animation-name: fadeInUp;">
-	              <a href="${path }/resources/upload/supLv/default.png" class="gallery-popup">
-	                <img src="${path }/resources/upload/supLv/default.png" alt="">
-	              </a>
-	            </div>
-	          </div>
-	          <div class="col-lg-4 col-md-6">
-	            <div class="gallery-item wow fadeInUp" style="visibility: visible; animation-name: fadeInUp;">
-	              <a href="${path }/resources/upload/supLv/default.png" class="gallery-popup">
-	                <img src="${path }/resources/upload/supLv/default.png" alt="">
-	              </a>
-	            </div>
-	          </div>
+			<div id="carouselExampleControls" class="carousel slide"
+				data-ride="carousel">
+				<div class="carousel-inner">
+					<!-- 데이터 삽입부분 -->
+				</div>
+				<a class="carousel-control-prev" href="#carouselExampleControls"
+					role="button" data-slide="prev"> <span
+					class="carousel-control-prev-icon" aria-hidden="true"
+					style="background-color: #ff0000d1;"></span> <span class="sr-only">Previous</span>
+				</a> <a class="carousel-control-next" href="#carouselExampleControls"
+					role="button" data-slide="next"> <span
+					class="carousel-control-next-icon" aria-hidden="true"
+					style="background-color: #ff0000d1;"></span> <span class="sr-only">Next</span>
+				</a>
+			</div>
+			<br />
+			<div>
+				<!-- 컨텐츠 내용 -->
+				<span class="subCont"></span>
+			</div>
+			<br />
+		</section>
 
-	          <div class="col-lg-4 col-md-6">
-	            <div class="gallery-item wow fadeInUp" style="visibility: visible; animation-name: fadeInUp;">
-	              <a href="${path }/resources/upload/supLv/default.png" class="gallery-popup">
-	                <img src="${path }/resources/upload/supLv/default.png" alt="">
-	              </a>
-	            </div>
-	          </div>
-	          <div class="col-lg-4 col-md-6">
-	            <div class="gallery-item wow fadeInUp" style="visibility: visible; animation-name: fadeInUp;">
-	              <a href="${path }/resources/upload/supLv/default.png" class="gallery-popup">
-	                <img src="${path }/resources/upload/supLv/default.png" alt="">
-	              </a>
-	            </div>
-	          </div>
-          </div>
-    		 --%>
-    		
-    		
-    		
-    		
-    		</section>
-    		
-    		
-    		
-    		
-    		
-    		<button class="btn btn-danger" type="button" onclick="celClick();">승 인</button>
-    		<button class="btn btn-success" onclick="celClose();">승인 취소</button>
-    	</div>
-    
-    </div>
+		<button class="btn btn-danger" type="button" onclick="celClick();">승 인</button>
+		<button class="btn btn-success" onclick="celClose();">승인 취소</button>
+	</div>
+
+</div>
     <!-- /#right-panel -->
     <script type="text/javascript">
     	
@@ -282,7 +213,7 @@
 	        $(".celti").on("click",function(e){
 	        	
 	        	memberNum = $('.'+this.id).text();
-	        	console.log(memberNum);
+	        	//console.log(memberNum);
 	        	
 	        	$.ajax({
 	        		url: '${path}/admin/celtify.do',
@@ -290,9 +221,57 @@
 	        		dataType:"JSON",
 	        		//contentType: "application/x-www-form-urlencoded; charset=UTF-8",
 	        		success: function (data) {
-						console.log("승인관련 데이터조회 완료");
+						//console.log("승인관련 데이터조회 완료");
+						
+						var imgDiv = $('<div>').attr({
+							'class' : "carousel-item active",
+						});
+						var imgList = $('<img>').attr({
+							'src' : "${path }/resources/upload/supLv/"+ data['FILEORGNAME1']
+						}).css({'height' : "363px"});
+						imgDiv.append(imgList);
+						
+						var imgDiv2 = $('<div>').attr({
+							'class' : "carousel-item",
+						});
+						var imgList2 = $('<img>').attr({
+							'src' : "${path }/resources/upload/supLv/"+ data['FILEORGNAME2']
+						}).css({'height' : "363px"});
+						imgDiv2.append(imgList2);
+						
+						var imgDiv3 = $('<div>').attr({
+							'class' : "carousel-item",
+						});
+						var imgList3 = $('<img>').attr({
+							'src' : "${path }/resources/upload/supLv/"+ data['FILEORGNAME3']
+						}).css({'height' : "363px"});
+						imgDiv3.append(imgList3);
+						
+						var imgDiv4 = $('<div>').attr({
+							'class' : "carousel-item",
+						});
+						var imgList4 = $('<img>').attr({
+							'src' : "${path }/resources/upload/supLv/"+ data['FILEORGNAME4']
+						}).css({'height' : "363px"});
+						imgDiv4.append(imgList4);
+					
+						var imgDiv5 = $('<div>').attr({
+							'class' : "carousel-item",
+						});
+						var imgList5 = $('<img>').attr({
+							'src' : "${path }/resources/upload/supLv/"+ data['FILEORGNAME5']
+						}).css({'height' : "363px"});
+						imgDiv5.append(imgList5);
+						
+						
+						$('.carousel-inner').append(imgDiv);
+						$('.carousel-inner').append(imgDiv2);
+						$('.carousel-inner').append(imgDiv3);
+						$('.carousel-inner').append(imgDiv4);
+						$('.carousel-inner').append(imgDiv5);
+						
 						$(".subCont").text(data['SUBLVCONTENT']);
-						console.log(data);
+						//console.log(data);
 						//모달뷰에 데이터를 출력
 						
 						modal.style.display = "block"; // 성공시 모달뷰 로드

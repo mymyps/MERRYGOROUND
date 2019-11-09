@@ -12,4 +12,6 @@ public interface SupLvDao {
 
 	int insertSupLvImg(SqlSessionTemplate session, SupLvUploadImg supLvImg);
 
+	int updateSupStatus(SqlSessionTemplate session, String id);
+
 }

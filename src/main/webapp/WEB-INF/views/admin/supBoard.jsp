@@ -63,7 +63,7 @@
                                                 <td><c:out value="${b['SUPNUM'] }"/></td>
                                                 <td><c:out value="${b['SUPUPTITLE'] }"/></td>
                                                 <td><c:out value="${b['THEMANAME'] }"/></td>
-                                                <td><c:out value="${b['LOCALNAME'] }"/></td>
+                                                <td><c:out value="${b['LOCALCITY'] }"/></td>
                                                 <td><fmt:formatDate value="${b['SUPUPDATE'] }" pattern="yyyy.MM.dd"/></td>
                                             </tr>
                                             </c:forEach>

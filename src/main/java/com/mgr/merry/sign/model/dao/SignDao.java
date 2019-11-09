@@ -30,4 +30,7 @@ public interface SignDao {
 	Members checkId(SqlSessionTemplate session, Members m);
 	int selectBoardCount(SqlSessionTemplate session,int supNum);
 	List<Map<String,String>> selectBoardList(SqlSessionTemplate session,int cPage,int numPerPage,int supNum);
+	Map<String, String> selectMemberId(SqlSessionTemplate session, String id);
+	List selectMemberid2(SqlSessionTemplate session, String id);
+	Members selectMemberbyMnum(SqlSessionTemplate session, int memNo);
 }
