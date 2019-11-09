@@ -50,10 +50,8 @@
 										<select id="" name="themaNum" class="mainThema">
 											<c:forEach items="${themaList2 }" var="t">
 												<option value="${t['THEMANUM'] }">${t['THEMANAME'] }</option>
-												<c:set var="tNum" value="${t['THEMANUM'] }"/>
 											</c:forEach>
 										</select>
-										<c:out value="${tNum }"/>
 										<select id="subThema" name="themaSubNum">
 											<c:forEach items="${themaList }" var="t">
 													<option value="${t['THEMANUM'] }">${t['THEMANAME'] }</option>
@@ -142,6 +140,7 @@
 		var infoupTime=$('#infoupTime');
 		var addr=$('#st-addr');
 		var buttonAddr=$('#button-addon1');
+		var subThema=('#subThema');
 		
 		if(infoupFile.val()==""){
            alert('이미지를 등록해주세요.');
@@ -155,6 +154,13 @@
 			infoupTitle.focus();
 			return false;
 		}
+		
+		if(subThema.val()==""){
+			alert('테마를 선택해주세요.');
+			subThema.focus();
+			return false;
+		}
+		
 		if(infoupPayment.val()==""){
 			alert('가격을 입력해주세요.');
 			
@@ -163,7 +169,6 @@
 		}
 		if(infoupPhone.val()==""){
 			alert('번호를 입력해주세요.');
-			
 			infoupPhone.focus();
 			return false;
 		}
