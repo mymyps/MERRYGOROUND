@@ -27,7 +27,11 @@ public class InfoReviewController {
    public ModelAndView insertReview (@RequestParam Map<String, String> param, HttpServletRequest request){
       
       int result = 0;
-      result = service.insertReview(param);
+      try {
+		result = service.insertReview(param);
+	} catch (Exception e) {
+		e.printStackTrace();
+	}
       
       String msg = "";
 

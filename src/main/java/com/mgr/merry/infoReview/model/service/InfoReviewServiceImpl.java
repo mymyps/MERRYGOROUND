@@ -6,6 +6,7 @@ import java.util.Map;
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.mgr.merry.infoReview.model.dao.InfoReviewDao;
 import com.mgr.merry.infoReview.model.vo.InfoReview;
@@ -32,6 +33,7 @@ public class InfoReviewServiceImpl implements InfoReviewService {
 	}
 
 	@Override
+	@Transactional(rollbackFor = Exception.class)
 	public int insertReview(Map<String, String> param) {
 		int result = 0;
 		result = dao.insertReview(session, param);

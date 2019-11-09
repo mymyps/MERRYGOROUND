@@ -12,6 +12,7 @@ import javax.servlet.http.HttpServletResponse;
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.mgr.merry.couple.model.vo.Attachment;
@@ -82,12 +83,14 @@ public class SupUploadServiceImpl implements SupUploadService {
 	}
 
 	@Override
+	@Transactional(rollbackFor = Exception.class)
 	public int insertSupUploadImg(Map<String, String> param, List<SupUploadImg> imgList) {
 		int result= 0;
 
 		if(imgList.size()>0) {
 			for(SupUploadImg supImg : imgList) {
 				result = dao.insertSupUploadImg(session, supImg);
+				if(result==0) throw new RuntimeException();
 			}
 		}
 
@@ -105,12 +108,14 @@ public class SupUploadServiceImpl implements SupUploadService {
 	}
 
 	@Override
+	@Transactional(rollbackFor = Exception.class)
 	public int insertSupUploadImgNum(Map<String, String> param, List<SupUploadImg> imgList) {
 		int result= 0;
 		
 		if(imgList.size()>0) {
 			for(SupUploadImg supImg : imgList) {
 				result = dao.insertSupUploadImgNum(session, supImg);
+				if(result==0) throw new RuntimeException();
 			}
 		}
 
