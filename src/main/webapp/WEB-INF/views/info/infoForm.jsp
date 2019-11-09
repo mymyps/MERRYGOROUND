@@ -34,6 +34,7 @@
 										<input type="file" name="infoupFile"/>
 
 									</p>
+									<div id="imageInfo">
 								</div>
 
 								<div>
@@ -211,7 +212,16 @@
         }
      });
 
-    
+	//div 이미지 출력하기
+    $('[name=infoupFile]').change(function () {
+        var reader = new FileReader();
+        reader.onload = function (e) {
+            var img = $('<img>').attr('src', e.target.result).css({'width':"100px", 'height':"100px"});
+            $('#imageInfo').append(img);
+        }
+        
+     	reader.readAsDataURL($(this)[0].files[0]); // 파일경로를 바꿈/=result
+    });
 	</script>
 </section>
 
