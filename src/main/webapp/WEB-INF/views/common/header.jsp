@@ -200,15 +200,21 @@
                            </ul>
                         </div>
                      </li>
-                     <li class="dropdown">
-                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">CouplePage <i
-                              class="fa fa-angle-down"></i></a>
-                        <div class="dropdown-menu">
-                           <ul>
-                              <li><a href="${pageContext.request.contextPath }/couple/coupleBoardList">커플게시판</a></li>
-                           </ul>
-                        </div>
-                     </li>
+	                     <li class="dropdown">
+	                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">CouplePage <i class="fa fa-angle-down"></i></a>
+	                        <div class="dropdown-menu">
+		                        <c:if test='${empty loginMember}'>
+		                           <ul>
+		                              <li><a>로그인 후 커플을 신청하세요!</a></li>
+		                           </ul>
+			                     </c:if>
+		                      <c:if test='${not empty loginMember and fn:trim(loginMember.cpstatus) == 1}'>
+	                           <ul>
+	                              <li><a href="${pageContext.request.contextPath }/couple/coupleBoardList?mNum=${loginMember.memberNum}">커플게시판</a></li>
+	                           </ul>
+		                     </c:if>
+	                        </div>
+	                     </li>
                      <li><a href="${pageContext.request.contextPath}">Contact</a></li>
                   </ul>
                </nav>
@@ -219,7 +225,6 @@
          <!--/ Container end -->
       </header>
       <!--헤더 끝!!!!!!!!!!!!! -->
-
        
         <!--공통 배너  -->
         <div id="ban" class="ban">
