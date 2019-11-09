@@ -1,7 +1,7 @@
 package com.mgr.merry.supLvUpload.controller;
 
 import java.io.File;
-import java.text.SimpleDateFormat;
+import java.util.List;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
@@ -11,10 +11,10 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
-import org.springframework.web.multipart.MultipartHttpServletRequest;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.mgr.merry.info.model.service.InfoService;
+import com.mgr.merry.sign.model.service.SignService;
 import com.mgr.merry.supLvUpload.model.service.SupLvService;
 import com.mgr.merry.supLvUpload.model.vo.SupLvUploadImg;
 
@@ -27,6 +27,9 @@ public class SupLvController {
 	@Autowired
 	InfoService iservice;
 	
+	@Autowired
+	SignService mservice;
+	
 	@RequestMapping("/supLv/supLvForm.do")
 	public ModelAndView supLvUpload(String id, @RequestParam Map<String, String> param) {
 		
@@ -35,6 +38,7 @@ public class SupLvController {
 		String msg="";
 		
 		Map<String, String> sup = iservice.selectSup(param);
+		List mem = mservice.selectMemberId2(id);
 		System.out.println("서포터즈가 아닐시 sup :"+sup);
 		
 		if(id=="") {
@@ -63,7 +67,7 @@ public class SupLvController {
 			@RequestParam(value = "supLvImg3", required = false) MultipartFile[] supLvUploadImg3,
 			@RequestParam(value = "supLvImg4", required = false) MultipartFile[] supLvUploadImg4,
 			@RequestParam(value = "supLvImg5", required = false) MultipartFile[] supLvUploadImg5,
-			HttpServletRequest request) {
+			HttpServletRequest request, String id) {
 
 		String saveDir = request.getSession().getServletContext().getRealPath("/resources/upload/supLv");
 		SupLvUploadImg supLvImg= new SupLvUploadImg();
@@ -125,12 +129,11 @@ public class SupLvController {
 		}
 		
 		int result = 0;
-		
-		System.out.println("섶렙 컨트롤러 이미지 : "+supLvImg);
+		int result2 = 0;
 		
 		try {
 			result = service.insertSupLv(param, supLvImg);
-			
+			result2 = service.updateSupStatus(id);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

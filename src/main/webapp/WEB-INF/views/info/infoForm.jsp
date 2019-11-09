@@ -13,7 +13,7 @@
 <section id="content">
 	<div class="container">
 		<form name="infoForm"
-			action="${pageContext.request.contextPath }/info/infoFormEnd.do"
+			action="${pageContext.request.contextPath }/info/infoFormEnd.do?infoupNum=${info.infoupNum}&id=${loginMember.id}"
 			method="post"
 			enctype="multipart/form-data">
 			<input type="hidden" value="${supporters.supNum }" name="supNum">
@@ -91,9 +91,7 @@
 										<input type="text" placeholder="INFO TIME" name="infoupTime" />
 									</p>
 								</div>
-								<div class="row">
-								</div>
-								<label for="address"  class="infoFormSubFrame">출발지 주소</label>
+								<label for="address"  class="infoFormSubFrame">주소</label>
 								<div class="infoForm1">
 									<div class="input-group mb-1">
  										<!-- <input type="text" class="form-control start-postcode"
@@ -193,6 +191,27 @@
 			}
 		}).open();
 	}
+	
+	
+    $(document).on("change","input[name='infoupFile']",function(event) {
+        var ext = $(this).val().split('.').pop().toLowerCase();
+        var fileSize = (this).files[0].size;
+        var maxSize = 1024*1024*1024;
+        
+        if($.inArray(ext, ['gif','png','jpg','jpeg']) == -1) {
+           alert("등록할 수 없는 확장자입니다.");
+           $(this).val("");
+           return;
+        } 
+        
+        if(fileSize > maxSize) {
+           alert("첨부파일 크기는 1GB 이내로 등록 가능합니다.");
+           $(this).val("");
+           return;
+        }
+     });
+
+    
 	</script>
 </section>
 

@@ -136,6 +136,16 @@ public class SignDaoImpl implements SignDao {
 		map.put("supNum",supNum);
 		return session.selectList("sign.selectBoardList",supNum,rows);
 	}
+
+	@Override
+	public Map<String, String> selectMemberId(SqlSessionTemplate session, String id) {
+		return session.selectOne("sign.selectMemberId", id);
+	}
+
+	@Override
+	public List selectMemberid2(SqlSessionTemplate session, String id) {
+		return session.selectList("sign.selectMemeberid2", id);
+	}
 	
 
 }

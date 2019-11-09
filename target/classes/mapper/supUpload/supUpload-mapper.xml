@@ -28,11 +28,11 @@
 		UPDATE SUPPORTERS_UPLOAD SET SUPUPTITLE=#{supupTitle}, SUPUPCONTENT=#{supupContent} where INFOUPNUM=#{infoupNum}
 	</update>
 	
-	<insert id="insertSupUploadImgNum" parameterType="map">
-		INSERT INTO SUPPORTERS_UPLOAD_IMG VALUES(#{supupNum}, SEQ_SUP_UP_IMG_NUM.NEXTVAL, #{fileReName})
-	</insert>
-	
 	<update id="updateSupRvState0">
 		UPDATE SUPPORTERS_UPLOAD SET SUPUPSTATUS=0 WHERE INFOUPNUM=#{infoupNum}
 	</update>
+	
+	<insert id="insertSupUploadImgNum" parameterType="com.mgr.merry.supUpload.model.vo.SupUploadImg">
+		INSERT INTO SUPPORTERS_UPLOAD_IMG VALUES(SEQ_SUP_UP_NUM.NEXTVAL, SEQ_SUP_UP_IMG_NUM.NEXTVAL, #{fileReName})
+	</insert>
 </mapper>

@@ -61,6 +61,11 @@ public class InfoDaoImpl implements InfoDao {
 		return session.selectOne("info.selectSup", param);
 	}
 
+	@Override
+	public int insertInfoImg2(SqlSessionTemplate session, InfoUploadImg infoimg) {
+		return session.insert("info.insertInfoImg2", infoimg);
+	}
+
 
 
 

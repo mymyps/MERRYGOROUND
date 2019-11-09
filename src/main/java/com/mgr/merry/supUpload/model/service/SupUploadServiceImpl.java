@@ -84,9 +84,7 @@ public class SupUploadServiceImpl implements SupUploadService {
 	@Override
 	public int insertSupUploadImg(Map<String, String> param, List<SupUploadImg> imgList) {
 		int result= 0;
-		
-		System.out.println("이미지리스트 : "+imgList);
-		
+
 		if(imgList.size()>0) {
 			for(SupUploadImg supImg : imgList) {
 				result = dao.insertSupUploadImg(session, supImg);
@@ -104,6 +102,19 @@ public class SupUploadServiceImpl implements SupUploadService {
 	@Override
 	public int supRvStatus0(int infoupNum) {
 		return dao.supRvStatus0(session, infoupNum);
+	}
+
+	@Override
+	public int insertSupUploadImgNum(Map<String, String> param, List<SupUploadImg> imgList) {
+		int result= 0;
+		
+		if(imgList.size()>0) {
+			for(SupUploadImg supImg : imgList) {
+				result = dao.insertSupUploadImgNum(session, supImg);
+			}
+		}
+
+		return result;
 	}
 
 

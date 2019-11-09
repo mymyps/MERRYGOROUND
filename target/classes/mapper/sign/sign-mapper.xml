@@ -69,4 +69,12 @@
          inner join supporters_upload_img using(supupNum)
          where supNum=#{supNum}
   	</select>
+  	
+  	<select id="selectMemberId" resultType="com.mgr.merry.sign.model.vo.Members" parameterType="com.mgr.merry.sign.model.vo.Members"> 
+      SELECT * FROM MEMBERS WHERE id=#{id}
+   </select>
+   
+   <select id="selectMemeberid2" resultType="com.mgr.merry.sign.model.vo.Members" parameterType="com.mgr.merry.sign.model.vo.Members"> 
+      SELECT * FROM MEMBERS WHERE id=#{id}
+   </select>
 </mapper>

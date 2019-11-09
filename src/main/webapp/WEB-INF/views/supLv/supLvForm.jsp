@@ -5,12 +5,12 @@
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 <c:set var="path" value="${pageContext.request.contextPath}" />
 <jsp:include page="/WEB-INF/views/common/header.jsp">
-	<jsp:param name="pageTitle" value="demo" />
+	<jsp:param name="pageTitle" value="서포터즈 신청" />
 </jsp:include>
 <section id="content">
 	<div class="container">
 		<form name="infoForm"
-			action="${pageContext.request.contextPath }/supLv/supLvFormEnd.do"
+			action="${pageContext.request.contextPath }/supLv/supLvFormEnd.do?id=${loginMember.id}"
 			method="post" enctype="multipart/form-data">
 			<input type="hidden" value="${loginMember.id }" name="id" />
 			<input type="hidden" value="${loginMember.memberNum }" name="memberNum" />
@@ -20,7 +20,7 @@
 					<!-- Blog post start -->
 					<div class="post-content">
 						<h1 class="post-title text-center">
-							<a href="blog-item.html">서포터즈 신청 작성</a>
+							<a href="blog-item.html">작성하기</a>
 						</h1>
 						
 						<div style="overflow:scroll; width:700px; height:400px; padding:10px;margin-left: 225px; ">
@@ -159,6 +159,97 @@
 			</div>
 		</form>
 	</div>
+	
+	<script>
+	$(document).on("change","input[name='supLvImg1']",function(event) {
+        var ext = $(this).val().split('.').pop().toLowerCase();
+        var fileSize = (this).files[0].size;
+        var maxSize = 1024*1024*1024;
+        
+        if($.inArray(ext, ['gif','png','jpg','jpeg']) == -1) {
+           alert("등록할 수 없는 확장자입니다.");
+           $(this).val("");
+           return;
+        } 
+        
+        if(fileSize > maxSize) {
+           alert("첨부파일 크기는 1GB 이내로 등록 가능합니다.");
+           $(this).val("");
+           return;
+        }
+     });
+
+	$(document).on("change","input[name='supLvImg2']",function(event) {
+        var ext = $(this).val().split('.').pop().toLowerCase();
+        var fileSize = (this).files[0].size;
+        var maxSize = 1024*1024*1024;
+        
+        if($.inArray(ext, ['gif','png','jpg','jpeg']) == -1) {
+           alert("등록할 수 없는 확장자입니다.");
+           $(this).val("");
+           return;
+        } 
+        
+        if(fileSize > maxSize) {
+           alert("첨부파일 크기는 1GB 이내로 등록 가능합니다.");
+           $(this).val("");
+           return;
+        }
+     });
+	
+	$(document).on("change","input[name='supLvImg3']",function(event) {
+        var ext = $(this).val().split('.').pop().toLowerCase();
+        var fileSize = (this).files[0].size;
+        var maxSize = 1024*1024*1024;
+        
+        if($.inArray(ext, ['gif','png','jpg','jpeg']) == -1) {
+           alert("등록할 수 없는 확장자입니다.");
+           $(this).val("");
+           return;
+        } 
+        
+        if(fileSize > maxSize) {
+           alert("첨부파일 크기는 1GB 이내로 등록 가능합니다.");
+           $(this).val("");
+           return;
+        }
+     });
+	$(document).on("change","input[name='supLvImg4']",function(event) {
+        var ext = $(this).val().split('.').pop().toLowerCase();
+        var fileSize = (this).files[0].size;
+        var maxSize = 1024*1024*1024;
+        
+        if($.inArray(ext, ['gif','png','jpg','jpeg']) == -1) {
+           alert("등록할 수 없는 확장자입니다.");
+           $(this).val("");
+           return;
+        } 
+        
+        if(fileSize > maxSize) {
+           alert("첨부파일 크기는 1GB 이내로 등록 가능합니다.");
+           $(this).val("");
+           return;
+        }
+     });
+	$(document).on("change","input[name='supLvImg5']",function(event) {
+        var ext = $(this).val().split('.').pop().toLowerCase();
+        var fileSize = (this).files[0].size;
+        var maxSize = 1024*1024*1024;
+        
+        if($.inArray(ext, ['gif','png','jpg','jpeg']) == -1) {
+           alert("등록할 수 없는 확장자입니다.");
+           $(this).val("");
+           return;
+        } 
+        
+        if(fileSize > maxSize) {
+           alert("첨부파일 크기는 1GB 이내로 등록 가능합니다.");
+           $(this).val("");
+           return;
+        }
+     });
+	
+	</script>
 
 
 </section>
