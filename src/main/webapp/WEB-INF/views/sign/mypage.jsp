@@ -93,6 +93,15 @@
                           </div>
                        </a>
                   </li>
+                  
+                  <li>
+                       <a class="animated fadeIn" href="#tab_z" data-toggle="tab">
+                          <span class="tab-icon"><i class="fa fa-trophy"></i></span>
+                          <div class="tab-info">
+                             <h3>회원 탈퇴</h3>
+                          </div>
+                       </a>
+                  </li>
                   <!--<li>
                        <a class="animated fadeIn" href="#tab_e" data-toggle="tab">
                           <span class="tab-icon"><i class="fa fa-support"></i></span>
@@ -449,7 +458,31 @@
                      </div>                      
                     </div>
                </div>     
-                    
+                <div class="tab-pane animated fadeIn" id="tab_z">
+                        <h3>회원 탈퇴</h3>
+                  <form class="login100-form validate-form" action="${path}/member/deleteMember.do" onsubmit="return checkPw();">
+                  <input type="hidden" value="${loginMember.id }" name="id" />
+                  <input class="input100" type="hidden" name="memberNum" value=${members.memberNum }>
+                  <div class="wrap-input100 validate-input" reauired>
+                     <span class="label-input100">변경할비밀번호</span> <input
+                        class="input100" type="password" id="pw" name="pw" reauired>
+                     <span class="focus-input100" data-symbol="&#xf190;"></span>
+                  </div>
+                  <div class="wrap-input100 validate-input" reauired>
+                     <span class="label-input100">변경할 비밀번호확인</span> <input
+                        class="input100" type="password" id="pw" name="pw2" reauired>
+                     <span class="focus-input100" data-symbol="&#xf190;"></span>
+                  </div>
+                  <!-- <div class="wrap-input100 validate-input" reauired>
+                     <span class="label-input100">Password</span> <input
+                        class="input100" type="password" id="pw" name="pw" reauired>
+                     <span class="focus-input100" data-symbol="&#xf190;"></span>
+                  </div> -->
+                  <div style="margin-left:50px;">
+                  <input type="submit" class="btn btn-primary solid cd-btn" value="탈퇴" >
+                  </div>
+                  </form>
+               </div>    
                 <div class="tab-pane animated fadeIn" id="tab_d">
                         <h3>비밀번호 변경</h3>
                   <form class="login100-form validate-form" action="${path}/member/updatePw.do" onsubmit="return checkPw();">

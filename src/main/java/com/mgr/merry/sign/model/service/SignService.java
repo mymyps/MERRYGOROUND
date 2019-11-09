@@ -29,4 +29,5 @@ public interface SignService {
 	List<Map<String,String>> selectBoardList(int cPage,int numPerPage,int supNum);
 	Map<String, String> selectMemberId(String id);
 	List selectMemberId2(String id);
+	int deleteMember(Members m);
 }

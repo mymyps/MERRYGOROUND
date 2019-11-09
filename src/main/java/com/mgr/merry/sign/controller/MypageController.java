@@ -16,6 +16,7 @@ import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
 import javax.mail.internet.MimeUtility;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
@@ -23,6 +24,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.support.SessionStatus;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -212,113 +214,6 @@ public class MypageController {
       return "sign/msg";
    }
 
-//   @RequestMapping("/member/requestsup.do")
-//   public String requestsup(@RequestParam Map<String, String> param, HttpServletRequest request, Model model,
-//         @RequestParam(value = "upFile", required = false) MultipartFile[] upFile, SupLvUpload slul) {
-//
-//      Map<String, Object> data = new HashMap<String, Object>();
-//      data.put("memberNum", Integer.parseInt(param.get("memberNum")));
-//      data.put("content", param.get("suplvContent"));
-//      String url = "";
-//      int suplvnum = -1;
-//      suplvnum = service.insertSupporter(data);
-//      String msg = "";
-//      String loc = "";
-//      System.out.println("controll@@@"+suplvnum);
-//      if (suplvnum != -1) {
-//         data.put("suplvnum", suplvnum);
-//         for (int i = 0; i < upFile.length; i++) {
-//            UUID uuid = UUID.randomUUID();
-//            String saveName = uuid + "_" + upFile[i].getOriginalFilename();
-//            System.out.println("saveName: {}" + saveName);
-//            // 저장할 File 객체를 생성(껍데기 파일)ㄴ
-//            String saveFile = request.getSession().getServletContext().getRealPath("/resources/images/member");
-//            // 파일 실제 저장하기
-//            data.put("file" + i, saveName);
-//            try {
-//               upFile[i].transferTo(new File(saveFile + "/" + saveName));
-//            } catch (Exception e) { // IlligalStateException|IOException
-//               e.printStackTrace();
-//            }
-//         }
-//         boolean isCompleted = service.insertSupporterFile(data) == 1 ? true : false;
-//         if(isCompleted) {
-//            msg="정상등록";
-//            int supstatus=0;
-//            supstatus = service.updatestatus(data);
-//            
-//         }else {
-//            msg="등록실패";
-//         }
-//         
-//      }
-//      model.addAttribute("msg", msg);
-//      model.addAttribute("loc", loc);
-//      return "sign/msg";
-//   }
-
-//   @RequestMapping("/member/requestsup.do")
-//   public String requestsup(@RequestParam Map<String,String> param,HttpServletRequest request,Model model,@RequestParam(value="upFile", required=false) MultipartFile[] upFile,SupLvUpload slul) {
-//      
-//      String memberNum=request.getParameter("memberNum");
-//      int num=Integer.parseInt(memberNum);
-//      int result = service.updatesuple(num);
-//      int slutNum= slul.getMemberNum();
-//      SupLvUpload slul11 = service.selectSlul(slutNum);
-//      int suplvimgnum= slul11.getSuplvNum();
-//            
-//      for(String s: param.keySet()){
-//         System.out.println("param : "+param.get(s));
-//         System.out.println(""+upFile[1].getSize());
-//         System.out.println("#####################");
-//      }
-//      String saveDir=request.getSession().getServletContext().getRealPath("/resources/images/member");
-//      List<SupLvUploadImg> supuploadimg=new ArrayList();
-//      File dir= new File(saveDir);
-//      
-//      for(MultipartFile mf : upFile) {
-//         if(!mf.isEmpty()) {
-//            //파일명 생성(rename)
-//            String oriFileName=mf.getOriginalFilename();
-//            String ext = oriFileName.substring(oriFileName.lastIndexOf("."));
-//            //규칙설정
-//            SimpleDateFormat sdf= new SimpleDateFormat("yyyyMMdd_HHMMssSSS");
-//            int rdv = (int)(Math.random()*1000);
-//            String reName = sdf.format(System.currentTimeMillis())+"_"+rdv+ext;
-//            
-//            // 파일 실제 저장하기
-//               try {
-//                  mf.transferTo(new File(saveDir + "/" + reName));
-//            
-//               } catch (Exception e) { //IlligalStateException|IOException
-//
-//                  e.printStackTrace();
-//               }
-//               SupLvUploadImg slui = new SupLvUploadImg();
-//               slui.setFileOrgName1(oriFileName);
-//               supuploadimg.add(slui);
-//         }
-//      }
-//      
-//      
-//      int result2 = 0;
-//      try {
-//         result = service.insertsuplvimg(supuploadimg,suplvimgnum);
-//      } catch (Exception e) {
-//         e.printStackTrace();
-//      }
-//      String msg = "";
-//      String loc = "";
-//      if (result > 0 ) {
-//         msg = "완료";
-//      } else {
-//         msg = "실패";
-//      }
-//      model.addAttribute("msg", msg);
-//      model.addAttribute("loc", loc);
-//      return "sign/msg";
-//   }
-
    // 이메일
    private void sendEmail(String email, String authNum) {
       String host = "smtp.gmail.com"; // smtp서버
@@ -364,5 +259,31 @@ public class MypageController {
          buffer.append(n);
       }
       return buffer.toString();
+   }
+   @RequestMapping("/member/deleteMember.do")
+   public String deleteMember(Members m,Model model,HttpSession session) {
+	   String msg="";
+	   String loc="";
+	   System.out.println("deleteMember"+m);
+	   Members result = service.selectMemberOne(m);
+	   
+	   if(pwEncoder.matches(m.getPw(), result.getPw())) {
+		   
+	   int result2 = service.deleteMember(m);
+	   if (result2 > 0) {
+	         msg = "완료";
+	         session.invalidate();
+	      } else {
+	         msg = "실패";
+	      }
+	      model.addAttribute("msg", msg);
+	      model.addAttribute("loc", loc);
+	   }else {
+		   msg="비밀번호를 확인해주세요";
+		   model.addAttribute("msg", msg);
+		   model.addAttribute("loc", loc); 
+	   }
+	   
+	   return "sign/msg";
    }
 }

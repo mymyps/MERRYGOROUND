@@ -77,4 +77,7 @@
    <select id="selectMemeberid2" resultType="com.mgr.merry.sign.model.vo.Members" parameterType="com.mgr.merry.sign.model.vo.Members"> 
       SELECT * FROM MEMBERS WHERE id=#{id}
    </select>
+   <update id="deleteMember" parameterType="com.mgr.merry.sign.model.vo.Members">
+   		update members set status=0 where memberNum=#{memberNum}
+   </update>
 </mapper>
