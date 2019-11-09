@@ -115,6 +115,9 @@ public class SignServiceImpl implements SignService {
 	public List selectMemberId2(String id) {
 		return dao.selectMemberid2(session, id);
 	}
+	public Members selectMemberbyMnum(int memNo) {
+		return dao.selectMemberbyMnum(session,memNo);
+	}
 	
 
 	
