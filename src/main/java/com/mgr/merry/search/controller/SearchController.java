@@ -21,6 +21,8 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.google.gson.Gson;
+import com.google.gson.JsonIOException;
 import com.mgr.merry.common.PageBarFactory;
 import com.mgr.merry.info.model.vo.InfoUpload;
 import com.mgr.merry.search.model.service.SearchService;
@@ -51,8 +53,8 @@ public class SearchController {
 
 		int totalCount = service.subThemaCount(param);
 
-		model.addAttribute("pageBar",
-				PageBarFactory.getPageBar(totalCount, cPage, numPerPage, "/merry/search/subThemaList?themaNum="
+		model.addAttribute("pageBar",                                   
+				PageBarFactory.getPageBar(totalCount, cPage, numPerPage, "/19AM_MERRYGOROUND_final/search/subThemaList?themaNum="
 						+ param.get("themaNum") + "&themaNumRef=" + param.get("themaNumRef")));
 
 		return "search/classifyByTheme";
@@ -74,7 +76,7 @@ public class SearchController {
 		int totalCount = service.mainThemaCount(themaNumRef);
 
 		model.addAttribute("pageBar", PageBarFactory.getPageBar(totalCount, cPage, numPerPage,
-				"/merry/search/mainThemaList?themaNumRef=" + themaNumRef));
+				"/19AM_MERRYGOROUND_final/search/mainThemaList?themaNumRef=" + themaNumRef));
 
 		return "search/classifyByTheme";
 
@@ -95,7 +97,7 @@ public class SearchController {
 		int totalCount = service.localCount(localNum);
 
 		model.addAttribute("pageBar",
-				PageBarFactory.getPageBar(totalCount, cPage, numPerPage, "/merry/search/locList?localNum=" + localNum));
+				PageBarFactory.getPageBar(totalCount, cPage, numPerPage, "/19AM_MERRYGOROUND_final/search/locList?localNum=" + localNum));
 		model.addAttribute("localNum", localNum);
 
 		return "search/classifyByLoc";
@@ -128,17 +130,18 @@ public class SearchController {
 
 		response.setContentType("application/x-json; charset=UTF-8");
 
-		// DTO 타입의 어레이리스트를 json 형태로 바꿔주는 구문(라이브러리 필수, zip->jar 확장자명 꼭 확인)
-//        String gson = new Gson().toJson(resultList);
-//        
-//        try {
-//            //ajax로 리턴해주는 부분
-//            response.getWriter().write(gson);
-//        } catch (JsonIOException e) {
-//            e.printStackTrace();
-//        } catch (IOException e) {
-//            e.printStackTrace();
-//        }
+        //DTO 타입의 어레이리스트를 json 형태로 변환
+		
+        String gson = new Gson().toJson(resultList);
+        
+        try {
+            //ajax로 리턴
+            response.getWriter().write(gson);
+        } catch (JsonIOException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
 
 	}
 
