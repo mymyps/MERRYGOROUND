@@ -159,7 +159,7 @@
                      <div class="dropdown-menu">
                       <ul>
                        <li><a href="${pageContext.request.contextPath }/supLv/supLvForm.do?id=${loginMember.id}">서포터즈 신청</a>
-                       <li><a href="${pageContext.request.contextPath }/info/infoForm.do?mNum=${loginMember.memberNum}">infoForm 임의연결</a></li>
+                       <li><a href="${pageContext.request.contextPath }/info/infoForm.do?mNum=${loginMember.memberNum}">인포메이션 작성</a></li>
                       </ul>
                      </div>
                      </c:if>
