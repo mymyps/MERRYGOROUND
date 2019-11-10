@@ -160,7 +160,7 @@
 							<br> <br>
 							<div>
 								<button class="btn infoFormBtn" type="submit">서포터즈 신청</button>
-								<button class="btn infoFormBtn" type="reset">서포터즈 신청 취소</button>
+								<input type="button" class="btn infoFormBtn" onClick="location.href='${pageContext.request.contextPath }/'" value="서포터즈 신청 취소">
 							</div>
 						</div>
 

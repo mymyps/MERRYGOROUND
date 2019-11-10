@@ -127,8 +127,7 @@
                         <br>
                         <div>
                            <button class="btn infoFormBtn" type="submit">INFO 작성</button>
-                           <button class="btn infoFormBtn" type="reset">INFO 작성
-                              취소</button>
+                           <input type="button" class="btn infoFormBtn" onClick="location.href='${pageContext.request.contextPath }/'" value="INFO 작성 취소">
                         </div>
                      </div>
 
@@ -157,7 +156,9 @@
       var infoupPhone=$('#infoupPhone');
       var infoupTime=$('#infoupTime');
       var addr=$('#st-addr');
+      var subThema=$('#subThema');
       var buttonAddr=$('#button-addon1');
+      
       
       if(infoupFile.val()==""){
            alert('이미지를 등록해주세요.');
@@ -170,6 +171,11 @@
          
          infoupTitle.focus();
          return false;
+      }
+      if(subThema.val()==null){
+    	  alert('테마를 선택해주세요.');
+    	  subThema.focus();
+    	  return false;
       }
       
       if(infoupPayment.val()==""){
