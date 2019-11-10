@@ -24,7 +24,7 @@
 							<form name="infoUpdate"
 								action="${pageContext.request.contextPath }/info/infoView.do?infoupNum=${supUpload.INFOUPNUM}"
 								method="post">
-								<input type="button" class="btn infoFormBtn" onClick="location.href='${pageContext.request.contextPath }/info/infoView.do?infoupNum=${supUpload.INFOUPNUM }&id=${loginMember.id }'" value="돌아가기">
+								<input type="button" class="btn supreviewBtn" onClick="location.href='${pageContext.request.contextPath }/info/infoView.do?infoupNum=${supUpload.INFOUPNUM }&id=${loginMember.id }'" value="돌아가기">
 							</form>
 							<br>
 						<c:if test="${loginMember.memberNum eq sup.MEMBERNUM && not empty loginMember }">
