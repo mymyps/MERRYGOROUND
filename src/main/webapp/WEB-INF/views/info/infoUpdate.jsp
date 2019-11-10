@@ -46,7 +46,7 @@
 								<div>
 									<div class="infoFormSubFrame">테마</div>
 									<p class="infoForm1">
-										<select id="" name="themaNum" class="mainThema">
+										<select id="mainThema" name="themaNum" class="mainThema">
 											<c:forEach items="${themaList2 }" var="t">
 												<c:if test="${info.THEMANUMREF ==t['THEMANUM']}">
 													<option value="${t['THEMANUM'] }" selected>${t['THEMANAME'] }</option>
@@ -62,14 +62,29 @@
 										</select>
 										<select id="subThema" name="themaSubNum">
 											<option value="${info.THEMANUM }" selected>${info.THEMANAME }</option>
-											<c:forEach items="${themaList }" var="t">
-												<c:if test="${info.THEMANUM != t['THEMANUM']}">
-													<option value="${t['THEMANUM'] }">${t['THEMANAME'] }</option>
-												</c:if>
-											</c:forEach>
 										</select>
 									</p>
 								</div>
+								<script>
+                              $(function(){
+                                 $("#mainThema").click(function(){
+                                    var themaNumRef=$("#mainThema").val();
+                                    $.ajax({
+                                       url:"<%=request.getContextPath()%>/info/selectSubThema",
+                                       type:"post",
+                                       data:{"themaNumRef":themaNumRef},
+                                       dataType:"JSON",
+                                       success:function(data){
+                                          console.log(data);
+                                          $('#subThema').find("option").remove();
+                                          for(var i=0;i<data.length;i++){
+	                                          $('<option value="' + data[i].THEMANUM +'">' + data[i].THEMANAME + '</option>').appendTo('#subThema');
+                                          }
+                                       }
+                                    });
+                                 });
+                              });
+                           </script>
 								
 								<div>
 									<div class="infoFormSubFrame">장소</div>

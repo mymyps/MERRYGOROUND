@@ -101,10 +101,10 @@ public class InfoServiceImpl implements InfoService {
       return dao.selectSup(session, param);
    }
 
-//   @Override
-//   public List<Thema> selectSubThema(int themaNumRef) {
-//      return dao.selectSubThema(session, themaNumRef);
-//   }
+   @Override
+   public List<Map<String, String>> selectSubThema(int themaNumRef) {
+      return dao.selectSubThema(session, themaNumRef);
+   }
 
 
 

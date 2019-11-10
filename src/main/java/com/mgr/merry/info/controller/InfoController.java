@@ -239,14 +239,15 @@ public class InfoController {
    
    }
    
-//   @RequestMapping(value="/info/selectSubThema", produces="application/json;charset=UTF-8")
-//   @ResponseBody
-//   public String selectSubCategory(@RequestParam(value="themaNumRef") String themaNumRef) throws JsonProcessingException{
-//      List<Thema> list = service.selectSubThema(Integer.parseInt(themaNumRef));
-//      ObjectMapper mapper = new ObjectMapper();
-//      return mapper.writeValueAsString(list);
-//      
-//   }
+   @RequestMapping(value="/info/selectSubThema", produces="application/json;charset=UTF-8")
+   @ResponseBody
+   public String selectSubCategory(@RequestParam(value="themaNumRef") String themaNumRef) throws JsonProcessingException{
+      List<Map<String, String>> list = service.selectSubThema(Integer.parseInt(themaNumRef));
+      ObjectMapper mapper = new ObjectMapper();
+      System.out.println("list :"+list.toString());
+      return mapper.writeValueAsString(list);
+      
+   }
    
    
 }

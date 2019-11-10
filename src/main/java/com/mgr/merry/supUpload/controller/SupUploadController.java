@@ -139,7 +139,7 @@ public class SupUploadController {
 	        }
 	        
 	        
-	        res.getWriter().print("/merry/resources/images/supRv/"+reName);
+	        res.getWriter().print("/19AM_MERRYGOROUND_final/resources/images/supRv/"+reName);
 	        
 	        //DB에 저장 board가 insert된후 boardnum을 가져온후 저장해야함 (따로 필요?)
 	        SupUploadImg supupImg= new SupUploadImg();

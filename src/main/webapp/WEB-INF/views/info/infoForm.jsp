@@ -52,10 +52,7 @@
                                  </c:forEach>
                               </select>
                               <select id="subThema" name="themaSubNum">
-                                 <c:forEach items="${themaList }" var="t">
-                                       <option value="${t['THEMANUM'] }">${t['THEMANAME'] }</option>
-                                    
-                                 </c:forEach>
+                                 
                               </select>
                            </p>
                            
@@ -72,7 +69,7 @@
                               
                            </p>
                         </div>
-                        <%-- <script>
+                        <script>
                               $(function(){
                                  $("#mainThema").click(function(){
                                     var themaNumRef=$("#mainThema").val();
@@ -80,19 +77,18 @@
                                        url:"<%=request.getContextPath()%>/info/selectSubThema",
                                        type:"post",
                                        data:{"themaNumRef":themaNumRef},
+                                       dataType:"JSON",
                                        success:function(data){
-                                          console.log("데이터 :"+data);
-                                          /* $('#subThema').find("option").remove();
-                                          for(var i=0;i<data.lenght;i++){
-                                             if(data!=0){
-                                                $('<option value="' + datas[i] +'">' + datas[i] + '</option>').appendTo('#subThema');
-                                             }
-                                          } */
+                                          console.log(data);
+                                          $('#subThema').find("option").remove();
+                                          for(var i=0;i<data.length;i++){
+	                                          $('<option value="' + data[i].THEMANUM +'">' + data[i].THEMANAME + '</option>').appendTo('#subThema');
+                                          }
                                        }
                                     });
                                  });
                               });
-                           </script> --%>
+                           </script>
                         <div>
                            <div class="infoFormSubFrame">가격</div>
                            <p class="infoForm1">

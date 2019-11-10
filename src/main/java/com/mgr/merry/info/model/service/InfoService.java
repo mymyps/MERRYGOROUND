@@ -21,6 +21,6 @@ public interface InfoService {
 
    Map<String, String> selectSup(Map<String, String> param);
 
-//   List<Thema> selectSubThema(int themaNumRef);
+   List<Map<String, String>> selectSubThema(int themaNumRef);
 
 }

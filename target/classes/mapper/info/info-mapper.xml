@@ -55,10 +55,13 @@
       UPDATE INFO_UPLOAD SET INFOUPSTATUS=0 WHERE INFOUPNUM=#{infoupNum}
    </update>
    
-<!--    <select id="selectSup" resultType="map" parameterType="_int">
+    <select id="selectSup" resultType="map" parameterType="_int">
       SELECT m.membernum, s.supnum FROM SUPPORTERS s join members m on s.membernum=m.membernum WHERE m.id='${id}'
-   </select> -->
-   
+   </select>
+	
+	<select id="selectSubThema" resultType="map" parameterType="_int">
+		SELECT * FROM THEMA WHERE THEMANUMREF=#{themaNumRef}
+	</select>
 
    
 

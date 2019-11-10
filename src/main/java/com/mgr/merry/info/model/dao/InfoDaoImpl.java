@@ -67,11 +67,10 @@ public class InfoDaoImpl implements InfoDao {
       return session.insert("info.insertInfoImg2", infoimg);
    }
 
-//   @Override
-//   public List<Thema> selectSubThema(SqlSessionTemplate session, int themaNumRef) {
-//      // TODO Auto-generated method stub
-//      return session.selectList("info.selectSubThema", themaNumRef);
-//   }
+   @Override
+   public List<Map<String, String>> selectSubThema(SqlSessionTemplate session, int themaNumRef) {
+      return session.selectList("info.selectSubThema", themaNumRef);
+   }
 
 
 
