@@ -93,7 +93,7 @@ border: 1px lightgray !important;
 <%-- 							<img src="${path}/resources/upload/info/${list.fileReName}" style="width:295px; height: 243px;"> --%>
 							<img src="${path}/resources/images/banpo.JPG" style="width:295px; height: 243px;">
 							<figcaption>
-							<a href="${pageContext.request.contextPath}/info/infoView.do?infoupNum=${list.infoupNum }" class="btn btn-primary white cd-btn">보러가기</a>
+							<a href="${pageContext.request.contextPath}/info/infoView.do?infoupNum=${list.infoupNum }&id=${loginMember.id}" class="btn btn-primary white cd-btn">보러가기</a>
 							</figcaption>			
 						</figure>
 						<div class="portfolio-static-desc">

@@ -109,15 +109,15 @@
 			                                            </div>
 			                                            <hr>
 			                                            <div class="reviewContent"><c:out value='${r["INFOREVIEWCONTENT"] }'/></div>
-						                                
+						                                <br>
 						                                <c:if test="${loginMember.memberNum eq r['MEMBERNUM'] }">
-							                                <button class="btn" type="submit" onclick="updateInfoReview${r['INFOREVIEWNUM']}();">리뷰 수정</button>
+							                                <button class="btn reviewBtn2" type="submit" onclick="updateInfoReview${r['INFOREVIEWNUM']}();">리뷰 수정</button>
 								                            
-								                            <br>
 								                            <form name="deleteInfoReview" action="${pageContext.request.contextPath }/info/status0InfoReview?infoupNum=${info.INFOUPNUM}&id=${loginMember.id}" method="post">
 								                            	<input type="hidden" value="${r['INFOREVIEWNUM']}" name="infoReviewNum"/>
 								                            	<input type="hidden" value="${info.INFOUPNUM }" name="infoupNum"/>
-								                                <button class="btn" type="submit">리뷰 삭제</button> 
+								                            	<br>
+								                                <button class="btn reviewBtn2" type="submit">리뷰 삭제</button> 
 								                            </form>
 							                            </c:if>
 			                                        </div>
