@@ -91,7 +91,6 @@
                </div>
                <div class="text-right p-t-8 p-b-31">
                   <a href="#">
-                     Forgot password?
                   </a>
                </div>
                
@@ -108,7 +107,6 @@
 
                <div class="txt1 text-center p-t-54 p-b-20">
                   <span>
-                     Or Sign Up Using
                   </span>
                </div>
 
