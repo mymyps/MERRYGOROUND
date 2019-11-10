@@ -257,7 +257,7 @@
                               <a href='${path }/info/infoView.do?infoupNum=${up["INFOUPNUM"]}&id=${loginMember.id }'>
                               <div class="service-content">
                                  <span class="service-image">
-                                    <img class="img-supupload_img_f" src='${path}/resources/images/member/${up["fileReName"] }' width="180px" height="200px"/>
+                                    <img class="img-supupload_img_f" src='${path}/resources/upload/info/${up["FILERENAME"] }' width="180px" height="200px"/>
                                  </span>
                                  
                                  <h3>${up["INFOUPTITLE"] }</h3>
