@@ -6,12 +6,12 @@
 <script src="https://ssl.daumcdn.net/dmaps/map_js_init/postcode.v2.js"></script>
 <script src="<%=request.getContextPath()%>/js/post.js" charset="utf-8"></script>
 <jsp:include page="/WEB-INF/views/common/header.jsp">
-	<jsp:param name="pageTitle" value="demo"/>
+	<jsp:param name="pageTitle" value="INFOMATION"/>
 </jsp:include>
 <section id="content">
 	<div class="container">
 		<form name="infoForm"
-			action="${pageContext.request.contextPath }/info/infoUpdateEnd.do?infoupNum=${info.INFOUPNUM}"
+			action="${pageContext.request.contextPath }/info/infoUpdateEnd.do?infoupNum=${info.INFOUPNUM}&id=${loginMember.id}"
 			method="post"
 			enctype="multipart/form-data" onsubmit="return checkNull();">
 			<div class="row">
@@ -28,9 +28,12 @@
 								<div>
 									<div class="infoFormSubFrame">이미지</div>
 									<p class="infoForm1">
-										<input type="file" name="infoupFile" id="infoupFile"/>
+										<input type="file" name="infoupFile" id="infoupFile" />
 										<img src="${path }/resources/upload/info/${infoImg.fileReName }" class="infoimg	"/>
+										
 									</p>
+										<div id="imageInfo">
+										</div>
 								</div>
 
 								<div>
@@ -108,7 +111,7 @@
 											style="text-align: center" id="st-addr-post" readonly> -->
 										<input type="text" class="form-control start-addr" name="infoAddr"
 											placeholder="주소를 검색해주세요" onkeydown="JavaScript:Enter_Check(1);"
-											id="st-addr" readonly>
+											id="st-addr" value="${info.INFOADDR }" readonly>
 										<div class="input-group-append">
 											<button class="btn btn-outline-secondary start-btn" type="button"
 												id="button-addon1" onclick="execDaumPostcode(1)">주소 찾기</button>
@@ -245,6 +248,19 @@ function checkNull(){
 			}
 		}).open();
 	}
+	
+	//div 이미지 출력하기
+    $('[name=infoupFile]').change(function () {
+        var reader = new FileReader();
+        reader.onload = function (e) {
+        	var img2 = $('<div class="infoFormSubFrame">변경할 이미지<br>미리보기</div>');
+            var img = $('<img>').attr('src', e.target.result).css({'width':"570", 'height':"570"}).addClass("infoForm1");
+            $('#imageInfo').append(img2);
+            $('#imageInfo').append(img);
+        }
+        
+     	reader.readAsDataURL($(this)[0].files[0]); // 파일경로를 바꿈/=result
+    });
 	</script>
 </section>
 <jsp:include page="/WEB-INF/views/common/footer.jsp"/>

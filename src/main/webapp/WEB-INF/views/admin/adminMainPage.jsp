@@ -353,15 +353,15 @@
 							<div class="card ov-h">
 								<div class="card-body bg-flat-color-4">
 									<div id="flotBarChart" class="float-chart ml-4 mr-4">
-										<p style="color:black">&lt;공지 사항&gt;</p>
-										<p style="color:white" class="notiTi"><c:out value="${adminNotice['NOTICECONTENT'] }" /></p>
-										<p style="color:red" class="notiDa"><fmt:formatDate value="${adminNotice['NOTICEDATE'] }" pattern="yyyy-MM-dd"/></p>
+										<p style="color:black; font-size:12px; font-style: italic;">&lt;공지 사항&gt;</p>
+										<p style="color:white;" class="notiTi"><c:out value="${adminNotice['NOTICECONTENT'] }" /></p>
+										<p style="color:red; font-size:13px;" class="notiDa"><fmt:formatDate value="${adminNotice['NOTICEDATE'] }" pattern="yyyy-MM-dd"/></p>
 									</div>
 								</div>
 								<div id="cellPaiChart" class="float-chart">
-									<p>&lt;입력창&gt;   &nbsp;<a style="color:#EB9579;" id="noticeClick">공지사항 추가하기</a></p> 
+									<!-- <hr class="mb-1"> -->
+									<p>&lt;입력창&gt;   &nbsp;<a style="color:#EB9579;" id="noticeClick">공지사항 추가하기</a></p>
 									<textarea class="txAA" cols="5" style="resize:none; width:100%; height:100px; padding:8px"></textarea>
-									
 								</div>
 							</div>
 							<!-- /.card -->
@@ -491,6 +491,7 @@
 					var d = d.getFullYear() +"-" + d.getMonth() +"-" + d.getDate();
 				
 					// notiTi, notiDa
+					console.log(data['NOTICECONTENT']);
 					$(".notiTi").text(data['NOTICECONTENT']);
 					$(".notiDa").text(d);
 					$('.txAA').val("");

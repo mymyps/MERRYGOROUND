@@ -4,9 +4,9 @@
 	<select id="selectSupUpload" resultType="map" parameterType="_int">
 		SELECT * FROM SUPPORTERS_UPLOAD WHERE INFOUPNUM=#{infoupNum}
 	</select>
-<!-- 	<select id=selectSupUploadImg" resultType="com.mgr.merry.supUpload.model.vo.SupUploadImg">
-	
-	</select> -->
+	<select id="selectSupUpload2" resultType="map" parameterType="_int">
+		SELECT * FROM SUPPORTERS_UPLOAD WHERE INFOUPNUM=#{infoupNum} AND SUPUPSTATUS=1
+	</select>
 	
 	<insert id="insertSupUpload" parameterType="Map">
 		INSERT INTO SUPPORTERS_UPLOAD VALUES(SEQ_SUP_UP_NUM.NEXTVAL, #{supNum}, #{infoupNum}, #{supupTitle}, #{supupContent}, default, default)

@@ -50,20 +50,20 @@
                         </div>
                         <br><br>
                         <div>
-                        	<c:if test="${not empty supUp}">
+                        	<c:if test="${not empty supUp && supUp.SUPUPSTATUS ==1}">
 	                            <form name="supReview" action="${pageContext.request.contextPath }/supUp/supReview?infoupNum=${info.INFOUPNUM}&id=${loginMember.id}" method="post">
 	                                <button class="btn supreviewBtn" type="submit">서포터즈 리뷰 바로가기</button> 
 	                            </form>
                             </c:if>
                             <c:if test="${loginMember.memberNum eq sup.MEMBERNUM }">
-	                            <c:if test="${empty supUp }">
+	                            <c:if test="${empty supUp || supUp.SUPUPSTATUS ==0 }">
 		                            <form name="supReviewForm" action="${pageContext.request.contextPath }/supUp/supReviewForm.do?infoupNum=${info.INFOUPNUM}&id=${loginMember.id}" method="post">
 		                                <button class="btn supreviewBtn" type="submit">서포터즈 리뷰 작성하기</button> 
 		                            </form>
 	                            </c:if>
 	                            <br>
 	                            <c:if test="${not empty loginMember }">
-	                            	<form name="infoUpdate" action="${pageContext.request.contextPath }/info/infoUpdate?infoupNum=${info.INFOUPNUM}" method="post">
+	                            	<form name="infoUpdate" action="${pageContext.request.contextPath }/info/infoUpdate?infoupNum=${info.INFOUPNUM}&id=${loginMember.id}" method="post">
 		                                <button class="btn supreviewBtn" type="submit">INFOMATION 수정</button> 
 		                            </form>
 		                            <br>
@@ -79,7 +79,7 @@
                         <c:if test="${not empty loginMember }">
 	                        <div class="comments-form">
 	                            <h3>멤버 리뷰 등록하기</h3>
-	                            <form name="insertReview" action="${pageContext.request.contextPath }/infoReview/insertInfoReview?infoupNum=${info.INFOUPNUM}" method="post" onsubmit="return checkNull();">
+	                            <form name="insertReview" action="${pageContext.request.contextPath }/infoReview/insertInfoReview?infoupNum=${info.INFOUPNUM}&id=${loginMember.id}" method="post" onsubmit="return checkNull();">
 	                                <input type="hidden" value="${loginMember.memberNum}" name="memNum">
 	                                <div class="form-group">
 	                                평점 <input type="number" step="1" max="5" min="0" name="infoReviewPoint" id="infoReviewPoint" required/><br><br>
@@ -114,7 +114,7 @@
 							                                <button class="btn" type="submit" onclick="updateInfoReview${r['INFOREVIEWNUM']}();">리뷰 수정</button>
 								                            
 								                            <br>
-								                            <form name="deleteInfoReview" action="${pageContext.request.contextPath }/info/status0InfoReview" method="post">
+								                            <form name="deleteInfoReview" action="${pageContext.request.contextPath }/info/status0InfoReview?infoupNum=${info.INFOUPNUM}&id=${loginMember.id}" method="post">
 								                            	<input type="hidden" value="${r['INFOREVIEWNUM']}" name="infoReviewNum"/>
 								                            	<input type="hidden" value="${info.INFOUPNUM }" name="infoupNum"/>
 								                                <button class="btn" type="submit">리뷰 삭제</button> 
@@ -124,7 +124,7 @@
 			                                        <script>
 				                                        function updateInfoReview${r['INFOREVIEWNUM']}(){
 						                            		var html="";
-						                            		html+="<form name='updateInfoReview' action='${pageContext.request.contextPath }/info/updateInfoReview?infoReviewNum=${r['INFOREVIEWNUM']}&infoupNum=${info.INFOUPNUM}' method='post'>";
+						                            		html+="<form name='updateInfoReview' action='${pageContext.request.contextPath }/info/updateInfoReview?infoReviewNum=${r['INFOREVIEWNUM']}&infoupNum=${info.INFOUPNUM}&id=${loginMember.id}' method='post'>";
 						                            		html+="<input type='hidden' name='infoReviewNum' value='${r["INFOREVIEWNUM"]}'";
 						                            		html+="<div class='comment-body' id='review${r["INFOREVIEWNUM"] }'>";
 						                            		html+="<h4 class='comment-author'><c:out value='${r["NAME"] }'/></h4>";

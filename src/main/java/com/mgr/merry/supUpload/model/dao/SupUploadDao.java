@@ -27,4 +27,6 @@ public interface SupUploadDao {
 
 	int insertSupUploadImgNum(SqlSessionTemplate session, SupUploadImg supImg);
 
+	Map<String, String> selectSupUpload2(SqlSessionTemplate session, int infoupNum);
+
 }

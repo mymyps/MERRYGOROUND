@@ -158,6 +158,9 @@
 					<a id="menuToggle" class="menutoggle"><i class="fa fa-bars facolor"></i></a>
 				</div>
 			</div>
-					<p style="text-align: right; color:antiquewhite; padding-top:16px; font-size:27px">ADMINISTRATOR</p>
+					<p style="text-align: right; color:antiquewhite; padding-top:16px; font-size:27px">
+					ADMINISTRATOR
+					<a href="#">logout</a>
+					</p>
 		</header>
 		<!-- /#header -->
