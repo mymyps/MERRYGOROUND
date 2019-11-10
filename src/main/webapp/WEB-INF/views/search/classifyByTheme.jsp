@@ -124,7 +124,7 @@
 							<p><strong><c:out value='${list.localCity}'/></strong><p>
 							</div>
 							<div class="col-md-4 ts-padding about-img" >
-                             <img class="listImg" src="${path}/resources/upload/info/${list.fileReName}" alt="">
+                             <img class="listImg" src="${path}/resources/upload/info/${list.fileReName}" alt="이런! 이미지 준비중이네요. T^T">
 						</div>
 					</div>
 					<br>
