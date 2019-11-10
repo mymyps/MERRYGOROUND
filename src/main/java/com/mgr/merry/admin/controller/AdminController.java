@@ -273,7 +273,7 @@ public class AdminController {
 	
 	// 서포터즈 승인
 	@RequestMapping("/admin/cletify.end")
-	public void cletifyAdmin(@RequestParam(value="memberNum") int memberNum, HttpServletResponse res) throws IOException {
+	public void cletifyAdmin(@RequestParam(value="memberNum") int memberNum, HttpServletResponse res) throws Exception {
 		
 		// 맴버넘버를 통해 모달에 띄어줄내용을 받아와야함
 		

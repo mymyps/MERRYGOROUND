@@ -145,8 +145,17 @@ public class AdminServiceImpl implements AdminService{
 	}
 	
 	@Override
-	public int cletifyAdmin(int memberNum) {
-		return dao.cletifyAdmin(sqlSession, memberNum);
+	public int cletifyAdmin(int memberNum) throws Exception {
+		
+		int result = dao.cletifyAdmin(sqlSession, memberNum);
+		
+		if(result == 0 ) throw new RuntimeException();
+		else {
+			result = dao.cletifyAdminIn(sqlSession, memberNum);
+			if(result == 0) throw new Exception();
+		}
+		
+		return result; 
 	}
 	
 	@Override

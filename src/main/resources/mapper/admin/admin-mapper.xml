@@ -262,6 +262,10 @@
 		where noticenum = #{noNum}
 	</update>
 	
+	<insert id="cletifyAdminIn" parameterType="_int">
+		insert into supporters values(SEQ_SUPORTERS.nextval, #{memberNum}, 1, sysdate, 0)
+	</insert>
+	
 </mapper>
 
 
