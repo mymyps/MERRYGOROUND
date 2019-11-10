@@ -65,7 +65,7 @@ public class CoupleBoardDaoImpl implements CoupleBoardDao {
 
 	@Override
 	public int deleteAttachment2(SqlSessionTemplate session, String src) {
-		return session.delete("couple.deleteAttachment2", src);
+		return session.update("couple.deleteAttachment2", src);
 	}
 
 	@Override

@@ -7,6 +7,7 @@
 <jsp:param name ="pageTitle" value=""/>
 </jsp:include>
 
+<!-- <script src="http://code.jquery.com/jquery-3.4.1.min.js"></script> -->
 <!-- <script src="http://code.jquery.com/jquery-3.3.1.slim.min.js" -->
 <!--    integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" -->
 <!--    crossorigin="anonymous"></script> -->
@@ -44,8 +45,8 @@
 									<span class="post-meta-author">작성자 <a href="#"> <c:out value='${cboard["ID"] }'></c:out></a></span>
 									<!-- <span class="post-meta-cats">in <a href="#"> News</a></span> -->
 									<div class="pull-right">
-										<span class="post-meta-comments"><a href="#"><i class="fa fa-comment-o"></i> (댓글 수)</a></span>
-										<span class="post-meta-hits"><a href="#"><i class="fa fa-heart-o"></i> (좋아요 수)</a></span>
+										<span class="post-meta-comments"><a href="#"><i class="fa fa-comment-o"></i> 댓글 <span id="cCnt"></span></a></span>
+<!-- 										<span class="post-meta-hits"><a href="#"><i class="fa fa-heart-o"></i> (좋아요 수)</a></span> -->
 									</div>
 									
 								</div><!-- post meta end -->
@@ -80,8 +81,10 @@
 						<button class="btn btn-primary pull-left" onclick='location.href="${path }/couple/coupleBoardList?mNum=${loginMember.memberNum}"'>목록</button>
 <%-- 						<button class="btn btn-primary pull-right" id="deleteCB" onclick='location.href="${path }/couple/deleteCoupleBoard?no=${cboard["COUPLENUM"]}"'>삭제</button>  --%>
 <%-- 						<button class="btn btn-primary pull-right" id="updateCB" onclick='location.href="${path }/couple/updateCoupleBoard?no=${cboard["COUPLENUM"]}"'>수정</button> --%>
+						<c:if test="${cboard.writer eq loginMember.id}">
 						<button class="btn btn-primary pull-right" id="deleteCB" onclick='deleteCB();'>삭제</button>
 						<button class="btn btn-primary pull-right" id="updateCB" onclick='updateCB();'>수정</button>
+						</c:if>
 						<br><hr>
 					
 
@@ -89,23 +92,22 @@
 						
 <!-- 				--------------------------------------------------------- -->
 
-<!-- 			<div class="container"> -->
-<!-- 				<form id="commentListForm" name="commentListForm" method="post"> -->
-<!-- 					<div> -->
-<!-- 						<span><strong>댓글</strong></span> -->
-<!-- 						<span id="cCnt"></span> -->
-<!-- 						<span><strong>개</strong></span> -->
-<!-- 					</div><hr><br><br> -->
-<!-- 					<div id="commentList"></div> -->
-<!-- 				</form> -->
-<!-- 			</div> -->
+			<div class="container">
+				<form id="commentListForm" name="commentListForm" method="post">
+					<div>
+						<span><strong>댓글</strong></span>
+						<span id="cCnt"></span>
+						<span><strong>개</strong></span>
+					</div><hr><br>
+					<div id="commentList"></div>
+				</form>
+			</div>
 			
-			<div class="my-3 p-3 bg-white rounded shadow-sm" style="padding-top: 10px">
+<!-- 			<div class="my-3 p-3 bg-white rounded shadow-sm" style="padding-top: 10px"> -->
+<!-- 				<h6 class="border-bottom pb-2 mb-0">댓글</h6> -->
+<!-- 				<div id="commentList"></div> -->
 
-				<h6 class="border-bottom pb-2 mb-0">댓글리스트</h6>
-				<div id="commentList"></div>
-
-			</div> 
+<!-- 			</div>  -->
 			
 			
 			<div class="container">
@@ -170,6 +172,7 @@
 			$(function(){
 			    var cNum=${cboard["COUPLENUM"]};
 			    console.log("콘솔cNUM!: "+cNum);
+				console.log("${loginMember.id}");
 			    
 			    getCommentList(cNum);
 // 			    showReplyList(cNum);
@@ -238,7 +241,10 @@
 			            if(data.length > 0){
 			                
 			                for(i=0; i<data.length; i++){
-			           		 console.log(data[i]);
+								var date = new Date(data[i].coupleDate);
+								var date = date.getFullYear() +"-"+date.getMonth() +"-"+date.getDate()+" &nbsp"+date.getHours()+":"+date.getMinutes();
+// 			           			 console.log(date);
+			                	
 // 			                    html += "<div>";
 // 			                    html += "<div><table class='table'><h6><strong>"+data[i].writer+"</strong></h6>";
 // 			                    html += "<tr><td>"+data[i].comment + "</td><td style='text-align: right;'>"+data[i].coupleDate+"</td></tr>";
@@ -255,9 +261,14 @@
 			                     htmls += '<span class="d-block">';
 			                     htmls += '<strong class="text-gray-dark">' + data[i].writer + '</strong>';
 			                     htmls += '<span style="padding-left: 7px; font-size: 9pt">';
-			                     htmls += '<a href="javascript:void(0)" onclick="fn_editReply(' + data[i].commentNo + ', \'' + data[i].writer + '\', \'' + data[i].comment + '\' )" style="padding-right:5px">수정</a>';
-			                     htmls += '<a href="javascript:void(0)" onclick="fn_deleteReply(' + data[i].commentNo + ')" >삭제</a>';
-			                     htmls += '&nbsp&nbsp&nbsp&nbsp'+data[i].coupleDate;
+			                  
+			                     htmls += '&nbsp &nbsp '+date+'&nbsp &nbsp';
+			                     if("${loginMember.id}" == data[i].writer){
+				                     htmls += '<a href="javascript:void(0)" onclick="fn_editReply(' + data[i].commentNo + ', \'' + data[i].writer + '\', \'' + data[i].comment + '\' )" style="padding-right:5px">수정</a>';
+				                     htmls += '<a href="javascript:void(0)" onclick="fn_deleteReply(' + data[i].commentNo + ')" >삭제</a>';
+			                     }
+			                     
+			                     
 			                     htmls += '</span>';
 			                     htmls += '</span>';
 			                     htmls += '</p>';
@@ -288,25 +299,27 @@
 			}
 			 
 			function fn_deleteReply(commentNo){
-				console.log("초기 commentNo: "+commentNo);
-			    var paramData = {"commentNo":commentNo};
-			    $.ajax({
-			        type:'POST',
-			        url : "<c:url value='/couple/deleteComment'/>",
-					data:paramData,
-					dataType: 'text',
-			        success : function(data){
-			            if(data=="success")
-			            {
-			                getCommentList();
-// 			                $("#comment").val("");
-			            }
-			        },
-			        error:function(request,status,error){
-			            //alert("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
-			       }
-			        
-			    });
+				if(confirm("댓글을 삭제하시겠습니가?")){
+					console.log("초기 commentNo: "+commentNo);
+				    var paramData = {"commentNo":commentNo};
+				    $.ajax({
+				        type:'POST',
+				        url : "<c:url value='/couple/deleteComment'/>",
+						data:paramData,
+						dataType: 'text',
+				        success : function(data){
+				            if(data=="success")
+				            {
+				                getCommentList();
+	// 			                $("#comment").val("");
+				            }
+				        },
+				        error:function(request,status,error){
+				            //alert("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
+				       }
+				        
+				    });
+			    }
 			}
 		
 			function fn_editReply(commentNo, writer, content){
@@ -322,10 +335,10 @@
 					htmls += '<span class="d-block">';
 					htmls += '<strong class="text-gray-dark">' + writer + '</strong>';
 					htmls += '<span style="padding-left: 7px; font-size: 9pt">';
-					htmls += '<c:if test="${empty loginMember}">'
+// 					htmls += '<c:if test="${empty loginMember}">'
 					htmls += '<a href="javascript:void(0)" onclick="fn_updateReply(' + commentNo + ', \'' + writer + '\')" style="padding-right:5px">저장</a>';
 					htmls += '<a href="javascript:void(0)" onClick="getCommentList()">취소<a>';
-					htmls += '</c:if>'
+// 					htmls += '</c:if>'
 					htmls += '</span>';
 					htmls += '</span>';		
 					htmls += '<textarea name="editContent" id="editContent" class="form-control" rows="3">';
@@ -366,7 +379,7 @@
 // 			    });
 // 			}
 			
-			//수정후 저장버튼을 눌렀을때!  사용안할듯
+			//수정후 저장버튼을 눌렀을때!  사용안할듯XXX
 			$(document).on('click', '#btnReplySave', function(){
 					var replyContent = $('#content').val();
 					var replyReg_id = $('#reg_id').val();

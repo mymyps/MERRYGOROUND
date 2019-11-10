@@ -217,8 +217,9 @@
 		where rnum = 1
 	</select>
 	
+	<!-- SUPSTATUS = 0 --> 
 	<update id="cletifyAdmin" parameterType="_int" >
-		update members set MEMBERLEVEL = 2 , SUPSTATUS = 0 
+		update members set MEMBERLEVEL = 2 
 		where MEMBERNUM = #{memberNum}
 	</update>
 	

@@ -195,7 +195,7 @@
                                     <li><a>로그인 후 커플을 신청하세요!</a></li>
                                  </ul>
                               </c:if>
-                            <c:if test='${not empty loginMember and fn:trim(loginMember.cpstatus) == 1}'>
+                            <c:if test="${not empty loginMember and fn:trim(loginMember.cpstatus) == 1}">
                               <ul>
                                  <li><a href="${pageContext.request.contextPath }/couple/coupleBoardList?mNum=${loginMember.memberNum}">커플게시판</a></li>
                               </ul>

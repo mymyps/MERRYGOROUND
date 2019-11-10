@@ -59,7 +59,8 @@ public class CoupleBoardController {
 		int totalCount = cservice.selectCoupleBoardCount(param);
 		System.out.println(list);
 		
-		mv.addObject("pageBar",PageBarFactory.getPageBar(totalCount, cPage,numPerPage,"/merry/couple/coupleBoardList?mNum="+mNum));
+//		mv.addObject("pageBar",PageBarFactory.getPageBar(totalCount, cPage,numPerPage,"/merry/couple/coupleBoardList?mNum="+mNum));
+		mv.addObject("pageBar",PageBarFactory.getPageBar(totalCount, cPage,numPerPage,"/19AM_MERRYGOROUND_final/couple/coupleBoardList?mNum="+mNum));
 		mv.addObject("count",totalCount);
 		mv.addObject("list",list);
 		mv.addObject("mNum",mNum);
@@ -73,17 +74,6 @@ public class CoupleBoardController {
 		attachList.clear();
 		return "couple/coupleBoardWrite";
 	}
-	
-	@RequestMapping("/couple/coupleBoardWrite2")
-	public String coupleBoardWrite2(int infoupNum) {
-		attachList.clear();
-		
-//		ModelAndView mv = new ModelAndView();
-		
-		return "couple/coupleBoardWrite";
-	}
-	
-	
 	
 	
 	@RequestMapping("/couple/coupleBoardWriteEnd")
@@ -153,9 +143,8 @@ public class CoupleBoardController {
         }
         
         
-//        res.getWriter().print("/19AM_MERRYGOROUND_final/resources/images/couple/"+reName);
-        res.getWriter().print("/merry/resources/images/couple/"+reName);
-//        res.getWriter().print(path+"\\"+reName);
+        res.getWriter().print("/19AM_MERRYGOROUND_final/resources/images/couple/"+reName);
+//        res.getWriter().print("/merry/resources/images/couple/"+reName);
         
         //DB에 저장 board가 insert된후 boardnum을 가져온후 저장해야함 (따로 필요?)
         Attachment att= new Attachment();
@@ -255,8 +244,8 @@ public class CoupleBoardController {
 		int result2 =0;
 		int result3 =0;
 		
-		result3 = cservice.deleteComment(no);
-		result2 = cservice.deleteAttachment(no);
+//		result3 = cservice.deleteComment(no);
+//		result2 = cservice.deleteAttachment(no);
 		//c_upload테이블을 참조하는 img테이블 레코드부터 삭제
 		result = cservice.deleteCoupleBoard(no);
 		
