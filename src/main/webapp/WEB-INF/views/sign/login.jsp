@@ -5,6 +5,8 @@
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 <c:set var="path" value="${pageContext.request.contextPath}"/>
 <jsp:include page="/WEB-INF/views/common/header.jsp"/>
+	<%-- <jsp:param name="pageTitle" value="로그인하기"/>
+</jsp:include> --%>
    <!-- hs boot -->
     <meta name="viewport" content="width=device-width, initial-scale=1">
    <!--===============================================================================================-->   
@@ -32,11 +34,11 @@
 <section id="content">
 <div class="limiter">
       <div class="container-login100" >
-            <div class="wrap-login100 p-l-55 p-r-55 p-t-65 p-b-54">
+            <div class="wrap-login100 p-l-55 p-r-55 p-t-65 p-b-54" style="margin-top:-100px;">
             <form class="login100-form validate-form" action="${pageContext.request.contextPath}/sign/memberLogin.do" method="post">
                <span class="login100-form-title p-b-49">
-                  Login
-               </span>
+                  로그인
+               </span> 
 
                <div class="wrap-input100 validate-input m-b-23" data-validate = "Username is reauired">
                   <span class="label-input100">ID</span>
