@@ -137,8 +137,7 @@
 								<br>
 								<div>
 									<button class="btn infoFormBtn" type="submit">INFO 수정</button>
-									<button class="btn infoFormBtn" type="reset">INFO 수정
-										취소</button>
+									<input type="button" class="btn infoFormBtn" onClick="location.href='${pageContext.request.contextPath }/info/infoView.do?infoupNum=${info.INFOUPNUM }&id=${loginMember.id }'" value="INFO 수정 취소">
 								</div>
 							</div>
 

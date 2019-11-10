@@ -73,7 +73,7 @@
 
 		<div>
 			<button class="btn infoFormBtn" type="submit">서포터즈 리뷰 작성</button>
-			<button class="btn infoFormBtn" type="reset">서포터즈 리뷰 작성 취소</button>
+			<input type="button" class="btn infoFormBtn" onClick="location.href='${pageContext.request.contextPath }/info/infoView.do?infoupNum=${info.INFOUPNUM }&id=${loginMember.id }'" value="서포터즈 리뷰 작성 취소">
 		</div>
 	</form>
 
