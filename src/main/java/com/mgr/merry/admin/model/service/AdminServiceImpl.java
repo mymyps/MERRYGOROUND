@@ -160,15 +160,17 @@ public class AdminServiceImpl implements AdminService{
 	}
 	
 	@Override
-	public Map<String, String> adminNoticeInsert(String str) {
+	public Map<String, String> adminNoticeInsert(String str) throws Exception {
 		
 		int result = 0;
 		
 		result = dao.adminNoticeInsert(sqlSession, str);
-		
 		Map<String, String> map = null;
-		if(result > 0) {
+
+		if(result == 0) throw new RuntimeException();
+		else if(result > 0) {
 			map = dao.adminNotice(sqlSession);
+			if(map == null) throw new Exception();
 		}
 		
 		return map;

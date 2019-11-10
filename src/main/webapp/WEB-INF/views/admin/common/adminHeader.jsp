@@ -160,7 +160,8 @@
 			</div>
 					<p style="text-align: right; color:antiquewhite; padding-top:16px; font-size:27px">
 					ADMINISTRATOR
-					<a href="#">logout</a>
+					
+					<a href="${pageContext.request.contextPath}/member/logout.do"><i class="fa fa-power-off"></i></a>
 					</p>
 		</header>
 		<!-- /#header -->

@@ -36,7 +36,7 @@ public interface AdminService {
 	int cletifyAdmin(int memberNum);
 	int calDropSave(AdminCalendar calTmp);
 	Map<String, String> adminNotice();
-	Map<String, String> adminNoticeInsert(String str);
+	Map<String, String> adminNoticeInsert(String str) throws Exception;
 	List<Map<String, String>> adminNoticeList();
 	int adminNotiDel(int noticeNum);
 	int adminNotiMod(Map<String, String> param);
