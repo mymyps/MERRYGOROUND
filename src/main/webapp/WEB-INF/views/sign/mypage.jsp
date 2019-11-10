@@ -257,10 +257,10 @@
                               <a href='${path }/info/infoView.do?infoupNum=${up["INFOUPNUM"]}&id=${loginMember.id }'>
                               <div class="service-content">
                                  <span class="service-image">
-                                    <img class="img-supupload_img_f" src='${path}/resources/images/member/${up["FILERENAME"] }' width="180px" height="200px"/>
+                                    <img class="img-supupload_img_f" src='${path}/resources/upload/info/${up["FILERENAME"] }' width="180px" height="200px"/>
                                  </span>
                                  
-                                 <h3>${up["SUPUPTITLE"] }</h3>
+                                 <h3>${up["INFOUPTITLE"] }</h3>
                                  
                               </div>
                               </a>
@@ -459,6 +459,11 @@
                <c:if test="${loginMember.supstatus == 1 }">
                <div class="tab-pane animated fadeInLeft" id="tab_r">
                		<h3>이미 서포터즈 신청했습니다.</h3> 
+               		</div>
+               </c:if>
+               <c:if test="${loginMember.memberLevel == 2 }">
+               <div class="tab-pane animated fadeInLeft" id="tab_r">
+               		<h3>이미 서포터즈 입니다</h3> 
                		</div>
                </c:if>
                

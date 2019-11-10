@@ -3,9 +3,8 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 <c:set var="path" value="${pageContext.request.contextPath}"/>
-<jsp:include page="/WEB-INF/views/common/header.jsp">
-   <jsp:param name="pageTitle" value=""/>
-</jsp:include>
+<jsp:include page="/WEB-INF/views/common/header.jsp"/>
+   <%-- <jsp:param name="pageTitle" value="회원가입하기"/>--%>
    <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath }/resources/login/csshs/util.css"> 
    <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath }/resources/login/csshs/main.css">
    <link rel="icon" type="image/png" href="${pageContext.request.contextPath }/resources/imageshs/icons/favicon.ico"/>
@@ -17,10 +16,10 @@
    <section id="content">
       <div class="limiter">
          <div class="container-login100" >
-            <div class="wrap-login100 p-l-55 p-r-55 p-t-65 p-b-54">
+            <div class="wrap-login100 p-l-55 p-r-55 p-t-65 p-b-54" style="margin-top:-50px;">
             <form class="login100-form validate-form" name="f" action="${path}/member/membersignup.do" method="post" onsubmit="return checkKey();" enctype="multipart/form-data">
                <span class="login100-form-title p-b-49">
-                  Sign up
+                 회원가입
                </span>
 
                <div class="wrap-input100 validate-input m-b-23 idname" reauired>
@@ -46,7 +45,7 @@
                </div>
                <div class="wrap-input100 validate-input m-b-23 idname" reauired>
                   <span class="label-input100">생년월일</span>
-                  <input class="input100" type="text" id="birth" name="birth" placeholder="생년월일">
+                  <input class="input100" type="text" id="birth" name="birth" placeholder="생년월일 yymmdd">
                   <span class="focus-input100" data-symbol="&#xf206;"></span>
                </div>
                <div class="wrap-input100 validate-input m-b-23 idname" reauired>
