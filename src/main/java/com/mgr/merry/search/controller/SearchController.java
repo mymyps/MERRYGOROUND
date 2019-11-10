@@ -34,46 +34,47 @@ public class SearchController {
 	SearchService service;
 
 	@RequestMapping("/search/subThemaList")
-	public String subThemaList(
-			@RequestParam("themaNum") int themaNum,
-			@RequestParam("themaNumRef") int themaNumRef, Model model
-			,@RequestParam(value="cPage",required=false,defaultValue="0") int cPage) {
-		
-		int numPerPage=4;
-		
+	public String subThemaList(@RequestParam("themaNum") int themaNum, @RequestParam("themaNumRef") int themaNumRef,
+			Model model, @RequestParam(value = "cPage", required = false, defaultValue = "0") int cPage) {
+
+		int numPerPage = 4;
+
 		Map<String, Object> param = new HashMap<String, Object>();
 		param.put("themaNum", themaNum);
 		param.put("themaNumRef", themaNumRef);
 
-		List<InfoUpload> list = service.subThemaList(param,cPage,numPerPage);
+		List<InfoUpload> list = service.subThemaList(param, cPage, numPerPage);
 		model.addAttribute("list", list);
 
 		logger.debug("" + param);
 		logger.debug("컨트롤러에서 서브테마 리스트 : " + list);
-		
-        int totalCount = service.subThemaCount(param);
-		
-		model.addAttribute("pageBar",PageBarFactory.getPageBar(totalCount, cPage, numPerPage, "/merry/search/subThemaList?themaNum="+param.get("themaNum")+"&themaNumRef="+param.get("themaNumRef")));
+
+		int totalCount = service.subThemaCount(param);
+
+		model.addAttribute("pageBar",
+				PageBarFactory.getPageBar(totalCount, cPage, numPerPage, "/merry/search/subThemaList?themaNum="
+						+ param.get("themaNum") + "&themaNumRef=" + param.get("themaNumRef")));
 
 		return "search/classifyByTheme";
 
 	}
 
 	@RequestMapping("/search/mainThemaList")
-	public String mainThemaList(@RequestParam("themaNumRef") int themaNumRef, Model model
-			,@RequestParam(value="cPage",required=false,defaultValue="0") int cPage) {
+	public String mainThemaList(@RequestParam("themaNumRef") int themaNumRef, Model model,
+			@RequestParam(value = "cPage", required = false, defaultValue = "0") int cPage) {
 
-		int numPerPage=4;
-		List<InfoUpload> list = service.mainThemaList(themaNumRef,cPage,numPerPage);
+		int numPerPage = 4;
+		List<InfoUpload> list = service.mainThemaList(themaNumRef, cPage, numPerPage);
 		model.addAttribute("themaNumRef", themaNumRef);
 		model.addAttribute("list", list);
 
 		logger.debug("themaNumRef : " + themaNumRef);
 		logger.debug("컨트롤러에서 메인테마 리스트 : " + list);
-		
+
 		int totalCount = service.mainThemaCount(themaNumRef);
-		
-		model.addAttribute("pageBar",PageBarFactory.getPageBar(totalCount, cPage, numPerPage, "/merry/search/mainThemaList?themaNumRef="+themaNumRef));
+
+		model.addAttribute("pageBar", PageBarFactory.getPageBar(totalCount, cPage, numPerPage,
+				"/merry/search/mainThemaList?themaNumRef=" + themaNumRef));
 
 		return "search/classifyByTheme";
 
@@ -81,22 +82,22 @@ public class SearchController {
 
 	@RequestMapping("/search/locList")
 
-	public String localList(@RequestParam("localNum") int localNum, Model model
-							,@RequestParam(value="cPage",required=false,defaultValue="0") int cPage) {
-		
-		int numPerPage=6;
-		List<InfoUpload> list = service.localList(localNum,cPage,numPerPage);
+	public String localList(@RequestParam("localNum") int localNum, Model model,
+			@RequestParam(value = "cPage", required = false, defaultValue = "0") int cPage) {
+
+		int numPerPage = 6;
+		List<InfoUpload> list = service.localList(localNum, cPage, numPerPage);
 		model.addAttribute("locList", list);
 
 		logger.debug("localNum : " + localNum);
 		logger.debug("컨트롤러에서 지역 리스트 : " + list);
 
 		int totalCount = service.localCount(localNum);
-		
-		model.addAttribute("pageBar",PageBarFactory.getPageBar(totalCount, cPage, numPerPage, "/merry/search/locList?localNum="+localNum));
-//		model.addAttribute("count",totalCount);
-		model.addAttribute("localNum",localNum);		
-		
+
+		model.addAttribute("pageBar",
+				PageBarFactory.getPageBar(totalCount, cPage, numPerPage, "/merry/search/locList?localNum=" + localNum));
+		model.addAttribute("localNum", localNum);
+
 		return "search/classifyByLoc";
 	}
 
@@ -106,28 +107,28 @@ public class SearchController {
 
 		return "search/placeOnAMap";
 	}
-	
-	
+
 	@RequestMapping("/search/mapSearchEnd")
-	
-	public void mapSerchEnd(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-	
+
+	public void mapSerchEnd(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
+
 		String keyword = request.getParameter("keyword");
-		double y=Double.parseDouble(request.getParameter("y"));
-		double x=Double.parseDouble(request.getParameter("x"));
-		
+		double y = Double.parseDouble(request.getParameter("y"));
+		double x = Double.parseDouble(request.getParameter("x"));
+
 		Map<String, Object> param = new HashMap<String, Object>();
 		param.put("keyword", keyword);
 		param.put("y", y);
 		param.put("x", x);
-		
-		List<Map<String,Object>> resultList = service.mapSearch(param);
-		
-		logger.debug(""+resultList);
-		
+
+		List<Map<String, Object>> resultList = service.mapSearch(param);
+
+		logger.debug("" + resultList);
+
 		response.setContentType("application/x-json; charset=UTF-8");
-		
-		//DTO 타입의 어레이리스트를 json 형태로 바꿔주는 구문(라이브러리 필수, zip->jar 확장자명 꼭 확인)
+
+		// DTO 타입의 어레이리스트를 json 형태로 바꿔주는 구문(라이브러리 필수, zip->jar 확장자명 꼭 확인)
 //        String gson = new Gson().toJson(resultList);
 //        
 //        try {
@@ -138,25 +139,23 @@ public class SearchController {
 //        } catch (IOException e) {
 //            e.printStackTrace();
 //        }
-		
+
 	}
-	
+
 	// 공시사항 인덱스 출력메소드
-	@RequestMapping(value="/admin/noticeIndexLoad",produces="application/json;charset=UTF-8")
+	@RequestMapping(value = "/admin/noticeIndexLoad", produces = "application/json;charset=UTF-8")
 	@ResponseBody
 	public String adminNoticeInsert() throws JsonProcessingException {
 
-		//비지니스 로직처리(데이터 삽입)
+		// 비지니스 로직처리(데이터 삽입)
 		Map<String, String> list = service.noticeIndexLoad();
 		logger.debug(list.toString());
-		
+
 		ObjectMapper mapper = new ObjectMapper();
 		String strData = mapper.writeValueAsString(list);
-		
+
 		return strData;
-		
+
 	}
-	
-	
 
 }
