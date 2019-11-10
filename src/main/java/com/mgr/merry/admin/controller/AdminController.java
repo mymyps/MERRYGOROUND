@@ -294,7 +294,7 @@ public class AdminController {
 	
 	@RequestMapping(value="/admin/adminNoticeIn.do",  produces="application/json;charset=UTF-8")
 	@ResponseBody
-	public String adminNoticeInsert(@RequestParam(value="strTmp") String strTmp, HttpServletResponse res) throws JsonProcessingException {
+	public String adminNoticeInsert(@RequestParam(value="strTmp") String strTmp, HttpServletResponse res) throws Exception {
 
 		ObjectMapper mapper = new ObjectMapper();
 		

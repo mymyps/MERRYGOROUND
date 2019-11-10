@@ -20,8 +20,8 @@ public class AnoLoggerAspect {
 	//////////////////////////////////////////////////////////////////
 	/*
 	//1. pintcut : 실행대상 메소드 표현식 적용
-	//@Pointcut("execution(* com.kh.spring..insert*(..))")
-	@Pointcut("execution(* com.kh.spring..*(..))")
+	//@Pointcut("execution(* com.mgr.merry..insert*(..))")
+	@Pointcut("execution(* com.mgr.merry..*(..))")
 	public void beforeAop() {}
 	
 	//2. adviece 등록
@@ -34,7 +34,7 @@ public class AnoLoggerAspect {
 	*/
 	//////////////////////////////////////////////////////////////////
 	
-	@Around("execution(* com.kh.spring..*(..))")
+	@Around("execution(* com.mgr.merry..*(..))")
 	public Object loggerAround(ProceedingJoinPoint joinpoint) throws Throwable{
 //		log.debug("[before] 망했네");
 		Object obj = joinpoint.proceed();
