@@ -122,6 +122,11 @@ public class SupUploadServiceImpl implements SupUploadService {
 		return result;
 	}
 
+	@Override
+	public Map<String, String> selectSupUpload2(int infoupNum) {
+		return dao.selectSupUpload2(session, infoupNum);
+	}
+
 
 
 }

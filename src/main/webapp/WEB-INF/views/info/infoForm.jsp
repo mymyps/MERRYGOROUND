@@ -7,7 +7,7 @@
 <script src="https://ssl.daumcdn.net/dmaps/map_js_init/postcode.v2.js"></script>
 <script src="<%=request.getContextPath()%>/js/post.js" charset="utf-8"></script>
 <jsp:include page="/WEB-INF/views/common/header.jsp">
-	<jsp:param name="pageTitle" value="MyPage " />
+	<jsp:param name="pageTitle" value="INFOMATION " />
 </jsp:include>
 
 <section id="content">
@@ -23,7 +23,7 @@
 					<!-- Blog post start -->
 					<div class="post-content">
 						<h1 class="post-title text-center">
-							<a href="blog-item.html">INFOMATION 작성</a>
+							<a href="blog-item.html">작성</a>
 						</h1>
 						<hr>
 						<div class="entry-content">
@@ -32,11 +32,10 @@
 									<div class="infoFormSubFrame">이미지</div>
 									<p class="infoForm1">
 										<input type="file" name="infoupFile" id="infoupFile"/>
-
+										
 									</p>
-									<div id="imageInfo">
-								</div>
-
+										<div id="imageInfo">
+										</div>
 								<div>
 									<div class="infoFormSubFrame">제목</div>
 									<p class="infoForm1">
@@ -125,6 +124,7 @@
 				<!--/ Content col end -->
 
 			</div>
+			</div>
 		</form>
 	</div>
 	<!--/ row end -->
@@ -140,7 +140,6 @@
 		var infoupTime=$('#infoupTime');
 		var addr=$('#st-addr');
 		var buttonAddr=$('#button-addon1');
-		var subThema=('#subThema');
 		
 		if(infoupFile.val()==""){
            alert('이미지를 등록해주세요.');
@@ -152,12 +151,6 @@
 			alert('제목을 입력해주세요.');
 			
 			infoupTitle.focus();
-			return false;
-		}
-		
-		if(subThema.val()==""){
-			alert('테마를 선택해주세요.');
-			subThema.focus();
 			return false;
 		}
 		
@@ -270,7 +263,9 @@
     $('[name=infoupFile]').change(function () {
         var reader = new FileReader();
         reader.onload = function (e) {
-            var img = $('<img>').attr('src', e.target.result).css({'width':"100px", 'height':"100px"});
+        	var img2 = $('<div class="infoFormSubFrame">이미지 미리보기</div>');
+            var img = $('<img>').attr('src', e.target.result).css({'width':"570", 'height':"570"}).addClass("infoForm1");
+            $('#imageInfo').append(img2);
             $('#imageInfo').append(img);
         }
         

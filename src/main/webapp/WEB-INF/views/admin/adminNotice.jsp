@@ -27,6 +27,7 @@
 	    border: 1px solid #888;
 	    width: 30%; /* Could be more or less, depending on screen size */                          
 	}
+	
 </style>
 
 <!-- ---------------------------------------------------------------------------- -->
@@ -124,7 +125,7 @@
 		          <!-- <p class="modalP"style="text-align: center; line-height: 1.5;"><br />내용 </p> -->
 		          <p class="modalNum" hidden></p>
 		         
-		      <div style="cursor:pointer;background-color:#DDDDDD;text-align: center;padding-bottom: 10px;padding-top: 10px;" onClick="noti_mod();">
+		      <div style="cursor:pointer;background-color:#58d073;text-align: center;padding-bottom: 10px;padding-top: 10px;" onClick="noti_mod();">
 		          <span class="pop_bt" style="font-size: 13pt;" >
 		               수정하기
 		          </span>

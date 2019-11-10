@@ -22,22 +22,28 @@ public class SearchDaoImpl implements SerchDao {
 
 
 	@Override
-	public List<InfoUpload> subThemaList(SqlSessionTemplate session, Map<String, Object> param) {
-
-		return session.selectList("search.subThemaList", param);
+	public List<InfoUpload> subThemaList(SqlSessionTemplate session, Map<String, Object> param,int cPage, int numPerPage) {
+		RowBounds rows = new RowBounds((cPage-1)*numPerPage,numPerPage);
+		return session.selectList("search.subThemaList", param,rows);
 	}
 
 	@Override
-	public List<InfoUpload> mainThemaList(SqlSessionTemplate session, int themaNumRef) {
-
-		return session.selectList("search.mainThemaList",themaNumRef);
+	public List<InfoUpload> mainThemaList(SqlSessionTemplate session, int themaNumRef,int cPage, int numPerPage) {
+		RowBounds rows = new RowBounds((cPage-1)*numPerPage,numPerPage);
+		return session.selectList("search.mainThemaList",themaNumRef,rows);
 	}
 
 	@Override
-	public List<InfoUpload> localList(SqlSessionTemplate session, int localNum) {
-
-		return session.selectList("search.localList", localNum);
+	public List<InfoUpload> localList(SqlSessionTemplate session, int localNum, int cPage, int numPerPage) {
+		RowBounds rows = new RowBounds((cPage-1)*numPerPage,numPerPage);
+		return session.selectList("search.localList", localNum,rows);
 	}
+
+	@Override
+	public int localCount(SqlSessionTemplate session, int localNum) {
+		return session.selectOne("search.localCount",localNum);
+	}
+
 
 	@Override
 	public List<Thema> selectThemaList3(SqlSessionTemplate session) {
@@ -64,6 +70,20 @@ public class SearchDaoImpl implements SerchDao {
 	public Map<String, String> noticeIndexLoad(SqlSessionTemplate session) {
 		return session.selectOne("search.noticeIndexLoad");
 	}
+
+
+	@Override
+	public int mainThemaCount(SqlSessionTemplate session, int themaNumRef) {
+		
+		return session.selectOne("search.mainThemaCount",themaNumRef);
+	}
+
+
+	@Override
+	public int subThemaCount(SqlSessionTemplate session, Map<String, Object> param) {
+		return session.selectOne("search.subThemaCount",param);
+	}
+
 
 
 

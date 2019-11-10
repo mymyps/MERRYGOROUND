@@ -11,14 +11,18 @@ public interface SearchService {
 List<Map<String,Object>> allList();
 	
 	//서브테마로 조회
-	List<InfoUpload> subThemaList(Map<String, Object> param);
-
+	List<InfoUpload> subThemaList(Map<String, Object> param,int cPage, int numPerPage);
+	int subThemaCount(Map<String, Object> param);
  
 	//메인테마로 조회
-	List<InfoUpload> mainThemaList(int themaNumRef);
+	List<InfoUpload> mainThemaList(int themaNumRef,int cPage, int numPerPage);
+	int mainThemaCount(int themaNumRef);
 	
 	//지역별 검색
-	List<InfoUpload> localList(int localNum);
+	List<InfoUpload> localList(int localNum, int cPage, int numPerPage);
+	int localCount(int localNum);
+	
+	
 	
 	List<Map<String,Object>> mapSearch(Map<String, Object> param);
 

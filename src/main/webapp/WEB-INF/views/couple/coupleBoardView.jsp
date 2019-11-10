@@ -90,23 +90,22 @@
 						
 <!-- 				--------------------------------------------------------- -->
 
-<!-- 			<div class="container"> -->
-<!-- 				<form id="commentListForm" name="commentListForm" method="post"> -->
-<!-- 					<div> -->
-<!-- 						<span><strong>댓글</strong></span> -->
-<!-- 						<span id="cCnt"></span> -->
-<!-- 						<span><strong>개</strong></span> -->
-<!-- 					</div><hr><br><br> -->
-<!-- 					<div id="commentList"></div> -->
-<!-- 				</form> -->
-<!-- 			</div> -->
+			<div class="container">
+				<form id="commentListForm" name="commentListForm" method="post">
+					<div>
+						<span><strong>댓글</strong></span>
+						<span id="cCnt"></span>
+						<span><strong>개</strong></span>
+					</div><hr><br>
+					<div id="commentList"></div>
+				</form>
+			</div>
 			
-			<div class="my-3 p-3 bg-white rounded shadow-sm" style="padding-top: 10px">
+<!-- 			<div class="my-3 p-3 bg-white rounded shadow-sm" style="padding-top: 10px"> -->
+<!-- 				<h6 class="border-bottom pb-2 mb-0">댓글</h6> -->
+<!-- 				<div id="commentList"></div> -->
 
-				<h6 class="border-bottom pb-2 mb-0">댓글리스트</h6>
-				<div id="commentList"></div>
-
-			</div> 
+<!-- 			</div>  -->
 			
 			
 			<div class="container">
@@ -241,7 +240,7 @@
 			                
 			                for(i=0; i<data.length; i++){
 								var date = new Date(data[i].coupleDate);
-								var date = date.getFullYear() +"-"+date.getMonth() +"-"+date.getDate()+" &nbsp "+date.getHours()+":"+date.getMinutes();
+								var date = date.getFullYear() +"-"+date.getMonth() +"-"+date.getDate()+" &nbsp"+date.getHours()+":"+date.getMinutes();
 // 			           			 console.log(date);
 			                	
 // 			                    html += "<div>";
@@ -260,16 +259,14 @@
 			                     htmls += '<span class="d-block">';
 			                     htmls += '<strong class="text-gray-dark">' + data[i].writer + '</strong>';
 			                     htmls += '<span style="padding-left: 7px; font-size: 9pt">';
+			                  
+			                     htmls += '&nbsp &nbsp '+date+'&nbsp &nbsp';
+			                     if("${loginMember.id}" == data[i].writer){
+				                     htmls += '<a href="javascript:void(0)" onclick="fn_editReply(' + data[i].commentNo + ', \'' + data[i].writer + '\', \'' + data[i].comment + '\' )" style="padding-right:5px">수정</a>';
+				                     htmls += '<a href="javascript:void(0)" onclick="fn_deleteReply(' + data[i].commentNo + ')" >삭제</a>';
+			                     }
 			                     
-// 			                     htmls += '<c:if test="1 eq 1">';
-// 			                     htmls += '<h1>아아아아</h1>';
-// 			                     htmls += '</c:if>';
 			                     
-			                     htmls += '<c:if test="${loginMember.id eq "'+data[i].writer+'}">';
-			                     htmls += '<a href="javascript:void(0)" onclick="fn_editReply(' + data[i].commentNo + ', \'' + data[i].writer + '\', \'' + data[i].comment + '\' )" style="padding-right:5px">수정</a>';
-			                     htmls += '<a href="javascript:void(0)" onclick="fn_deleteReply(' + data[i].commentNo + ')" >삭제</a>';
-			                     htmls += '</c:if>';
-			                     htmls += '&nbsp&nbsp&nbsp&nbsp'+date;
 			                     htmls += '</span>';
 			                     htmls += '</span>';
 			                     htmls += '</p>';
@@ -300,25 +297,27 @@
 			}
 			 
 			function fn_deleteReply(commentNo){
-				console.log("초기 commentNo: "+commentNo);
-			    var paramData = {"commentNo":commentNo};
-			    $.ajax({
-			        type:'POST',
-			        url : "<c:url value='/couple/deleteComment'/>",
-					data:paramData,
-					dataType: 'text',
-			        success : function(data){
-			            if(data=="success")
-			            {
-			                getCommentList();
-// 			                $("#comment").val("");
-			            }
-			        },
-			        error:function(request,status,error){
-			            //alert("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
-			       }
-			        
-			    });
+				if(confirm("댓글을 삭제하시겠습니가?")){
+					console.log("초기 commentNo: "+commentNo);
+				    var paramData = {"commentNo":commentNo};
+				    $.ajax({
+				        type:'POST',
+				        url : "<c:url value='/couple/deleteComment'/>",
+						data:paramData,
+						dataType: 'text',
+				        success : function(data){
+				            if(data=="success")
+				            {
+				                getCommentList();
+	// 			                $("#comment").val("");
+				            }
+				        },
+				        error:function(request,status,error){
+				            //alert("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
+				       }
+				        
+				    });
+			    }
 			}
 		
 			function fn_editReply(commentNo, writer, content){
@@ -378,7 +377,7 @@
 // 			    });
 // 			}
 			
-			//수정후 저장버튼을 눌렀을때!  사용안할듯
+			//수정후 저장버튼을 눌렀을때!  사용안할듯XXX
 			$(document).on('click', '#btnReplySave', function(){
 					var replyContent = $('#content').val();
 					var replyReg_id = $('#reg_id').val();

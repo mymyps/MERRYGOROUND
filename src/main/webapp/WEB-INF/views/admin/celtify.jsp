@@ -4,6 +4,7 @@
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 <c:set var="path" value="${pageContext.request.contextPath}" />
 <jsp:include page="/WEB-INF/views/admin/common/adminHeader.jsp" />
+<script src="https://code.jquery.com/jquery-3.3.1.min.js" type="text/javascript"></script>
 <script src="https://cdn.jsdelivr.net/npm/jquery@2.2.4/dist/jquery.min.js"></script>
 <!-- modal style -->
 <style>
@@ -32,10 +33,7 @@
 
 /* The Close Button */
 .close {
-  color: #aaaaaa;
   float: right;
-  font-size: 28px;
-  font-weight: bold;
 }
 
 .close:hover,
@@ -112,8 +110,8 @@
 	                                                <td><c:out value="${b['PHONE'] }"/></td>
 	                                                <td><c:out value="${b['EMAIL'] }"/></td>
 	                                                <td>
-                                                        <span class="badge badge-complete celti" id="fy${i.count }" >확 인</span>
-                                                        <span class="badge badge-complete celti2" style="display:none">완 료</span>
+                                                        <span class="badge badge-complete celti cel${b['MEMBERNUM'] }" id="fy${i.count }" >확 인</span>
+                                                        <span class="badge badge-complete cel2${b['MEMBERNUM'] }" style="display:none">완 료</span>
                                                     </td>
 	                                            </tr>
 	                                            </c:forEach>
@@ -175,6 +173,7 @@
 	</div>
 
 </div>
+
     <!-- /#right-panel -->
     <script type="text/javascript">
     	
@@ -184,17 +183,19 @@
 		    var cTest = confirm("승인 할까요?");
 			if(cTest == true){
 				//ajax
-				console.log(memberNum);
-
+				//console.log(memberNum);
+				
 				$.ajax({
 					url: '${path }/admin/cletify.end',
 					data: {'memberNum': memberNum},
 					success: function (data) {
-						//console.log(typeof(data));
+						
 						if(data=="true"){
 							console.log("승인했습니다.");
-							$(".celti").hide();
-							$(".celti2").css('background-color', 'black').show();
+							var celbtn = '.cel'+memberNum;
+							$(celbtn).hide();
+							var celbtn2 = '.cel2' + memberNum;
+							$(celbtn2).css('background-color', 'black').show();
 							celClose();
 						}else{
 							alert("승인이 불가합니다");
@@ -287,14 +288,6 @@
 	    
 	    /* modal view */
 	    var modal = document.getElementById("myModal");
-	    //var btn = document.getElementById("myBtn");
-	    var span = document.getElementsByClassName("close")[0];
-	    //btn.onclick = function () {
-		//	modal.style.display = "block";
-		//}
-	    span.onclick = function () {
-			modal.style.display = "none";
-		}
 	    window.onclick = function (e) {
 			if(e.target == modal){
 				modal.style.display = "none";
@@ -302,6 +295,8 @@
 		}
 	    
 	    function celClose() {
+	    	//console.log("closeee");
+	    	$(".carousel-item").remove();
 			modal.style.display = "none";
 		}
 	    
@@ -309,3 +304,4 @@
 	
 
     <jsp:include page="/WEB-INF/views/admin/common/tableJs.jsp" />
+    

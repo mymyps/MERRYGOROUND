@@ -63,7 +63,7 @@
 	<!-- 서포터즈 신청자 --> 
 	<select id="topSupStatus" resultType="_int">
 		select count(*) "supStatus" from members
-		where SUPSTATUS = '1'
+		where SUPSTATUS = '1' and STATUS = 1
 	</select>
 	
 	<!-- 게시글 추천 5 -->
@@ -156,6 +156,7 @@
 				select count(supnum) "UPLOAD", proimg, suplevel, sum(suppay) "SUM", id, phone, enrolldate from supporters
 					join members using(membernum)
 					join supporters_upload using(supnum)
+				where status = 1
 				group by supnum, proimg, suplevel, suppay, id, phone, enrolldate
 			order by 5 desc
 		) a)
@@ -165,7 +166,7 @@
 		select * from(
 			select rownum as rnum, a.* from(
 				select * from members
-				where memberlevel != 0
+				where memberlevel != 0 and status = 1
 			order by enrolldate desc
 		) a)
 	</select>
@@ -187,7 +188,7 @@
 	
 	<select id="celtify" resultType="map">
 		select * from members
-			where supstatus = 1 and memberlevel = 1 
+			where supstatus = 1 and memberlevel = 1 and status = 1
 		order by enrolldate desc
 	</select>
 	
@@ -210,7 +211,7 @@
 				from members
 				join supporters_lv_upload using(membernum)
 				join supporters_lv_upload_img using(suplvnum)
-			where membernum = 3 and supstatus = 1
+			where membernum = #{memberNum} and supstatus = 1
         	order by suplvenrolldate desc
         	) a)
 		where rnum = 1

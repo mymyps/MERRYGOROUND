@@ -78,8 +78,12 @@
       SELECT * FROM MEMBERS WHERE id=#{id}
    </select>
 	
-	
 	<select id="selectMemberbyMnum" resultType="com.mgr.merry.sign.model.vo.Members" parameterType="_int">
   		select * from members where email=(select cpid from members where membernum=#{memNo})
   	</select>
+
+   <update id="deleteMember" parameterType="com.mgr.merry.sign.model.vo.Members">
+   		update members set status=0 where memberNum=#{memberNum}
+   </update>
+
 </mapper>

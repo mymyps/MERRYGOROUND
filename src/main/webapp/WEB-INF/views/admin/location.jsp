@@ -46,14 +46,14 @@
 		                                    <strong class="card-title">지 역</strong>
 		                                </div>
 		                            </div>
-		                            <div class="float-right">
+		                            <!-- <div class="float-right">
 	                                	<div class="input-group">
 										  	<input class="form-control form-control-sm" type="text" placeholder="추가할 지역명">
 										  	<div class="input-group-append">
 											    	<button class="btn btn-success btn-sm" onclick="localAdd(); return false;">추가</button>
 										  	</div>
 										</div>
-		                            </div>
+		                            </div> -->
 		        	            </div>
                                 <div class="card-body">
                                     <table id="bootstrap-data-table" class="table table-striped table-bordered">

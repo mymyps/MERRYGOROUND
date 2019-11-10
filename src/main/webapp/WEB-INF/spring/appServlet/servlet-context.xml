@@ -29,7 +29,7 @@
 
 	<!-- 인터셉터등록하기 -->
 	<!-- <interceptors> <interceptor> <mapping path="/demo/*" /> <mapping path="/board/*" 
-		/> <exclude-mapping path="" /> <beans:bean id="loggerInterceptor" class="com.kh.spring.common.interceptor.LoggerInterceptor"></beans:bean> 
+		/> <exclude-mapping path="" /> <beans:bean id="loggerInterceptor" class="com.mgr.merry.common.interceptor.LoggerInterceptor"></beans:bean> 
 		</interceptor> </interceptors> -->
 
 

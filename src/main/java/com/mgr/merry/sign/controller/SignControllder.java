@@ -227,9 +227,23 @@ public class SignControllder {
 		Members result = service.selectMemberOne(m);
 		String msg = "";
 		String loc = "/";
+		
 		if (result==null) {
 			msg = "아이디없음";
+			model.addAttribute("msg", msg);
+			model.addAttribute("loc", loc);
+
+			return "sign/msg";
 		} 
+		
+		if(result.getStatus()==0) {
+			msg="탈퇴한 회원 입니다";
+			model.addAttribute("msg", msg);
+			model.addAttribute("loc", loc);
+
+			return "sign/msg";
+		}
+		
 		else if (pwEncoder.matches(m.getPw(), result.getPw())) {
 			msg = "로그인 성공";
 			model.addAttribute("loginMember", result);
@@ -238,6 +252,7 @@ public class SignControllder {
 		} else {
 			msg = "비밀번호가 틀립니다.";
 		}
+		
 		model.addAttribute("msg", msg);
 		model.addAttribute("loc", loc);
 

@@ -83,7 +83,7 @@ public class InfoController {
 		InfoUploadImg infoImg = service.selectInfoImg(infoupNum);
 		List<InfoReview> review = rservice.selectReview(infoupNum);
 		Map<String, String> sup = service.selectSup(param);
-		Map<String, String> supUp = supservice.selectSupUpload(infoupNum);
+		Map<String, String> supUp = supservice.selectSupUpload2(infoupNum);
 		
 		mv.addObject("info", info);
 		mv.addObject("infoImg", infoImg);
@@ -132,10 +132,10 @@ public class InfoController {
 		String loc = "";
 		if (result > 0) {
 			msg = "INFO가 등록되었습니다.";
-			loc ="/info/infoView.do?infoupNum="+infoupNum+"&id="+id;
+			loc ="";
 		} else {
 			msg = "INFO 등록 실패";
-//			loc ="/info/infoForm.do"
+			loc ="";
 		}
 		ModelAndView mv = new ModelAndView();
 		mv.addObject("msg", msg);
@@ -146,11 +146,18 @@ public class InfoController {
 
 	// info_upload테이블 infoupStatus 0으로 바꾸기
 	@RequestMapping("/info/infoStatus0")
-	public String infoStatus0(int infoupNum) {
+	public ModelAndView infoStatus0(int infoupNum) {
 		int result = 0;
 		result = service.infoStatus0(infoupNum);
 		
-		return "/"; // 나중에 경로 바꿀것
+		ModelAndView mv = new ModelAndView();
+		String msg ="인포메이션이 삭제됐습니다.";
+		String loc ="";
+		mv.addObject("msg", msg);
+		mv.addObject("loc", loc);
+		mv.setViewName("common/msg");
+		
+		return mv; // 나중에 경로 바꿀것
 	}
 	
 	@RequestMapping("/info/infoUpdate")
@@ -182,7 +189,7 @@ public class InfoController {
 	@RequestMapping("/info/infoUpdateEnd")
 	public ModelAndView updateInfo(@RequestParam Map<String, String> param,
 			@RequestParam(value = "infoupFile", required = false) MultipartFile[] infoupFile,
-			HttpServletRequest request, int infoupNum) {
+			HttpServletRequest request, int infoupNum, String id) {
 
 		String saveDir = request.getSession().getServletContext().getRealPath("/resources/upload/info");
 		InfoUploadImg infoimg = new InfoUploadImg();
@@ -211,14 +218,17 @@ public class InfoController {
 			e.printStackTrace();
 		}
 		String msg = "";
-
+		String loc = "";
 		if (result > 0) {
 			msg = "INFO 수정 완료";
+			loc ="/info/infoView.do?infoupNum="+infoupNum+"&id="+id;
 		} else {
 			msg = "INFO 수정 실패";
+			loc ="/info/infoUpdate?infoupNum="+infoupNum+"&id="+id;
 		}
 		ModelAndView mv = new ModelAndView();
 		mv.addObject("msg", msg);
+		mv.addObject("loc", loc);
 		mv.setViewName("common/msg");
 		return mv;
 	

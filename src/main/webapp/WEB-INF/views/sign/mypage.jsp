@@ -4,7 +4,7 @@
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 <c:set var="path" value="${pageContext.request.contextPath}"/>
 <jsp:include page="/WEB-INF/views/common/header.jsp">
-	<jsp:param name="pageTitle" value="마이페이지"/>
+   <jsp:param name="pageTitle" value=""/>
 </jsp:include>
 <style>
 .inbtn-10{
@@ -58,6 +58,7 @@
                           </div>
                        </a>
                     </li>
+                    <c:if test="${loginMember.memberLevel != 0 }">
                     <li>
                        <a class="animated fadeIn" href="#tab_b" data-toggle="tab">
                           <!-- <span class="tab-icon"><i class="fa fa-briefcase"></i></span> -->
@@ -67,7 +68,7 @@
                           </div>
                        </a>
                   </li>
-                  
+                 
                    <li>
                        <a class="animated fadeIn" href="#tab_g" data-toggle="tab">
                           <!-- <span class="tab-icon"><i class="fa fa-briefcase"></i></span> -->
@@ -77,6 +78,7 @@
                           </div>
                        </a>
                   </li>
+                  </c:if>
                   <li>
                        <a class="animated fadeIn" href="#tab_d" data-toggle="tab">
                           <span class="tab-icon"><i class="fa fa-lock"></i></span>
@@ -85,6 +87,8 @@
                           </div>
                        </a>
                   </li>
+                  <c:if test="${loginMember.memberLevel != 0 }">
+                  
                   <li>
                        <a class="animated fadeIn" href="#tab_r" data-toggle="tab">
                           <span class="tab-icon"><i class="fa fa-trophy"></i></span>
@@ -93,14 +97,16 @@
                           </div>
                        </a>
                   </li>
-                  <!--<li>
-                       <a class="animated fadeIn" href="#tab_e" data-toggle="tab">
-                          <span class="tab-icon"><i class="fa fa-support"></i></span>
+                  
+                  <li>
+                       <a class="animated fadeIn" href="#tab_z" data-toggle="tab">
+                          <span class="tab-icon"><i class="fa fa-trophy"></i></span>
                           <div class="tab-info">
-                             <h3>Dedicated Support</h3>
+                             <h3>회원 탈퇴</h3>
                           </div>
                        </a>
-                  </li> -->
+                  </li>
+                  </c:if>
                </ul>
                <div class="tab-content col-md-9 col-sm-7">
                <c:if test="${empty list}">
@@ -296,6 +302,7 @@
                   </div>                      
                     </div>
                     </c:if>
+                    <c:if test="${loginMember.supstatus == 0 }">
                     <div class="tab-pane animated fadeInLeft" id="tab_r">
                      <div>
                      <div style="overflow:scroll; width:700px; height:400px; padding:10px; ">
@@ -445,11 +452,41 @@
             </div>
          </div>
       </form>
-                     
                      </div>                      
                     </div>
                </div>     
-                    
+               </c:if>
+               <c:if test="${loginMember.supstatus == 1 }">
+               <div class="tab-pane animated fadeInLeft" id="tab_r">
+               		<h3>이미 서포터즈 신청했습니다.</h3> 
+               		</div>
+               </c:if>
+               
+                <div class="tab-pane animated fadeIn" id="tab_z">
+                        <h3>회원 탈퇴</h3>
+                  <form class="login100-form validate-form" action="${path}/member/deleteMember.do" onsubmit="return checkPw();">
+                  <input type="hidden" value="${loginMember.id }" name="id" />
+                  <input class="input100" type="hidden" name="memberNum" value=${members.memberNum }>
+                  <div class="wrap-input100 validate-input" reauired>
+                     <span class="label-input100">변경할비밀번호</span> <input
+                        class="input100" type="password" id="pw" name="pw" reauired>
+                     <span class="focus-input100" data-symbol="&#xf190;"></span>
+                  </div>
+                  <div class="wrap-input100 validate-input" reauired>
+                     <span class="label-input100">변경할 비밀번호확인</span> <input
+                        class="input100" type="password" id="pw" name="pw2" reauired>
+                     <span class="focus-input100" data-symbol="&#xf190;"></span>
+                  </div>
+                  <!-- <div class="wrap-input100 validate-input" reauired>
+                     <span class="label-input100">Password</span> <input
+                        class="input100" type="password" id="pw" name="pw" reauired>
+                     <span class="focus-input100" data-symbol="&#xf190;"></span>
+                  </div> -->
+                  <div style="margin-left:50px;">
+                  <input type="submit" class="btn btn-primary solid cd-btn" value="탈퇴" >
+                  </div>
+                  </form>
+               </div>    
                 <div class="tab-pane animated fadeIn" id="tab_d">
                         <h3>비밀번호 변경</h3>
                   <form class="login100-form validate-form" action="${path}/member/updatePw.do" onsubmit="return checkPw();">

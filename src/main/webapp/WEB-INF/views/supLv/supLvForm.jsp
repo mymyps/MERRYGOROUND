@@ -5,7 +5,7 @@
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 <c:set var="path" value="${pageContext.request.contextPath}" />
 <jsp:include page="/WEB-INF/views/common/header.jsp">
-	<jsp:param name="pageTitle" value="서포터즈" />
+	<jsp:param name="pageTitle" value="SUPPORTERS" />
 </jsp:include>
 <section id="content">
 	<div class="container">
@@ -111,6 +111,8 @@
 									<input type="file" name="supLvImg1" id="supLvImg1" />
 
 								</p>
+								<div id="img1">
+								</div>
 							</div>
 							<div>
 								<div class="infoFormSubFrame">이미지2</div>
@@ -118,6 +120,8 @@
 									<input type="file" name="supLvImg2"  id="supLvImg2"/>
 
 								</p>
+								<div id="img2">
+								</div>
 							</div>
 							<div>
 								<div class="infoFormSubFrame">이미지3</div>
@@ -125,6 +129,8 @@
 									<input type="file" name="supLvImg3"  id="supLvImg3"/>
 
 								</p>
+								<div id="img3">
+								</div>
 							</div>
 							<div>
 								<div class="infoFormSubFrame">이미지4</div>
@@ -132,6 +138,8 @@
 									<input type="file" name="supLvImg4"  id="supLvImg4"/>
 
 								</p>
+								<div id="img4">
+								</div>
 							</div>
 							<div>
 								<div class="infoFormSubFrame">이미지5</div>
@@ -139,6 +147,8 @@
 									<input type="file" name="supLvImg5"  id="supLvImg5"/>
 
 								</p>
+								<div id="img5">
+								</div>
 							</div>
 							<div>
 								<div class="infoFormSubFrame">내용</div>
@@ -305,6 +315,67 @@
            return;
         }
      });
+	
+	//div 이미지 출력하기
+    $('[name=supLvImg1]').change(function () {
+        var reader = new FileReader();
+        reader.onload = function (e) {
+        	var img2 = $('<div class="infoFormSubFrame">이미지1 미리보기</div>&nbsp;');
+            var img = $('<img>').attr('src', e.target.result).css({'width':"570", 'height':"570"}).addClass("infoForm1");
+            $('#img1').append(img2);
+            $('#img1').append(img);
+        }
+        
+     	reader.readAsDataURL($(this)[0].files[0]); // 파일경로를 바꿈/=result
+    });
+	
+    $('[name=supLvImg2]').change(function () {
+        var reader = new FileReader();
+        reader.onload = function (e) {
+        	var img2 = $('<div class="infoFormSubFrame">이미지2 미리보기</div>&nbsp;');
+            var img = $('<img>').attr('src', e.target.result).css({'width':"570", 'height':"570"}).addClass("infoForm1");
+            $('#img2').append(img2);
+            $('#img2').append(img);
+        }
+        
+     	reader.readAsDataURL($(this)[0].files[0]); // 파일경로를 바꿈/=result
+    });
+    
+    $('[name=supLvImg3]').change(function () {
+        var reader = new FileReader();
+        reader.onload = function (e) {
+        	var img2 = $('<div class="infoFormSubFrame">이미지3 미리보기</div>&nbsp;');
+            var img = $('<img>').attr('src', e.target.result).css({'width':"570", 'height':"570"}).addClass("infoForm1");
+            $('#img3').append(img2);
+            $('#img3').append(img);
+        }
+        
+     	reader.readAsDataURL($(this)[0].files[0]); // 파일경로를 바꿈/=result
+    });
+    
+    $('[name=supLvImg4]').change(function () {
+        var reader = new FileReader();
+        reader.onload = function (e) {
+        	var img2 = $('<div class="infoFormSubFrame">이미지4 미리보기</div>&nbsp;');
+            var img = $('<img>').attr('src', e.target.result).css({'width':"570", 'height':"570"}).addClass("infoForm1");
+            $('#img4').append(img2);
+            $('#img4').append(img);
+        }
+        
+     	reader.readAsDataURL($(this)[0].files[0]); // 파일경로를 바꿈/=result
+    });
+    
+    $('[name=supLvImg5]').change(function () {
+        var reader = new FileReader();
+        reader.onload = function (e) {
+        	var img2 = $('<div class="infoFormSubFrame">이미지5 미리보기</div>&nbsp;');
+            var img = $('<img>').attr('src', e.target.result).css({'width':"570", 'height':"570"}).addClass("infoForm1");
+            $('#img5').append(img2);
+            $('#img5').append(img);
+        }
+        
+     	reader.readAsDataURL($(this)[0].files[0]); // 파일경로를 바꿈/=result
+    });
 	
 	</script>
 

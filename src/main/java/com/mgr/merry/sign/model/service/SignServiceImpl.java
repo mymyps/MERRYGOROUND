@@ -118,6 +118,10 @@ public class SignServiceImpl implements SignService {
 	public Members selectMemberbyMnum(int memNo) {
 		return dao.selectMemberbyMnum(session,memNo);
 	}
+	@Override
+	public int deleteMember(Members m) {
+		return dao.deleteMember(session,m);
+	}
 	
 
 	

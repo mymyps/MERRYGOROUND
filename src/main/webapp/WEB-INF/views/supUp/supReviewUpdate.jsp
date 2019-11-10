@@ -4,7 +4,7 @@
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 <c:set var = "path" value="${pageContext.request.contextPath}"/>
 <jsp:include page ="/WEB-INF/views/common/header.jsp">
-<jsp:param name ="pageTitle" value="서포터즈"/>	
+<jsp:param name ="pageTitle" value="SUPPORTERS REVIEW"/>	
 </jsp:include>
 
     <link href="https://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.12/summernote-bs4.css" rel="stylesheet">
@@ -28,7 +28,7 @@
 					<!-- Blog post start -->
 					<div class="post-content">
 						<h1 class="post-title text-center">
-							<a href="blog-item.html">리뷰 수정</a>
+							<a href="blog-item.html">수정</a>
 						</h1>
 						<hr>
 						<div class="entry-content">

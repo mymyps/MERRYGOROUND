@@ -7,13 +7,6 @@
 <jsp:include page="/WEB-INF/views/common/header.jsp">
 	<jsp:param name="pageTitle" value="지역별 데이트코스" />
 </jsp:include>
-<style>
-#locGrayLi ul li a{
-border: 1px lightgray !important;
-}
-
-</style>
-
 
  <!-- Portfolio start -->
  <section id="portfolio" class="portfolio portfolio-box">
@@ -90,16 +83,15 @@ border: 1px lightgray !important;
 			    <div class="col-sm-3 portfolio-static-item food isotope-item" style="margin-bottom:20px;">
 					<div class="grid">
 						<figure class="effect-oscar">
-<%-- 							<img src="${path}/resources/upload/info/${list.fileReName}" style="width:295px; height: 243px;"> --%>
-							<img src="${path}/resources/images/banpo.JPG" style="width:295px; height: 243px;">
+						<img src="${path}/resources/upload/info/${list.fileReName}" style="width:295px; height: 243px;" alt="이런! 이미지 준비중이네요. T^T">
 							<figcaption>
-							<a href="${pageContext.request.contextPath}/info/infoView.do?infoupNum=${list.infoupNum }" class="btn btn-primary white cd-btn">보러가기</a>
+							<a href="${pageContext.request.contextPath}/info/infoView.do?infoupNum=${list.infoupNum }&id=${loginMember.id}" class="btn btn-primary white cd-btn">보러가기</a>
 							</figcaption>			
 						</figure>
 						<div class="portfolio-static-desc">
 							<div class="row text-center">
 							<h3>${list.infoupTitle}</h3>
-							<span><a href="#">${list.localCity}</a></span>
+							<span>${list.localCity}</span>
 							</div>
 						</div>					
 					</div><!--/ grid end -->
@@ -107,21 +99,19 @@ border: 1px lightgray !important;
 				</c:if>
 
                 <!-- 놀거리 -->
-				
 			     <c:if test="${7 eq list.themaNumRef}">
 				<div class="col-sm-3 portfolio-static-item play isotope-item" style="margin-bottom:20px;">
 					<div class="grid">
 						<figure class="effect-oscar">
-<%-- 							<img src="${path}/resources/upload/info/${list.fileReName}" style="width:295px; height: 243px;"> --%>
-							<img src="${path}/resources/images/map1.jpg" style="width:295px; height: 243px;">
+							<img src="${path}/resources/upload/info/${list.fileReName}" style="width:295px; height: 243px;" alt="이런! 이미지 준비중이네요. T^T">
 							<figcaption>
-							<a href="${pageContext.request.contextPath}/info/infoView.do?infoupNum=${list.infoupNum}" class="btn btn-primary white cd-btn">보러가기</a>
+							<a href="${pageContext.request.contextPath}/info/infoView.do?infoupNum=${list.infoupNum }&id=${loginMember.id}" class="btn btn-primary white cd-btn">보러가기</a>
 							</figcaption>			
 						</figure>
 						<div class="portfolio-static-desc">
 							<div class="row text-center">
 							<h3>${list.infoupTitle}</h3>
-							<span><a href="#">${list.localCity}</a></span>
+							<span>${list.localCity}</span>
 							</div>
 						</div>					
 					</div><!--/ grid end -->
@@ -133,16 +123,15 @@ border: 1px lightgray !important;
 				<div class="col-sm-3 portfolio-static-item cafe isotope-item">
 					<div class="grid">
 						<figure class="effect-oscar">
-<%-- 							<img src="${path}/resources/upload/info/${list.fileReName}" style="width:295px; height: 243px;"> --%>
-								<img src="${path}/resources/images/merry2.jpg" style="width:295px; height: 243px;">
+						<img src="${path}/resources/upload/info/${list.fileReName}" style="width:295px; height: 243px;" alt="이런! 이미지 준비중이네요. T^T">
 								<figcaption>
-								<a href="${pageContext.request.contextPath}/info/infoView.do?infoupNum=${list.infoupNum }" class="btn btn-primary white cd-btn">보러가기</a>
+								<a href="${pageContext.request.contextPath}/info/infoView.do?infoupNum=${list.infoupNum }&id=${loginMember.id}" class="btn btn-primary white cd-btn">보러가기</a>
 							</figcaption>			
 						</figure>
 						<div class="portfolio-static-desc">
 							<div class="row text-center">
 							<h3>${list.infoupTitle}</h3>
-							<span><a href="#">${list.localCity}</a></span>
+							<span>${list.localCity}</span>
 							</div>
 						</div>					
 					</div><!--/ grid end -->
@@ -150,10 +139,12 @@ border: 1px lightgray !important;
 				</c:if>
 				</c:forEach>
 		
-	
 			</div><!-- Content row end -->
 		</div><!-- Container end -->
 		</div>
+		       <div style="margin-left:890px;">
+				${pageBar }
+				</div>
 	</section><!-- Portfolio end -->
 
 	<div class="gap-40"></div>
