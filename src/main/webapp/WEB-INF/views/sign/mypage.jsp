@@ -58,6 +58,7 @@
                           </div>
                        </a>
                     </li>
+                    <c:if test="${loginMember.memberLevel != 0 }">
                     <li>
                        <a class="animated fadeIn" href="#tab_b" data-toggle="tab">
                           <!-- <span class="tab-icon"><i class="fa fa-briefcase"></i></span> -->
@@ -67,7 +68,7 @@
                           </div>
                        </a>
                   </li>
-                  
+                 
                    <li>
                        <a class="animated fadeIn" href="#tab_g" data-toggle="tab">
                           <!-- <span class="tab-icon"><i class="fa fa-briefcase"></i></span> -->
@@ -77,6 +78,7 @@
                           </div>
                        </a>
                   </li>
+                  </c:if>
                   <li>
                        <a class="animated fadeIn" href="#tab_d" data-toggle="tab">
                           <span class="tab-icon"><i class="fa fa-lock"></i></span>
@@ -85,6 +87,7 @@
                           </div>
                        </a>
                   </li>
+                  <c:if test="${loginMember.memberLevel != 0 }">
                   <li>
                        <a class="animated fadeIn" href="#tab_r" data-toggle="tab">
                           <span class="tab-icon"><i class="fa fa-trophy"></i></span>
@@ -102,6 +105,7 @@
                           </div>
                        </a>
                   </li>
+                  </c:if>
                   <!--<li>
                        <a class="animated fadeIn" href="#tab_e" data-toggle="tab">
                           <span class="tab-icon"><i class="fa fa-support"></i></span>
