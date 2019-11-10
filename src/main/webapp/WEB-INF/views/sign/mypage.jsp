@@ -88,6 +88,7 @@
                        </a>
                   </li>
                   <c:if test="${loginMember.memberLevel != 0 }">
+                  
                   <li>
                        <a class="animated fadeIn" href="#tab_r" data-toggle="tab">
                           <span class="tab-icon"><i class="fa fa-trophy"></i></span>
@@ -106,14 +107,6 @@
                        </a>
                   </li>
                   </c:if>
-                  <!--<li>
-                       <a class="animated fadeIn" href="#tab_e" data-toggle="tab">
-                          <span class="tab-icon"><i class="fa fa-support"></i></span>
-                          <div class="tab-info">
-                             <h3>Dedicated Support</h3>
-                          </div>
-                       </a>
-                  </li> -->
                </ul>
                <div class="tab-content col-md-9 col-sm-7">
                <c:if test="${empty list}">
@@ -309,6 +302,7 @@
                   </div>                      
                     </div>
                     </c:if>
+                    <c:if test="${loginMember.supstatus == 0 }">
                     <div class="tab-pane animated fadeInLeft" id="tab_r">
                      <div>
                      <div style="overflow:scroll; width:700px; height:400px; padding:10px; ">
@@ -458,10 +452,16 @@
             </div>
          </div>
       </form>
-                     
                      </div>                      
                     </div>
                </div>     
+               </c:if>
+               <c:if test="${loginMember.supstatus == 1 }">
+               <div class="tab-pane animated fadeInLeft" id="tab_r">
+               		<h3>이미 서포터즈 신청했습니다.</h3> 
+               		</div>
+               </c:if>
+               
                 <div class="tab-pane animated fadeIn" id="tab_z">
                         <h3>회원 탈퇴</h3>
                   <form class="login100-form validate-form" action="${path}/member/deleteMember.do" onsubmit="return checkPw();">
