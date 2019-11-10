@@ -163,8 +163,22 @@
                       </ul>
                      </div>
                      </c:if>
-                     <c:if test="${loginMember.memberLevel !=2}">
+                     <c:if test="${loginMember.memberLevel ==0 }">
+                     	<div class="dropdown-menu">
+	                      <ul>
+	                         <!-- <li><h2>관리자</h2></li> -->
+	                      </ul>
+	                   </div>
+                     </c:if>
+                     <c:if test="${loginMember.memberLevel ==1}">
 	                   <div class="dropdown-menu">
+	                      <ul>
+	                         <li><a href="${pageContext.request.contextPath }/supLv/supLvForm.do?id=${loginMember.id}">서포터즈 신청</a>
+	                      </ul>
+	                   </div>
+                    </c:if>
+                    <c:if test="${loginMember == null}">
+                    <div class="dropdown-menu">
 	                      <ul>
 	                         <li><a href="${pageContext.request.contextPath }/supLv/supLvForm.do?id=${loginMember.id}">서포터즈 신청</a>
 	                      </ul>
