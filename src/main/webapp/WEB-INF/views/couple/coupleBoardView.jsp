@@ -7,6 +7,7 @@
 <jsp:param name ="pageTitle" value=""/>
 </jsp:include>
 
+<!-- <script src="http://code.jquery.com/jquery-3.4.1.min.js"></script> -->
 <!-- <script src="http://code.jquery.com/jquery-3.3.1.slim.min.js" -->
 <!--    integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" -->
 <!--    crossorigin="anonymous"></script> -->
@@ -170,6 +171,7 @@
 			$(function(){
 			    var cNum=${cboard["COUPLENUM"]};
 			    console.log("콘솔cNUM!: "+cNum);
+				console.log("${loginMember.id}");
 			    
 			    getCommentList(cNum);
 // 			    showReplyList(cNum);
@@ -238,7 +240,10 @@
 			            if(data.length > 0){
 			                
 			                for(i=0; i<data.length; i++){
-			           		 console.log(data[i]);
+								var date = new Date(data[i].coupleDate);
+								var date = date.getFullYear() +"-"+date.getMonth() +"-"+date.getDate()+" &nbsp "+date.getHours()+":"+date.getMinutes();
+// 			           			 console.log(date);
+			                	
 // 			                    html += "<div>";
 // 			                    html += "<div><table class='table'><h6><strong>"+data[i].writer+"</strong></h6>";
 // 			                    html += "<tr><td>"+data[i].comment + "</td><td style='text-align: right;'>"+data[i].coupleDate+"</td></tr>";
@@ -255,9 +260,16 @@
 			                     htmls += '<span class="d-block">';
 			                     htmls += '<strong class="text-gray-dark">' + data[i].writer + '</strong>';
 			                     htmls += '<span style="padding-left: 7px; font-size: 9pt">';
+			                     
+// 			                     htmls += '<c:if test="1 eq 1">';
+// 			                     htmls += '<h1>아아아아</h1>';
+// 			                     htmls += '</c:if>';
+			                     
+			                     htmls += '<c:if test="${loginMember.id eq "'+data[i].writer+'}">';
 			                     htmls += '<a href="javascript:void(0)" onclick="fn_editReply(' + data[i].commentNo + ', \'' + data[i].writer + '\', \'' + data[i].comment + '\' )" style="padding-right:5px">수정</a>';
 			                     htmls += '<a href="javascript:void(0)" onclick="fn_deleteReply(' + data[i].commentNo + ')" >삭제</a>';
-			                     htmls += '&nbsp&nbsp&nbsp&nbsp'+data[i].coupleDate;
+			                     htmls += '</c:if>';
+			                     htmls += '&nbsp&nbsp&nbsp&nbsp'+date;
 			                     htmls += '</span>';
 			                     htmls += '</span>';
 			                     htmls += '</p>';
@@ -322,10 +334,10 @@
 					htmls += '<span class="d-block">';
 					htmls += '<strong class="text-gray-dark">' + writer + '</strong>';
 					htmls += '<span style="padding-left: 7px; font-size: 9pt">';
-					htmls += '<c:if test="${empty loginMember}">'
+// 					htmls += '<c:if test="${empty loginMember}">'
 					htmls += '<a href="javascript:void(0)" onclick="fn_updateReply(' + commentNo + ', \'' + writer + '\')" style="padding-right:5px">저장</a>';
 					htmls += '<a href="javascript:void(0)" onClick="getCommentList()">취소<a>';
-					htmls += '</c:if>'
+// 					htmls += '</c:if>'
 					htmls += '</span>';
 					htmls += '</span>';		
 					htmls += '<textarea name="editContent" id="editContent" class="form-control" rows="3">';
