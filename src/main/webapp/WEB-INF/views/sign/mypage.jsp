@@ -254,16 +254,16 @@
                         <div class="row">
                              <c:forEach items="${list }" var="up" varStatus="i">
                            <div class="col-md-4 col-sm-4 wow fadeInDown" data-wow-delay=".5s">
-                              <button onclick="detailView()">
+                              <a href='${path }/info/infoView.do?infoupNum=${up["INFOUPNUM"]}&id=${loginMember.id }'>
                               <div class="service-content">
                                  <span class="service-image">
                                     <img class="img-supupload_img_f" src='${path}/resources/images/member/${up["FILERENAME"] }' width="180px" height="200px"/>
                                  </span>
                                  
-                                 <h3>${up["SUPUPCONTENT"] }</h3>
+                                 <h3>${up["SUPUPTITLE"] }</h3>
                                  
                               </div>
-                              </button>
+                              </a>
                            </div>
                          </c:forEach>
                      </div>
