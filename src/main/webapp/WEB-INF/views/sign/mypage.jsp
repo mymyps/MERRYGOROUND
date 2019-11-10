@@ -200,7 +200,7 @@
                               <!-- <button class="login100-form-btn" type="submit">
                                  수정하기
                               </button> --><div style="margin-left:200px;">
-                              <input type="submit" style=" width:150px;" class="btn btn-primary solid cd-btn" value="가입" >
+                              <input type="submit" style=" width:150px;" class="btn btn-primary solid cd-btn" value="변 경" >
                               </div>
                            <!-- </div> 
                         </div>-->

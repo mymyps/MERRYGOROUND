@@ -1,64 +1,65 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="info">
-	
-	<insert id="insertInfo" parameterType="map">
-		<!-- #{localNum}, #{supNum}, #{themaNum} 추가해야함 -->
-		INSERT INTO INFO_UPLOAD VALUES(SEQ_INFO_UPLOAD_NUM.NEXTVAL, #{localNum}, #{supNum}, #{themaSubNum},#{infoupTitle}, default, #{infoupPayment}, #{infoupPhone}, #{infoupTime}, default, #{infoAddr})
-		<!-- <selectKey keyProperty="infoupNum" resultType="_int" order="AFTER">
-			SELECT SEQ_INFO_UPLOAD_NUM.CURRVAL FROM DUAL
-		</selectKey> -->
-	</insert>
-	
-	<insert id="insertInfoImg" parameterType="com.mgr.merry.info.model.vo.InfoUploadImg">
-		INSERT INTO INFO_UPLOAD_IMG VALUES(#{infoupNum}, SEQ_INFO_UPLOAD_IMG_NUM.NEXTVAL, #{fileReName})
-		<selectKey keyProperty="infoupNum" resultType="_int" order="BEFORE">
-			select seq_info_upload_num.currval from dual
-		</selectKey>
-	</insert>
-	
-	<insert id="insertInfoImg2" parameterType="com.mgr.merry.info.model.vo.InfoUploadImg">
-		INSERT INTO INFO_UPLOAD_IMG VALUES(#{infoupNum}, SEQ_INFO_UPLOAD_IMG_NUM.NEXTVAL, #{fileReName})
-	</insert>
-	
-	<select id="selectInfo" resultType="map" parameterType="_int">
-		select * from info_upload i join thema t on i.themanum=t.themanum join location l on i.localnum=l.localnum where infoupNum=#{infoNum}
-	</select>
-	
-	<select id="selectInfoImg" resultType="com.mgr.merry.info.model.vo.InfoUploadImg" parameterType="_int">
-		select * from info_upload_img where infoupNum=#{infoNum}
-	</select>
-	
-	<delete id="deleteInfo">
-		DELETE FROM INFO_UPLOAD WHERE INFOUPNUM=#{infoupNum}
-	</delete>
-	
-	<delete id="deleteInfoImg">
-		DELETE FROM INFO_UPLOAD_IMG WHERE INFOUPNUM=#{infoupNum}
-	</delete>
-	
-	<update id="updateInfo" parameterType="map">
-		UPDATE INFO_UPLOAD
-		SET
-		LOCALNUM=#{localNum},
-		THEMANUM=#{themaSubNum},
-		INFOUPTITLE=#{infoupTitle},
-		INFOUPDATE=default,
-		INFOUPPAYMENT=#{infoupPayment},
-		INFOUPPHONE=#{infoupPhone},
-		INFOUPTIME=#{infoupTime},
-		INFOADDR=#{infoAddr}
-		where INFOUPNUM=#{infoupNum}
-	</update>
-	
-	<update id="updateInfoStatus0">
-		UPDATE INFO_UPLOAD SET INFOUPSTATUS=0 WHERE INFOUPNUM=#{infoupNum}
-	</update>
-	
-	<select id="selectSup" resultType="map" parameterType="_int">
-		SELECT m.membernum, s.supnum FROM SUPPORTERS s join members m on s.membernum=m.membernum WHERE m.id='${id}'
-	</select>
-	
-	
-	
+   
+   <insert id="insertInfo" parameterType="map">
+      <!-- #{localNum}, #{supNum}, #{themaNum} 추가해야함 -->
+      INSERT INTO INFO_UPLOAD VALUES(SEQ_INFO_UPLOAD_NUM.NEXTVAL, #{localNum}, #{supNum}, #{themaSubNum},#{infoupTitle}, default, #{infoupPayment}, #{infoupPhone}, #{infoupTime}, default, #{infoAddr})
+      <!-- <selectKey keyProperty="infoupNum" resultType="_int" order="AFTER">
+         SELECT SEQ_INFO_UPLOAD_NUM.CURRVAL FROM DUAL
+      </selectKey> -->
+   </insert>
+   
+   <insert id="insertInfoImg" parameterType="com.mgr.merry.info.model.vo.InfoUploadImg">
+      INSERT INTO INFO_UPLOAD_IMG VALUES(#{infoupNum}, SEQ_INFO_UPLOAD_IMG_NUM.NEXTVAL, #{fileReName})
+      <selectKey keyProperty="infoupNum" resultType="_int" order="BEFORE">
+         select seq_info_upload_num.currval from dual
+      </selectKey>
+   </insert>
+   
+   <insert id="insertInfoImg2" parameterType="com.mgr.merry.info.model.vo.InfoUploadImg">
+      INSERT INTO INFO_UPLOAD_IMG VALUES(#{infoupNum}, SEQ_INFO_UPLOAD_IMG_NUM.NEXTVAL, #{fileReName})
+   </insert>
+   
+   <select id="selectInfo" resultType="map" parameterType="_int">
+      select * from info_upload i join thema t on i.themanum=t.themanum join location l on i.localnum=l.localnum where infoupNum=#{infoNum}
+   </select>
+   
+   <select id="selectInfoImg" resultType="com.mgr.merry.info.model.vo.InfoUploadImg" parameterType="_int">
+      select * from info_upload_img where infoupNum=#{infoNum}
+   </select>
+   
+   <delete id="deleteInfo">
+      DELETE FROM INFO_UPLOAD WHERE INFOUPNUM=#{infoupNum}
+   </delete>
+   
+   <delete id="deleteInfoImg">
+      DELETE FROM INFO_UPLOAD_IMG WHERE INFOUPNUM=#{infoupNum}
+   </delete>
+   
+   <update id="updateInfo" parameterType="map">
+      UPDATE INFO_UPLOAD
+      SET
+      LOCALNUM=#{localNum},
+      THEMANUM=#{themaSubNum},
+      INFOUPTITLE=#{infoupTitle},
+      INFOUPDATE=default,
+      INFOUPPAYMENT=#{infoupPayment},
+      INFOUPPHONE=#{infoupPhone},
+      INFOUPTIME=#{infoupTime},
+      INFOADDR=#{infoAddr}
+      where INFOUPNUM=#{infoupNum}
+   </update>
+   
+   <update id="updateInfoStatus0">
+      UPDATE INFO_UPLOAD SET INFOUPSTATUS=0 WHERE INFOUPNUM=#{infoupNum}
+   </update>
+   
+<!--    <select id="selectSup" resultType="map" parameterType="_int">
+      SELECT m.membernum, s.supnum FROM SUPPORTERS s join members m on s.membernum=m.membernum WHERE m.id='${id}'
+   </select> -->
+   
+
+   
+
 </mapper>
