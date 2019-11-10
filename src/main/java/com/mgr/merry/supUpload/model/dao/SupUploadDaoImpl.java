@@ -56,6 +56,11 @@ public class SupUploadDaoImpl implements SupUploadDao {
 		return session.insert("supUp.insertSupUploadImgNum", supImg);
 	}
 
+	@Override
+	public Map<String, String> selectSupUpload2(SqlSessionTemplate session, int infoupNum) {
+		return session.selectOne("supUp.selectSupUpload2", infoupNum);
+	}
+
 
 
 }

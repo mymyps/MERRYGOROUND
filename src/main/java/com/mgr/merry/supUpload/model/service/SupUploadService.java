@@ -34,4 +34,6 @@ public interface SupUploadService {
 
 	int insertSupUploadImgNum(Map<String, String> param, List<SupUploadImg> imgList) throws Exception;
 
+	Map<String, String> selectSupUpload2(int infoupNum);
+
 }

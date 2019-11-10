@@ -5,7 +5,7 @@
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 <c:set var="path" value="${pageContext.request.contextPath}" />
 <jsp:include page="/WEB-INF/views/common/header.jsp">
-	<jsp:param name="pageTitle" value="서포터즈" />
+	<jsp:param name="pageTitle" value="SUPPORTERS" />
 </jsp:include>
 <section id="content">
 	<div class="container">

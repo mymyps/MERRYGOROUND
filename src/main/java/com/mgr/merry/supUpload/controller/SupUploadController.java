@@ -51,7 +51,7 @@ public class SupUploadController {
 		
 		System.out.println("param :"+param);
 		
-		Map<String, String> supUpload= service.selectSupUpload(infoupNum);
+		Map<String, String> supUpload= service.selectSupUpload2(infoupNum);
 		Map<String, String> sup = iservice.selectSup(param);
 //		SupUploadImg supUploadImg = service.selectSupUploadImg(infoupNum);
 		

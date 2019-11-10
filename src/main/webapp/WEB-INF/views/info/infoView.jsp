@@ -50,20 +50,20 @@
                         </div>
                         <br><br>
                         <div>
-                        	<c:if test="${not empty supUp}">
+                        	<c:if test="${not empty supUp && supUp.SUPUPSTATUS ==1}">
 	                            <form name="supReview" action="${pageContext.request.contextPath }/supUp/supReview?infoupNum=${info.INFOUPNUM}&id=${loginMember.id}" method="post">
 	                                <button class="btn supreviewBtn" type="submit">서포터즈 리뷰 바로가기</button> 
 	                            </form>
                             </c:if>
                             <c:if test="${loginMember.memberNum eq sup.MEMBERNUM }">
-	                            <c:if test="${empty supUp }">
+	                            <c:if test="${empty supUp || supUp.SUPUPSTATUS ==0 }">
 		                            <form name="supReviewForm" action="${pageContext.request.contextPath }/supUp/supReviewForm.do?infoupNum=${info.INFOUPNUM}&id=${loginMember.id}" method="post">
 		                                <button class="btn supreviewBtn" type="submit">서포터즈 리뷰 작성하기</button> 
 		                            </form>
 	                            </c:if>
 	                            <br>
 	                            <c:if test="${not empty loginMember }">
-	                            	<form name="infoUpdate" action="${pageContext.request.contextPath }/info/infoUpdate?infoupNum=${info.INFOUPNUM}" method="post">
+	                            	<form name="infoUpdate" action="${pageContext.request.contextPath }/info/infoUpdate?infoupNum=${info.INFOUPNUM}&id=${loginMember.id}" method="post">
 		                                <button class="btn supreviewBtn" type="submit">INFOMATION 수정</button> 
 		                            </form>
 		                            <br>
