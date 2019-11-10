@@ -30,7 +30,10 @@
 									<p class="infoForm1">
 										<input type="file" name="infoupFile" id="infoupFile" />
 										<img src="${path }/resources/upload/info/${infoImg.fileReName }" class="infoimg	"/>
+										
 									</p>
+										<div id="imageInfo">
+										</div>
 								</div>
 
 								<div>
@@ -245,6 +248,19 @@ function checkNull(){
 			}
 		}).open();
 	}
+	
+	//div 이미지 출력하기
+    $('[name=infoupFile]').change(function () {
+        var reader = new FileReader();
+        reader.onload = function (e) {
+        	var img2 = $('<div class="infoFormSubFrame">변경할 이미지<br>미리보기</div>');
+            var img = $('<img>').attr('src', e.target.result).css({'width':"570", 'height':"570"}).addClass("infoForm1");
+            $('#imageInfo').append(img2);
+            $('#imageInfo').append(img);
+        }
+        
+     	reader.readAsDataURL($(this)[0].files[0]); // 파일경로를 바꿈/=result
+    });
 	</script>
 </section>
 <jsp:include page="/WEB-INF/views/common/footer.jsp"/>

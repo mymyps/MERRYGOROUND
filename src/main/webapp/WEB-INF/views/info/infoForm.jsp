@@ -32,11 +32,10 @@
 									<div class="infoFormSubFrame">이미지</div>
 									<p class="infoForm1">
 										<input type="file" name="infoupFile" id="infoupFile"/>
-
+										
 									</p>
-									<div id="imageInfo">
-								</div>
-
+										<div id="imageInfo">
+										</div>
 								<div>
 									<div class="infoFormSubFrame">제목</div>
 									<p class="infoForm1">
@@ -264,7 +263,9 @@
     $('[name=infoupFile]').change(function () {
         var reader = new FileReader();
         reader.onload = function (e) {
-            var img = $('<img>').attr('src', e.target.result).css({'width':"100px", 'height':"100px"});
+        	var img2 = $('<div class="infoFormSubFrame">이미지 미리보기</div>');
+            var img = $('<img>').attr('src', e.target.result).css({'width':"570", 'height':"570"}).addClass("infoForm1");
+            $('#imageInfo').append(img2);
             $('#imageInfo').append(img);
         }
         
