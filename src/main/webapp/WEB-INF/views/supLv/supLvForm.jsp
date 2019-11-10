@@ -99,9 +99,9 @@
 <br>
 요금 등 서비스 이용으로 발생한 분쟁에 대해 소송이 제기될 경우 회사의 본사 소재지를 관할하는 법원을 전속 관할법원으로 합니다.
 						</div>
-						
+						<div class="text-center">
 						<input type="checkbox" id='check' name="check"/> 약관을 동의하십니까? (필수)
-						
+						</div>
 						
 						<hr>
 						<div class="entry-content">
@@ -228,20 +228,24 @@
 
 	}
 	
+	var check = 0;
+	
 	$(document).on("change","input[name='supLvImg1']",function(event) {
         var ext = $(this).val().split('.').pop().toLowerCase();
         var fileSize = (this).files[0].size;
         var maxSize = 1024*1024*1024;
-        
+        check = 0;
         if($.inArray(ext, ['gif','png','jpg','jpeg']) == -1) {
            alert("등록할 수 없는 확장자입니다.");
            $(this).val("");
+           check = 1;
            return;
         } 
         
         if(fileSize > maxSize) {
            alert("첨부파일 크기는 1GB 이내로 등록 가능합니다.");
            $(this).val("");
+           check = 1;
            return;
         }
      });
@@ -250,16 +254,18 @@
         var ext = $(this).val().split('.').pop().toLowerCase();
         var fileSize = (this).files[0].size;
         var maxSize = 1024*1024*1024;
-        
+        check = 0;
         if($.inArray(ext, ['gif','png','jpg','jpeg']) == -1) {
            alert("등록할 수 없는 확장자입니다.");
            $(this).val("");
+           check = 1;
            return;
         } 
         
         if(fileSize > maxSize) {
            alert("첨부파일 크기는 1GB 이내로 등록 가능합니다.");
            $(this).val("");
+           check = 1;
            return;
         }
      });
@@ -268,16 +274,18 @@
         var ext = $(this).val().split('.').pop().toLowerCase();
         var fileSize = (this).files[0].size;
         var maxSize = 1024*1024*1024;
-        
+        check = 0;
         if($.inArray(ext, ['gif','png','jpg','jpeg']) == -1) {
            alert("등록할 수 없는 확장자입니다.");
            $(this).val("");
+           check = 1;
            return;
         } 
         
         if(fileSize > maxSize) {
            alert("첨부파일 크기는 1GB 이내로 등록 가능합니다.");
            $(this).val("");
+           check = 1;
            return;
         }
      });
@@ -285,16 +293,18 @@
         var ext = $(this).val().split('.').pop().toLowerCase();
         var fileSize = (this).files[0].size;
         var maxSize = 1024*1024*1024;
-        
+        check = 0;
         if($.inArray(ext, ['gif','png','jpg','jpeg']) == -1) {
            alert("등록할 수 없는 확장자입니다.");
            $(this).val("");
+           check = 1;
            return;
         } 
         
         if(fileSize > maxSize) {
            alert("첨부파일 크기는 1GB 이내로 등록 가능합니다.");
            $(this).val("");
+           check = 1;
            return;
         }
      });
@@ -302,28 +312,34 @@
         var ext = $(this).val().split('.').pop().toLowerCase();
         var fileSize = (this).files[0].size;
         var maxSize = 1024*1024*1024;
-        
+        check = 0;
         if($.inArray(ext, ['gif','png','jpg','jpeg']) == -1) {
            alert("등록할 수 없는 확장자입니다.");
            $(this).val("");
+           check = 1;
            return;
         } 
         
         if(fileSize > maxSize) {
            alert("첨부파일 크기는 1GB 이내로 등록 가능합니다.");
            $(this).val("");
+           check = 1;
            return;
         }
      });
+	
+	
 	
 	//div 이미지 출력하기
     $('[name=supLvImg1]').change(function () {
         var reader = new FileReader();
         reader.onload = function (e) {
+        	if(check==0){
         	var img2 = $('<div class="infoFormSubFrame">이미지1 미리보기</div>&nbsp;');
             var img = $('<img>').attr('src', e.target.result).css({'width':"570", 'height':"570"}).addClass("infoForm1");
             $('#img1').append(img2);
             $('#img1').append(img);
+        	}
         }
         
      	reader.readAsDataURL($(this)[0].files[0]); // 파일경로를 바꿈/=result
@@ -332,10 +348,12 @@
     $('[name=supLvImg2]').change(function () {
         var reader = new FileReader();
         reader.onload = function (e) {
+        	if(check==0){
         	var img2 = $('<div class="infoFormSubFrame">이미지2 미리보기</div>&nbsp;');
             var img = $('<img>').attr('src', e.target.result).css({'width':"570", 'height':"570"}).addClass("infoForm1");
             $('#img2').append(img2);
             $('#img2').append(img);
+        	}
         }
         
      	reader.readAsDataURL($(this)[0].files[0]); // 파일경로를 바꿈/=result
@@ -344,10 +362,12 @@
     $('[name=supLvImg3]').change(function () {
         var reader = new FileReader();
         reader.onload = function (e) {
+        	if(check==0){
         	var img2 = $('<div class="infoFormSubFrame">이미지3 미리보기</div>&nbsp;');
             var img = $('<img>').attr('src', e.target.result).css({'width':"570", 'height':"570"}).addClass("infoForm1");
             $('#img3').append(img2);
             $('#img3').append(img);
+        	}
         }
         
      	reader.readAsDataURL($(this)[0].files[0]); // 파일경로를 바꿈/=result
@@ -356,10 +376,12 @@
     $('[name=supLvImg4]').change(function () {
         var reader = new FileReader();
         reader.onload = function (e) {
+        	if(check==0){
         	var img2 = $('<div class="infoFormSubFrame">이미지4 미리보기</div>&nbsp;');
             var img = $('<img>').attr('src', e.target.result).css({'width':"570", 'height':"570"}).addClass("infoForm1");
             $('#img4').append(img2);
             $('#img4').append(img);
+        	}
         }
         
      	reader.readAsDataURL($(this)[0].files[0]); // 파일경로를 바꿈/=result
@@ -368,10 +390,12 @@
     $('[name=supLvImg5]').change(function () {
         var reader = new FileReader();
         reader.onload = function (e) {
+        	if(check==0){
         	var img2 = $('<div class="infoFormSubFrame">이미지5 미리보기</div>&nbsp;');
             var img = $('<img>').attr('src', e.target.result).css({'width':"570", 'height':"570"}).addClass("infoForm1");
             $('#img5').append(img2);
             $('#img5').append(img);
+        	}
         }
         
      	reader.readAsDataURL($(this)[0].files[0]); // 파일경로를 바꿈/=result

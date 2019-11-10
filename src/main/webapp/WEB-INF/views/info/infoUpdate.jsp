@@ -264,14 +264,40 @@ function checkNull(){
 		}).open();
 	}
 	
+	var check = 0;
+	
+	$(document).on("change","input[name='infoupFile']",function(event) {
+        var ext = $(this).val().split('.').pop().toLowerCase();
+        var fileSize = (this).files[0].size;
+        var maxSize = 1024*1024*1024;
+        check =0;
+        if($.inArray(ext, ['gif','png','jpg','jpeg']) == -1) {
+           alert("등록할 수 없는 확장자입니다.");
+           $(this).val("");
+           check = 1;
+           return;
+        } 
+        
+        if(fileSize > maxSize) {
+           alert("첨부파일 크기는 1GB 이내로 등록 가능합니다.");
+           $(this).val("");
+           check = 1;
+           return;
+        }
+     });
+	
 	//div 이미지 출력하기
     $('[name=infoupFile]').change(function () {
         var reader = new FileReader();
         reader.onload = function (e) {
+        	if(check==0){
         	var img2 = $('<div class="infoFormSubFrame">변경할 이미지<br>미리보기</div>');
             var img = $('<img>').attr('src', e.target.result).css({'width':"570", 'height':"570"}).addClass("infoForm1");
             $('#imageInfo').append(img2);
             $('#imageInfo').append(img);
+        	}else{
+        		return;
+        	}
         }
         
      	reader.readAsDataURL($(this)[0].files[0]); // 파일경로를 바꿈/=result
