@@ -4,12 +4,29 @@
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 <c:set var="path" value="${pageContext.request.contextPath}"/>
 <jsp:include page="/WEB-INF/views/common/header.jsp">
-   <jsp:param name="pageTitle" value=""/>
+   <jsp:param name="pageTitle" value="마이페이지"/>
 </jsp:include>
 <style>
 .inbtn-10{
    background-color: #EB9579;
 }
+
+input[type="file"] { 
+ position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip:rect(0,0,0,0); border: 0; }
+
+/* .filebox label  */
+/* { display: inline-block;  */
+/* padding: .5em .75em; color: #999;  */
+/* font-size: inherit;  */
+/* line-height: normal;  */
+/* vertical-align: middle;  */
+/* background-color: #fdfdfd;  */
+/* cursor: pointer;  */
+/* border: 1px solid #ebebeb;  */
+/* border-bottom-color: #e2e2e2;  */
+/* border-radius: .25em; } */
+
+
 </style>
 <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
    <link rel="stylesheet" type="text/css" href="${path }/resources/login/csshs/main.css">
@@ -108,7 +125,7 @@
                   </li>
                   </c:if>
                </ul>
-               <div class="tab-content col-md-9 col-sm-7">
+               <div class="tab-content col-md-9 col-sm-7" style="margin-top:-50px;">
                <c:if test="${empty list}">
                     <div class="tab-pane active animated fadeIn" id="tab_a">
                 </c:if>
@@ -117,40 +134,34 @@
                 </c:if>
                 
                        <!-- <i class="fa fa-trophy big"></i> -->
+                         <div class="row text-center"> 
                         <h3>개인정보수정</h3> 
+                        </div>
+                        <div class="gap-30"></div>
                         <form class="login100-form validate-form" method="post" action="${path}/member/update.do" onsubmit="return checkKey();" enctype="multipart/form-data">
                         
                         <input class="input100" type="hidden" name="memberNum" value=${members.memberNum }>
                         
                         <div class="wrap-input100 validate-input m-b-23 idname" data-validate = "Username is reauired">
-                           <span class="label-input100">아이디 </span>
+                           <span class="label-input100"><h4>아이디</h4> </span>
                            <input class="input100" type="text" name="id" value=${members.id }  readonly="readonly">
                            <span class="focus-input100" data-symbol="&#xf206;"></span>
                         </div>
                         
-                        <!-- <div class="wrap-input100 validate-input" data-validate="Password is required">
-                           <span class="label-input100">Password</span>
-                           <input class="input100" type="password" name="member_pass" placeholder="기존비밀번호">
-                           <span class="focus-input100" data-symbol="&#xf190;"></span>
-                        </div>
-                        <div class="wrap-input100 validate-input" data-validate="Password is required">
-                           <span class="label-input100">Password </span>
-                           <input class="input100" type="password" name="member_pass" placeholder="변경할 비밀번호">
-                           <span class="focus-input100" data-symbol="&#xf190;"></span>
-                        </div> -->
+                      
                         <div class="wrap-input100 validate-input m-b-23 idname" data-validate = "Username is reauired">
-                           <span class="label-input100">이름</span>
+                           <span class="label-input100"><h4>이름</h4></span>
                            <input class="input100" type="text" name="name" placeholder="이름" value=${members.name }>
                            <span class="focus-input100" data-symbol="&#xf206;"></span>
                         </div>
                         <div class="wrap-input100 validate-input m-b-23 idname" data-validate = "Username is reauired">
-                           <span class="label-input100">생년월일</span>
+                           <span class="label-input100"><h4>생년월일</h4></span>
                            <input class="input100" type="text" name="birth" placeholder="생년월일" value=${members.birth }>
                            <span class="focus-input100" data-symbol="&#xf206;"></span>
                         </div>
                         
                         <div class="wrap-input100 validate-input m-b-23 idname" data-validate = "Username is reauired">
-                           <span class="label-input100">핸드폰</span>
+                           <span class="label-input100"><h4>핸드폰</h4></span>
                            <input class="input100" type="text" name="phone" placeholder="핸드폰" value=${members.phone }>
                            <span class="focus-input100" data-symbol="&#xf206;"></span>
                         </div>
@@ -160,7 +171,7 @@
                            <span class="focus-input100" data-symbol="&#xf206;"></span>
                         </div> --%>
                      <div class="wrap-input100 validate-input m-b-23 idname" reauired>
-                        <span class="label-input100">이메일</span> 
+                        <span class="label-input100"><h4>이메일</h4></span> 
                         <div class="input-group subscribe">
                         <input class="input100"
                            type="email" name="email" placeholder="이메일" value=${members.email }> <span
@@ -171,7 +182,7 @@
                         </div>
                      </div>
                      <div class="wrap-input100 validate-input m-b-23 idname" reauired>
-                        <span class="label-input100">인증번호</span> <input class="input100"
+                        <span class="label-input100"><h4>인증번호</h4></span> <input class="input100"
                            type="number" name="authkey" placeholder="인증번호"> <span
                            class="focus-input100" data-symbol="&#xf206;"></span>
                      </div>
@@ -181,26 +192,18 @@
                            <span class="focus-input100" data-symbol="&#xf206;"></span>
                         </div> --%>
                      <div class="input-group-prepend" style="padding: 0px;">
-                        <span class="input-group-text">본인사진변경</span>
+                        <span class="input-group-text"><h4>본인사진변경</h4></span>
                      </div>
-                     <div class="custom-file">
-                        <!-- <label class="custom-file-label" for="upFile1"></label> -->
-                     <input type="file" class="custom-file-input" name="upFile"
-                     id="upFile"> 
-
-                     </div>
+                     <div class="filebox"> 
+                     <label for="upFile" class="btn btn-primary whithe">파일업로드</label> 
+                     <input type="file" name="upFile" id="upFile"></div>
 
                      <div class="text-right p-t-8 p-b-31">
                               
                         </div>
          
-                        <!-- <div class="container-login100-form-btn"> -->
-                           <!-- <div class="wrap-login100-form-btn"> -->
-                              
-                              <!-- <button class="login100-form-btn" type="submit">
-                                 수정하기
-                              </button> --><div style="margin-left:200px;">
-                              <input type="submit" style=" width:150px;" class="btn btn-primary solid cd-btn" value="변 경" >
+                <div style="margin-left:300px;">
+                              <input type="submit" style=" width:150px;" class="btn btn-primary solid cd-btn" value="회원정보수정" >
                               </div>
                            <!-- </div> 
                         </div>-->
@@ -250,14 +253,16 @@
                     <c:if test="${empty list}">
                     <div class="tab-pane animated fadeInRight" id="tab_c">    
                     </c:if>
+                    <div class="row text-center"> 
                         <h3>내 작성글 보기</h3> 
-                        <div class="row">
+                        </div>
+                        <div class="row" style="margin-top:100px;">
                              <c:forEach items="${list }" var="up" varStatus="i">
                            <div class="col-md-4 col-sm-4 wow fadeInDown" data-wow-delay=".5s">
                               <a href='${path }/info/infoView.do?infoupNum=${up["INFOUPNUM"]}&id=${loginMember.id }'>
                               <div class="service-content">
                                  <span class="service-image">
-                                    <img class="img-supupload_img_f" src='${path}/resources/upload/info/${up["FILERENAME"] }' width="180px" height="200px"/>
+                                    <img class="img-supupload_img_f" src='${path}/resources/upload/info/${up["FILERENAME"] }' width="180px" height="200px" alt="이런!이미지준비중이에요.뿌잉 -현식-T^T"/>
                                  </span>
                                  
                                  <h3>${up["INFOUPTITLE"] }</h3>
@@ -267,7 +272,9 @@
                            </div>
                          </c:forEach>
                      </div>
+                     <div style="position: relative;left:250px;top:100px;">
                   ${pageBar }  
+                  </div>
                     </div>
                     <c:if test="${loginMember.cpid eq null }">
                     <div class="tab-pane animated fadeInLeft" id="tab_g">
