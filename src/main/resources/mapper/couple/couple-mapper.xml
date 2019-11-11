@@ -17,7 +17,7 @@
    </select>
    
    <insert id="insertCoupleBoard" parameterType="map">
-      insert into c_upload values(seq_cupload_couplenum.nextval, #{writer},10,#{content},sysdate,1,#{title})
+      insert into c_upload values(seq_cupload_couplenum.nextval, #{writer},1,#{content},default,default,#{title})
       <selectKey keyProperty="coupleNum" resultType="string" order="AFTER">
          select seq_cupload_couplenum.currval from dual
       </selectKey>

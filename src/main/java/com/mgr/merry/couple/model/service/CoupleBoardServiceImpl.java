@@ -30,6 +30,7 @@ public class CoupleBoardServiceImpl implements CoupleBoardService {
 	@Override
 	public int insertCoupleBoard(Map<String, String> param, List<Attachment> attachList) {
 		int result= 0;
+		int attresult=0;
 		int boardNo = 0;
 		result = cdao.insertCoupleBoard(session,param);
 		if(result>0) {
@@ -39,7 +40,8 @@ public class CoupleBoardServiceImpl implements CoupleBoardService {
 					System.out.println("param.get('coupleNum'): "+param.get("coupleNum"));
 					a.setCoupleNum(Integer.parseInt(param.get("coupleNum")));
 					System.out.println("aaaa : "+a);
-					result = cdao.insertAttachment(session, a);
+					attresult = cdao.insertAttachment(session, a);
+					System.out.println("attresult :"+attresult);
 				}
 			}
 		}
