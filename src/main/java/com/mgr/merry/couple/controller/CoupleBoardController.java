@@ -238,17 +238,41 @@ public class CoupleBoardController {
 	
 	
 	@RequestMapping("/couple/deleteCoupleBoard")
-	public String deleteCoupleBoard(@RequestParam("no") int no) {
+//	public ModelAndView deleteCoupleBoard(@RequestParam("no") int no) {
+	public ModelAndView deleteCoupleBoard(@RequestParam("no") int no
+							, @RequestParam Map<String,Object> param, HttpServletRequest request) {
+		log.debug("RequestParam('no'): "+no);
+		log.debug("delete에서 param: "+param);
 		int result =0;
 //		int result2 =0;
 //		int result3 =0;
+		
+		HttpSession session = request.getSession();
+		Members m = (Members) session.getAttribute("loginMember");
+		
+//		param.put("mNum", m.getMemberNum());
+		//mNum가져와서 넘겨줘서 쿼리스트링으로 
 		
 //		result3 = cservice.deleteComment(no);
 //		result2 = cservice.deleteAttachment(no);
 		//c_upload테이블을 참조하는 img테이블 레코드부터 삭제
 		result = cservice.deleteCoupleBoard(no);
 		
-		return "redirect:/";
+		String msg = "";
+		String loc = "/couple/coupleBoardList?mNum="+m.getMemberNum();
+		if(result>0) {
+			msg="게시물 삭제 성공";
+		}else {
+			msg="게시물 삭제 실패";
+		}
+		
+		
+		ModelAndView mv = new ModelAndView();
+		mv.addObject("msg",msg);
+		mv.addObject("loc",loc);
+		mv.setViewName("common/msg");
+		
+		return mv;
 	}
 	
 	@RequestMapping("/couple/updateCoupleBoard")
@@ -315,8 +339,7 @@ public class CoupleBoardController {
     public String ajax_addComment(@RequestParam Map<String,String> param, HttpServletRequest request) throws Exception{
         
         HttpSession session = request.getSession();
-        log.debug((String) session.getAttribute("loginMember"));
-        //        LoginVO loginVO = (LoginVO)session.getAttribute("loginVO");
+//        LoginVO loginVO = (LoginVO)session.getAttribute("loginVO");
         
         log.debug("addComment의 param: "+param);
         try{
