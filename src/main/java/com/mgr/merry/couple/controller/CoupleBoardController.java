@@ -315,8 +315,7 @@ public class CoupleBoardController {
     public String ajax_addComment(@RequestParam Map<String,String> param, HttpServletRequest request) throws Exception{
         
         HttpSession session = request.getSession();
-        log.debug((String) session.getAttribute("loginMember"));
-        //        LoginVO loginVO = (LoginVO)session.getAttribute("loginVO");
+//        LoginVO loginVO = (LoginVO)session.getAttribute("loginVO");
         
         log.debug("addComment의 param: "+param);
         try{

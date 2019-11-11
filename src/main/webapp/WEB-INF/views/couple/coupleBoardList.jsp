@@ -11,7 +11,8 @@
 <script src="http://code.jquery.com/jquery-3.4.1.min.js"></script>
 <style>
 	.img{
-		position: relative;
+/* 		position: relative; */
+		position: absolute;
 		width: 100%; height: 400px;
 		object-fit: cover; object-position: center;
 		z-index: 1;
@@ -19,9 +20,8 @@
 	}
 	
 	.img-content{
-		position: relative;
-		/* transform: translate(0%,-800%); */
-		transform: translateY(-500%);
+ 		position: relative;
+ 		transform: translateY(450%);
 		color: whitesmoke; 
 		text-align: center;
 		z-index: 2;
@@ -29,7 +29,10 @@
 		font-weight: bold;
 		text-shadow: 0 0 3px black;
 		z-index: 4;
-
+	}
+	
+	.divImg{
+		height: 439px;
 	}
 	.post span{
 		z-index: 1;
@@ -52,17 +55,14 @@
 						onclick='location.href="${path}/couple/coupleBoardWrite"'>글 작성</button>
 				</div>
 				<br>
-				<br>
-				<br>
+				<br><br>
 
 				<c:forEach items="${list }" var="c" varStatus="v">
 					<div class="post postmb">
 						<!-- post image start -->
-						<div class="post-image-wrapper">
-							<a href='${path }/couple/coupleBoardView?no=${c["COUPLENUM"]}'> 
-							<img src='${path}/resources/images/couple/${c["FILERENAME"]}'	class="img" alt="이미지준비중" />
-<%-- 							<img src="${path}/resources/images/banpo.JPG"  class="img" alt="이미지준비중" /> --%>
-																	 <!-- 마지막 파일명만 따로 불러오든, 전체경로를 다 받아오든  -->
+						<div class="post-image-wrapper divImg">
+							<a href='${path }/couple/coupleBoardView?no=${c["COUPLENUM"]}'>
+								<img src='${path}/resources/images/couple/${c["FILERENAME"]}' class="img" alt="파일이 존재하지 않습니다" />
 								<p class="img-content"><c:out value='${c["COUPLETITLE"] }'></c:out></p>
 								<span class="blog-date"> <fmt:formatDate value='${c["COUPLEDATE"] }'/></span>
 							</a>
@@ -84,10 +84,8 @@
 <!-- 						<li><a href="#"><i class="fa fa-angle-right"></i></a></li> -->
 <!-- 					</ul> -->
 <!-- 				</div> -->
-
 			</div>
 			<!--/ Content col end -->
-
 
 		</div>
 	</div>
