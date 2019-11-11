@@ -40,7 +40,6 @@ public class SupLvController {
 		
 		Map<String, String> sup = iservice.selectSup(param);
 		List<Members> mem = mservice.selectMemberId2(id);
-		System.out.println("서포터즈가 아닐시 sup :"+sup);
 		
 		if(id=="") {
 			msg="로그인  후 이용가능합니다.";

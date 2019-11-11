@@ -76,8 +76,6 @@ public class InfoReviewController {
 	@RequestMapping("/info/updateInfoReview")
 	public ModelAndView updateReview(@RequestParam Map<String, String> param, int infoupNum, String id) {
 		
-		System.out.println("파라미터 : "+param);
-		
 		int result = 0;
 		
 		result = service.updateReview(param);

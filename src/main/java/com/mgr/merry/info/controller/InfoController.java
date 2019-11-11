@@ -170,8 +170,6 @@ public class InfoController {
          @RequestParam(value = "infoupFile", required = false) MultipartFile[] infoupFile,
          HttpServletRequest request) {
       
-      System.out.println("인포업데이트 파라미터 :"+param);
-      
       ModelAndView mv = new ModelAndView();
       
       List<Thema> themaList = sservice.selectThemaList3();
@@ -244,7 +242,6 @@ public class InfoController {
    public String selectSubCategory(@RequestParam(value="themaNumRef") String themaNumRef) throws JsonProcessingException{
       List<Map<String, String>> list = service.selectSubThema(Integer.parseInt(themaNumRef));
       ObjectMapper mapper = new ObjectMapper();
-      System.out.println("list :"+list.toString());
       return mapper.writeValueAsString(list);
       
    }

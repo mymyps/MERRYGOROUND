@@ -82,7 +82,6 @@ public class InfoServiceImpl implements InfoService {
       int result3=0; // img insert
       
       result=dao.updateInfo(session, param);
-      System.out.println("서비스 업데이트 : "+result);
       
       if(result==0) throw new RuntimeException(); 
       if(result>0) {
