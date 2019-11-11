@@ -83,8 +83,7 @@
 		select * from(
 		select rownum as rnum, a.* from(
 		select supnum, suplevel, suppay from supporters
-		join info_upload using(supnum)
-		group by supnum, suplevel, suppay 
+		group by supnum, suplevel, suppay
 		)a order by 4 desc)
 		where rnum between 1 and 5
 	</select>
@@ -155,7 +154,6 @@
 			select rownum as rnum, a.* from(
 				select count(supnum) "UPLOAD", proimg, suplevel, suppay "SUM", id, phone, enrolldate from supporters
 					join members using(membernum)
-					join info_upload using(supnum)
 				where status = 1
 				group by supnum, proimg, suplevel, suppay, id, phone, enrolldate
 			order by 5 desc

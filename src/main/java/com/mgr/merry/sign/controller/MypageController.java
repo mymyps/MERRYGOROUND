@@ -116,23 +116,25 @@ public class MypageController {
 
    // 비밀번호변경
    @RequestMapping("/member/updatePw.do")
-   public String pwUpdate(Members m, Model model) {
-      m.setPw(pwEncoder.encode(m.getPw()));
-      System.out.println("updatepass" + m);
-      int result = service.updatePw(m);
+   public String pwUpdate(Members m, Model model, HttpSession session) {
+	   m.setPw(pwEncoder.encode(m.getPw()));
+	   //      System.out.println("updatepass" + m);
+	   int result = service.updatePw(m);
 
-      String msg = "";
-      String loc = "";
-      if (result > 0) {
-         msg = "완료";
-      } else {
-         msg = "실패";
-      }
-      model.addAttribute("msg", msg);
-      model.addAttribute("loc", loc);
-      return "sign/msg";
+	   String msg = "";
+	   String loc = "";
+	   if (result > 0) {
+		   msg = "비밀번호가 변경되었습니다.";
+		   session.invalidate();
+		   loc = "/member/login.do";
+	   } else {
+		   msg = "비밀번호 변경실패";
+	   }
+	   model.addAttribute("msg", msg);
+	   model.addAttribute("loc", loc);
+	   return "sign/msg";
    }
-
+   
    // 커프요청
    @RequestMapping("/member/cupemail.do")
    public String cupemail(HttpServletRequest request, Members m, Model model) {
