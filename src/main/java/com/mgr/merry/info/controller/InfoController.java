@@ -67,6 +67,13 @@ public class InfoController {
 //      m.setMemberNum(memberNum);
       
       Supporters result2 = supservice.selectSup(mNum);
+      String msg="";
+      if(result2==null) {
+			msg="서포터즈가 아닙니다.";
+			mv.addObject("msg", msg);
+			mv.setViewName("/common/msg");
+			return mv;
+      }else {
 
       mv.addObject("supporters",result2);
       mv.addObject("themaList", themaList);
@@ -77,6 +84,7 @@ public class InfoController {
       
       
       return mv;
+      }
    }
 
    // infoView로 들어가기
