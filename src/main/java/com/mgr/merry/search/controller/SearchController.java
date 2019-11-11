@@ -113,8 +113,7 @@ public class SearchController {
 		int totalCount = service.mapCountAll(keyword);
 
 		model.addAttribute("pageBar", PageBarFactory.getPageBar(totalCount, cPage, numPerPage,
-//						"/19AM_MERRYGOROUND_final/search/locList?localNum=" + localNum));
-				"/merry/search/mapSearchEnd?keyword=" + keyword));
+				"/19AM_MERRYGOROUND_final/search/mapSearchEnd?keyword=" + keyword));
 		model.addAttribute("keyword", keyword);
 
 		Map<String, Object> map = new HashMap<String, Object>();
