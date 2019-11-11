@@ -70,7 +70,7 @@
                                                 <td><c:out value="${b['ID'] }"/></td>
                                                 <td><c:out value="${b['UPLOAD'] }"/></td>
                                                 <td><c:out value="${b['SUPLEVEL'] }"/></td>
-                                                <td><c:out value="${b['SUM'] }"/></td>
+                                                <td><fmt:formatNumber value="${b['SUM']* 1000 }" pattern="###,###,###"/></td>
                                                 <td><c:out value="${b['PHONE'] }"/></td>
                                                 <td><fmt:formatDate value="${b['ENROLLDATE'] }" pattern="yyyy.MM.dd"/></td>
                                             </tr>

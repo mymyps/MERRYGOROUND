@@ -167,7 +167,7 @@
 										<!-- supPayMain5 -->
 											<c:forEach items="${supPayMain5 }" var="sp" varStatus="i">
 											<tr>
-												<fmt:parseNumber var="test" value="${sp['rsum'] }" integerOnly="true"/>
+												<fmt:parseNumber var="test" value="${sp['SUPPAY'] * 1000 }" integerOnly="true"/>
 												<td scope="row"><c:out value="${i.count }"/></td>
 												<td class="serial"><c:out value="${sp['SUPNUM'] }"/></td>
 												<td><span class="name"><c:out value="${sp['SUPLEVEL'] }"/></span></td>

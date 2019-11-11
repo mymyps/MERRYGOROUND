@@ -62,6 +62,10 @@
 	<select id="selectSubThema" resultType="map" parameterType="_int">
 		SELECT * FROM THEMA WHERE THEMANUMREF=#{themaNumRef}
 	</select>
+	
+	<update id="updateInfoPay" parameterType="map">
+		update supporters set suppay = (suppay+1) where supnum = #{supNum} 
+	</update>
 
    
 

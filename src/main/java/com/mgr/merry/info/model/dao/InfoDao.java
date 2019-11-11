@@ -33,6 +33,8 @@ public interface InfoDao {
    int insertInfoImg2(SqlSessionTemplate session, InfoUploadImg infoimg);
 
    List<Map<String, String>> selectSubThema(SqlSessionTemplate session, int themaNumRef);
+   
+   int updateInfoPay(SqlSessionTemplate session, Map<String, String> param);
 
 
 

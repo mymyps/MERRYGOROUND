@@ -63,7 +63,7 @@
 	<!-- 서포터즈 신청자 --> 
 	<select id="topSupStatus" resultType="_int">
 		select count(*) "supStatus" from members
-		where SUPSTATUS = '1' and STATUS = 1
+		where SUPSTATUS = '1' and memberlevel != 2 and STATUS = 1
 	</select>
 	
 	<!-- 게시글 추천 5 -->
@@ -82,9 +82,9 @@
 	<select id="supPayMain" resultType="map">
 		select * from(
 		select rownum as rnum, a.* from(
-		select supnum, suplevel, sum(infouppayment) "rsum" from supporters
+		select supnum, suplevel, suppay from supporters
 		join info_upload using(supnum)
-		group by supnum, suplevel
+		group by supnum, suplevel, suppay 
 		)a order by 4 desc)
 		where rnum between 1 and 5
 	</select>
@@ -104,7 +104,7 @@
 	<select id="supConfirmMain" resultType="map">
 		select * from(
 			select rownum as rnum, a.* from(
-				select * from members where supstatus = 1 and status = 1
+				select * from members where supstatus = 1 and memberlevel != 2 and status = 1
 			)a order by 4 desc)
 		where rnum between 1 and 4
 	</select>
@@ -153,9 +153,9 @@
 	<select id="supportersPay" resultType="map">
 		select * from(
 			select rownum as rnum, a.* from(
-				select count(supnum) "UPLOAD", proimg, suplevel, sum(suppay) "SUM", id, phone, enrolldate from supporters
+				select count(supnum) "UPLOAD", proimg, suplevel, suppay "SUM", id, phone, enrolldate from supporters
 					join members using(membernum)
-					join supporters_upload using(supnum)
+					join info_upload using(supnum)
 				where status = 1
 				group by supnum, proimg, suplevel, suppay, id, phone, enrolldate
 			order by 5 desc

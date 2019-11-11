@@ -33,7 +33,9 @@ public class InfoServiceImpl implements InfoService {
       if(result==0) throw new RuntimeException(); 
       if(result>0) {
          result2=dao.insertInfoImg(session, infoimg); // info_upload_img 
-         if(result2==0) throw new RuntimeException(); 
+         if(result2==0) throw new RuntimeException();
+         // 돈 업데이트
+         result2 = dao.updateInfoPay(session, param);
       }
       
       return result;

@@ -72,6 +72,10 @@ public class InfoDaoImpl implements InfoDao {
       return session.selectList("info.selectSubThema", themaNumRef);
    }
 
+   @Override
+	public int updateInfoPay(SqlSessionTemplate session, Map<String, String> param) {
+		return session.update("info.updateInfoPay", param);
+	}
 
 
 
