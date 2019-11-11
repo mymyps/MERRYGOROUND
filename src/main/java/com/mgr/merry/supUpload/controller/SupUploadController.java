@@ -49,15 +49,11 @@ public class SupUploadController {
 		imgList.clear();
 		ModelAndView mv = new ModelAndView();
 		
-		System.out.println("param :"+param);
-		
 		Map<String, String> supUpload= service.selectSupUpload2(infoupNum);
 		Map<String, String> sup = iservice.selectSup(param);
-//		SupUploadImg supUploadImg = service.selectSupUploadImg(infoupNum);
 		
 		mv.addObject("supUpload", supUpload);
 		mv.addObject("sup", sup);
-//		mv.addObject("supUploadImg", supUploadImg);
 		
 		return mv;
 	}
@@ -67,8 +63,6 @@ public class SupUploadController {
 		ModelAndView mv = new ModelAndView();
 		Map<String, String> info = iservice.selectInfo(infoupNum);
 		Map<String, String> sup = iservice.selectSup(param);
-		
-		System.out.println("컨트롤러 sup : "+sup);
 		
 		mv.addObject("info", info);
 		mv.addObject("sup", sup);
@@ -80,8 +74,6 @@ public class SupUploadController {
 	@RequestMapping("/supUp/supReviewFormEnd.do")
 	public ModelAndView supReviewFormEnd(@RequestParam Map<String, String> param, int infoupNum, String id) {
 		ModelAndView mv = new ModelAndView();
-
-		System.out.println("섶리 파라미터값 : "+param);
 		
 		int result = 0;
 		int imgResult = 0;
@@ -90,7 +82,6 @@ public class SupUploadController {
 		
 		if(imgList.size()>0) {
 			try {
-				System.out.println("writeEnd안에서 param: "+param);
 				imgResult = service.insertSupUploadImgNum(param,imgList);
 			}catch(Exception e) {
 				e.printStackTrace();
@@ -117,7 +108,6 @@ public class SupUploadController {
 		public void uploadSummernoteImage2(MultipartFile image, HttpSession session, HttpServletResponse res) throws Exception{
 			String savename = image.getOriginalFilename();
 			
-			System.out.println(image.getOriginalFilename());
 			String path=session.getServletContext().getRealPath("/resources/images/supRv");
 			File f=new File(path);
 			if(!f.exists()) f.mkdirs();
@@ -143,16 +133,13 @@ public class SupUploadController {
 	        
 	        //DB에 저장 board가 insert된후 boardnum을 가져온후 저장해야함 (따로 필요?)
 	        SupUploadImg supupImg= new SupUploadImg();
-	        System.out.println("setFilerename에 들어갈 값 : "+path+"/"+reName);
 //	        att.setFileRename(path+"/"+reName);
 	        
 	        supupImg.setFileReName(reName);
 	        
 	        
-//	        System.out.println("attachList.size() : "+attachList.size());
 	        
 	        	imgList.add(supupImg);
-	        System.out.println("이미지 등록 완료시 :" +imgList);
 		}
 	
 	
@@ -163,7 +150,6 @@ public class SupUploadController {
 	public void uploadSummernoteImage(MultipartFile image, HttpSession session, HttpServletResponse res, int supupNum) throws Exception{
 		String savename = image.getOriginalFilename();
 		
-		System.out.println(image.getOriginalFilename());
 		String path=session.getServletContext().getRealPath("/resources/images/supRv");
 		File f=new File(path);
 		if(!f.exists()) f.mkdirs();
@@ -189,7 +175,6 @@ public class SupUploadController {
         
         //DB에 저장 board가 insert된후 boardnum을 가져온후 저장해야함 (따로 필요?)
         SupUploadImg supupImg= new SupUploadImg();
-        System.out.println("setFilerename에 들어갈 값 : "+path+"/"+reName);
 //        att.setFileRename(path+"/"+reName);
         
 //        supupNum을 받아와야..하는뎅뎅
@@ -197,10 +182,8 @@ public class SupUploadController {
         supupImg.setFileReName(reName);
         
         
-//        System.out.println("attachList.size() : "+attachList.size());
         
         	imgList.add(supupImg);
-        System.out.println("이미지 등록 완료시 :" +imgList);
 	}
 	
 	@RequestMapping("supUp/supReviewUpdate.do")
@@ -208,18 +191,14 @@ public class SupUploadController {
 		imgList.clear();
 		ModelAndView mv = new ModelAndView();
 		
-		System.out.println("param :"+param);
-		
 		Map<String, String> supUpload= service.selectSupUpload2(infoupNum);
 		
 		Map<String, String> sup = iservice.selectSup(param);
 		Map<String, String> info = iservice.selectInfo(infoupNum);
 		InfoUploadImg infoImg = iservice.selectInfoImg(infoupNum);
-//		SupUploadImg supUploadImg = service.selectSupUploadImg(infoupNum);
 		
 		mv.addObject("supUpload", supUpload);
 		mv.addObject("sup", sup);
-//		mv.addObject("supUploadImg", supUploadImg);
 		mv.addObject("info", info);
 		mv.addObject("infoImg", infoImg);
 		mv.setViewName("/supUp/supReviewUpdate");
