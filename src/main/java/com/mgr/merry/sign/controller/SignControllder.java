@@ -57,7 +57,6 @@ public class SignControllder {
 		//비지니스 로직
 		System.out.println("checkid"+m);
 		Members result = service.checkId(m);
-		System.out.println("성공여부 : " + result);
 		if(result==null) {
 			res.getWriter().print(true);
 		}else {
@@ -68,41 +67,46 @@ public class SignControllder {
 	@RequestMapping("/member/membersignup.do")
 	public String membersignup(Members m, Model model, MultipartFile upFile, HttpServletRequest request) {
 //		System.out.println("!!!!!!!!!!!!!!!!!" + m);
-		System.out.println("파일 이름: {}" + upFile.getOriginalFilename());
-		System.out.println("파일 크기: {}" + upFile.getSize());
-
+//		System.out.println("파일 이름: {}" + upFile.getOriginalFilename());
+//		System.out.println("파일 크기: {}" + upFile.getSize());
+		List<Members> list = service.searchid(m);
+		System.out.println("회원가입ㅁㅇㄴㄹ"+list.size());
 		// 파일 이름 변경
 		UUID uuid = UUID.randomUUID();
 		String saveName = uuid + "_" + upFile.getOriginalFilename();
-		System.out.println("saveName: {}" + saveName);
+//		System.out.println("saveName: {}" + saveName);
 
 		// 저장할 File 객체를 생성(껍데기 파일)ㄴ
 		String saveFile = request.getSession().getServletContext().getRealPath("/resources/images/member");
 		// 파일 실제 저장하기
-
+		String msg = "";
+		String loc = "";
 		try {
 			upFile.transferTo(new File(saveFile + "/" + saveName));
 			m.setProimg(saveName);
-			System.out.println("m     :  " + m);
+//			System.out.println("m     :  " + m);
 
 		} catch (Exception e) { // IlligalStateException|IOException
 
 			e.printStackTrace();
 		}
-
+		if(list.size()==0) {
 		m.setPw(pwEncoder.encode(m.getPw()));
 		int result = service.insertMember(m);
-		String msg = "";
-		String loc = "";
+		
 		if (result > 0) {
 			msg = "완료";
 		} else {
 			msg = "실패";
 		}
+		}else {
+			msg="이미 가입된 이메일이 있습니다.";
+			
+		}
 		model.addAttribute("msg", msg);
 		model.addAttribute("loc", loc);
 		return "sign/msg";
-
+		
 	}
 
 	// 비밀번호찾기
