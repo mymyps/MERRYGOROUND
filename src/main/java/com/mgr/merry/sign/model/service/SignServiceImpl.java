@@ -122,6 +122,10 @@ public class SignServiceImpl implements SignService {
 	public int deleteMember(Members m) {
 		return dao.deleteMember(session,m);
 	}
+	@Override
+	public List<Members> searchid(Members m) {
+		return dao.searchid(session,m);
+	}
 	
 
 	

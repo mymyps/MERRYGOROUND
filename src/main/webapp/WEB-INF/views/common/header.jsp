@@ -117,6 +117,7 @@
                            <ul>
                               <li><a href="${pageContext.request.contextPath }/member/login.do">로그인</a></li>
                               <li><a href="${pageContext.request.contextPath }/member/signup.do">회원가입</a></li>
+                              <li><a href="${pageContext.request.contextPath }/member/searchid.do">아이디 찾기</a></li>
                               <li><a href="${pageContext.request.contextPath }/member/searchpw.do">비밀번호찾기</a></li>
                            </ul>
                         </div>

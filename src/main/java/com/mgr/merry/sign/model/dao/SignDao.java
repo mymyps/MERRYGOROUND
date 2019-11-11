@@ -34,4 +34,5 @@ public interface SignDao {
 	List selectMemberid2(SqlSessionTemplate session, String id);
 	Members selectMemberbyMnum(SqlSessionTemplate session, int memNo);
 	int deleteMember(SqlSessionTemplate session, Members m);
+	List<Members> searchid(SqlSessionTemplate session, Members m);
 }

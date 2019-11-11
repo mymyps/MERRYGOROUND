@@ -2,6 +2,7 @@ package com.mgr.merry.sign.controller;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.List;
 import java.util.Properties;
 import java.util.UUID;
 
@@ -28,7 +29,6 @@ import org.springframework.web.bind.support.SessionStatus;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
-import com.mgr.merry.admin.model.vo.AdminCalendar;
 import com.mgr.merry.common.SMTPTemplate;
 import com.mgr.merry.sign.model.service.SignService;
 import com.mgr.merry.sign.model.vo.Members;
@@ -110,7 +110,27 @@ public class SignControllder {
 	public String searchpw(Members m, Model model) {
 		return "sign/searchpw";
 	}
-
+	@RequestMapping("/member/searchid.do")
+	public String searchid(Members m,Model model) {
+		return "sign/searchid";
+	}
+	@RequestMapping("/member/searchidend.do")
+	public String searchidend(Members m,Model model) {
+		System.out.println("아이디찾기"+m);
+		String msg="";
+		String loc="";
+		List<Members> list = service.searchid(m);
+		System.out.println("list123"+list);
+	
+		if(list!=null) {
+			msg="아이디는  "+list.get(0).getId()+"입니다";
+		}else {
+			msg="실패";
+		}
+		model.addAttribute("msg", msg);
+		model.addAttribute("loc", loc);
+		return "sign/msg";
+	}
 	@RequestMapping("/member/searchpwend.do")
 	public ModelAndView searchpwend(Members m) {
 		System.out.println("비밀번호찾기" + m);

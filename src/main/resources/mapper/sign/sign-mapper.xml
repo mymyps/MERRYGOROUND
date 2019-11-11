@@ -87,5 +87,7 @@
    <update id="deleteMember" parameterType="com.mgr.merry.sign.model.vo.Members">
    		update members set status=0 where memberNum=#{memberNum}
    </update>
-
+	<select id ="searchid" resultType="com.mgr.merry.sign.model.vo.Members" parameterType="com.mgr.merry.sign.model.vo.Members">
+		select * from members where email=#{email}
+	</select>
 </mapper>
