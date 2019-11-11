@@ -191,6 +191,7 @@
 		
 		/* 접속위치를 받아오기 */
 		// HTML5의 geolocation으로 사용할 수 있는지 확인합니다 
+		console.log(navigator);
 		if (navigator.geolocation) {
 		
 			// GeoLocation을 이용해서 접속 위치를 얻어옵니다
