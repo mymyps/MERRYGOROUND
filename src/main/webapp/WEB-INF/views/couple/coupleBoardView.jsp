@@ -45,7 +45,7 @@
 									<span class="post-meta-author">작성자 <a href="#"> <c:out value='${cboard["ID"] }'></c:out></a></span>
 									<!-- <span class="post-meta-cats">in <a href="#"> News</a></span> -->
 									<div class="pull-right">
-										<span class="post-meta-comments"><a href="#"><i class="fa fa-comment-o"></i> 댓글 <span id="cCnt"></span></a></span>
+										<span class="post-meta-comments"><a href="#"><i class="fa fa-comment-o"></i> 댓글 <span id="cCnt"></a></span>
 <!-- 										<span class="post-meta-hits"><a href="#"><i class="fa fa-heart-o"></i> (좋아요 수)</a></span> -->
 									</div>
 									
@@ -81,10 +81,14 @@
 						<button class="btn btn-primary pull-left" onclick='location.href="${path }/couple/coupleBoardList?mNum=${loginMember.memberNum}"'>목록</button>
 <%-- 						<button class="btn btn-primary pull-right" id="deleteCB" onclick='location.href="${path }/couple/deleteCoupleBoard?no=${cboard["COUPLENUM"]}"'>삭제</button>  --%>
 <%-- 						<button class="btn btn-primary pull-right" id="updateCB" onclick='location.href="${path }/couple/updateCoupleBoard?no=${cboard["COUPLENUM"]}"'>수정</button> --%>
-						<c:if test="${cboard.writer eq loginMember.id}">
-						<button class="btn btn-primary pull-right" id="deleteCB" onclick='deleteCB();'>삭제</button>
-						<button class="btn btn-primary pull-right" id="updateCB" onclick='updateCB();'>수정</button>
+						<c:if test="${cboard.ID eq loginMember.id}">
+							<button class="btn btn-primary pull-right" id="deleteCB" onclick='deleteCB();'>삭제</button>
+							<button class="btn btn-primary pull-right" id="updateCB" onclick='updateCB();'>수정</button>
 						</c:if>
+						<script>
+							console.log("${cboard.ID}");
+							console.log("${loginMember.id}");
+						</script>
 						<br><hr>
 					
 
