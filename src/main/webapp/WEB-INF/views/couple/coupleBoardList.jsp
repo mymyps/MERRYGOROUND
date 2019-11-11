@@ -8,7 +8,7 @@
 </jsp:include>
 
 
-<script src="http://code.jquery.com/jquery-3.4.1.min.js"></script>
+<!-- <script src="http://code.jquery.com/jquery-3.4.1.min.js"></script> -->
 <style>
 	.img{
 /* 		position: relative; */
