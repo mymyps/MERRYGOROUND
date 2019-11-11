@@ -160,5 +160,17 @@ public class SearchController {
 		return strData;
 
 	}
+	@RequestMapping(value ="/search/bestinfo.do", produces = "application/json;charset=UTF-8")
+	@ResponseBody
+	public String bestinfo() throws JsonProcessingException{
+		
+		List<Map<String, String>> list = service.bestinfo();
+		logger.debug(list.toString());
 
+		ObjectMapper mapper = new ObjectMapper();
+		
+		return mapper.writeValueAsString(list);
+
+		
+	}
 }

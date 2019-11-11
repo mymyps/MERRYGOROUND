@@ -283,62 +283,19 @@
 					</div>
 				</div><!-- Title row end -->
 				
-				<div class="row text-center">
+				<div class="row text-center bestbest">
 					<!-- 반포한강공원 -->
-					<div class="col-sm-3 development isotope-item">
-						<div class="grid">
-							<figure class="effect-oscar">
-								<img src="${pageContext.request.contextPath}/resources/images/banpo.JPG" alt="" class="img-thumbnail">
-								<figcaption>
-									<h3>반포한강공원</h3>
-									<a href="${pageContext.request.contextPath}" class="btn btn-primary white cd-btn">보러가기</a>
-								</figcaption>
-							</figure>
-						<p>무지개분수와 푸드트럭!</p>
-						</div>
-					</div><!-- Isotope item end -->
+					
+						
 					<!--반포한강공원끝 -->
 					<!-- 신촌맥주축제 -->
-					<div class="col-sm-3 development isotope-item">
-						<div class="grid">
-							<figure class="effect-oscar">
-								<img src="${pageContext.request.contextPath}/resources/images/beerparty.jpg" alt="" class="img-thumbnail">
-								<figcaption>
-									<h3>신촌맥주축제</h3>
-									<a href="${pageContext.request.contextPath}" class="btn btn-primary white cd-btn">보러가기</a>
-								</figcaption>
-							</figure>
-							<p>시원한 맥주와 신나는 공연!</p>
-						</div>
-					</div><!-- Isotope item end -->
+					<!-- Isotope item end -->
 					<!--신촌맥주축제 끝 -->
 					<!-- 코엑스연극 -->
-					<div class="col-sm-3 development isotope-item">
-						<div class="grid">
-							<figure class="effect-oscar">
-								<img src="${pageContext.request.contextPath}/resources/images/coex.jpg" alt="" class="img-thumbnail">
-								<figcaption>
-									<h3>코엑스<br>연극 관람</h3>
-									<a href="${pageContext.request.contextPath}" class="btn btn-primary white cd-btn">보러가기</a>
-								</figcaption>
-							</figure>
-							<p>쌀쌀한 가을날 실내데이트 어때요?</p>
-						</div>
-					</div><!-- Isotope item end -->
+					
 					<!--코엑스 연극 끝-->
 					<!-- 루프탑 레스토랑 -->
-					<div class="col-sm-3 development isotope-item">
-						<div class="grid">
-							<figure class="effect-oscar">
-								<img src="${pageContext.request.contextPath}/resources/images/looftop.JPG" alt="" class="img-thumbnail">
-								<figcaption>
-									<h3>루프탑<br>레스토랑</h3>
-									<a href="${pageContext.request.contextPath}" class="btn btn-primary white cd-btn">보러가기</a>
-								</figcaption>
-							</figure>
-							<p>시원한 가을바람과 맛있는 저녁!</p>
-						</div>
-					</div><!-- Isotope item end -->
+					
 					<!--루프탑 레스토랑 끝 -->
 				</div>
 				<!--/ Content row end -->
@@ -387,7 +344,9 @@
                                      </c:forEach>
                                      <h3>서포터즈 상시모집</h3>
 										<p>
-											능력있는 서포터즈를 모집합니다 :)Lorem Ipsum as their default model text, and a search for
+											능력있는 서포터즈를 모집합니다 :)
+											</p>
+											<p>Lorem Ipsum as their default model text, and a search for
 											‘lorem ipsum’
 											will uncover many web sites still in their infancy. Various versions
 											have evolved over the years, sometimes by accident, sometimes on
@@ -426,6 +385,49 @@
 			},error: function(e) {
 				console.log("ajax error");
             }
+		});
+	  $.ajax({
+			url: '${pageContext.request.contextPath }/search/bestinfo.do',
+			dataType:"JSON",
+			success: function (data) {
+				console.log(data[0].FILERENAME);
+			
+				
+			for(var i=0;i<4;i++){	
+			 var fff = $("<figure>").attr({
+				 'class':"effect-oscar"
+			 });
+				var iii = $("<img>").attr({
+					'src':"${pageContext.request.contextPath}/"+data[i].FILERENAME,
+					//'src':"${pageContext.request.contextPath}/resources/images/coex.jpg",
+					'class':"img-thumbnail"
+				});
+				var f = $("<figcaption>");
+				var hh3 = $("<h3>").text(data[i].INFOUPTITLE);
+				var aaa = $("<a>").attr({ 
+					'class':"btn btn-primary white cd-btn"
+					
+				}).text("^^");
+				var ggg = $("<div>").attr({
+					'class':"grid"
+				});
+				var ddd = $("<div>").attr({
+					'class':"col-sm-3 development isotope-item"
+				})
+				f.append(hh3);
+				f.append(aaa);
+				
+				fff.append(iii);
+				fff.append(f);
+				ggg.append(fff);
+				var ppp = $("<p>").text(data[i].INFOUPTITLE);
+				ggg.append(ppp);
+				ddd.append(ggg);
+				$(".bestbest").append(ddd);
+				}
+			},error: function(e) {
+				console.log("ajax error");
+          }
 		});
 	});
   

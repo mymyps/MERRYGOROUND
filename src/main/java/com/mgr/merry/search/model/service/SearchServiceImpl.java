@@ -88,4 +88,10 @@ public class SearchServiceImpl implements SearchService {
 		return dao.subThemaCount(session, param);
 	}
 
+	@Override
+	public List<Map<String, String>> bestinfo() {
+		// TODO Auto-generated method stub
+		return dao.bestinfo(session);
+	}
+
 }

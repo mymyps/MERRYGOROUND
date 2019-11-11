@@ -33,5 +33,7 @@ List<Map<String,Object>> allList();
 	List<Location> selectLocationList();
 	
 	Map<String, String> noticeIndexLoad();
+
+	List<Map<String, String>> bestinfo();
 	
 }
