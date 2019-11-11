@@ -52,12 +52,9 @@
                </div>
                
                <div class="container-login100-form-btn">
-                  <div class="wrap-login100-form-btn">
-                     <div class="login100-form-bgbtn"></div>
                      <button class="btn btn-primary solid cd-btn">
-                        Login
+                        	변경
                      </button>
-                  </div>
                </div>
 
                <div class="txt1 text-center p-t-54 p-b-20" type="submit">
