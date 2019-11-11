@@ -73,13 +73,13 @@
 <p id="result1"></p>
 <p id="result2"></p>
 
-    <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=a70d9f47dd92a2c810ce5d8c69f6b406"></script>
+    <script type="text/javascript" src="http://dapi.kakao.com/v2/maps/sdk.js?appkey=a70d9f47dd92a2c810ce5d8c69f6b406&libraries=services"></script>
     <script>
-		
+	
 		var markers = [];
 		var mapContainer = document.getElementById('map'), // 지도를 표시할 div 
 		mapOption = {
-			center : new kakao.maps.LatLng(37.566826, 126.9786567), // 지도의 중심좌표
+			center : new kakao.maps.LatLng(37.500210, 127.036249), // 지도의 중심좌표
 			level : 3
 		// 지도의 확대 레벨
 		};
@@ -92,12 +92,19 @@
 		map.addControl(zoomControl, kakao.maps.ControlPosition.RIGHT);
 		
 		//지도를 클릭한 위치에 표출할 마커입니다
-		var marker = new kakao.maps.Marker({ 
+		//var marker = new kakao.maps.Marker({ 
 		  // 지도 중심좌표에 마커를 생성합니다 
-		  position: map.getCenter() 
-		}); 
+		//  position: map.getCenter()
+		//});
+		//console.log(map.getCenter());
+		//console.log(position);
+		
+		
 		//지도에 마커를 표시합니다
-		marker.setMap(map);
+		//marker.setMap(map);
+		//marker2.setMap(map);
+		
+		//37.499428, 127.033811
 		
 		//지도에 클릭 이벤트를 등록합니다
 		//지도를 클릭하면 마지막 파라미터로 넘어온 함수를 호출합니다
@@ -107,7 +114,7 @@
 		  var latlng = mouseEvent.latLng; 
 		  
 		  // 마커 위치를 클릭한 위치로 옮깁니다
-		  marker.setPosition(latlng);
+		  //marker.setPosition(latlng);
 		  
 		  var message = '클릭한 위치의 위도는 ' + latlng.getLat() + ' 이고, ';
 		  message += '경도는 ' + latlng.getLng() + ' 입니다';
@@ -116,6 +123,71 @@
 		  resultDiv.innerHTML = message;
 		  
 		});
+		
+		 
+
+		// 키워드로 장소를 검색합니다
+		//var ps = new kakao.maps.services.Places();
+		//ps.keywordSearch('서울 강남구 역삼동 824-39', placesSearchCB);
+		//ps.keywordSearch('역삼역', placesSearchCB);
+		
+		var geocoder = new kakao.maps.services.Geocoder();
+		//제주특별자치도 제주시 영평동 2012-15
+		//경기 성남시 분당구 백현동 582-6
+		//대전 동구 판교2길 7
+		//서울 강남구 테헤란로5길 7
+		//대전 동구 판암동 497-7
+		var tmpAddr = [];
+		tmpAddr.push('제주특별자치도 제주시 영평동 2012-15');
+		tmpAddr.push('경기 성남시 분당구 백현동 582-6');
+		tmpAddr.push('대전 동구 판교2길 7');
+		tmpAddr.push('서울 강남구 테헤란로5길 7');
+		tmpAddr.push('대전 동구 판암동 497-7');
+		console.log(tmpAddr);
+		
+		
+		for(var i=0; i<5; i++){
+			geocoder.addressSearch(tmpAddr[i], function (result, status) {
+				
+				if(status === kakao. maps.services.Status.OK){
+					var coords = new kakao.maps.LatLng(result[0].y, result[0].x);
+					console.log("====== coords =======");
+					console.log(coords);
+					//console.log("=============");
+					
+					var marker = new kakao.maps.Marker({
+						map:map,
+						position:coords
+					});
+					
+					//console.log("====== marker =======");
+					//console.log(marker);
+					//console.log("=============")
+				}
+				
+			});
+		}
+		
+		
+		
+		// 키워드 검색 완료 시 호출되는 콜백함수 입니다
+		/* function placesSearchCB (data, status, pagination) {
+		    if (status === kakao.maps.services.Status.OK) {
+
+		        // 검색된 장소 위치를 기준으로 지도 범위를 재설정하기위해
+		        // LatLngBounds 객체에 좌표를 추가합니다
+		        var bounds = new kakao.maps.LatLngBounds();
+				//console.log(bounds);
+				console.log(data);
+				
+		        //for (var i=0; i<data.length; i++) {
+		            displayMarker(data[i]);
+		            bounds.extend(new kakao.maps.LatLng(data[i].y, data[i].x));
+		        //}       
+		        // 검색된 장소 위치를 기준으로 지도 범위를 재설정합니다
+		        //map.setBounds(bounds);
+		    } 
+		} */
 		
 		/* 접속위치를 받아오기 */
 		// HTML5의 geolocation으로 사용할 수 있는지 확인합니다 
@@ -135,48 +207,98 @@
 				
 				resultDiv1.innerHTML = lat;
 				resultDiv2.innerHTML = lon;
-		
-				// 마커와 인포윈도우를 표시합니다
+				
+						// 마커와 인포윈도우를 표시합니다
+				//console.log(locPosition);
+				//console.log(typeof(locPosition['Ga']));
+				//displayMarker(locPosition, message);
+				//locPosition.na = {'Ga':127.036249, 'Ha':37.500210};
+				//37.500210, 127.036249
+				//37.499257, 127.035841
+ 				//displayMarker(locPosition, message);
+				
+				
+				// 마커를 표시할 위치와 title 객체 배열입니다 
+				var positions = [
+				    {
+				        title: '카카오', 
+				        latlng: new kakao.maps.LatLng(37.500210, 127.036249)
+				    },
+				    {
+				        title: '생태연못', 
+				        latlng: new kakao.maps.LatLng(37.499257, 127.035841)
+				    }
+				];
+				
+				// 마커 이미지의 이미지 주소입니다
+				var imageSrc = "http://t1.daumcdn.net/localimg/localimages/07/mapapidoc/markerStar.png"; 
+				    
+				for (var i = 0; i < positions.length; i ++) {
+				    // 마커 이미지의 이미지 크기 입니다
+				    var imageSize = new kakao.maps.Size(24, 35); 
+				    
+				    // 마커 이미지를 생성합니다    
+				    var markerImage = new kakao.maps.MarkerImage(imageSrc, imageSize); 
+				    
+				    // 마커를 생성합니다
+				    var marker = new kakao.maps.Marker({
+				        map: map, // 마커를 표시할 지도
+				        position: positions[i].latlng, // 마커를 표시할 위치
+				        title : positions[i].title, // 마커의 타이틀, 마커에 마우스를 올리면 타이틀이 표시됩니다
+				        image : markerImage // 마커 이미지 
+				    });
+				
+				}
+				
+				/* locPosition['Ga'] = 127.036249;
+				locPosition['Ha'] = 37.500210;
+				console.log(locPosition);
+				displayMarker(locPosition, "test marker2");
+				locPosition['Ga'] = 127.035841;
+				locPosition['Ha'] = 37.499257;
+				displayMarker(locPosition, "test marker3"); */
 				displayMarker(locPosition, message);
+				
+				var mer = "서울 강남구 테헤란로5길";
 		
 			});
 		
-		} else { // HTML5의 GeoLocation을 사용할 수 없을때 마커 표시 위치와 인포윈도우 내용을 설정합니다
+		} 
 		
-			var locPosition = new kakao.maps.LatLng(33.450701, 126.570667), message = 'geolocation을 사용할수 없습니다.'
+		//else { // HTML5의 GeoLocation을 사용할 수 없을때 마커 표시 위치와 인포윈도우 내용을 설정합니다
+		//	var locPosition = new kakao.maps.LatLng(33.450701, 126.570667), message = 'geolocation을 사용할수 없습니다.'
+		//	displayMarker(locPosition, message);
+		//}
 		
-			displayMarker(locPosition, message);
-		}
 		//지도에 마커와 인포윈도우를 표시하는 함수입니다
 		function displayMarker(locPosition, message) {
 		
 			// 마커를 생성합니다
 			var marker = new kakao.maps.Marker({
-				map : map,
+				//map : map,
 				position : locPosition
 			});
+			marker.setMap(map);
 			
-			/* locPosition['Ga'] = '127.03268729999999';
-			locPosition['Ha'] = '37.4989621'; */
-			
-			console.log(locPosition);
-			console.log(marker);
+			//console.log(locPosition);
+			//console.log(marker);
 				
-			var iwContent = message, // 인포윈도우에 표시할 내용
+			var iwContent = message
+			, // 인포윈도우에 표시할 내용
 			iwRemoveable = true;
 		
 			// 인포윈도우를 생성합니다
 			var infowindow = new kakao.maps.InfoWindow({
-				content : iwContent,
-				removable : iwRemoveable
+				content : iwContent
+				,removable : iwRemoveable
 			});
 		
 			// 인포윈도우를 마커위에 표시합니다 
 			infowindow.open(map, marker);
 		
 			// 지도 중심좌표를 접속위치로 변경합니다
-			markers.push(marker);
-			map.setCenter(locPosition);
+			//markers.push(marker);
+			//map.setCenter(locPosition);
 		}
 		
 		/* 이동된 위치 중심좌표 반환하기 */
