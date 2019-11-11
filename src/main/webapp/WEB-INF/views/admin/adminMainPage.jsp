@@ -461,7 +461,7 @@
 		});
 	</c:forEach>
 	
-	new Morris.Bar({
+	var bar = new Morris.Bar({
 		element: 'morrisBars',
 	  	data: dateBoard,
 	  	xkey: 'period',
@@ -523,6 +523,15 @@
 			location.href = "${path}/admin/users";
 		});
 	});
+	
+	
+	$(window).resize(function () {
+		//$('#morrisBars').resize(function () {
+			bar.redraw();
+		//});
+	});
+	
+	
 		
 	
     </script>
