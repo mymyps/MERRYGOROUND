@@ -49,13 +49,21 @@ public class SearchServiceImpl implements SearchService {
 		
 		return dao.mainThemaList(session, themaNumRef,cPage,numPerPage);
 	}
+	
+	@Override 
+	public List<InfoUpload> mapList(String keyword, int cPage, int numPerPage) {
+		
+		return dao.mapList(session, keyword, cPage, numPerPage);
+	}
 
 	@Override
-	public List<Map<String,Object>> mapSearch(Map<String, Object> param) {
-		
-		return dao.mapSearch(session, param);
+	public int mapCountAll(String data) {
+		return dao.mapCountAll(session,data);
 	}
 	
+	
+	//쥬미가 쓴 코드 
+
 	@Override
 	public List<Thema> selectThemaList3() {
 		return dao.selectThemaList3(session);
@@ -87,5 +95,7 @@ public class SearchServiceImpl implements SearchService {
 	public int subThemaCount(Map<String, Object> param) {
 		return dao.subThemaCount(session, param);
 	}
+
+	
 
 }

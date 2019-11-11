@@ -1,12 +1,9 @@
 package com.mgr.merry.search.controller;
 
-import java.io.IOException;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import javax.servlet.ServletException;
-import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.slf4j.Logger;
@@ -18,11 +15,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
-
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.google.gson.Gson;
-import com.google.gson.JsonIOException;
 import com.mgr.merry.common.PageBarFactory;
 import com.mgr.merry.info.model.vo.InfoUpload;
 import com.mgr.merry.search.model.service.SearchService;
@@ -53,9 +47,10 @@ public class SearchController {
 
 		int totalCount = service.subThemaCount(param);
 
-		model.addAttribute("pageBar",                                   
-				PageBarFactory.getPageBar(totalCount, cPage, numPerPage, "/19AM_MERRYGOROUND_final/search/subThemaList?themaNum="
-						+ param.get("themaNum") + "&themaNumRef=" + param.get("themaNumRef")));
+		model.addAttribute("pageBar",
+				PageBarFactory.getPageBar(totalCount, cPage, numPerPage,
+						"/19AM_MERRYGOROUND_final/search/subThemaList?themaNum=" + param.get("themaNum")
+								+ "&themaNumRef=" + param.get("themaNumRef")));
 
 		return "search/classifyByTheme";
 
@@ -83,7 +78,6 @@ public class SearchController {
 	}
 
 	@RequestMapping("/search/locList")
-
 	public String localList(@RequestParam("localNum") int localNum, Model model,
 			@RequestParam(value = "cPage", required = false, defaultValue = "0") int cPage) {
 
@@ -96,53 +90,53 @@ public class SearchController {
 
 		int totalCount = service.localCount(localNum);
 
-		model.addAttribute("pageBar",
-				PageBarFactory.getPageBar(totalCount, cPage, numPerPage, "/19AM_MERRYGOROUND_final/search/locList?localNum=" + localNum));
+		model.addAttribute("pageBar", PageBarFactory.getPageBar(totalCount, cPage, numPerPage,
+				"/19AM_MERRYGOROUND_final/search/locList?localNum=" + localNum));
 		model.addAttribute("localNum", localNum);
 
 		return "search/classifyByLoc";
 	}
 
+	@RequestMapping(value = "/search/mapSearchEnd", produces = "application/json;charset=UTF-8")
+	@ResponseBody
+	public String mapSerchEnd(HttpServletResponse response, String keyword,
+			@RequestParam(value = "cPage", required = false, defaultValue = "0") int cPage, Model model)
+			throws JsonProcessingException {
+
+		int numPerPage = 5;
+		List<InfoUpload> list = service.mapList(keyword, cPage, numPerPage);
+		model.addAttribute("list", list);
+
+		logger.debug("keyword : " + keyword);
+		logger.debug("컨트롤러에서MAP 리스트 : " + list);
+
+		int totalCount = service.mapCountAll(keyword);
+
+		model.addAttribute("pageBar", PageBarFactory.getPageBar(totalCount, cPage, numPerPage,
+//						"/19AM_MERRYGOROUND_final/search/locList?localNum=" + localNum));
+				"/merry/search/mapSearchEnd?keyword=" + keyword));
+		model.addAttribute("keyword", keyword);
+
+		Map<String, Object> map = new HashMap<String, Object>();
+
+		map.put("cPage", cPage);
+		map.put("totalCount", totalCount);
+		map.put("numPerPage", numPerPage);
+		map.put("list", list);
+
+		// responsebody -> jackson
+
+		ObjectMapper mapper = new ObjectMapper();
+
+		return mapper.writeValueAsString(map);
+	}
+
+	// 지도 API
 	@RequestMapping("/search/mapSearch")
 
 	public String mapSerch() {
 
 		return "search/placeOnAMap";
-	}
-
-	@RequestMapping("/search/mapSearchEnd")
-
-	public void mapSerchEnd(HttpServletRequest request, HttpServletResponse response)
-			throws ServletException, IOException {
-
-		String keyword = request.getParameter("keyword");
-		double y = Double.parseDouble(request.getParameter("y"));
-		double x = Double.parseDouble(request.getParameter("x"));
-
-		Map<String, Object> param = new HashMap<String, Object>();
-		param.put("keyword", keyword);
-		param.put("y", y);
-		param.put("x", x);
-
-		List<Map<String, Object>> resultList = service.mapSearch(param);
-
-		logger.debug("" + resultList);
-
-		response.setContentType("application/x-json; charset=UTF-8");
-
-        //DTO 타입의 어레이리스트를 json 형태로 변환
-		
-        String gson = new Gson().toJson(resultList);
-        
-        try {
-            //ajax로 리턴
-            response.getWriter().write(gson);
-        } catch (JsonIOException e) {
-            e.printStackTrace();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-
 	}
 
 	// 공시사항 인덱스 출력메소드

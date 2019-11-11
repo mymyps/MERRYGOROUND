@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-
 <beans xsi:schemaLocation="http://www.springframework.org/schema/beans https://www.springframework.org/schema/beans/spring-beans.xsd http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-4.3.xsd http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-4.3.xsd"
 	xmlns:aop="http://www.springframework.org/schema/aop"
 	xmlns:tx="http://www.springframework.org/schema/tx"
@@ -8,7 +7,6 @@
 	xmlns="http://www.springframework.org/schema/beans">
 
 	<!-- Root Context: defines shared resources visible to all other web components -->
-
 
 	<!-- db연결에 필요한 데이터를 BasicDataSource객체에 넣음 -->
 
@@ -48,13 +46,9 @@
 	<!-- SessionTemplate를 이용한 springbean으로 등록하여 활용 -->
 	<bean class="org.mybatis.spring.SqlSessionTemplate"
 		id="sqlSessionTemplate">
-
 		<!--위의 sqlSessionFactoryBean 이 들어옴 -->
 
-
 		<!--생성자를 이용 , index = 매개변수의 순서 -->
-
-
 		<constructor-arg ref="sqlSessionFactoryBean" index="0" />
 	</bean>
 

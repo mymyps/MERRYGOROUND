@@ -11,20 +11,25 @@ import com.mgr.merry.search.model.vo.Thema;
 
 public interface SerchDao {
 
-	List<Map<String,Object>> allList(SqlSessionTemplate session);
-	
+	List<Map<String, Object>> allList(SqlSessionTemplate session);
+
 	List<InfoUpload> subThemaList(SqlSessionTemplate session, Map<String, Object> param, int cPage, int numPerPage);
+
 	int subThemaCount(SqlSessionTemplate session, Map<String, Object> param);
-	
+
 	List<InfoUpload> mainThemaList(SqlSessionTemplate session, int themaNumRef, int cPage, int numPerPage);
-	
+
 	List<InfoUpload> localList(SqlSessionTemplate session, int localNum, int cPage, int numPerPage);
+
 	int localCount(SqlSessionTemplate session, int localNum);
-	
+
 	int mainThemaCount(SqlSessionTemplate session, int themaNumRef);
 	
-	List<Map<String, Object>> mapSearch(SqlSessionTemplate session, Map<String, Object> param);
+	//지도AI
+	List<InfoUpload> mapList(SqlSessionTemplate session, String keyword, int cPage, int numPerPage);
+	int mapCountAll(SqlSessionTemplate session, String data);
 
+	// 쥬미코드
 	List<Thema> selectThemaList3(SqlSessionTemplate session);
 
 	List<Thema> selectThemaList4(SqlSessionTemplate session);

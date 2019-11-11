@@ -22,10 +22,11 @@ List<Map<String,Object>> allList();
 	List<InfoUpload> localList(int localNum, int cPage, int numPerPage);
 	int localCount(int localNum);
 	
-	
-	
-	List<Map<String,Object>> mapSearch(Map<String, Object> param);
+	//지도 API 
+	List<InfoUpload> mapList(String keyword, int cPage, int numPerPage);
+	int mapCountAll(String data);
 
+	//쥬미가 쓴 코드
 	List<Thema> selectThemaList3();
 
 	List<Thema> selectThemaList4();
