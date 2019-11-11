@@ -100,7 +100,7 @@
 				<form id="commentListForm" name="commentListForm" method="post">
 					<div>
 						<span><strong>댓글</strong></span>
-						<span id="cCnt"></span>
+						<span id="cCnt2"></span>
 						<span><strong>개</strong></span>
 					</div><hr><br>
 					<div id="commentList"></div>
@@ -292,6 +292,7 @@
 			            }
 			            
 			            $("#cCnt").html(cCnt);
+			            $("#cCnt2").html(cCnt);
 			            $("#commentList").html(htmls);
 			            
 			        },
