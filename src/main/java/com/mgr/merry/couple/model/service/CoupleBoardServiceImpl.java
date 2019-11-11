@@ -18,13 +18,13 @@ public class CoupleBoardServiceImpl implements CoupleBoardService {
 	SqlSessionTemplate session;
 	
 	@Override
-	public int selectCoupleBoardCount() {
-		return cdao.selectCoupleBoardCount(session);
+	public int selectCoupleBoardCount(Map<String,Object> param) {
+		return cdao.selectCoupleBoardCount(session,param);
 	}
 
 	@Override
-	public List<Map<String, String>> selectCoupleBoardList(int mNum,int cPage, int numPerPage) {
-		return cdao.selectCoupleBoardList(session,mNum,cPage,numPerPage);
+	public List<Map<String, String>> selectCoupleBoardList(Map<String,Object> param,int cPage, int numPerPage) {
+		return cdao.selectCoupleBoardList(session,param,cPage,numPerPage);
 	}
 
 	@Override

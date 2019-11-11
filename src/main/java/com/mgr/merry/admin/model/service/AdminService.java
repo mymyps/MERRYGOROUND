@@ -33,10 +33,10 @@ public interface AdminService {
 	int themaAdd(String strTmp);
 	int themaAddAdd(String strTmp);
 	Map<String, String> celtifyData(int memberNum);
-	int cletifyAdmin(int memberNum);
+	int cletifyAdmin(int memberNum) throws Exception;
 	int calDropSave(AdminCalendar calTmp);
 	Map<String, String> adminNotice();
-	Map<String, String> adminNoticeInsert(String str);
+	Map<String, String> adminNoticeInsert(String str) throws Exception;
 	List<Map<String, String>> adminNoticeList();
 	int adminNotiDel(int noticeNum);
 	int adminNotiMod(Map<String, String> param);

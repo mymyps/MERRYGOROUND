@@ -1,22 +1,26 @@
 package com.mgr.merry.info.model.service;
 
+import java.util.List;
 import java.util.Map;
 
 
 import com.mgr.merry.info.model.vo.InfoUploadImg;
+import com.mgr.merry.search.model.vo.Thema;
 
 public interface InfoService {
 
-	int insertInfo(Map<String, String> param, InfoUploadImg infoimg) throws Exception;
+   int insertInfo(Map<String, String> param, InfoUploadImg infoimg) throws Exception;
 
-	Map<String, String> selectInfo(int infoupNum);
+   Map<String, String> selectInfo(int infoupNum);
 
-	InfoUploadImg selectInfoImg(int infoupNum);
+   InfoUploadImg selectInfoImg(int infoupNum);
 
-	int infoStatus0(int infoupNum);
+   int infoStatus0(int infoupNum);
 
-	int updateInfo(Map<String, String> param, InfoUploadImg infoimg, int infoupNum) throws Exception;
+   int updateInfo(Map<String, String> param, InfoUploadImg infoimg, int infoupNum) throws Exception;
 
-	Map<String, String> selectSup(Map<String, String> param);
+   Map<String, String> selectSup(Map<String, String> param);
+
+   List<Map<String, String>> selectSubThema(int themaNumRef);
 
 }

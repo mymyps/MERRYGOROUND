@@ -4,7 +4,7 @@
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 <c:set var = "path" value="${pageContext.request.contextPath}"/>
 <jsp:include page ="/WEB-INF/views/common/header.jsp">
-<jsp:param name ="pageTitle" value=""/>	
+<jsp:param name ="pageTitle" value="SUPPORTERS REVIEW"/>	
 </jsp:include>
 
     <link href="https://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.12/summernote-bs4.css" rel="stylesheet">
@@ -14,7 +14,7 @@
 	<!-- summernote 폼-->
 	<form name="infoForm"
 		action="${pageContext.request.contextPath }/supUp/supReviewUpadeEnd.do"
-		method="post" enctype="multipart/form-data">
+		method="post" enctype="multipart/form-data" onsubmit="return checkNull();">
 		<div class="container">
 			<input type="hidden" name="loginMemberNum"
 				value="${loginMember.memberNum}">
@@ -28,7 +28,7 @@
 					<!-- Blog post start -->
 					<div class="post-content">
 						<h1 class="post-title text-center">
-							<a href="blog-item.html">서포터즈 리뷰 수정</a>
+							<a href="blog-item.html">수정</a>
 						</h1>
 						<hr>
 						<div class="entry-content">
@@ -58,10 +58,10 @@
 								<div>
 									<div class="infoFormSubFrame">제목</div>
 									<p class="infoForm1">
-										<input type="text" name="supupTitle" value="${supUpload.SUPUPTITLE }" />
+										<input type="text" name="supupTitle" value="${supUpload.SUPUPTITLE }" id="supupTitle"/>
 									</p>
 								</div>
-								<textarea id="summ" name="supupContent" required><c:out value="${supUpload.SUPUPCONTENT }"/></textarea>
+								<textarea id="summ" name="supupContent"><c:out value="${supUpload.SUPUPCONTENT }"/></textarea>
 								
 							</div>
 
@@ -74,10 +74,32 @@
 
 		<div>
 			<button class="btn infoFormBtn" type="submit">서포터즈 리뷰 수정</button>
-			<button class="btn infoFormBtn" type="reset">서포터즈 리뷰 수정 취소</button>
+			<input type="button" class="btn infoFormBtn" onClick="location.href='${pageContext.request.contextPath }/supUp/supReview?infoupNum=${info.INFOUPNUM }&id=${loginMember.id }'" value="서포터즈 리뷰 작성 취소">
 		</div>
 	</form>
 
+	<script>
+		function checkNull(){
+			var supupTitle=$('#supupTitle');
+			var summ=$('#summ')
+			
+			if(supupTitle.val()==""){
+		    	alert('제목을 입력해주세요.');
+		    	supupTitle.focus();
+		    	return false;
+			}
+			if(summ.val()==""){
+		    	alert('내용을 입력해주세요.');
+		    	summ.focus();
+		    	return false;
+			}
+			if(summ.val()=="<p><br><p>"){
+		    	alert('내용을 입력해주세요.');
+		    	summ.focus();
+		    	return false;
+			}
+		}
+	</script>
 
 	<input type="hidden" value="" />
 	

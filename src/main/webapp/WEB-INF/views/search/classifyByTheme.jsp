@@ -124,8 +124,7 @@
 							<p><strong><c:out value='${list.localCity}'/></strong><p>
 							</div>
 							<div class="col-md-4 ts-padding about-img" >
-<%-- 							<img class="listImg" src="${list.fileReName}" alt="이미지 준비중"> --%>
-                             <img class="listImg" src="${path}/resources/images/banpo.JPG" alt="이미지 준비중">
+                             <img class="listImg" src="${path}/resources/upload/info/${list.fileReName}" alt="이런! 이미지 준비중이네요. T^T">
 						</div>
 					</div>
 					<br>
@@ -133,15 +132,7 @@
 	 	<!-- list 출력 끝 -->
 		<!-- 테마별 리스트 DIV 끝 -->
     				<div class="paging2">
-						<ul class="pagination">
-							<li><a href="#"><i class="fa fa-angle-left"></i></a></li>
-							<li class="active"><a href="#">1</a></li>
-							<li><a href="#">2</a></li>
-							<li><a href="#">3</a></li>
-							<li><a href="#">4</a></li>
-							<li><a href="#">5</a></li>
-							<li><a href="#"><i class="fa fa-angle-right"></i></a></li>
-						</ul>
+						${pageBar}
 					</div>
 				</div>
 				<!-- tab content -->

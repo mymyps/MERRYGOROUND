@@ -200,7 +200,7 @@
 								<div class="col-lg-6">
 									<div class="card">
 										<div class="card-body">
-											<h4 class="mb-3">업로드 글</h4>
+											<h4 class="mb-3">올라온 글(날짜별)</h4>
 											<div id="morrisBars"></div>
 										</div>
 									</div>
@@ -211,7 +211,7 @@
 									<div class="card-body">
 										<div class="progress-box progress-1">
 											<!-- mainThema - (list) -->
-											<h4 class="por-title">테마별 조회(Thema)</h4>
+											<h4 class="por-title">테마별 글누적수(Thema)</h4>
 											<c:set var = 'rto' value="${rto }"/>
 											<c:forEach items="${mainThema }" var="t" varStatus="i">
 											<div class="por-txt"><c:out value="${t['THEMANAME'] }"/> <c:out value="${t['COUNT'] }"/>회</div>
@@ -260,13 +260,18 @@
 											</thead>
 											<tbody>
 											<!-- supListMain -->
+											<c:if test="${empty supListMain}">
+											<tr>
+												<td colspan="6"><p>서포터즈가 없습니다</p></td>
+											</tr>
+											</c:if>
 											<c:forEach items="${supListMain }" var="sl" varStatus="i">
 											<tr>
 												<td scope="row"><c:out value="${i.count }"/></td>
 												<td class="avatar">
 														<div class="round-img">
 															<a href="#"><img class="rounded-circle" 
-															src="${path }/resources/images/member/${sl['PROIMG']}" alt=""></a>
+															src="${path }/resources/images/member/${sl['PROIMG']}"></a>
 														</div>
 													</td>
 												<td class="serial"><c:out value="${sl['ID'] }"/></td>
@@ -303,6 +308,12 @@
 										</thead>
 										<tbody>
 										<!-- supConfirmMain -->
+										<c:if test="${empty supConfirmMain}">
+											<tr>
+												<td colspan="4"><p>서포터즈 신청자가 없습니다</p></td>
+											</tr>
+										</c:if>
+										<c:if test="${!empty supConfirmMain}">
 											<c:forEach items="${supConfirmMain }" var="sc" varStatus="i">
 											<tr>
 												<td scope="row"><c:out value="${i.count }"/></td>
@@ -312,6 +323,7 @@
 												<%-- <td><c:out value="${sc['ENROLLDATE'] }"/></td> --%>
 											</tr>
 											</c:forEach>
+										</c:if>
 										</tbody>
 									</table>
 								</div>
@@ -341,15 +353,15 @@
 							<div class="card ov-h">
 								<div class="card-body bg-flat-color-4">
 									<div id="flotBarChart" class="float-chart ml-4 mr-4">
-										<p style="color:black">&lt;공지 사항&gt;</p>
-										<p style="color:white" class="notiTi"><c:out value="${adminNotice['NOTICECONTENT'] }" /></p>
-										<p style="color:red" class="notiDa"><fmt:formatDate value="${adminNotice['NOTICEDATE'] }" pattern="yyyy-MM-dd"/></p>
+										<p style="color:black; font-size:12px; font-style: italic;">&lt;공지 사항&gt;</p>
+										<p style="color:white;" class="notiTi"><c:out value="${adminNotice['NOTICECONTENT'] }" /></p>
+										<p style="color:red; font-size:13px;" class="notiDa"><fmt:formatDate value="${adminNotice['NOTICEDATE'] }" pattern="yyyy-MM-dd"/></p>
 									</div>
 								</div>
 								<div id="cellPaiChart" class="float-chart">
-									<p>&lt;입력창&gt;   &nbsp;<a style="color:#EB9579;" id="noticeClick">공지사항 추가하기</a></p> 
+									<!-- <hr class="mb-1"> -->
+									<p>&lt;입력창&gt;   &nbsp;<a style="color:#EB9579;" id="noticeClick">공지사항 추가하기</a></p>
 									<textarea class="txAA" cols="5" style="resize:none; width:100%; height:100px; padding:8px"></textarea>
-									
 								</div>
 							</div>
 							<!-- /.card -->
@@ -479,6 +491,7 @@
 					var d = d.getFullYear() +"-" + d.getMonth() +"-" + d.getDate();
 				
 					// notiTi, notiDa
+					console.log(data['NOTICECONTENT']);
 					$(".notiTi").text(data['NOTICECONTENT']);
 					$(".notiDa").text(d);
 					$('.txAA').val("");

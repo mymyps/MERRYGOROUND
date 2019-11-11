@@ -4,7 +4,6 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 
-
 <!DOCTYPE html>
 <html lang="ko">
 
@@ -13,30 +12,20 @@
 <title>Merry-go-round</title>
 <meta name="description" content="">
 <meta name="author" content="">
-   
-   
 
-   <!-- Mobile Specific Metas
-   ================================================== -->
+   <!-- Mobile Specific Metas ================================================== -->
    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 
-   <!-- Favicons
-   ================================================== -->
+   <!-- Favicons================================================== -->
    <script defer src="https://use.fontawesome.com/releases/v5.0.8/js/solid.js" integrity="sha384-+Ga2s7YBbhOD6nie0DzrZpJes+b2K1xkpKxTFFcx59QmVPaSA8c7pycsNaFwUK6l" crossorigin="anonymous"></script>
-    <script defer src="https://use.fontawesome.com/releases/v5.0.8/js/fontawesome.js" integrity="sha384-7ox8Q2yzO/uWircfojVuCQOZl+ZZBg2D2J5nkpLqzH1HY0C1dHlTKIbpRz/LG23c" crossorigin="anonymous"></script>
+   <script defer src="https://use.fontawesome.com/releases/v5.0.8/js/fontawesome.js" integrity="sha384-7ox8Q2yzO/uWircfojVuCQOZl+ZZBg2D2J5nkpLqzH1HY0C1dHlTKIbpRz/LG23c" crossorigin="anonymous"></script>
    
    <link rel="icon" href="${pageContext.request.contextPath }/resources/img/favicon/favicon-32x32.png" type="image/x-icon" />
    <link rel="apple-touch-icon-precomposed" sizes="144x144" href="${pageContext.request.contextPath }/resources/img/favicon/favicon-144x144.png">
    <link rel="apple-touch-icon-precomposed" sizes="72x72" href="${pageContext.request.contextPath }/resources/img/favicon/favicon-72x72.png">
    <link rel="apple-touch-icon-precomposed" href="${pageContext.request.contextPath }/resources/img/favicon/favicon-54x54.png">
 
-   
-<!--    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" -->
-<!--    integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" -->
-<!--    crossorigin="anonymous"></script> -->
-   
    <!-- Javascript Files ================================================== -->
-
    <!-- initialize jQuery Library -->
    <script type="text/javascript" src="${pageContext.request.contextPath }/resources/js/jquery.js"></script>
    <!-- Bootstrap jQuery -->
@@ -108,7 +97,6 @@
                      <span class="icon-bar"></span>
                      <span class="icon-bar"></span>
                   </button>
-                  <!-- 로고 이미지 들어갈 자리  -->
                   <div class="navbar-brand navbar-bg">
                      <a href="${pageContext.request.contextPath }">
                         <img class=" img-responsive" src="${pageContext.request.contextPath }/resources/images/logo.png" alt="logo">
@@ -119,7 +107,8 @@
                
                <nav class="collapse navbar-collapse clearfix" role="navigation">
                   <ul class="nav navbar-nav navbar-right">
-                     <!-- 마이페이지(로그인 후 이용가능) -->
+                    
+                     <!--로그인 -->
                      <c:if test="${empty loginMember}">
                      <li class="dropdown active">
                         <a href="${pageContext.request.contextPath }" class="dropdown-toggle" data-toggle="dropdown">Login <i
@@ -133,7 +122,6 @@
                         </div>
                      </li>
                      </c:if>
-                     
                      <c:if test="${not empty loginMember}">
                         <li class="dropdown active">
                         <a href="${pageContext.request.contextPath }" class="dropdown-toggle" data-toggle="dropdown">${loginMember.id}님 반가워요:) <i
@@ -146,11 +134,8 @@
                         </div>
                      </li>
                      </c:if>
-                     
                      <c:if test="${loginMember==null }">
 	                     <li class="dropdown">
-	                        <%-- <a href="${pageContext.request.contextPath }/sign/mypage.do?mNo=${loginMember.memberNum}">Mypage <i
-	                              class="fa fa-angle-down"></i></a> --%>
 	                           <div class="dropdown-menu">
 	                           <ul>
 	                              <li><a href="portfolio-static.html">로그인후 이용가능</a></li>
@@ -158,37 +143,50 @@
 	                        </div>
                      	</li>
                      </c:if>
-                  
+                    
+                     <!--관리자페이지 -->
                      <c:if test="${loginMember.id eq 'admin'}">
                      <li class="dropdown">
                      <li>
                         <a href="${pageContext.request.contextPath }/admin/adminMain">Admin</a>
                      </li>
                      </c:if>
-                     
                     
-                    
-                     <li class="dropdown">
-                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">Supporters <i class="fa fa-angle-down"></i></a>
-                        <c:if test="${loginMember.memberLevel eq 2}">
-                        <div class="dropdown-menu">
-                           <ul>
-                        <li><a href="${pageContext.request.contextPath }/supLv/supLvForm.do?id=${loginMember.id}">서포터즈 신청</a>
-                        <li><a href="${pageContext.request.contextPath }/info/infoForm.do?mNum=${loginMember.memberNum}">infoForm 임의연결</a></li>
-                        <li><a href="${pageContext.request.contextPath }/info/infoView.do">infoView 임의연결</a></li>
-                           </ul>
-                        </div>
-                         </c:if>
-                          <c:if test="${loginMember.memberLevel !=2}">
-                        <div class="dropdown-menu">
-                           <ul>
-                        <li><a href="${pageContext.request.contextPath }/supLv/supLvForm.do?id=${loginMember.id}">서포터즈 신청</a>
-                   
-                           </ul>
-                        </div>
-                         </c:if>
-                         </li>
+                 <!--서포터즈페이지 -->
+                <li class="dropdown">
+                   <a href="#" class="dropdown-toggle" data-toggle="dropdown">Supporters <i class="fa fa-angle-down"></i></a>
+                    <c:if test="${loginMember.memberLevel eq 2}">
+                     <div class="dropdown-menu">
+                      <ul>
+                       <li><a href="${pageContext.request.contextPath }/supLv/supLvForm.do?id=${loginMember.id}">서포터즈 신청</a>
+                       <li><a href="${pageContext.request.contextPath }/info/infoForm.do?mNum=${loginMember.memberNum}">인포메이션 작성</a></li>
+                      </ul>
+                     </div>
+                     </c:if>
+                     <c:if test="${loginMember.memberLevel ==0 }">
+                     	<div class="dropdown-menu">
+	                      <ul>
+	                         <!-- <li><h2>관리자</h2></li> -->
+	                      </ul>
+	                   </div>
+                     </c:if>
+                     <c:if test="${loginMember.memberLevel ==1}">
+	                   <div class="dropdown-menu">
+	                      <ul>
+	                         <li><a href="${pageContext.request.contextPath }/supLv/supLvForm.do?id=${loginMember.id}">서포터즈 신청</a>
+	                      </ul>
+	                   </div>
+                    </c:if>
+                    <c:if test="${loginMember == null}">
+                    <div class="dropdown-menu">
+	                      <ul>
+	                         <li><a href="${pageContext.request.contextPath }/supLv/supLvForm.do?id=${loginMember.id}">서포터즈 신청</a>
+	                      </ul>
+	                   </div>
+                    </c:if>
+                    </li>
                      
+                      <!--커플페이지 -->
                       <li class="dropdown">
                            <a href="#" class="dropdown-toggle" data-toggle="dropdown">CouplePage <i class="fa fa-angle-down"></i></a>
                            <div class="dropdown-menu">
@@ -197,16 +195,14 @@
                                     <li><a>로그인 후 커플을 신청하세요!</a></li>
                                  </ul>
                               </c:if>
-                            <c:if test='${not empty loginMember and fn:trim(loginMember.cpstatus) == 1}'>
+                            <c:if test="${not empty loginMember and fn:trim(loginMember.cpstatus) == 1}">
                               <ul>
                                  <li><a href="${pageContext.request.contextPath }/couple/coupleBoardList?mNum=${loginMember.memberNum}">커플게시판</a></li>
                               </ul>
                            </c:if>
                            </div>
                         </li>
-                 
-                 
-                  </ul>
+                   </ul>
                </nav>
                <!--/ Navigation end -->
             </div>
@@ -218,16 +214,15 @@
        
         <!--공통 배너  -->
         <div id="ban" class="ban">
-      <div id="banner-area">
-         <img src="${pageContext.request.contextPath }/resources/images/banner/banner4.jpg" />
-         <div class="parallax-overlay"></div>
-      
-            <div class="banner-title-content">
-               <div class="text-center">
-                  <h2>${param.pageTitle }</h2>
-                 </div>
-              </div>
-      </div>
-   </div>
-   </div>
+           <div id="banner-area">
+             <img src="${pageContext.request.contextPath }/resources/images/banner/banner4.jpg" />
+               <div class="parallax-overlay"></div>
+	            <div class="banner-title-content">
+	               <div class="text-center">
+	                  <h2>${param.pageTitle }</h2>
+	                 </div>
+	              </div>
+		      </div>
+		   </div>
+		   </div>
    

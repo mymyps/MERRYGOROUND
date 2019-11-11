@@ -6,8 +6,8 @@ import java.util.Map;
 import com.mgr.merry.couple.model.vo.Attachment;
 
 public interface CoupleBoardService {
-	int selectCoupleBoardCount();
-	List<Map<String,String>> selectCoupleBoardList(int mNum,int cPage, int numPerPage);
+	int selectCoupleBoardCount(Map<String,Object> param);
+	List<Map<String,String>> selectCoupleBoardList(Map<String,Object> param,int cPage, int numPerPage);
 	
 	Map<String,String> selectCoupleBoard(int no);
 	

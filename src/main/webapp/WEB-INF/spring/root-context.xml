@@ -49,40 +49,20 @@
 	<bean class="org.mybatis.spring.SqlSessionTemplate"
 		id="sqlSessionTemplate">
 
-		<!--위의 sqlSessionFactoryBean 이 들어옴 -->
-
-
-		<!--생성자를 이용 , index = 매개변수의 순서 -->
-
-
 		<constructor-arg ref="sqlSessionFactoryBean" index="0" />
 	</bean>
 
 	<!-- 트랜젝션 처리 -->
-
-
-	<!-- <bean id="transactionManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager"><property 
-		name="dataSource" ref="dataSource"></property></bean> -->
-
-
+	<bean id="transactionManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager"><property 
+		name="dataSource" ref="dataSource"></property></bean>
 	<!-- annotation -->
-
-
-	<!-- <tx:annotation-driven transaction-manager="transactionManager"/> -->
-
-
+	<tx:annotation-driven transaction-manager="transactionManager"/>
 	<!-- 선언적방식으로 트랜젝션처리 -->
-
-
-	<!-- <tx:advice id="txAdvice" transaction-manager="transactionManager"><tx:attributes><tx:method 
-		name="insert*" rollback-for="Exception"/><tx:method name="update*" rollback-for="Exception"/></tx:attributes></tx:advice> -->
-
-
+	<tx:advice id="txAdvice" transaction-manager="transactionManager"><tx:attributes><tx:method 
+		name="insert*" rollback-for="Exception"/><tx:method name="update*" rollback-for="Exception"/></tx:attributes></tx:advice>
 	<!-- aop와 연결하여 트랜젝션을 적용 -->
-
-
-	<!-- <aop:config><aop:pointcut expression="execution(* com.kh.spring..*ServiceImpl.*(..))" 
-		id="serviceMethod"/><aop:advisor advice-ref="txAdvice" pointcut-ref="serviceMethod"/></aop:config> -->
+	<aop:config><aop:pointcut expression="execution(* com.mgr.merry..*ServiceImpl.*(..))" 
+		id="serviceMethod"/><aop:advisor advice-ref="txAdvice" pointcut-ref="serviceMethod"/></aop:config>
 
 
 	<bean class="org.springframework.mail.javamail.JavaMailSenderImpl"

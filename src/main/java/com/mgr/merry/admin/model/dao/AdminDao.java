@@ -41,5 +41,6 @@ public interface AdminDao {
 	List<Map<String, String>> adminNoticeList(SqlSessionTemplate session);
 	int adminNotiDel(SqlSessionTemplate session, int noticeNum);
 	int adminNotiMod(SqlSessionTemplate session, Map<String, String> param);
+	int cletifyAdminIn(SqlSessionTemplate sqlSession, int memberNum);
 
 }

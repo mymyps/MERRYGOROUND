@@ -170,5 +170,10 @@ public class AdminDaoImpl implements AdminDao{
 	public int adminNotiMod(SqlSessionTemplate session, Map<String, String> param) {
 		return session.update("admin.adminNotiMod", param);
 	}
+	
+	@Override
+	public int cletifyAdminIn(SqlSessionTemplate session, int memberNum) {
+		return session.insert("admin.cletifyAdminIn", memberNum);
+	}
 
 }

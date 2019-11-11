@@ -145,8 +145,17 @@ public class AdminServiceImpl implements AdminService{
 	}
 	
 	@Override
-	public int cletifyAdmin(int memberNum) {
-		return dao.cletifyAdmin(sqlSession, memberNum);
+	public int cletifyAdmin(int memberNum) throws Exception {
+		
+		int result = dao.cletifyAdmin(sqlSession, memberNum);
+		
+		if(result == 0 ) throw new RuntimeException();
+		else {
+			result = dao.cletifyAdminIn(sqlSession, memberNum);
+			if(result == 0) throw new Exception();
+		}
+		
+		return result; 
 	}
 	
 	@Override
@@ -160,15 +169,17 @@ public class AdminServiceImpl implements AdminService{
 	}
 	
 	@Override
-	public Map<String, String> adminNoticeInsert(String str) {
+	public Map<String, String> adminNoticeInsert(String str) throws Exception {
 		
 		int result = 0;
 		
 		result = dao.adminNoticeInsert(sqlSession, str);
-		
 		Map<String, String> map = null;
-		if(result > 0) {
+
+		if(result == 0) throw new RuntimeException();
+		else if(result > 0) {
 			map = dao.adminNotice(sqlSession);
+			if(map == null) throw new Exception();
 		}
 		
 		return map;

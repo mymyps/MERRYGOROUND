@@ -158,6 +158,24 @@ Googel Fonts  */
 .bg-flat-color-6 {
   background: #5c6bc0; }
 
+.bg-flat-color-7 {
+  background: #ff07d8; }
+  
+.bg-flat-color-8 {
+background: #212529; }
+  
+ .bg-flat-color-9 {
+ background: #ec0d0d; }
+ 
+ .bg-flat-color-10 {
+ background: #ffc107; }
+ 
+ .bg-flat-color-11 {
+ background: #ea9579; }
+ 
+ .bg-flat-color-12 {
+ background: #66bb6a; }
+
 .bg-transparent {
   background-color: transparent; }
 
@@ -1890,10 +1908,10 @@ header .form-inline {
   color: #666;
   background: rgba(0, 0, 0, 0.7);
   border: none;
-  color: #fff !important; }
+  color: #f05b4f !important; }
 
-.morris-hover-point {
-  color: rgba(255, 255, 255, 0.8) !important; }
+/* .morris-hover-point {
+  color: rgba(255, 255, 255, 0.8) !important; } */
 
 #morris-bar-chart {
   height: 285px; }

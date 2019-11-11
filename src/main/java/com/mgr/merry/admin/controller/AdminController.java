@@ -11,9 +11,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
@@ -275,7 +273,7 @@ public class AdminController {
 	
 	// 서포터즈 승인
 	@RequestMapping("/admin/cletify.end")
-	public void cletifyAdmin(@RequestParam(value="memberNum") int memberNum, HttpServletResponse res) throws IOException {
+	public void cletifyAdmin(@RequestParam(value="memberNum") int memberNum, HttpServletResponse res) throws Exception {
 		
 		// 맴버넘버를 통해 모달에 띄어줄내용을 받아와야함
 		
@@ -294,9 +292,9 @@ public class AdminController {
 	}
 	
 	
-	@RequestMapping("/admin/adminNoticeIn.do")
+	@RequestMapping(value="/admin/adminNoticeIn.do",  produces="application/json;charset=UTF-8")
 	@ResponseBody
-	public String adminNoticeInsert(@RequestParam(value="strTmp") String strTmp, HttpServletResponse res) throws JsonProcessingException {
+	public String adminNoticeInsert(@RequestParam(value="strTmp") String strTmp, HttpServletResponse res) throws Exception {
 
 		ObjectMapper mapper = new ObjectMapper();
 		
@@ -306,13 +304,6 @@ public class AdminController {
 		return mapper.writeValueAsString(map);
 		
 	}
-	
-		//한글
-//		BoardService bService = new BoardServiceImpl();
-//		mapper.readValue(json값, vo클래스)
-//		List<Map<String, String>> list = bService.boardList(1, 5); 
-		
-//		return mapper.writeValueAsString(list);
 	
 	// notice view load
 	@RequestMapping("/admin/notice")
@@ -343,10 +334,6 @@ public class AdminController {
 	
 	@RequestMapping(value="/admin/adminNotiMod", produces="application/json;charset=UTF-8")
 	public void adminNotiMod(@RequestParam Map<String,String> param, HttpServletResponse res) throws IOException {
-		
-		System.out.println("====================");
-		System.out.println("====================");
-		System.out.println(param);
 		
 		int result = service.adminNotiMod(param);
 		

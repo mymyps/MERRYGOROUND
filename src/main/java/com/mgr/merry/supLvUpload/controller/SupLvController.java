@@ -15,6 +15,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.mgr.merry.info.model.service.InfoService;
 import com.mgr.merry.sign.model.service.SignService;
+import com.mgr.merry.sign.model.vo.Members;
 import com.mgr.merry.supLvUpload.model.service.SupLvService;
 import com.mgr.merry.supLvUpload.model.vo.SupLvUploadImg;
 
@@ -38,7 +39,7 @@ public class SupLvController {
 		String msg="";
 		
 		Map<String, String> sup = iservice.selectSup(param);
-		List mem = mservice.selectMemberId2(id);
+		List<Members> mem = mservice.selectMemberId2(id);
 		System.out.println("서포터즈가 아닐시 sup :"+sup);
 		
 		if(id=="") {
@@ -46,7 +47,11 @@ public class SupLvController {
 			mv.addObject("msg", msg);
 			mv.setViewName("/common/msg");
 			
-		}else if (sup!=null) {
+		} else if(Integer.parseInt(mem.get(0).getSupstatus())==1) {
+			msg="이미 서포터즈를 신청한 상태입니다.";
+			mv.addObject("msg", msg);
+			mv.setViewName("/common/msg");
+		} else if (sup!=null) {
 			msg="이미 등록된 서포터즈입니다.";
 			mv.addObject("msg", msg);
 			mv.setViewName("/common/msg");
@@ -142,7 +147,7 @@ public class SupLvController {
 		if (result > 0) {
 			msg = "서포터즈 신청이 등록되었습니다.";
 		} else {
-			msg = "서포터즈 신청시에는 5개 이미지를 모두 등록해야 합니다.";
+			msg = "서포터즈 신청에 실패했습니다.";
 		}
 		ModelAndView mv = new ModelAndView();
 		mv.addObject("msg", msg);

@@ -26,12 +26,16 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.mgr.merry.common.PageBarFactory;
 import com.mgr.merry.couple.model.service.CoupleBoardService;
 import com.mgr.merry.couple.model.vo.Attachment;
+import com.mgr.merry.sign.model.service.SignService;
+import com.mgr.merry.sign.model.vo.Members;
 
 @Controller
 public class CoupleBoardController {
 	
 	@Autowired
 	CoupleBoardService cservice;
+	@Autowired
+	SignService sservice;
 	private static List<Attachment> attachList =new ArrayList();
 	
 	@RequestMapping("/couple/coupleBoardList")
@@ -41,18 +45,26 @@ public class CoupleBoardController {
 		System.out.println("BoardList 컨트롤러!!");
 		System.out.println("List에 넘어온 mNum: "+mNum);
 		
-//		Map<String,Object> param = new HashMap<String,Object>();
-//		param.put("mNum", mNum);
-//		param.put("cPage", cPage)cPage;
+		//자신의 cpid에있는 상대방 Members 객체 가져오기
+		Members m= sservice.selectMemberbyMnum(mNum);
+		System.out.println(m);
+		
+		Map<String,Object> param = new HashMap<String,Object>();
+		param.put("mNum", mNum);
+		param.put("cpmNum", m.getMemberNum());
+		System.out.println(param);
 		
 		int numPerPage=5;
-		List<Map<String,String>> list = cservice.selectCoupleBoardList(mNum,cPage,numPerPage);
-		int totalCount = cservice.selectCoupleBoardCount();
+		List<Map<String,String>> list = cservice.selectCoupleBoardList(param,cPage,numPerPage);
+		int totalCount = cservice.selectCoupleBoardCount(param);
+		System.out.println(list);
 		
-		mv.addObject("pageBar",PageBarFactory.getPageBar(totalCount, cPage,numPerPage,"/merry/couple/coupleBoardList"));
+//		mv.addObject("pageBar",PageBarFactory.getPageBar(totalCount, cPage,numPerPage,"/merry/couple/coupleBoardList?mNum="+mNum));
+		mv.addObject("pageBar",PageBarFactory.getPageBar(totalCount, cPage,numPerPage,"/19AM_MERRYGOROUND_final/couple/coupleBoardList?mNum="+mNum));
 		mv.addObject("count",totalCount);
 		mv.addObject("list",list);
 		mv.addObject("mNum",mNum);
+		mv.addObject("cpmNum",m.getMemberNum());
 		mv.setViewName("couple/coupleBoardList");
 		return mv;
 	}
@@ -62,8 +74,6 @@ public class CoupleBoardController {
 		attachList.clear();
 		return "couple/coupleBoardWrite";
 	}
-	
-	
 	
 	
 	@RequestMapping("/couple/coupleBoardWriteEnd")
@@ -133,9 +143,8 @@ public class CoupleBoardController {
         }
         
         
-//        res.getWriter().print("/19AM_MERRYGOROUND_final/resources/images/couple/"+reName);
-        res.getWriter().print("/merry/resources/images/couple/"+reName);
-//        res.getWriter().print(path+"\\"+reName);
+        res.getWriter().print("/19AM_MERRYGOROUND_final/resources/images/couple/"+reName);
+//        res.getWriter().print("/merry/resources/images/couple/"+reName);
         
         //DB에 저장 board가 insert된후 boardnum을 가져온후 저장해야함 (따로 필요?)
         Attachment att= new Attachment();
@@ -235,8 +244,8 @@ public class CoupleBoardController {
 		int result2 =0;
 		int result3 =0;
 		
-		result3 = cservice.deleteComment(no);
-		result2 = cservice.deleteAttachment(no);
+//		result3 = cservice.deleteComment(no);
+//		result2 = cservice.deleteAttachment(no);
 		//c_upload테이블을 참조하는 img테이블 레코드부터 삭제
 		result = cservice.deleteCoupleBoard(no);
 		
@@ -307,7 +316,8 @@ public class CoupleBoardController {
     @ResponseBody
     public String ajax_addComment(@RequestParam Map<String,String> param, HttpServletRequest request) throws Exception{
         
-//        HttpSession session = request.getSession();
+        HttpSession session = request.getSession();
+        System.out.println(session.getAttribute("loginMember"));
 //        LoginVO loginVO = (LoginVO)session.getAttribute("loginVO");
         
 		System.out.println("addComment의 param: "+param);

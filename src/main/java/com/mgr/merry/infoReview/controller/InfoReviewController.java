@@ -24,7 +24,7 @@ public class InfoReviewController {
    
    // 수정중
    @RequestMapping("/infoReview/insertInfoReview")
-   public ModelAndView insertReview (@RequestParam Map<String, String> param, HttpServletRequest request){
+   public ModelAndView insertReview (@RequestParam Map<String, String> param, HttpServletRequest request, int infoupNum, String id){
       
       int result = 0;
       try {
@@ -34,32 +34,39 @@ public class InfoReviewController {
 	}
       
       String msg = "";
-
+      String loc = "";
 		if (result > 0) {
 			msg = "리뷰가 등록되었습니다.";
+			loc = "/info/infoView.do?infoupNum="+infoupNum+"&id="+id;
 		} else {
 			msg = "리뷰 등록 실패";
+			loc = "/info/infoView.do?infoupNum="+infoupNum+"&id="+id;
 		}
 		ModelAndView mv = new ModelAndView();
 		mv.addObject("msg", msg);
+		mv.addObject("loc", loc);
 		mv.setViewName("common/msg");
 		return mv;
 	}
 	
 	// 수정중
 	@RequestMapping("/info/status0InfoReview")
-	public ModelAndView status0InfoReview(int infoReviewNum, int infoupNum) {
+	public ModelAndView status0InfoReview(int infoReviewNum, int infoupNum, String id) {
 		int result = 0;
 		result = service.status0InfoReview(infoReviewNum);
 		
 		String msg="";
+		String loc="";
 		if (result > 0) {
 			msg = "리뷰가 삭제됐습니다.";
+			loc = "/info/infoView.do?infoupNum="+infoupNum+"&id="+id;
 		} else {
 			msg = "리뷰 삭제 실패";
+			loc = "/info/infoView.do?infoupNum="+infoupNum+"&id="+id;
 		}
 		ModelAndView mv = new ModelAndView();
 		mv.addObject("msg", msg);
+		mv.addObject("loc", loc);
 		mv.setViewName("common/msg");
 		return mv;
 		
@@ -67,7 +74,7 @@ public class InfoReviewController {
 	
 	//수정중
 	@RequestMapping("/info/updateInfoReview")
-	public ModelAndView updateReview(@RequestParam Map<String, String> param, int infoupNum) {
+	public ModelAndView updateReview(@RequestParam Map<String, String> param, int infoupNum, String id) {
 		
 		System.out.println("파라미터 : "+param);
 		
@@ -78,12 +85,16 @@ public class InfoReviewController {
 		ModelAndView mv = new ModelAndView();
 		
 		String msg="";
+		String loc="";
 		if (result > 0) {
 			msg = "리뷰가 수정됐습니다.";
+			loc = "/info/infoView.do?infoupNum="+infoupNum+"&id="+id;
 		} else {
 			msg = "리뷰 수정 실패";
+			loc = "/info/infoView.do?infoupNum="+infoupNum+"&id="+id;
 		}
 		mv.addObject("msg", msg);
+		mv.addObject("loc", loc);
 		mv.setViewName("common/msg");
 		return mv;
 	}

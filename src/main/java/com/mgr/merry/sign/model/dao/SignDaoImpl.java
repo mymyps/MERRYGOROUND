@@ -146,6 +146,15 @@ public class SignDaoImpl implements SignDao {
 	public List selectMemberid2(SqlSessionTemplate session, String id) {
 		return session.selectList("sign.selectMemeberid2", id);
 	}
+	public Members selectMemberbyMnum(SqlSessionTemplate session, int memNo) {
+		return session.selectOne("sign.selectMemberbyMnum", memNo);
+	}
+	
+
+	@Override
+	public int deleteMember(SqlSessionTemplate session, Members m) {
+		return session.update("sign.deleteMember",m);
+	}
 	
 
 }

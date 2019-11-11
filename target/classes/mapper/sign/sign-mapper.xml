@@ -43,9 +43,10 @@
    </select>
    <select id="selectSupt3" resultType="map" parameterType="_int">
       select * from supporters 
-         inner join supporters_upload using(supNum)
-         inner join supporters_upload_img using(supupNum)
+         inner join info_upload using(supNum)
+         inner join info_upload_img using(infoupNum)
          where supNum=#{supNum}
+         order by INFOUPDATE desc
    </select>
    <select id="selectMemberOne2" resultType="_int" parameterType="com.mgr.merry.sign.model.vo.Members">
       select count(*) from members where id=#{id}
@@ -59,15 +60,16 @@
    </select>
    <select id="selectBoardCount" resultType="_int">
 		select count(*) from supporters 
-         inner join supporters_upload using(supNum)
-         inner join supporters_upload_img using(supupNum)
+         inner join info_upload using(supNum)
+         inner join info_upload_img using(infoupNum)
          where supNum=#{supNum}
 	</select>
 	<select id="selectBoardList" resultType="map" parameterType="map">
   		select * from supporters 
-         inner join supporters_upload using(supNum)
-         inner join supporters_upload_img using(supupNum)
+         inner join info_upload using(supNum)
+         inner join info_upload_img using(infoupNum)
          where supNum=#{supNum}
+         order by INFOUPDATE desc
   	</select>
   	
   	<select id="selectMemberId" resultType="com.mgr.merry.sign.model.vo.Members" parameterType="com.mgr.merry.sign.model.vo.Members"> 
@@ -77,4 +79,13 @@
    <select id="selectMemeberid2" resultType="com.mgr.merry.sign.model.vo.Members" parameterType="com.mgr.merry.sign.model.vo.Members"> 
       SELECT * FROM MEMBERS WHERE id=#{id}
    </select>
+	
+	<select id="selectMemberbyMnum" resultType="com.mgr.merry.sign.model.vo.Members" parameterType="_int">
+  		select * from members where email=(select cpid from members where membernum=#{memNo})
+  	</select>
+
+   <update id="deleteMember" parameterType="com.mgr.merry.sign.model.vo.Members">
+   		update members set status=0 where memberNum=#{memberNum}
+   </update>
+
 </mapper>

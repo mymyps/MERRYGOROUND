@@ -6,14 +6,14 @@
 <script src="https://ssl.daumcdn.net/dmaps/map_js_init/postcode.v2.js"></script>
 <script src="<%=request.getContextPath()%>/js/post.js" charset="utf-8"></script>
 <jsp:include page="/WEB-INF/views/common/header.jsp">
-	<jsp:param name="pageTitle" value="demo"/>
+	<jsp:param name="pageTitle" value="INFOMATION"/>
 </jsp:include>
 <section id="content">
 	<div class="container">
 		<form name="infoForm"
-			action="${pageContext.request.contextPath }/info/infoUpdateEnd.do?infoupNum=${info.INFOUPNUM}"
+			action="${pageContext.request.contextPath }/info/infoUpdateEnd.do?infoupNum=${info.INFOUPNUM}&id=${loginMember.id}"
 			method="post"
-			enctype="multipart/form-data">
+			enctype="multipart/form-data" onsubmit="return checkNull();">
 			<div class="row">
 				<!-- Blog start -->
 				<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
@@ -28,22 +28,25 @@
 								<div>
 									<div class="infoFormSubFrame">이미지</div>
 									<p class="infoForm1">
-										<input type="file" name="infoupFile"/>
+										<input type="file" name="infoupFile" id="infoupFile" />
 										<img src="${path }/resources/upload/info/${infoImg.fileReName }" class="infoimg	"/>
+										
 									</p>
+										<div id="imageInfo">
+										</div>
 								</div>
 
 								<div>
 									<div class="infoFormSubFrame">제목</div>
 									<p class="infoForm1">
-										<input type="text" placeholder="INFO TITLE" name="infoupTitle" value="${info.INFOUPTITLE }"/>
+										<input type="text" placeholder="INFO TITLE" name="infoupTitle" value="${info.INFOUPTITLE }" id="infoupTitle"/>
 									</p>
 								</div>
 								
 								<div>
 									<div class="infoFormSubFrame">테마</div>
 									<p class="infoForm1">
-										<select id="" name="themaNum" class="mainThema">
+										<select id="mainThema" name="themaNum" class="mainThema">
 											<c:forEach items="${themaList2 }" var="t">
 												<c:if test="${info.THEMANUMREF ==t['THEMANUM']}">
 													<option value="${t['THEMANUM'] }" selected>${t['THEMANAME'] }</option>
@@ -57,16 +60,31 @@
 												</c:if>
 											</c:forEach>
 										</select>
-										<select id="" name="themaSubNum">
+										<select id="subThema" name="themaSubNum">
 											<option value="${info.THEMANUM }" selected>${info.THEMANAME }</option>
-											<c:forEach items="${themaList }" var="t">
-												<c:if test="${info.THEMANUM != t['THEMANUM']}">
-													<option value="${t['THEMANUM'] }">${t['THEMANAME'] }</option>
-												</c:if>
-											</c:forEach>
 										</select>
 									</p>
 								</div>
+								<script>
+                              $(function(){
+                                 $("#mainThema").click(function(){
+                                    var themaNumRef=$("#mainThema").val();
+                                    $.ajax({
+                                       url:"<%=request.getContextPath()%>/info/selectSubThema",
+                                       type:"post",
+                                       data:{"themaNumRef":themaNumRef},
+                                       dataType:"JSON",
+                                       success:function(data){
+                                          console.log(data);
+                                          $('#subThema').find("option").remove();
+                                          for(var i=0;i<data.length;i++){
+	                                          $('<option value="' + data[i].THEMANUM +'">' + data[i].THEMANAME + '</option>').appendTo('#subThema');
+                                          }
+                                       }
+                                    });
+                                 });
+                              });
+                           </script>
 								
 								<div>
 									<div class="infoFormSubFrame">장소</div>
@@ -85,19 +103,19 @@
 								<div>
 									<div class="infoFormSubFrame">가격</div>
 									<p class="infoForm1">
-										<input type="number" step="1000" name="infoupPayment" value="${info.INFOUPPAYMENT }"/>
+										<input type="number" step="1000" name="infoupPayment" value="${info.INFOUPPAYMENT }" id="infoupPayment"/>
 									</p>
 								</div>
 								<div>
 									<div class="infoFormSubFrame">번호</div>
 									<p class="infoForm1">
-										<input type="text" placeholder="INFO PHONE" name="infoupPhone" value="${info.INFOUPPHONE }"/>
+										<input type="text" placeholder="INFO PHONE" name="infoupPhone" value="${info.INFOUPPHONE }" id="infoupPhone"/>
 									</p>
 								</div>
 								<div>
 									<div class="infoFormSubFrame">시간</div>
 									<p class="infoForm1">
-										<input type="text" placeholder="INFO TIME" name="infoupTime" value="${info.INFOUPTIME }"/>
+										<input type="text" placeholder="INFO TIME" name="infoupTime" value="${info.INFOUPTIME }" id="infoupTime"/>
 									</p>
 								</div>
 								<label for="address"  class="infoFormSubFrame">주소</label>
@@ -108,7 +126,7 @@
 											style="text-align: center" id="st-addr-post" readonly> -->
 										<input type="text" class="form-control start-addr" name="infoAddr"
 											placeholder="주소를 검색해주세요" onkeydown="JavaScript:Enter_Check(1);"
-											id="st-addr" readonly>
+											id="st-addr" value="${info.INFOADDR }" readonly>
 										<div class="input-group-append">
 											<button class="btn btn-outline-secondary start-btn" type="button"
 												id="button-addon1" onclick="execDaumPostcode(1)">주소 찾기</button>
@@ -119,8 +137,7 @@
 								<br>
 								<div>
 									<button class="btn infoFormBtn" type="submit">INFO 수정</button>
-									<button class="btn infoFormBtn" type="reset">INFO 수정
-										취소</button>
+									<input type="button" class="btn infoFormBtn" onClick="location.href='${pageContext.request.contextPath }/info/infoView.do?infoupNum=${info.INFOUPNUM }&id=${loginMember.id }'" value="INFO 수정 취소">
 								</div>
 							</div>
 
@@ -137,6 +154,55 @@
 		</form>
 	</div>
 <script>
+
+function checkNull(){
+	var infoupFile=$('#infoupFile');
+	var infoupTitle=$('#infoupTitle');
+	var infoupPayment=$('#infoupPayment');
+	var infoupPhone=$('#infoupPhone');
+	var infoupTime=$('#infoupTime');
+	var addr=$('#st-addr');
+	var buttonAddr=$('#button-addon1');
+	
+	if(infoupFile.val()==""){
+       alert('이미지를 등록해주세요.');
+       infoupFile.focus();
+       return false;
+	}
+	
+	if(infoupTitle.val()==""){
+		alert('제목을 입력해주세요.');
+		
+		infoupTitle.focus();
+		return false;
+	}
+	
+	if(infoupPayment.val()==""){
+		alert('가격을 입력해주세요.');
+		
+		infoupPayment.focus();
+		return false;
+	}
+	if(infoupPhone.val()==""){
+		alert('번호를 입력해주세요.');
+		infoupPhone.focus();
+		return false;
+	}
+	if(infoupTime.val()==""){
+		alert('시간을 입력해주세요.');
+		
+		infoupTime.focus();
+		return false;
+	}
+	if(addr.val()==""){
+		alert('주소를 입력해주세요.');
+		
+		buttonAddr.focus();
+		return false;
+	}
+	
+}
+
 	function Enter_Check(pocode){
 	    if(event.keyCode == 13){
 	    	execDaumPostcode(pocode); 
@@ -196,6 +262,45 @@
 			}
 		}).open();
 	}
+	
+	var check = 0;
+	
+	$(document).on("change","input[name='infoupFile']",function(event) {
+        var ext = $(this).val().split('.').pop().toLowerCase();
+        var fileSize = (this).files[0].size;
+        var maxSize = 1024*1024*1024;
+        check =0;
+        if($.inArray(ext, ['gif','png','jpg','jpeg']) == -1) {
+           alert("등록할 수 없는 확장자입니다.");
+           $(this).val("");
+           check = 1;
+           return;
+        } 
+        
+        if(fileSize > maxSize) {
+           alert("첨부파일 크기는 1GB 이내로 등록 가능합니다.");
+           $(this).val("");
+           check = 1;
+           return;
+        }
+     });
+	
+	//div 이미지 출력하기
+    $('[name=infoupFile]').change(function () {
+        var reader = new FileReader();
+        reader.onload = function (e) {
+        	if(check==0){
+        	var img2 = $('<div class="infoFormSubFrame">변경할 이미지<br>미리보기</div>');
+            var img = $('<img>').attr('src', e.target.result).css({'width':"570", 'height':"570"}).addClass("infoForm1");
+            $('#imageInfo').append(img2);
+            $('#imageInfo').append(img);
+        	}else{
+        		return;
+        	}
+        }
+        
+     	reader.readAsDataURL($(this)[0].files[0]); // 파일경로를 바꿈/=result
+    });
 	</script>
 </section>
 <jsp:include page="/WEB-INF/views/common/footer.jsp"/>

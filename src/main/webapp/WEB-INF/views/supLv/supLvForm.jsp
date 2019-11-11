@@ -5,13 +5,13 @@
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 <c:set var="path" value="${pageContext.request.contextPath}" />
 <jsp:include page="/WEB-INF/views/common/header.jsp">
-	<jsp:param name="pageTitle" value="서포터즈 신청" />
+	<jsp:param name="pageTitle" value="SUPPORTERS" />
 </jsp:include>
 <section id="content">
 	<div class="container">
 		<form name="infoForm"
 			action="${pageContext.request.contextPath }/supLv/supLvFormEnd.do?id=${loginMember.id}"
-			method="post" enctype="multipart/form-data">
+			method="post" enctype="multipart/form-data"  onsubmit="return checkNull();">
 			<input type="hidden" value="${loginMember.id }" name="id" />
 			<input type="hidden" value="${loginMember.memberNum }" name="memberNum" />
 			<div class="row">
@@ -20,7 +20,7 @@
 					<!-- Blog post start -->
 					<div class="post-content">
 						<h1 class="post-title text-center">
-							<a href="blog-item.html">작성하기</a>
+							<a href="blog-item.html">신청</a>
 						</h1>
 						
 						<div style="overflow:scroll; width:700px; height:400px; padding:10px;margin-left: 225px; ">
@@ -99,55 +99,68 @@
 <br>
 요금 등 서비스 이용으로 발생한 분쟁에 대해 소송이 제기될 경우 회사의 본사 소재지를 관할하는 법원을 전속 관할법원으로 합니다.
 						</div>
+						<div class="text-center">
+						<input type="checkbox" id='check' name="check"/> 약관을 동의하십니까? (필수)
+						</div>
 						
 						<hr>
 						<div class="entry-content">
 							<div class="infoFormMainFrame">
 								<div class="infoFormSubFrame">이미지1</div>
 								<p class="infoForm1">
-									<input type="file" name="supLvImg1" />
+									<input type="file" name="supLvImg1" id="supLvImg1" />
 
 								</p>
+								<div id="img1">
+								</div>
 							</div>
 							<div>
 								<div class="infoFormSubFrame">이미지2</div>
 								<p class="infoForm1">
-									<input type="file" name="supLvImg2" />
+									<input type="file" name="supLvImg2"  id="supLvImg2"/>
 
 								</p>
+								<div id="img2">
+								</div>
 							</div>
 							<div>
 								<div class="infoFormSubFrame">이미지3</div>
 								<p class="infoForm1">
-									<input type="file" name="supLvImg3" />
+									<input type="file" name="supLvImg3"  id="supLvImg3"/>
 
 								</p>
+								<div id="img3">
+								</div>
 							</div>
 							<div>
 								<div class="infoFormSubFrame">이미지4</div>
 								<p class="infoForm1">
-									<input type="file" name="supLvImg4" />
+									<input type="file" name="supLvImg4"  id="supLvImg4"/>
 
 								</p>
+								<div id="img4">
+								</div>
 							</div>
 							<div>
 								<div class="infoFormSubFrame">이미지5</div>
 								<p class="infoForm1">
-									<input type="file" name="supLvImg5" />
+									<input type="file" name="supLvImg5"  id="supLvImg5"/>
 
 								</p>
+								<div id="img5">
+								</div>
 							</div>
 							<div>
 								<div class="infoFormSubFrame">내용</div>
 								<p class="infoForm1">
-									<input type="text" class="subLvHeight" name="supLvContent" />
+									<input type="text" class="subLvHeight" name="supLvContent" id="supLvContent"/>
 								</p>
 							</div>
 
 							<br> <br>
 							<div>
 								<button class="btn infoFormBtn" type="submit">서포터즈 신청</button>
-								<button class="btn infoFormBtn" type="reset">서포터즈 신청 취소</button>
+								<input type="button" class="btn infoFormBtn" onClick="location.href='${pageContext.request.contextPath }/'" value="서포터즈 신청 취소">
 							</div>
 						</div>
 
@@ -161,20 +174,78 @@
 	</div>
 	
 	<script>
+	
+	function checkNull(){
+		var check=$('#check');
+		var supLvImg1=$('#supLvImg1');
+		var supLvImg2=$('#supLvImg2');
+		var supLvImg3=$('#supLvImg3');
+		var supLvImg4=$('#supLvImg4');
+		var supLvImg5=$('#supLvImg5');
+		var supLvContent=$('#supLvContent');
+		
+		if(check.is(':checked')==false){
+        	alert('이용약관에 동의해주세요.');
+        	return false;
+        }
+		
+		if(supLvImg1.val()==""){
+           alert('이미지1 등록해주세요.');
+           supLvImg1.focus();
+           return false;
+		}
+		
+		if(supLvImg2.val()==""){
+	           alert('이미지2 등록해주세요.');
+	           supLvImg2.focus();
+	           return false;
+			}
+		
+		if(supLvImg3.val()==""){
+	           alert('이미지3 등록해주세요.');
+	           supLvImg3.focus();
+	           return false;
+			}
+		
+		if(supLvImg4.val()==""){
+	           alert('이미지4 등록해주세요.');
+	           supLvImg4.focus();
+	           return false;
+			}
+		
+		if(supLvImg5.val()==""){
+	           alert('이미지5 등록해주세요.');
+	           supLvImg5.focus();
+	           return false;
+			}
+		
+		if(supLvContent.val()==""){
+	         alert('내용을 입력해주세요.');
+	         
+	         supLvContent.focus();
+	         return false;
+	      }
+
+	}
+	
+	var check = 0;
+	
 	$(document).on("change","input[name='supLvImg1']",function(event) {
         var ext = $(this).val().split('.').pop().toLowerCase();
         var fileSize = (this).files[0].size;
         var maxSize = 1024*1024*1024;
-        
+        check = 0;
         if($.inArray(ext, ['gif','png','jpg','jpeg']) == -1) {
            alert("등록할 수 없는 확장자입니다.");
            $(this).val("");
+           check = 1;
            return;
         } 
         
         if(fileSize > maxSize) {
            alert("첨부파일 크기는 1GB 이내로 등록 가능합니다.");
            $(this).val("");
+           check = 1;
            return;
         }
      });
@@ -183,16 +254,18 @@
         var ext = $(this).val().split('.').pop().toLowerCase();
         var fileSize = (this).files[0].size;
         var maxSize = 1024*1024*1024;
-        
+        check = 0;
         if($.inArray(ext, ['gif','png','jpg','jpeg']) == -1) {
            alert("등록할 수 없는 확장자입니다.");
            $(this).val("");
+           check = 1;
            return;
         } 
         
         if(fileSize > maxSize) {
            alert("첨부파일 크기는 1GB 이내로 등록 가능합니다.");
            $(this).val("");
+           check = 1;
            return;
         }
      });
@@ -201,16 +274,18 @@
         var ext = $(this).val().split('.').pop().toLowerCase();
         var fileSize = (this).files[0].size;
         var maxSize = 1024*1024*1024;
-        
+        check = 0;
         if($.inArray(ext, ['gif','png','jpg','jpeg']) == -1) {
            alert("등록할 수 없는 확장자입니다.");
            $(this).val("");
+           check = 1;
            return;
         } 
         
         if(fileSize > maxSize) {
            alert("첨부파일 크기는 1GB 이내로 등록 가능합니다.");
            $(this).val("");
+           check = 1;
            return;
         }
      });
@@ -218,16 +293,18 @@
         var ext = $(this).val().split('.').pop().toLowerCase();
         var fileSize = (this).files[0].size;
         var maxSize = 1024*1024*1024;
-        
+        check = 0;
         if($.inArray(ext, ['gif','png','jpg','jpeg']) == -1) {
            alert("등록할 수 없는 확장자입니다.");
            $(this).val("");
+           check = 1;
            return;
         } 
         
         if(fileSize > maxSize) {
            alert("첨부파일 크기는 1GB 이내로 등록 가능합니다.");
            $(this).val("");
+           check = 1;
            return;
         }
      });
@@ -235,19 +312,94 @@
         var ext = $(this).val().split('.').pop().toLowerCase();
         var fileSize = (this).files[0].size;
         var maxSize = 1024*1024*1024;
-        
+        check = 0;
         if($.inArray(ext, ['gif','png','jpg','jpeg']) == -1) {
            alert("등록할 수 없는 확장자입니다.");
            $(this).val("");
+           check = 1;
            return;
         } 
         
         if(fileSize > maxSize) {
            alert("첨부파일 크기는 1GB 이내로 등록 가능합니다.");
            $(this).val("");
+           check = 1;
            return;
         }
      });
+	
+	
+	
+	//div 이미지 출력하기
+    $('[name=supLvImg1]').change(function () {
+        var reader = new FileReader();
+        reader.onload = function (e) {
+        	if(check==0){
+        	var img2 = $('<div class="infoFormSubFrame">이미지1 미리보기</div>&nbsp;');
+            var img = $('<img>').attr('src', e.target.result).css({'width':"570", 'height':"570"}).addClass("infoForm1");
+            $('#img1').append(img2);
+            $('#img1').append(img);
+        	}
+        }
+        
+     	reader.readAsDataURL($(this)[0].files[0]); // 파일경로를 바꿈/=result
+    });
+	
+    $('[name=supLvImg2]').change(function () {
+        var reader = new FileReader();
+        reader.onload = function (e) {
+        	if(check==0){
+        	var img2 = $('<div class="infoFormSubFrame">이미지2 미리보기</div>&nbsp;');
+            var img = $('<img>').attr('src', e.target.result).css({'width':"570", 'height':"570"}).addClass("infoForm1");
+            $('#img2').append(img2);
+            $('#img2').append(img);
+        	}
+        }
+        
+     	reader.readAsDataURL($(this)[0].files[0]); // 파일경로를 바꿈/=result
+    });
+    
+    $('[name=supLvImg3]').change(function () {
+        var reader = new FileReader();
+        reader.onload = function (e) {
+        	if(check==0){
+        	var img2 = $('<div class="infoFormSubFrame">이미지3 미리보기</div>&nbsp;');
+            var img = $('<img>').attr('src', e.target.result).css({'width':"570", 'height':"570"}).addClass("infoForm1");
+            $('#img3').append(img2);
+            $('#img3').append(img);
+        	}
+        }
+        
+     	reader.readAsDataURL($(this)[0].files[0]); // 파일경로를 바꿈/=result
+    });
+    
+    $('[name=supLvImg4]').change(function () {
+        var reader = new FileReader();
+        reader.onload = function (e) {
+        	if(check==0){
+        	var img2 = $('<div class="infoFormSubFrame">이미지4 미리보기</div>&nbsp;');
+            var img = $('<img>').attr('src', e.target.result).css({'width':"570", 'height':"570"}).addClass("infoForm1");
+            $('#img4').append(img2);
+            $('#img4').append(img);
+        	}
+        }
+        
+     	reader.readAsDataURL($(this)[0].files[0]); // 파일경로를 바꿈/=result
+    });
+    
+    $('[name=supLvImg5]').change(function () {
+        var reader = new FileReader();
+        reader.onload = function (e) {
+        	if(check==0){
+        	var img2 = $('<div class="infoFormSubFrame">이미지5 미리보기</div>&nbsp;');
+            var img = $('<img>').attr('src', e.target.result).css({'width':"570", 'height':"570"}).addClass("infoForm1");
+            $('#img5').append(img2);
+            $('#img5').append(img);
+        	}
+        }
+        
+     	reader.readAsDataURL($(this)[0].files[0]); // 파일경로를 바꿈/=result
+    });
 	
 	</script>
 

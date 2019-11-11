@@ -71,7 +71,7 @@
 						<!-- post image end -->
 					</div>
 				</c:forEach>
-				
+				<input id="cpmNum" name="cpmNum" type="hidden" value='${cpmNum }'/>
 				${pageBar }
 <!-- 				<div class="paging"> -->
 <!-- 					<ul class="pagination"> -->
@@ -97,4 +97,4 @@
 </section>
 <!-- Blog details page end -->
 
-<%-- <jsp:include page="/WEB-INF/views/common/footer.jsp"/> --%>
+<jsp:include page="/WEB-INF/views/common/footer.jsp"/>

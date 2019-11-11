@@ -4,7 +4,7 @@
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 <c:set var = "path" value="${pageContext.request.contextPath}"/>
 <jsp:include page ="/WEB-INF/views/common/header.jsp">
-<jsp:param name ="pageTitle" value="404 Error Page"/>
+<jsp:param name ="pageTitle" value="페이지를 찾을 수 없습니다."/>
 </jsp:include>
 <section id="main-container">
 		<div class="container">
@@ -17,7 +17,7 @@
 				</div>
 				<div class="error-body">
 					고객센터에 문의하세요.<br/>
-					<a href="index.html" class="btn btn-primary solid blank"><i class="fa fa-arrow-circle-left">&nbsp;</i> Go to Home</a>
+					<a href="${path}/index.jsp" class="btn btn-primary solid blank"><i class="fa fa-arrow-circle-left">&nbsp;</i>메인화면으로</a>
 				</div>
 			</div>
 		</div>

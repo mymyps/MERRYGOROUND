@@ -64,6 +64,16 @@
 #cellPaiChart {
 	height: 160px;
 }
+
+.facolor{
+	color: navajowhite;
+}
+
+.facolor:hover,
+.facolor:focus{
+	color: mediumturquoise;
+}
+
 </style>
 
 <%-- <jsp:include page="/WEB-INF/views/common/header.jsp" /> --%>
@@ -145,9 +155,13 @@
                      </a>
                   	
 					</div>
-					<a id="menuToggle" class="menutoggle"><i class="fa fa-bars"></i></a>
+					<a id="menuToggle" class="menutoggle"><i class="fa fa-bars facolor"></i></a>
 				</div>
 			</div>
-					<p style="text-align: right; color:antiquewhite; padding-top:16px; font-size:27px">ADMINISTRATOR</p>
+					<p style="text-align: right; color:antiquewhite; padding-top:16px; font-size:27px">
+					ADMINISTRATOR
+					
+					<a href="${pageContext.request.contextPath}/member/logout.do"><i class="fa fa-power-off"></i></a>
+					</p>
 		</header>
 		<!-- /#header -->
