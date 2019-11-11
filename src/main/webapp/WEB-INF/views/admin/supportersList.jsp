@@ -4,11 +4,6 @@
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 <c:set var="path" value="${pageContext.request.contextPath}" />
 <jsp:include page="/WEB-INF/views/admin/common/adminHeader.jsp" />
-<style>
-img{
-	max-width : 45px !important;	
-	}
-</style>
 <script src="https://cdn.jsdelivr.net/npm/jquery@2.2.4/dist/jquery.min.js"></script>
 <!-- ---------------------------------------------------------------------------- -->
 <!-- -------------------------     데이터      ------------------------------------ -->
@@ -69,7 +64,9 @@ img{
                                                 
                                                 <td class="avatar">
 	                                                <div class="round-img">
-	                                                    <a href="#"><img class="rounded-circle" src="${path }/resources/images/member/${b['PROIMG'] }"></a>
+	                                                    <a href="#"><img style="max-width : 45px !important;" 
+	                                                    class="rounded-circle" src="${path }/resources/images/member/${b['PROIMG'] }"></a>
+	                                                    
 	                                                </div>
                                                 </td>
                                                 <td><c:out value="${b['SUPNUM'] }"/></td>
