@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-    <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 <c:set var="path" value="${pageContext.request.contextPath}"/>
@@ -9,28 +9,11 @@
 </jsp:include> --%>
    <!-- hs boot -->
     <meta name="viewport" content="width=device-width, initial-scale=1">
-   <!--===============================================================================================-->   
    <link rel="icon" type="image/png" href="${pageContext.request.contextPath }/resources/imageshs/icons/favicon.ico"/>
-<!--===============================================================================================-->
-<%--    <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath }/resources/vendor/bootstrap/css/bootstrap.min.css">
-<!--===============================================================================================--> --%>
-   <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath }/resources/login/fontshs/font-awesome-4.7.0/css/font-awesome.min.css">
-<!--===============================================================================================-->
    <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath }/resources/login/fontshs/iconic/css/material-design-iconic-font.min.css">
-<!--===============================================================================================-->
-<%--    <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath }/resources/vendor/animate/animate.css">
-<!--===============================================================================================-->   
-   <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath }/resources/vendor/css-hamburgers/hamburgers.min.css">
-<!--===============================================================================================-->
-   <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath }/resources/vendor/animsition/css/animsition.min.css">
-<!--===============================================================================================-->
-   <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath }/resources/vendor/select2/select2.min.css">
-<!--===============================================================================================-->   
-   <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath }/resources/vendor/daterangepicker/daterangepicker.css">
-<!--===============================================================================================-->--%>
+   
    <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath }/resources/login/csshs/util.css"> 
    <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath }/resources/login/csshs/main.css">
-<!--===============================================================================================--> 
 <section id="content">
 <div class="limiter">
       <div class="container-login100" >
@@ -58,17 +41,11 @@
                   </a>
                </div>
                
-<!--                <div class="container-login100-form-btn"> -->
-<!--                   <div class="wrap-login100-form-btn"> -->
-<!--                      <div class="login100-form-bgbtn"></div> -->
                       <div style="margin-left:135px;">
                      <button class="btn btn-primary solid cd-btn">
                         Login
                      </button>
                      </div>
-<!--                   </div> -->
-<!--                </div> -->
-               
 
                <div class="txt1 text-center p-t-54 p-b-20" type="submit">
                   <span>

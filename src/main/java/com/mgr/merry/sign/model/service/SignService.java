@@ -31,4 +31,5 @@ public interface SignService {
 	List selectMemberId2(String id);
 	Members selectMemberbyMnum(int memNo);
 	int deleteMember(Members m);
+	List<Members> searchid(Members m);
 }
