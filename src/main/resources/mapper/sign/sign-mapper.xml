@@ -32,7 +32,7 @@
       select * from members where code=#{code}
    </select>
    <update id="pwUpdate">
-      update members set pw=#{pw} where id=#{id}
+      update members set pw=#{pw} where email=#{email}
    </update>
    <update id="updatesuple">
       update members set supstatus=1 where memberNum=#{num}

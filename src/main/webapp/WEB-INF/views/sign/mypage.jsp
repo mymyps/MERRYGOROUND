@@ -479,12 +479,12 @@
                   <input class="input100" type="hidden" name="memberNum" value=${members.memberNum }>
                   <div class="wrap-input100 validate-input" reauired>
                      <span class="label-input100">변경할비밀번호</span> <input
-                        class="input100" type="password" id="pw" name="pw" reauired>
+                        class="input100" type="password" name="pw" reauired>
                      <span class="focus-input100" data-symbol="&#xf190;"></span>
                   </div>
                   <div class="wrap-input100 validate-input" reauired>
                      <span class="label-input100">변경할 비밀번호확인</span> <input
-                        class="input100" type="password" id="pw" name="pw2" reauired>
+                        class="input100" type="password" name="pw2" reauired>
                      <span class="focus-input100" data-symbol="&#xf190;"></span>
                   </div>
                   <!-- <div class="wrap-input100 validate-input" reauired>
@@ -503,12 +503,12 @@
                   <input class="input100" type="hidden" name="memberNum" value=${members.memberNum }>
                   <div class="wrap-input100 validate-input" reauired>
                      <span class="label-input100">변경할비밀번호</span> <input
-                        class="input100" type="password" id="pw" name="pw" reauired>
+                        class="input100" type="password" name="pw" reauired>
                      <span class="focus-input100" data-symbol="&#xf190;"></span>
                   </div>
                   <div class="wrap-input100 validate-input" reauired>
                      <span class="label-input100">변경할 비밀번호확인</span> <input
-                        class="input100" type="password" id="pw" name="pw2" reauired>
+                        class="input100" type="password" name="pw2" reauired>
                      <span class="focus-input100" data-symbol="&#xf190;"></span>
                   </div>
                   <!-- <div class="wrap-input100 validate-input" reauired>

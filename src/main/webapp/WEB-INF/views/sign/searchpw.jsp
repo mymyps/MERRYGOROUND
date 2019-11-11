@@ -26,12 +26,12 @@
                   비밀번호찾기
                </span>
                
-                <div class="wrap-input100 validate-input m-b-23" data-validate = "Username is reauired">
+              <!--   <div class="wrap-input100 validate-input m-b-23" data-validate = "Username is reauired">
                   <span class="label-input100">ID</span>
                   <input class="input100" type="text" name="id" placeholder="아이디입력">
                   
                   <span class="focus-input100" data-symbol="&#xf206;"></span>
-               </div> 
+               </div>  -->
 
                <div class="wrap-input100 validate-input m-b-23 idname" reauired>
                   <span class="label-input100">이메일</span>
