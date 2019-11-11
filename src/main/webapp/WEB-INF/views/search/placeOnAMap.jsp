@@ -155,7 +155,13 @@
 				map : map,
 				position : locPosition
 			});
-		
+			
+			/* locPosition['Ga'] = '127.03268729999999';
+			locPosition['Ha'] = '37.4989621'; */
+			
+			console.log(locPosition);
+			console.log(marker);
+				
 			var iwContent = message, // 인포윈도우에 표시할 내용
 			iwRemoveable = true;
 		
