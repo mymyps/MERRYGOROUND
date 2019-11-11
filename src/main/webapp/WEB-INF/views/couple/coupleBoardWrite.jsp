@@ -10,7 +10,7 @@
 <!-- <script src="http://code.jquery.com/jquery-3.4.1.min.js"></script> -->
 <!-- include libraries(jQuery, bootstrap) -->
 	<link href="http://netdna.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.css" rel="stylesheet">
-	<script src="http://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.js"></script> 
+<!-- 	<script src="http://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.js"></script>  -->
 	<script src="http://netdna.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.js"></script>
 <!-- include summernote css/js -->
 	<link href="http://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.12/summernote.css" rel="stylesheet">
@@ -45,6 +45,8 @@
 			<button class="btn btn-primary pull-right" id="write" type="submit">게시글 작성</button> 
 		</div>
 	</form>
+	
+	
 
 	<script>
 	$('#summernote').summernote({

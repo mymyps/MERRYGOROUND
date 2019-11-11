@@ -14,7 +14,7 @@
    
    <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath }/resources/login/csshs/util.css"> 
    <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath }/resources/login/csshs/main.css">
-<section id="content">
+<!-- <section id="content"> -->
 <div class="limiter">
       <div class="container-login100" >
             <div class="wrap-login100 p-l-55 p-r-55 p-t-65 p-b-54" style="margin-top:-100px;">
