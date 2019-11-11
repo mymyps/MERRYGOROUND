@@ -85,6 +85,12 @@ public class SearchDaoImpl implements SerchDao {
 	}
 
 
+	@Override
+	public List<Map<String, String>> bestinfo(SqlSessionTemplate session) {
+		return session.selectList("search.bestinfo");
+	}
+
+
 
 
 

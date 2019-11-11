@@ -33,4 +33,6 @@ public interface SerchDao {
 
 	Map<String, String> noticeIndexLoad(SqlSessionTemplate session);
 
+	List<Map<String, String>> bestinfo(SqlSessionTemplate session);
+
 }
