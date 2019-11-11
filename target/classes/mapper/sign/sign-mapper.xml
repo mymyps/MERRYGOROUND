@@ -45,7 +45,7 @@
       select * from supporters 
          inner join info_upload using(supNum)
          inner join info_upload_img using(infoupNum)
-         where supNum=#{supNum}
+         where supNum=#{supNum} AND INFOUPSTATUS=1
          order by INFOUPDATE desc
    </select>
    <select id="selectMemberOne2" resultType="_int" parameterType="com.mgr.merry.sign.model.vo.Members">
@@ -62,13 +62,13 @@
 		select count(*) from supporters 
          inner join info_upload using(supNum)
          inner join info_upload_img using(infoupNum)
-         where supNum=#{supNum}
+         where supNum=#{supNum} AND INFOUPSTATUS=1
 	</select>
 	<select id="selectBoardList" resultType="map" parameterType="map">
   		select * from supporters 
          inner join info_upload using(supNum)
          inner join info_upload_img using(infoupNum)
-         where supNum=#{supNum}
+         where supNum=#{supNum} AND INFOUPSTATUS=1
          order by INFOUPDATE desc
   	</select>
   	
