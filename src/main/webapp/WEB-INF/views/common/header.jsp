@@ -65,8 +65,8 @@
    <!-- Responsive styles-->
    <link rel="stylesheet" href="${pageContext.request.contextPath }/resources/css/responsive.css">
    <!-- FontAwesome -->
-   <link rel="stylesheet" href="${pageContext.request.contextPath }/resources/css/font-awesome.min.css">
-   <link rel="stylesheet" href="${pageContext.request.contextPath }/resources/css/font-awesome.css">
+   <%-- <link rel="stylesheet" href="${pageContext.request.contextPath }/resources/css/font-awesome.min.css">
+   <link rel="stylesheet" href="${pageContext.request.contextPath }/resources/css/font-awesome.css"> --%>
    <!-- Animation -->
    <link rel="stylesheet" href="${pageContext.request.contextPath }/resources/css/animate.css">
    <!-- Prettyphoto -->
