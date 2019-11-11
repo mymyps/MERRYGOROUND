@@ -340,10 +340,8 @@
 					htmls += '<span class="d-block">';
 					htmls += '<strong class="text-gray-dark">' + writer + '</strong>';
 					htmls += '<span style="padding-left: 7px; font-size: 9pt">';
-// 					htmls += '<c:if test="${empty loginMember}">'
 					htmls += '<a href="javascript:void(0)" onclick="fn_updateReply(' + commentNo + ', \'' + writer + '\')" style="padding-right:5px">저장</a>';
 					htmls += '<a href="javascript:void(0)" onClick="getCommentList()">취소<a>';
-// 					htmls += '</c:if>'
 					htmls += '</span>';
 					htmls += '</span>';		
 					htmls += '<textarea name="editContent" id="editContent" class="form-control" rows="3">';
