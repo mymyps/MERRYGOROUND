@@ -81,10 +81,10 @@
 				console.log(savename);
 				console.log(edi);
 	        	$(edi).summernote('editor.insertImage', savename);
-	        	alert("성공!"+savename);
+	        	console.log("성공!"+savename);
 			},
 			error: function(){
-				alert("summernote 에러");
+				console.log("summernote 에러");
 			}
 		});
 
