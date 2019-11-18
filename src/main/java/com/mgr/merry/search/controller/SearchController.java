@@ -81,7 +81,7 @@ public class SearchController {
 	public String localList(@RequestParam("localNum") int localNum, Model model,
 			@RequestParam(value = "cPage", required = false, defaultValue = "0") int cPage) {
 
-		int numPerPage = 6;
+		int numPerPage = 8;
 		List<InfoUpload> list = service.localList(localNum, cPage, numPerPage);
 		model.addAttribute("locList", list);
 
