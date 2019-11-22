@@ -28,12 +28,13 @@
 	<context:component-scan base-package="com.mgr.merry" />
 
 	<!-- 인터셉터등록하기 -->
-	<!-- <interceptors> <interceptor> <mapping path="/demo/*" /> <mapping path="/board/*" 
-		/> <exclude-mapping path="" /> <beans:bean id="loggerInterceptor" class="com.mgr.merry.common.interceptor.LoggerInterceptor"></beans:bean> 
-		</interceptor> </interceptors> -->
-
-
-
+	<interceptors> 
+		<interceptor>
+			<mapping path="/admin/*" /><!--  <mapping path="/board/*"/> -->
+				<exclude-mapping path="" />
+				<beans:bean id="adminInterceptor" class="com.mgr.merry.common.interceptor.AdminInterceptor"/> 
+		</interceptor>
+	</interceptors>
 
 
 	<beans:bean id="multipartResolver"
