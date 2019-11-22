@@ -376,7 +376,7 @@
   $(document).ready(function(){
 		
 	  $.ajax({
-			url: '${pageContext.request.contextPath }/admin/noticeIndexLoad',
+			url: '${pageContext.request.contextPath }/search/noticeIndexLoad',
 			dataType:"JSON",
 			success: function (data) {
 				//console.log(data);
@@ -390,7 +390,7 @@
 			url: '${pageContext.request.contextPath }/search/bestinfo.do',
 			dataType:"JSON",
 			success: function (data) {
-				console.log(data[0].FILERENAME);
+				//console.log(data);
 			
 				
 			for(var i=0;i<4;i++){	
@@ -398,7 +398,7 @@
 				 'class':"effect-oscar"
 			 });
 				var iii = $("<img>").attr({
-					'src':"${pageContext.request.contextPath}/"+data[i].FILERENAME,
+					'src':"${pageContext.request.contextPath}/resources/upload/info/"+data[i].FILERENAME,
 					//'src':"${pageContext.request.contextPath}/resources/images/coex.jpg",
 					'class':"img-thumbnail"
 				});

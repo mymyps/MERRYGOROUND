@@ -139,7 +139,7 @@ public class SearchController {
 	}
 
 	// 공시사항 인덱스 출력메소드
-	@RequestMapping(value = "/admin/noticeIndexLoad", produces = "application/json;charset=UTF-8")
+	@RequestMapping(value = "/search/noticeIndexLoad", produces = "application/json;charset=UTF-8")
 	@ResponseBody
 	public String adminNoticeInsert() throws JsonProcessingException {
 

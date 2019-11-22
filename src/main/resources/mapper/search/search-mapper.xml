@@ -160,7 +160,7 @@
 	<select id="bestinfo" resultType="map">
 		select * from info_upload
 join info_upload_img using(infoupnum)
-where infoupdate > (sysdate - 7)
+where infoupdate > (sysdate - 30)
     and infoupstatus = 1 order by dbms_random.value
 	</select>
 
